@@ -5,7 +5,7 @@ using System.Text;
 using StoneAgeEngine.Objects.Humans;
 
 namespace StoneAgeEngine.MapSpace {
-	class Map {
+	public class Board {
 
 
 		/* For Purposes of SE1, this class is just an example of how we would need to create a Board class, thus I'm not going to fully document everything in it. Essentially, we create the "board" in a similar
@@ -25,7 +25,7 @@ namespace StoneAgeEngine.MapSpace {
 
 
 		private static Node	trainingRoom = new Node(2, "TrainingRoom", "Pawns get trained here");
-		public Map() {
+		public Board() {
 			if (nodesOnMap.Count == 0) {
 				InitMap(nodesOnMap);
 			}

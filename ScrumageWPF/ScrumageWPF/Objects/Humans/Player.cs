@@ -9,7 +9,7 @@ namespace StoneAgeEngine.Objects.Humans {
 	/// <summary>
 	/// Player class used to represent and retain information about a player
 	/// </summary>
-	class Player {
+	public class Player {
 		/// <summary>
 		/// An ID to be used for the player for easier identification than their name
 		/// </summary>

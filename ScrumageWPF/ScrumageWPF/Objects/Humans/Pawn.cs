@@ -9,7 +9,7 @@ namespace StoneAgeEngine.Objects.Humans {
 	/// <summary>
 	/// A pawn class that represents a player's piece on the board
 	/// </summary>
-	class Pawn {
+	public class Pawn {
 		/// <summary>
 		/// The pawn's ID will be the same as the owning player's ID, used to determine if a pawn is a players upon a move.
 		/// </summary>

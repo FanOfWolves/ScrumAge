@@ -12,7 +12,7 @@ namespace StoneAgeEngine {
 	/// <summary>
 	/// Static class that handles input from the user, send information into this as a space delimited String(Command Argument Arguemnt ...)
 	/// </summary>
-	static class InputHandler {
+	public static class InputHandler {
 		/// <summary>
 		/// The most recent input that is handled
 		/// </summary>

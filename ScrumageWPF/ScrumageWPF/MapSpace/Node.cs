@@ -8,7 +8,7 @@ namespace StoneAgeEngine.MapSpace {
 	/// <summary>
 	/// A Node is an area that can hold pawns outside of the player's inventory
 	/// </summary>
-	class Node {
+	public class Node {
 		/// <summary>
 		/// The ID to use in identifying a node
 		/// </summary>
