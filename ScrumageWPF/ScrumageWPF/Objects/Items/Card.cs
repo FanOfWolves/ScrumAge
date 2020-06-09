@@ -8,7 +8,7 @@ namespace StoneAgeEngine.Objects.Items {
 	/// <summary>
 	/// Card extends Item, Used to represent a Card within the game
 	/// </summary>
-	class Card : Item{
+	public class Card : Item{
 		/// <summary>
 		/// The Type of card that is being created
 		/// </summary>
@@ -23,7 +23,7 @@ namespace StoneAgeEngine.Objects.Items {
 		/// <param name="type">The type of card being created</param>
 		/// <param name="name">The name of the card</param>
 		/// <param name="message">The text for the card</param>
-		Card(String type, String name, String message) : base(name, message) {
+		public Card(String type, String name, String message) : base(name, message) {
 			CardType = type;
 			Name = name;
 			Message = message;

@@ -6,6 +6,7 @@ using StoneAgeEngine.MapSpace;
 using static StoneAgeEngine.MapSpace.Map;
 using StoneAgeEngine.Exceptions;
 using StoneAgeEngine.Objects.Humans;
+using StoneAgeEngine.Objects.Items;
 
 namespace StoneAgeEngine {
 	/// <summary>
@@ -90,9 +91,9 @@ namespace StoneAgeEngine {
 							player.GivePawn(PawnLevels[Rand.Next(3)]);
 						}else if(inputArr[1] == "card") {
 							if(inputArr[2] == "feature") {
-
+								player.AddToFeatures(new Card("Type", "Name", "Would be a feature card"));
 							}else if(inputArr[2] == "story") {
-
+								player.AddToUserStories(new Card("Type", "Name", "Would be a story card"));
 							}
 						}
 						break;

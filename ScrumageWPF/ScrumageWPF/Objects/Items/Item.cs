@@ -6,7 +6,7 @@ namespace StoneAgeEngine.Objects {
 	/// <summary>
 	/// Item Class: Abstract class to inherit from when creating items for the game
 	/// </summary>
-    abstract class Item {
+    public abstract class Item {
 		/// <summary>
 		/// A Name holder for the item to ensure all created items get a name
 		/// </summary>
