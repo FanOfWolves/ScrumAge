@@ -9,7 +9,10 @@
 *.user
 *.userosscache
 *.sln.docstates
+<<<<<<< HEAD
 /.vs/slnx.sqlite
+=======
+>>>>>>> 6d207c7cd07fd5e0291b2c0c351ee24c24e918f3
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -358,4 +361,8 @@ MigrationBackup/
 .ionide/
 
 # Fody - auto-generated XML schema
+<<<<<<< HEAD
 FodyWeavers.xsd
+=======
+FodyWeavers.xsd
+>>>>>>> 6d207c7cd07fd5e0291b2c0c351ee24c24e918f3
