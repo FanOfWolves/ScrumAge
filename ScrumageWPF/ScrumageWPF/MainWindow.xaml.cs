@@ -34,7 +34,6 @@ namespace ScrumageWPF {
 
 		// Example function to show how the GUI deals with InputHandler. No data is being manipulated directly by the GUI.
 		private void player1GivePawnBtn_Click(object sender, RoutedEventArgs e) {
-			// Test Comment for thing
 			HandleInput("add pawn", board.p1, board);
 			UpdatePlayer1Pawns();
 		}
