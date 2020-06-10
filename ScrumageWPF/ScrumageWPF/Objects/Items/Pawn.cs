@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScrumageEngine.Objects.Humans {
+namespace ScrumageEngine.Objects.Items {
 	/// <summary>
 	/// A pawn class that represents a player's piece on the board
 	/// </summary>

@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static ScrumageEngine.InputLogic.InputHandler;
+using System.Collections.ObjectModel;
+using ScrumageEngine.Objects.Items;
 
 namespace ScrumageWPF {
 
@@ -25,6 +27,7 @@ namespace ScrumageWPF {
 	/// </summary>
 	public partial class MainWindow : Window {
 		Board board = new Board(); // This is likely to be a Game class instead of board, in which the Game class will have a board(?) Discuss in design.
+		public static ObservableCollection<String> testBind { get; set; } = new ObservableCollection<String>();
 		public MainWindow() {
 			InitializeComponent();
 		}

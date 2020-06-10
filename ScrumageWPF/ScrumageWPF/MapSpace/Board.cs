@@ -26,6 +26,11 @@ namespace ScrumageEngine.MapSpace {
 				InitMap(nodesOnMap);
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="nodesOnMap"></param>
 		public void InitMap(List<Node> nodesOnMap) {// To add nodes to the map, create the node in vars
 													// then add it to the passed list, nodeName(2digID)
 			nodesOnMap.Add(trainingRoom);

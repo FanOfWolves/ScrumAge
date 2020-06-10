@@ -85,7 +85,7 @@ namespace ScrumageEngine.InputLogic {
 					throw new InvalidInputEx(inputArr);				 // If the command is invalid, throw an exception
 				}
 			} catch (InvalidInputEx ex) {
-				WriteLine(ex.GetMessage(inputArr));
+				WriteLine(ex.GetMessage(inputArr));					// Change this line to however we tell user something went wrong
 			}
 		}
 
@@ -117,7 +117,8 @@ namespace ScrumageEngine.InputLogic {
 				}
 				case "move": {
 						if(inputArr[1] == "pawn") {
-							// Use currently selected pawn's level
+							Pawn tempPawn = player.TakePawn(inputArr[2]);
+							board.GetNodeByID(1).AddPawn(tempPawn);
 						}
 						break;
 					}

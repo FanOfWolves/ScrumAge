@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ScrumageEngine.Objects;
-using ScrumageEngine.Objects.Humans;
+using ScrumageEngine.Objects.Items;
 
 namespace ScrumageEngine.MapSpace {
 	/// <summary>
@@ -50,7 +50,7 @@ namespace ScrumageEngine.MapSpace {
 		/// <param name="pawnID">The ID used to pair the pawn with the player</param>
 		/// <returns>returns the pawn requested</returns>
 		public Pawn TakePawnFromNode(String pawnLevel, int pawnID) {
-			Pawn retPawn = null;
+			Pawn retPawn = new Pawn();
 			foreach (Pawn i in Pawns) {
 				if (i.PawnLevel.ToLower().Replace(" ", "").Equals(pawnLevel) && i.PawnID == pawnID) {
 					retPawn = i;
