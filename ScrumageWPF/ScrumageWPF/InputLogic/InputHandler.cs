@@ -8,7 +8,17 @@ using ScrumageEngine.Exceptions;
 using ScrumageEngine.Objects.Humans;
 using ScrumageEngine.Objects.Items;
 
-namespace StoneAgeEngine.InputLogic {
+
+
+
+/*
+ * WE NEED TO PLAN OUT WHERE INSTANCES WILL ACTUALLY BE! Should only the board be instanciated on the GUI? Should the board + players be on the GUI? Should
+ * nothing be on the GUI? Etc. This will be discussed in the design part of the first meeting on June 10@11 AM with the developers!
+ * */
+
+
+
+namespace ScrumageEngine.InputLogic {
 	/// <summary>
 	/// Static class that handles input from the user, send information into this as a space delimited String(Command Argument Arguemnt ...)
 	/// </summary>
@@ -64,13 +74,13 @@ namespace StoneAgeEngine.InputLogic {
 		/// </summary>
 		/// <param name="playerInput">The input to be handled</param>
 		/// <param name="player">The player that inputted</param>
-		public static void HandleInput(String playerInput, Player player) {
+		public static void HandleInput(String playerInput, Player player, Board board) {
 			RecordInputs(playerInput);
 			playerInput = playerInput.ToLower().Replace(" the", ""); // In case of console user input, the word "the" means nothing
 			String[] inputArr = playerInput.Split(' ');				 // Split the input by space
 			try {
 				if (inputArr.Length >= 2) {							 // If the the input is only one word, no argument was given which is invalid based on this handling
-					DetermineCommand(inputArr, player);				 // This is where magic happens, this function takes each part of the input and does the specified action
+					DetermineCommand(inputArr, player, board);				 // This is where magic happens, this function takes each part of the input and does the specified action
 				} else {
 					throw new InvalidInputEx(inputArr);				 // If the command is invalid, throw an exception
 				}
@@ -79,18 +89,25 @@ namespace StoneAgeEngine.InputLogic {
 			}
 		}
 
+		// Also, possible replacements for the string-as-command system that is currently being used might be needed.
 		/// <summary>
-		/// Determines the command being 
+		/// Determines command + args based on a string array passed in.
 		/// </summary>
-		/// <param name="inputArr">The array of each component of the command</param>
-		/// <param name="player"></param>
-		private static void DetermineCommand(String[] inputArr, Player player) {
+		/// <param name="inputArr">The array of command and args</param>
+		/// <param name="player">The player that did the input</param>
+		/// <param name="board">The state of the board</param>
+		private static void DetermineCommand(String[] inputArr, Player player, Board board) {
 			switch (inputArr[0]) {
-				case "add": {
-						if(inputArr[1] == "pawn") {
+				case "add": {	// Command
+
+						/*
+						 * Don't do this in implementation! Each case should get a helper function!!!!!
+						 * 
+						 */
+						if(inputArr[1] == "pawn") { // Arg 1
 							player.GivePawn(PawnLevels[Rand.Next(3)]);
 						}else if(inputArr[1] == "card") {
-							if(inputArr[2] == "feature") {
+							if(inputArr[2] == "feature") { // Arg 2
 								player.AddToFeatures(new Card("Type", "Name", "Would be a feature card"));
 							}else if(inputArr[2] == "story") {
 								player.AddToUserStories(new Card("Type", "Name", "Would be a story card"));
@@ -106,7 +123,9 @@ namespace StoneAgeEngine.InputLogic {
 					}
 				case "roll": {
 						if(inputArr[1] == "dice") {
-							// parse inputArr[2] to int then roll that many dice
+							int dieCount = Int32.Parse(inputArr[2]);
+
+							//board.dice = RollDice(dieCount);
 						}
 						break;
 					}
@@ -116,12 +135,17 @@ namespace StoneAgeEngine.InputLogic {
 			}
 		}
 
-		private static String RejoinInput(String[] arr, int startIndex) {
-			String retStr = "";
-			for (int i = startIndex; i < arr.Length; i++) {
-				retStr += " " + arr[i];
+		/// <summary>
+		/// Roll a specified number of dice and return them as a List.
+		/// </summary>
+		/// <param name="diceCount">The number of dice to roll.</param>
+		/// <returns>A list of the dice.</returns>
+		private static List<Die> RollDice(int diceCount) {
+			List<Die> dice = new List<Die>();
+			for(int i = 0; i < diceCount; i++) {
+				dice.Add(new Die((Rand.Next(6) + 1)));
 			}
-			return retStr;
+			return dice;
 		}
 	}
 }

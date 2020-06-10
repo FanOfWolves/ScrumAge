@@ -3,18 +3,12 @@ using System.Collections.Generic;
 using ScrumageEngine.MapSpace;
 using System.Text;
 using ScrumageEngine.Objects.Humans;
+using ScrumageEngine.Objects.Items;
 
 namespace ScrumageEngine.MapSpace {
 	public class Board {
 
 
-		/* For Purposes of SE1, this class is just an example of how we would need to create a Board class, thus I'm not going to fully document everything in it. Essentially, we create the "board" in a similar
-		 * class to this and then pass information back and forth between here and the GUI. This class is only for example.
-		 */
-
-
-
-		public Player p1 = new Player(1, "bla");
 
 
 
@@ -22,6 +16,8 @@ namespace ScrumageEngine.MapSpace {
 		//      added needs to only be in this class to avoid functionality problems with the engine. Nothing in this class in concrete, and can/will be changed based on the design of the game. Current
 		//      objects are only for example and testing. If you wish to add functionality to the engine, feel free to do so but BE CAREFUL!!!!!!! Ask Michael for help if need be.
 		private List<Node> nodesOnMap = new List<Node>();
+		public Player p1 = new Player(1, "bla"); // Players maybe moved to a "Game" class?
+		public List<Die> dice = new List<Die>();
 
 
 		private Node trainingRoom = new Node(2, "TrainingRoom", "Pawns get trained here");

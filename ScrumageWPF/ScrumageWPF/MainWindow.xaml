@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:ScrumageWPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+	<Grid Background="#FF959595">
+		<ListBox x:Name="player1PawnBox" Margin="31,10,617,208"/>
+		<Button x:Name="player1GivePawnBtn" Content="Button" HorizontalAlignment="Left" Margin="66,231,0,0" VerticalAlignment="Top" Height="32" Width="82" Click="player1GivePawnBtn_Click"/>
+
+	</Grid>
 </Window>
