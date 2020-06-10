@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StoneAgeEngine.Exceptions {
+namespace ScrumageEngine.Exceptions {
 	/// <summary>
 	/// An exception that gets thrown whenever the user gives an invalid input.
 	/// </summary>

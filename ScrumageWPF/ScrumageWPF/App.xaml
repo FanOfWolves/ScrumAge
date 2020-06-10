@@ -1,7 +1,7 @@
-﻿<Application x:Class="StoneAgeWpf.App"
+﻿<Application x:Class="ScrumageWpf.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:StoneAgeWpf"
+             xmlns:local="clr-namespace:ScrumageWpf"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

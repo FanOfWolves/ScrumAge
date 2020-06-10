@@ -1,11 +1,11 @@
-﻿using StoneAgeEngine.MapSpace;
+﻿using ScrumageEngine.MapSpace;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoneAgeEngine.Objects.Humans {
+namespace ScrumageEngine.Objects.Humans {
 	/// <summary>
 	/// A pawn class that represents a player's piece on the board
 	/// </summary>

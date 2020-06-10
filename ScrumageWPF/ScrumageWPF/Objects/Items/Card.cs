@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoneAgeEngine.Objects.Items {
+namespace ScrumageEngine.Objects.Items {
 	/// <summary>
 	/// Card extends Item, Used to represent a Card within the game
 	/// </summary>

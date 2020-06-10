@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using StoneAgeEngine.Objects;
-using StoneAgeEngine.Objects.Humans;
+using ScrumageEngine.Objects;
+using ScrumageEngine.Objects.Humans;
 
-namespace StoneAgeEngine.MapSpace {
+namespace ScrumageEngine.MapSpace {
 	/// <summary>
 	/// A Node is an area that can hold pawns outside of the player's inventory
 	/// </summary>
@@ -24,7 +24,7 @@ namespace StoneAgeEngine.MapSpace {
 		/// <summary>
 		/// The list of pawns that can be held in the node
 		/// </summary>
-		public List<Pawn> Pawns { get; set; } = new List<Pawn>();
+		public List<Pawn> Pawns { get; set; }
 		/// <summary>
 		/// Node default constructor, does not assign any values(can likely be scrapped)
 		/// </summary>
@@ -60,6 +60,7 @@ namespace StoneAgeEngine.MapSpace {
 					break;
 				}
 			}
+			RemovePawn(retPawn);
 			return retPawn;
 		}
 		/// <summary>
@@ -95,7 +96,7 @@ namespace StoneAgeEngine.MapSpace {
 		/// Removes a pawn from the node's inventory.
 		/// </summary>
 		/// <param name="pawn">The pawn to be removed</param>
-		public void RemovPawn(Pawn pawn) {
+		public void RemovePawn(Pawn pawn) {
 			Pawns.Remove(pawn);
 		}
 	}

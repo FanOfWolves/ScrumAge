@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using StoneAgeEngine.MapSpace;
-using StoneAgeEngine.Exceptions;
+using ScrumageEngine.MapSpace;
+using ScrumageEngine.Exceptions;
 using System.Text;
-using StoneAgeEngine.Objects.Items;
+using ScrumageEngine.Objects.Items;
 
-namespace StoneAgeEngine.Objects.Humans {
+namespace ScrumageEngine.Objects.Humans {
 	/// <summary>
 	/// Player class used to represent and retain information about a player
 	/// </summary>
@@ -61,7 +61,7 @@ namespace StoneAgeEngine.Objects.Humans {
 		/// <summary>
 		/// Adds an already existing pawn into the player's pawn inventory
 		/// </summary>
-		/// <param name="pawn"></param>
+		/// <param name="pawn">An existing pawn that the player is moving back</param>
 		public void GivePawn(Pawn pawn) {
 			this.Pawns.Add(pawn);
 		}

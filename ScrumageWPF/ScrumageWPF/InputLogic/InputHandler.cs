@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using static System.Console;
-using StoneAgeEngine.MapSpace;
-using static StoneAgeEngine.MapSpace.Map;
-using StoneAgeEngine.Exceptions;
-using StoneAgeEngine.Objects.Humans;
-using StoneAgeEngine.Objects.Items;
+using ScrumageEngine.MapSpace;
+using static ScrumageEngine.MapSpace.Board;
+using ScrumageEngine.Exceptions;
+using ScrumageEngine.Objects.Humans;
+using ScrumageEngine.Objects.Items;
 
-namespace StoneAgeEngine {
+namespace StoneAgeEngine.InputLogic {
 	/// <summary>
 	/// Static class that handles input from the user, send information into this as a space delimited String(Command Argument Arguemnt ...)
 	/// </summary>
@@ -99,9 +99,14 @@ namespace StoneAgeEngine {
 						break;
 				}
 				case "move": {
-
 						if(inputArr[1] == "pawn") {
 							// Use currently selected pawn's level
+						}
+						break;
+					}
+				case "roll": {
+						if(inputArr[1] == "dice") {
+							// parse inputArr[2] to int then roll that many dice
 						}
 						break;
 					}
@@ -110,7 +115,8 @@ namespace StoneAgeEngine {
 					throw new InvalidInputEx(inputArr);
 			}
 		}
-		public static String RejoinInput(String[] arr, int startIndex) {
+
+		private static String RejoinInput(String[] arr, int startIndex) {
 			String retStr = "";
 			for (int i = startIndex; i < arr.Length; i++) {
 				retStr += " " + arr[i];

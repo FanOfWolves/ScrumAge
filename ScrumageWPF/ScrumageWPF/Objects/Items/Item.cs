@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StoneAgeEngine.Objects {
+namespace ScrumageEngine.Objects {
 	/// <summary>
 	/// Item Class: Abstract class to inherit from when creating items for the game
 	/// </summary>

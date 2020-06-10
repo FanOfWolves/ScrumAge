@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using StoneAgeEngine.MapSpace;
+using ScrumageEngine.MapSpace;
 using System.Text;
-using StoneAgeEngine.Objects.Humans;
+using ScrumageEngine.Objects.Humans;
 
-namespace StoneAgeEngine.MapSpace {
+namespace ScrumageEngine.MapSpace {
 	public class Board {
 
 
@@ -14,17 +14,17 @@ namespace StoneAgeEngine.MapSpace {
 
 
 
-
+		public Player p1 = new Player(1, "bla");
 
 
 
 		// This class is the content of the game, adding nodes, items, surroundings, creatures, etc here puts them into the game. Unless something is being done to the engine specifically, anything
 		//      added needs to only be in this class to avoid functionality problems with the engine. Nothing in this class in concrete, and can/will be changed based on the design of the game. Current
 		//      objects are only for example and testing. If you wish to add functionality to the engine, feel free to do so but BE CAREFUL!!!!!!! Ask Michael for help if need be.
-		private static List<Node> nodesOnMap = new List<Node>();
+		private List<Node> nodesOnMap = new List<Node>();
 
 
-		private static Node	trainingRoom = new Node(2, "TrainingRoom", "Pawns get trained here");
+		private Node trainingRoom = new Node(2, "TrainingRoom", "Pawns get trained here");
 		public Board() {
 			if (nodesOnMap.Count == 0) {
 				InitMap(nodesOnMap);
@@ -57,7 +57,7 @@ namespace StoneAgeEngine.MapSpace {
 		/// </summary>
 		/// <param name="nodeID">The ID of the node to be found</param>
 		/// <returns>The node if node exists, default node if it does not.</returns>
-		public static Node GetNodeByID(int nodeID) {
+		public Node GetNodeByID(int nodeID) {
 			Node retNode = new Node();
 			foreach (Node node in nodesOnMap) {
 				if (node.NodeID == nodeID) {
