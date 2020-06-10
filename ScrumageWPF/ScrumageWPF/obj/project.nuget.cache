@@ -1,10 +1,33 @@
 {
   "version": 2,
-  "dgSpecHash": "w7z7j2K67xs8kjupG4U/KAGXS7hbRx5qAVWvOAJHNHNbvIS3IJMgDuwGEj9J4oXC6vbiSLYJvAIW6Rqx2rOfRw==",
+  "dgSpecHash": "RWcdOQivaEIrZ0+wUW8EXB3Sg8lnPse4skVepdollXzFsxWxH+llNP86KOaLHsw4K6LLnL2mLwo93GaZRX5iJQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\EDWARDSMR\\ScrummageGitRepo\\ScrumageWPF\\ScrumageWPF\\ScrumageWPF.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\EDWARDSMR\\.nuget\\packages\\caliburn.micro\\3.2.0\\caliburn.micro.3.2.0.nupkg.sha512",
+    "C:\\Users\\EDWARDSMR\\.nuget\\packages\\caliburn.micro.core\\3.2.0\\caliburn.micro.core.3.2.0.nupkg.sha512",
     "C:\\Users\\EDWARDSMR\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Caliburn.Micro 3.2.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "Caliburn.Micro",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Caliburn.Micro.Core 3.2.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "Caliburn.Micro.Core",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

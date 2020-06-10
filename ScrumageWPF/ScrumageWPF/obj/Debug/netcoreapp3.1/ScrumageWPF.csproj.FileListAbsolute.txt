@@ -9,7 +9,6 @@ C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp
 C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\ScrumageWPF_MarkupCompile.cache
 C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\ScrumageWPF.AssemblyInfoInputs.cache
 C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\ScrumageWPF.AssemblyInfo.cs
-C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\ScrumageWPF.csproj.CoreCompileInputs.cache
 C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\ScrumageWPF.dll
 C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\ScrumageWPF.pdb
 C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\ScrumageWPF.genruntimeconfig.cache
