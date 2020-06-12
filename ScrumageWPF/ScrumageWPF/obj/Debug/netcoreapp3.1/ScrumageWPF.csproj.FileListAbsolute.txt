@@ -12,9 +12,7 @@ C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp
 C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\ScrumageWPF.dll
 C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\ScrumageWPF.pdb
 C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\ScrumageWPF.genruntimeconfig.cache
-C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\MainWindow.g.cs
 C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\ScrumageWPF_MarkupCompile.lref
-C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\MainWindow.baml
 C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\ScrumageWPF.g.resources
 C:\Users\EDWARDSMR\Desktop\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\bin\Debug\netcoreapp3.1\ScrumageWPF.exe
 C:\Users\EDWARDSMR\Desktop\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\bin\Debug\netcoreapp3.1\ScrumageWPF.deps.json
@@ -37,3 +35,8 @@ C:\Users\EDWARDSMR\Desktop\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\ne
 C:\Users\EDWARDSMR\Desktop\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\Windows\StartWindow.g.cs
 C:\Users\EDWARDSMR\Desktop\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\Windows\MainWindow.baml
 C:\Users\EDWARDSMR\Desktop\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\Windows\StartWindow.baml
+C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\Windows\MainWindow.g.cs
+C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\Windows\StartWindow.g.cs
+C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\Windows\MainWindow.baml
+C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\Windows\StartWindow.baml
+C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\ScrumageWPF.csproj.CoreCompileInputs.cache

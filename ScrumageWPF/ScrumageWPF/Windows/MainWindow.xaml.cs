@@ -92,10 +92,15 @@ namespace ScrumageEngine {
 		}
 		private void UpdateDieBoxes(List<Die> dice) {
 			TextBox tempBox = null;
-			for(int i = 0; i < dice.Count; i++) {
-				tempBox = (FindName($"DieBox{i+1}") as TextBox);
-				tempBox.Visibility = Visibility.Visible;
-				tempBox.Text = dice[i].DrawDie();
+			for(int i = 0; i < 7; i++) {
+				if(i < dice.Count) {
+					tempBox = (FindName($"DieBox{i + 1}") as TextBox);
+					tempBox.Visibility = Visibility.Visible;
+					tempBox.Text = dice[i].DrawDie();
+				} else {
+					tempBox = (FindName($"DieBox{i + 1}") as TextBox);
+					tempBox.Visibility = Visibility.Hidden;
+				}
 			}
 		}
 
@@ -130,6 +135,12 @@ namespace ScrumageEngine {
 			HandleInput($"move pawn {NodeComboBox.SelectedItem}", game.Players[currentPlayerID], game, SelectedPawns);
 			UpdatePawnBox(FindName($"{NodeComboBox.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.board.GetNodeByName(NodeComboBox.SelectedItem.ToString()).Pawns);
 			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.Players[currentPlayerID].Pawns);
+			LogInput();
+		}
+
+		private void TestDiceBtn_Click(object sender, RoutedEventArgs e) {
+			HandleInput($"roll dice {DiceCountCombo.SelectedItem}", game.Players[currentPlayerID], game, null);
+			UpdateDieBoxes(game.board.dice);
 			LogInput();
 		}
 	}

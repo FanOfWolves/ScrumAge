@@ -293,5 +293,15 @@
 		<TextBox x:Name="DieBox5" HorizontalAlignment="Left" Margin="1411,860,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="119" Visibility="Hidden" IsEnabled="False" FontFamily="Consolas" FontSize="20" TextAlignment="Center"/>
 		<TextBox x:Name="DieBox6" HorizontalAlignment="Left" Margin="1531,860,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="119" Visibility="Hidden" IsEnabled="False" FontFamily="Consolas" FontSize="20" TextAlignment="Center"/>
 		<TextBox x:Name="DieBox7" HorizontalAlignment="Left" Margin="1651,860,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="119" Visibility="Hidden" IsEnabled="False" FontFamily="Consolas" FontSize="20" TextAlignment="Center"/>
+		<Button x:Name="TestDiceBtn" Content="Dice" HorizontalAlignment="Left" Margin="1617,1011,0,0" VerticalAlignment="Top" Height="59" Width="82" FontSize="40" Click="TestDiceBtn_Click"/>
+		<ComboBox x:Name="DiceCountCombo" HorizontalAlignment="Left" Margin="1714,1030,0,0" VerticalAlignment="Top" Width="48">
+			<System:String>1</System:String>
+			<System:String>2</System:String>
+			<System:String>3</System:String>
+			<System:String>4</System:String>
+			<System:String>5</System:String>
+			<System:String>6</System:String>
+			<System:String>7</System:String>
+		</ComboBox>
 	</Grid>
 </Window>

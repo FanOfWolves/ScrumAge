@@ -15,11 +15,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\EDWARDSMR\\Desktop\\ScrummageGitRepo\\ScrumageWPF\\ScrumageWPF\\ScrumageWPF.csproj",
+      "projectUniqueName": "C:\\Users\\EDWARDSMR\\ScrummageGitRepo\\ScrumageWPF\\ScrumageWPF\\ScrumageWPF.csproj",
       "projectName": "ScrumageWPF",
-      "projectPath": "C:\\Users\\EDWARDSMR\\Desktop\\ScrummageGitRepo\\ScrumageWPF\\ScrumageWPF\\ScrumageWPF.csproj",
+      "projectPath": "C:\\Users\\EDWARDSMR\\ScrummageGitRepo\\ScrumageWPF\\ScrumageWPF\\ScrumageWPF.csproj",
       "packagesPath": "C:\\Users\\EDWARDSMR\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\EDWARDSMR\\Desktop\\ScrummageGitRepo\\ScrumageWPF\\ScrumageWPF\\obj\\",
+      "outputPath": "C:\\Users\\EDWARDSMR\\ScrummageGitRepo\\ScrumageWPF\\ScrumageWPF\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
