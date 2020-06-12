@@ -66,76 +66,24 @@ namespace ScrumageEngine.InputLogic {
 			}
 		}
 
-		/// <summary>
-		/// This determines if the command has valid syntax then 
-		/// </summary>
-		/// <param name="playerInput">The input to be handled</param>
-		/// <param name="player">The player that inputted</param>
-		public static void HandleInput(String playerInput, Player player, Game game, List<Pawn> pawns) {
-			RecordInputs(playerInput);
-			playerInput = playerInput.ToLower().Replace(" the", ""); // In case of console user input, the word "the" means nothing
-			String[] inputArr = playerInput.Split(' ');              // Split the input by space
-			try {
-				if(inputArr.Length >= 2) {                           // If the the input is only one word, no argument was given which is invalid based on this handling
-					DetermineCommand(inputArr, player, game, pawns);                // This is where magic happens, this function takes each part of the input and does the specified action
-				} else {
-					throw new InvalidInputEx(inputArr);              // If the command is invalid, throw an exception
-				}
-			} catch(InvalidInputEx ex) {
-				WriteLine(ex.GetMessage(inputArr));                 // Change this line to however we tell user something went wrong
-			}
-		}
-
-		// Also, possible replacements for the string-as-command system that is currently being used might be needed.
-		/// <summary>
-		/// Determines command + args based on a string array passed in.
-		/// </summary>
-		/// <param name="inputArr">The array of command and args</param>
-		/// <param name="player">The player that did the input</param>
-		/// <param name="board">The state of the board</param>
-		private static void DetermineCommand(String[] inputArr, Player player, Game game, List<Pawn> pawns) {
-			switch(inputArr[0]) {
-				case "add": {   // Command
-						if(inputArr[1] == "pawn") // Arg 1
-							GivePlayerPawn(inputArr, player, game); // Action Helper Function
-						else if(inputArr[1] == "card")
-							GivePlayerCard(inputArr, player);
-						break;
-					}
-				case "move": {
-						if(inputArr[1] == "pawn") {
-							MovePawn(pawns, player, game.board.GetNodeByName($"{inputArr[2]} {inputArr[3]}"));
-						}
-						break;
-					}
-				case "roll": {
-						if(inputArr[1] == "dice") {
-							int dieCount = Int32.Parse(inputArr[2]);
-							game.board.dice = RollDice(dieCount);
-						}
-						break;
-					}
-
-				default:
-					throw new InvalidInputEx(inputArr);
-			}
-		}
-
-		private static void GivePlayerCard(String[] inputArr, Player player) {	// Replace with inherited Card children?
-			if(inputArr[2] == "artifact") { // Arg 2
+		public static void GivePlayerCard(String cardType, Player player) { // Replace with inherited Card children?
+			RecordInputs($"{player.PlayerName} took {cardType}");
+			if(cardType == "artifact") { // Arg 2
 				player.AddToFeatures(new Card("Artifact", "Name", "Would be a feature card")); // Also these should be existing cards when those are created
-			} else if(inputArr[2] == "agility") {
+			} else if(cardType == "agility") {
 				player.AddToUserStories(new Card("Agility", "Name", "Would be a story card"));
 			}
 		}
 
-		private static void GivePlayerPawn(String[] inputArr, Player player, Game game) {
-			if(inputArr.Length == 2)
-				player.GivePawn(game.PawnLevels[Rand.Next(3)]);
-			else if(inputArr.Length == 3)
-				player.GivePawn(game.PawnLevels[int.Parse(inputArr[2])]);
-			else if(inputArr.Length == 4)
-				player.GivePawn($"{inputArr[2]} {inputArr[3]}");
+		public static void GivePlayerPawn(Player player, Game game, String input = "") {
+			RecordInputs($"{ player.PlayerName} received pawn");
+			String[] inputArr = input.Split(' ');
+			if(inputArr[0] == "")
+				player.GivePawn(game.PawnLevels[Rand.Next(2)]);
+			else if(inputArr.Length == 1)
+				player.GivePawn(game.PawnLevels[int.Parse(inputArr[0])]);
+			else if(inputArr.Length == 2)
+				player.GivePawn($"{inputArr[0]} {inputArr[1]}");
 		}
 
 
@@ -144,7 +92,8 @@ namespace ScrumageEngine.InputLogic {
 		/// </summary>
 		/// <param name="diceCount">The number of dice to roll.</param>
 		/// <returns>A list of the dice.</returns>
-		private static List<Die> RollDice(int diceCount) {
+		public static List<Die> RollDice(int diceCount) {
+			RecordInputs($"{diceCount} dice rolled");
 			List<Die> dice = new List<Die>();
 			for(int i = 0; i < diceCount; i++) {
 				dice.Add(new Die((Rand.Next(6) + 1)));
@@ -152,7 +101,7 @@ namespace ScrumageEngine.InputLogic {
 			return dice;
 		}
 
-		private static void MovePawn(List<Pawn> pawns, Player player, Node node) {
+		public static void MovePawn(List<Pawn> pawns, Player player, Node node) {
 			if(PlayerOwnsAll(pawns, player.PlayerID)) {
 				foreach(Pawn p in pawns) {
 					player.TakePawn(p);
@@ -161,7 +110,7 @@ namespace ScrumageEngine.InputLogic {
 			}
 		}
 
-		private static Boolean PlayerOwnsAll(List<Pawn> pawns, int playerID) {
+		public static Boolean PlayerOwnsAll(List<Pawn> pawns, int playerID) {
 			foreach(Pawn p in pawns) {
 				if(p.PawnID != playerID) {
 					return false;

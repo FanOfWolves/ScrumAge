@@ -22,5 +22,31 @@ namespace ScrumageEngine.BoardSpace {
 			}
 			return retPlayers;
 		}
+
+		public Node GetNodeByName(String nodeName) {
+			Node retNode = board.GetNodeByName(nodeName);
+
+			// Keep track of what just happened
+			//			--> Check if all players have moved all pawns
+			//					--> If so, move to next phase
+			//					--> If not, move to next player with false CompletedPhase
+			// Call the function in Board
+			CheckPlayerPawns();
+			CheckPhase();
+			return retNode;
+		}
+
+		private void CheckPlayerPawns() {
+			// If currentPlayer.Pawns.Items.Count == 0
+				// set DoneWithPhase = true;
+		}
+
+		private void CheckPhase() {
+			foreach(Player player in Players) {
+				// If player has moved all pawns,
+					// Set DoneWithPhased
+				
+			}
+		}
 	}
 }

@@ -55,30 +55,17 @@ namespace ScrumageEngine {
 		}
 
 		private void TestBtn_Click(object sender, RoutedEventArgs e) {
-			// Test for adding a random pawn
-			HandleInput("add pawn", game.Players[currentPlayerID], game, null);
+			// Test for adding a pawn
+			GivePlayerPawn(game.Players[currentPlayerID], game); // Gives random pawn
+			GivePlayerPawn(game.Players[currentPlayerID], game, "0"); // 0 = FE, 1 = BE, 2 = FS
+			GivePlayerPawn(game.Players[currentPlayerID], game, "Full Stack"); // Just enter the name of the pawn
 			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.Players[currentPlayerID].Pawns);
 
-			// Test for specific pawn(both of these work)
-			//HandleInput("add pawn Full Stack", game.Players[currentPlayerID], game);
-			//HandleInput("add pawn 1", game.Players[currentPlayerID], game); // 0 = FE, 1 = BE, 2 = FS
-			//UpdatePawnBox(GetPawnBoxByID(currentPlayerID), game.Players[currentPlayerID].Pawns);
-
 			// Test for card(probably a better way of getting the TextBox)
-			//HandleInput("add card artifact", game.Players[currentPlayerID], game);
-			//HandleInput("add card agility", game.Players[currentPlayerID], game);
-			//UpdateCardBox((PlayerTabControl.Items[currentPlayerID] as TabItem).FindName($"P{currentPlayerID + 1}ArtifactBox") as TextBox, game.Players[currentPlayerID].FeatureCards[0]);
-			//UpdateCardBox((PlayerTabControl.Items[currentPlayerID] as TabItem).FindName($"P{currentPlayerID + 1}AgilityBox") as TextBox, game.Players[currentPlayerID].UserStories[0]);
-
-			// Test for move
-
-
-
-			// Test for roll
-			//HandleInput("roll dice 7", game.Players[currentPlayerID], game);
-			//UpdateDieBoxes(game.board.dice);
-
-
+			/*GivePlayerCard("artifact", game.Players[currentPlayerID]);
+			GivePlayerCard("agility", game.Players[currentPlayerID]);
+			UpdateCardBox((PlayerTabControl.Items[currentPlayerID] as TabItem).FindName($"P{currentPlayerID + 1}ArtifactBox") as TextBox, game.Players[currentPlayerID].FeatureCards[0]);
+			UpdateCardBox((PlayerTabControl.Items[currentPlayerID] as TabItem).FindName($"P{currentPlayerID + 1}AgilityBox") as TextBox, game.Players[currentPlayerID].UserStories[0]);*/
 			LogInput();
 		}
 
@@ -94,11 +81,11 @@ namespace ScrumageEngine {
 			TextBox tempBox = null;
 			for(int i = 0; i < 7; i++) {
 				if(i < dice.Count) {
-					tempBox = (FindName($"DieBox{i + 1}") as TextBox);
+					tempBox = FindName($"DieBox{i + 1}") as TextBox;
 					tempBox.Visibility = Visibility.Visible;
 					tempBox.Text = dice[i].DrawDie();
 				} else {
-					tempBox = (FindName($"DieBox{i + 1}") as TextBox);
+					tempBox = FindName($"DieBox{i + 1}") as TextBox;
 					tempBox.Visibility = Visibility.Hidden;
 				}
 			}
@@ -132,14 +119,14 @@ namespace ScrumageEngine {
 			foreach(Pawn p in GetPlayerPawnBoxByID(currentPlayerID).SelectedItems) {
 				SelectedPawns.Add(p);
 			}
-			HandleInput($"move pawn {NodeComboBox.SelectedItem}", game.Players[currentPlayerID], game, SelectedPawns);
+			MovePawn(SelectedPawns, game.Players[currentPlayerID], game.board.GetNodeByName(NodeComboBox.SelectedItem.ToString()));
 			UpdatePawnBox(FindName($"{NodeComboBox.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.board.GetNodeByName(NodeComboBox.SelectedItem.ToString()).Pawns);
 			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.Players[currentPlayerID].Pawns);
 			LogInput();
 		}
 
 		private void TestDiceBtn_Click(object sender, RoutedEventArgs e) {
-			HandleInput($"roll dice {DiceCountCombo.SelectedItem}", game.Players[currentPlayerID], game, null);
+			game.board.dice = RollDice(int.Parse(DiceCountCombo.SelectedItem.ToString()));
 			UpdateDieBoxes(game.board.dice);
 			LogInput();
 		}
