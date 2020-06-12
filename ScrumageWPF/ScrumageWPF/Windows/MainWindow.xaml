@@ -1,0 +1,297 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScrumageEngine"
+        xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Class="ScrumageEngine.MainWindow"
+        mc:Ignorable="d"
+		WindowState="Maximized"
+		WindowStyle="None"
+        Title="MainWindow" Height="1080" Width="1920">
+	<Grid Background="#FFCFB997">
+		<Label Content="Resource 1" HorizontalAlignment="Left" Margin="962,8,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.579,-2.542" FontSize="20" Height="224" Width="204"/>
+		<Label HorizontalAlignment="Left" Margin="962,8,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.579,-2.542" FontSize="20" Height="224" Width="204"/>
+		<Label Content="Resource 1" HorizontalAlignment="Left" Margin="1220,8,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.579,-2.542" FontSize="20" Height="224" Width="204"/>
+		<Label Content="Resource 1" HorizontalAlignment="Left" Margin="1473,8,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.579,-2.542" FontSize="20" Height="224" Width="204"/>
+		<Label Content="Resource 1" HorizontalAlignment="Left" Margin="1726,8,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.579,-2.542" FontSize="20" Height="224" Width="204"/>
+		<ListBox x:Name="Resource1Box" Margin="918,94,798,762" FontSize="20" SelectionMode="Multiple" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<ListBox x:Name="Resource2Box" Margin="1171,94,545,762" FontSize="20" SelectionMode="Multiple" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<ListBox x:Name="Resource3Box" Margin="1433,94,283,762" FontSize="20" SelectionMode="Multiple" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<ListBox x:Name="Resource4Box" Margin="1677,94,39,762" FontSize="20" SelectionMode="Multiple" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<ListBox x:Name="TechnicalHutBox" Margin="918,400,798,642" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<Label Content="Technical Hut" HorizontalAlignment="Left" Margin="956,358,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<ListBox x:Name="BudgetIncreaseBox" Margin="1156,400,560,642" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<Label Content="Budget Increase" HorizontalAlignment="Left" Margin="1182,350,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<ListBox x:Name="InterviewNodeBox" Margin="1424,400,292,642" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<Label Content="Interview" HorizontalAlignment="Left" Margin="1481,350,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<ListBox x:Name="ReassignmentNodeBox" Margin="1681,400,35,580" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<Label Content="Reassignment" HorizontalAlignment="Left" Margin="1717,350,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<ListBox x:Name="Artifact1Box" Margin="918,611,798,431" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<ListBox x:Name="Artifact2Box" Margin="1156,611,560,431" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<Label Content="Artifact 2" HorizontalAlignment="Left" Margin="1213,516,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<ListBox x:Name="Artifact3Box" Margin="1424,611,292,431" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<Label Content="Artifact 3" HorizontalAlignment="Left" Margin="1487,513,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<ListBox x:Name="Artifact4Box" Margin="1681,611,35,431" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False"/>
+		<Label Content="Artifact 4" HorizontalAlignment="Left" Margin="1738,506,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<Label Content="Artifact 1" HorizontalAlignment="Left" Margin="965,513,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<ListBox x:Name="Agility1Box" Margin="924,790,792,252" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<ListBox x:Name="Agility2Box" Margin="1162,790,554,252" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<Label Content="Agility 2" HorizontalAlignment="Left" Margin="1217,690,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<ListBox x:Name="Agility3Box" Margin="1430,790,286,252" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<Label Content="Agility 3" HorizontalAlignment="Left" Margin="1494,690,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<ListBox x:Name="Agility4Box" Margin="1687,790,29,252" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False"/>
+		<Label Content="Agility 4" HorizontalAlignment="Left" Margin="1742,690,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<Label Content="Agility 1" HorizontalAlignment="Left" Margin="969,698,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<Label Content="Card info label" HorizontalAlignment="Left" Margin="941,550,0,0" VerticalAlignment="Top" FontSize="20" MouseDoubleClick="Label_MouseDoubleClick" Cursor="Hand" FontWeight="Bold"/>
+		<Label Content="Card info label" HorizontalAlignment="Left" Margin="1189,550,0,0" VerticalAlignment="Top" FontSize="20" MouseDoubleClick="Label_MouseDoubleClick" Cursor="Hand" FontWeight="Bold"/>
+		<Label Content="Card info label" HorizontalAlignment="Left" Margin="1461,550,0,0" VerticalAlignment="Top" FontSize="20" MouseDoubleClick="Label_MouseDoubleClick" Cursor="Hand" FontWeight="Bold"/>
+		<Label Content="Card info label" HorizontalAlignment="Left" Margin="1714,543,0,0" VerticalAlignment="Top" FontSize="20" MouseDoubleClick="Label_MouseDoubleClick" Cursor="Hand" FontWeight="Bold"/>
+		<Label Content="Dev Requirement" HorizontalAlignment="Left" Margin="929,52,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<Label Content="Dev Requirement" HorizontalAlignment="Left" Margin="1189,52,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<Label Content="Dev Requirement" HorizontalAlignment="Left" Margin="1445,52,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<Label Content="Dev Requirement" HorizontalAlignment="Left" Margin="1687,52,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<Label Content="Card info label" HorizontalAlignment="Left" Margin="944,734,0,0" VerticalAlignment="Top" FontSize="20" MouseDoubleClick="Label_MouseDoubleClick" Cursor="Hand" FontWeight="Bold"/>
+		<Label Content="Card info label" HorizontalAlignment="Left" Margin="1192,734,0,0" VerticalAlignment="Top" FontSize="20" MouseDoubleClick="Label_MouseDoubleClick" Cursor="Hand" FontWeight="Bold"/>
+		<Label Content="Card info label" HorizontalAlignment="Left" Margin="1484,727,0,0" VerticalAlignment="Top" FontSize="20" MouseDoubleClick="Label_MouseDoubleClick" Cursor="Hand" FontWeight="Bold"/>
+		<Label Content="Card info label" HorizontalAlignment="Left" Margin="1717,727,0,0" VerticalAlignment="Top" FontSize="20" MouseDoubleClick="Label_MouseDoubleClick" Cursor="Hand" FontWeight="Bold"/>
+		<TabControl x:Name="PlayerTabControl" Margin="0,0,1390,10" SelectedIndex="0" SelectionChanged="PlayerTabControl_SelectionChanged">
+			<TabItem x:Name="P1Tab" Header="Player 1" Background="#FFE5E5E5" BorderBrush="#FFACACAC" IsEnabled="False" Visibility="Hidden">
+				<Grid x:Name="P1Grid" Background="#FFE5E5E5">
+					<Label x:Name="P1NameLabel" Content="Name:" HorizontalAlignment="Left" Margin="33,10,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label Content="Team Color:" HorizontalAlignment="Left" Margin="287,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.105,-1.924" FontSize="26"/>
+					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-1,336,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<ListBox x:Name="P1ResourceBox" Margin="13,424,316,358" FontSize="20"/>
+					<ListBox x:Name="P1PawnBox" SelectionMode="Multiple" Margin="309,424,20,358" FontSize="20"/>
+					<Label Content="Resources" HorizontalAlignment="Left" Margin="48,374,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label Content="Pawns" HorizontalAlignment="Left" Margin="366,374,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-8,689,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<TextBox x:Name="P1ArtifactBox" Margin="33,809,316,10" FontSize="20">
+					</TextBox>
+					<Label Content="Cards" HorizontalAlignment="Center" Margin="0,726,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<TextBox x:Name="P1AgilityBox" Margin="319,809,30,10" FontSize="20">
+					</TextBox>
+					<Button x:Name="P1LeftArtifactsBtn" Content="" HorizontalAlignment="Left" Margin="33,778,0,0" VerticalAlignment="Top" Height="26" Width="30" FontSize="30">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/LeftArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Button x:Name="P1RightArtifactsBtn" Content="" HorizontalAlignment="Left" Margin="177,778,0,0" VerticalAlignment="Top" Height="26" Width="31" FontSize="30">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/RightArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Button x:Name="P1LeftAgilityBtn" Content="" HorizontalAlignment="Left" Margin="319,778,0,0" VerticalAlignment="Top" Height="26" Width="30" FontSize="30">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/LeftArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Button x:Name="P1RIghtAgilityBtn" Content="" HorizontalAlignment="Left" Margin="463,778,0,0" VerticalAlignment="Top" Height="26" Width="31" FontSize="30" RenderTransformOrigin="4.21,0.502">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/RightArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Label x:Name="P1ArtifactsCountLabel" Content="## of ##" HorizontalAlignment="Left" Margin="77,744,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label x:Name="P1AgilityCountLabel" Content="## of ##" HorizontalAlignment="Left" Margin="366,744,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label Content="Artifacts" HorizontalAlignment="Left" Margin="79,767,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label Content="Agility" HorizontalAlignment="Left" Margin="374,767,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-1,76,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label x:Name="P1BudgetLabel" Content="Budget:" HorizontalAlignment="Left" Margin="48,113,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P1FundsLabel" Content="Funds:" HorizontalAlignment="Left" Margin="48,158,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P1SprintLabel" Content="Sprint Cost:" HorizontalAlignment="Left" Margin="48,203,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P1ScoreLabel" Content="Score:" HorizontalAlignment="Left" Margin="39,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P1ScoreValue" Content="####" HorizontalAlignment="Left" Margin="121,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P1SprintValue" Content="####" HorizontalAlignment="Left" Margin="195,205,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P1FundsValue" Content="####" HorizontalAlignment="Left" Margin="137,158,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P1BudgetValue" Content="####" HorizontalAlignment="Left" Margin="151,113,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P1NameValue" Content="###################" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" FontSize="26" Height="49"/>
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="P2Tab" Header="Player 2" Background="#FFE5E5E5" BorderBrush="#FFACACAC" IsEnabled="False" Visibility="Hidden">
+				<Grid Background="#FFE5E5E5">
+					<Label x:Name="Player2NameLabel" Content="Name:" HorizontalAlignment="Left" Margin="33,10,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label Content="Team Color:" HorizontalAlignment="Left" Margin="287,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.105,-1.924" FontSize="26"/>
+					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-1,336,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<ListBox x:Name="P2ResourceBox" Margin="13,424,316,358" FontSize="20"/>
+					<ListBox x:Name="P2PawnBox" SelectionMode="Multiple" Margin="309,424,20,358" FontSize="20"/>
+					<Label Content="Resources" HorizontalAlignment="Left" Margin="48,374,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label Content="Pawns" HorizontalAlignment="Left" Margin="366,374,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-8,689,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<TextBox x:Name="P2ArtifactBox" Margin="33,809,316,10" FontSize="20">
+					</TextBox>
+					<Label Content="Cards" HorizontalAlignment="Center" Margin="0,726,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<TextBox x:Name="P2AgilityBox" Margin="319,809,30,10" FontSize="20">
+					</TextBox>
+					<Button x:Name="P2LeftArtifactsBtn" Content="" HorizontalAlignment="Left" Margin="33,778,0,0" VerticalAlignment="Top" Height="26" Width="30" FontSize="30">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/LeftArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Button x:Name="P2RightArtifactsBtn" Content="" HorizontalAlignment="Left" Margin="177,778,0,0" VerticalAlignment="Top" Height="26" Width="31" FontSize="30">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/RightArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Button x:Name="P2LeftAgilityBtn" Content="" HorizontalAlignment="Left" Margin="319,778,0,0" VerticalAlignment="Top" Height="26" Width="30" FontSize="30">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/LeftArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Button x:Name="P2RIghtAgilityBtn" Content="" HorizontalAlignment="Left" Margin="463,778,0,0" VerticalAlignment="Top" Height="26" Width="31" FontSize="30" RenderTransformOrigin="4.21,0.502">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/RightArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Label x:Name="P2ArtifactsCountLabel" Content="## of ##" HorizontalAlignment="Left" Margin="77,744,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label x:Name="P2AgilityCountLabel" Content="## of ##" HorizontalAlignment="Left" Margin="366,744,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label Content="Artifacts" HorizontalAlignment="Left" Margin="79,767,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label Content="Agility" HorizontalAlignment="Left" Margin="374,767,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-1,76,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label x:Name="P2BudgetLabel" Content="Budget:" HorizontalAlignment="Left" Margin="48,113,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P2FundsLabel" Content="Funds:" HorizontalAlignment="Left" Margin="48,158,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P2SprintLabel" Content="Sprint Cost:" HorizontalAlignment="Left" Margin="48,203,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P2ScoreLabel" Content="Score:" HorizontalAlignment="Left" Margin="39,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P2ScoreValue" Content="####" HorizontalAlignment="Left" Margin="121,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P2SprintValue" Content="####" HorizontalAlignment="Left" Margin="195,205,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P2FundsValue" Content="####" HorizontalAlignment="Left" Margin="137,158,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P2BudgetValue" Content="####" HorizontalAlignment="Left" Margin="151,113,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P2NameValue" Content="###################" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" FontSize="26" Height="47"/>
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="P3Tab" Header="Player 3" Background="#FFE5E5E5" BorderBrush="#FFACACAC" IsEnabled="False" Visibility="Hidden">
+				<Grid Background="#FFE5E5E5">
+					<Label x:Name="Player3NameLabel" Content="Name:" HorizontalAlignment="Left" Margin="33,10,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label Content="Team Color:" HorizontalAlignment="Left" Margin="287,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.105,-1.924" FontSize="26"/>
+					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-1,336,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<ListBox x:Name="P3ResourceBox" Margin="13,424,316,358" FontSize="20"/>
+					<ListBox x:Name="P3PawnBox" SelectionMode="Multiple" Margin="309,424,20,358" FontSize="20"/>
+					<Label Content="Resources" HorizontalAlignment="Left" Margin="48,374,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label Content="Pawns" HorizontalAlignment="Left" Margin="366,374,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-8,689,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<TextBox x:Name="P3ArtifactBox" Margin="33,809,316,10" FontSize="20">
+					</TextBox>
+					<Label Content="Cards" HorizontalAlignment="Center" Margin="0,726,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<TextBox x:Name="P3AgilityBox" Margin="319,809,30,10" FontSize="20">
+					</TextBox>
+					<Button x:Name="P3LeftArtifactsBtn" Content="" HorizontalAlignment="Left" Margin="33,778,0,0" VerticalAlignment="Top" Height="26" Width="30" FontSize="30">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/LeftArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Button x:Name="P3RightArtifactsBtn" Content="" HorizontalAlignment="Left" Margin="177,778,0,0" VerticalAlignment="Top" Height="26" Width="31" FontSize="30">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/RightArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Button x:Name="P3LeftAgilityBtn" Content="" HorizontalAlignment="Left" Margin="319,778,0,0" VerticalAlignment="Top" Height="26" Width="30" FontSize="30">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/LeftArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Button x:Name="P3RIghtAgilityBtn" Content="" HorizontalAlignment="Left" Margin="463,778,0,0" VerticalAlignment="Top" Height="26" Width="31" FontSize="30" RenderTransformOrigin="4.21,0.502">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/RightArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Label x:Name="P3ArtifactsCountLabel" Content="## of ##" HorizontalAlignment="Left" Margin="77,744,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label x:Name="P3AgilityCountLabel" Content="## of ##" HorizontalAlignment="Left" Margin="366,744,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label Content="Artifacts" HorizontalAlignment="Left" Margin="79,767,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label Content="Agility" HorizontalAlignment="Left" Margin="374,767,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-1,76,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label x:Name="P3BudgetLabel" Content="Budget:" HorizontalAlignment="Left" Margin="48,113,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P3FundsLabel" Content="Funds:" HorizontalAlignment="Left" Margin="48,158,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P3SprintLabel" Content="Sprint Cost:" HorizontalAlignment="Left" Margin="48,203,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P3ScoreLabel" Content="Score:" HorizontalAlignment="Left" Margin="39,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P3ScoreValue" Content="####" HorizontalAlignment="Left" Margin="121,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P3SprintValue" Content="####" HorizontalAlignment="Left" Margin="195,205,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P3FundsValue" Content="####" HorizontalAlignment="Left" Margin="137,158,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P3BudgetValue" Content="####" HorizontalAlignment="Left" Margin="151,113,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P3NameValue" Content="###################" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="P4Tab" Header="Player 4" Background="#FFE5E5E5" BorderBrush="#FFACACAC" IsEnabled="False" Visibility="Hidden">
+				<Grid Background="#FFE5E5E5">
+					<Label x:Name="Player4NameLabel" Content="Name:" HorizontalAlignment="Left" Margin="33,10,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label Content="Team Color:" HorizontalAlignment="Left" Margin="287,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.105,-1.924" FontSize="26"/>
+					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-1,336,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<ListBox x:Name="P4ResourceBox" Margin="13,424,316,358" FontSize="20"/>
+					<ListBox x:Name="P4PawnBox" SelectionMode="Multiple" Margin="309,424,20,358" FontSize="20"/>
+					<Label Content="Resources" HorizontalAlignment="Left" Margin="48,374,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label Content="Pawns" HorizontalAlignment="Left" Margin="366,374,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-8,689,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<TextBox x:Name="P4ArtifactBox" Margin="33,809,316,10" FontSize="20">
+					</TextBox>
+					<Label Content="Cards" HorizontalAlignment="Center" Margin="0,726,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<TextBox x:Name="P4AgilityBox" Margin="319,809,30,10" FontSize="20">
+					</TextBox>
+					<Button x:Name="P4LeftArtifactsBtn" Content="" HorizontalAlignment="Left" Margin="33,778,0,0" VerticalAlignment="Top" Height="26" Width="30" FontSize="30">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/LeftArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Button x:Name="P4RightArtifactsBtn" Content="" HorizontalAlignment="Left" Margin="177,778,0,0" VerticalAlignment="Top" Height="26" Width="31" FontSize="30">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/RightArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Button x:Name="P4LeftAgilityBtn" Content="" HorizontalAlignment="Left" Margin="319,778,0,0" VerticalAlignment="Top" Height="26" Width="30" FontSize="30">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/LeftArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Button x:Name="P4RIghtAgilityBtn" Content="" HorizontalAlignment="Left" Margin="463,778,0,0" VerticalAlignment="Top" Height="26" Width="31" FontSize="30" RenderTransformOrigin="4.21,0.502">
+						<Button.Background>
+							<ImageBrush ImageSource="/Images/RightArrow.jpg"/>
+						</Button.Background>
+					</Button>
+					<Label x:Name="P4ArtifactsCountLabel" Content="## of ##" HorizontalAlignment="Left" Margin="77,744,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label x:Name="P4AgilityCountLabel" Content="## of ##" HorizontalAlignment="Left" Margin="366,744,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label Content="Artifacts" HorizontalAlignment="Left" Margin="79,767,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label Content="Agility" HorizontalAlignment="Left" Margin="374,767,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-1,76,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label x:Name="P4BudgetLabel" Content="Budget:" HorizontalAlignment="Left" Margin="48,113,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P4FundsLabel" Content="Funds:" HorizontalAlignment="Left" Margin="48,158,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P4SprintLabel" Content="Sprint Cost:" HorizontalAlignment="Left" Margin="48,203,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P4ScoreLabel" Content="Score:" HorizontalAlignment="Left" Margin="39,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P4ScoreValue" Content="####" HorizontalAlignment="Left" Margin="121,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P4SprintValue" Content="####" HorizontalAlignment="Left" Margin="195,205,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P4FundsValue" Content="####" HorizontalAlignment="Left" Margin="137,158,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P4BudgetValue" Content="####" HorizontalAlignment="Left" Margin="151,113,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P4NameValue" Content="###################" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+				</Grid>
+			</TabItem>
+		</TabControl>
+		<TabControl Margin="535,0,1007,512">
+			<TabItem Header="TabItem" Visibility="Visible" Background="#FFE5E5E5">
+				<Grid Background="#FFE5E5E5">
+					<Label Content="Current Phase" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label Content="Phase Label" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" FontSize="20"/>
+					<Label Content="---------------------------------------------------------------------------------------------------------------------" HorizontalAlignment="Left" Margin="-85,102,0,0" VerticalAlignment="Top"/>
+					<ComboBox x:Name="NodeComboBox" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Width="288" Height="46"/>
+					<Label Content="Location:" HorizontalAlignment="Left" Margin="101,133,0,0" VerticalAlignment="Top" FontSize="40" Height="76" Width="214"/>
+					<Button x:Name="MovePawnBtn" Content="Move Pawn" HorizontalAlignment="Center" Margin="0,401,0,0" VerticalAlignment="Top" Height="88" Width="236" FontSize="40" Click="MovePawnBtn_Click"/>
+				</Grid>
+			</TabItem>
+			<TabItem Header="TestTab" Visibility="Visible" Background="#FFE3E3E3">
+				<Grid Background="#FFE5E5E5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="27*"/>
+						<ColumnDefinition Width="47*"/>
+						<ColumnDefinition Width="298*"/>
+					</Grid.ColumnDefinitions>
+				</Grid>
+			</TabItem>
+		</TabControl>
+		<ListBox x:Name="SprintLogBox" Margin="535,668,1007,10"/>
+		<Label Content="Sprint Log" HorizontalAlignment="Left" Margin="628,598,0,0" VerticalAlignment="Top" FontSize="40"/>
+		<Button x:Name="ExitBtn" Content="Exit" HorizontalAlignment="Left" Margin="1779,1025,0,0" VerticalAlignment="Top" Height="45" Width="127" Click="ExitBtn_Click" FontSize="26"/>
+		<Button x:Name="TestBtn" Content="Test" HorizontalAlignment="Left" Margin="1828,961,0,0" VerticalAlignment="Top" Height="59" Width="82" FontSize="40" Click="TestBtn_Click"/>
+		<TextBox x:Name="DieBox1" HorizontalAlignment="Left" Margin="931,860,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="119" Visibility="Hidden" IsEnabled="False" FontFamily="Consolas" FontSize="20" TextAlignment="Center"/>
+		<TextBox x:Name="DieBox2" HorizontalAlignment="Left" Margin="1051,860,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="119" Visibility="Hidden" IsEnabled="False" FontFamily="Consolas" FontSize="20" TextAlignment="Center"/>
+		<TextBox x:Name="DieBox3" HorizontalAlignment="Left" Margin="1171,860,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="119" Visibility="Hidden" IsEnabled="False" FontFamily="Consolas" FontSize="20" TextAlignment="Center"/>
+		<TextBox x:Name="DieBox4" HorizontalAlignment="Left" Margin="1291,860,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="119" Visibility="Hidden" IsEnabled="False" FontFamily="Consolas" FontSize="20" TextAlignment="Center"/>
+		<TextBox x:Name="DieBox5" HorizontalAlignment="Left" Margin="1411,860,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="119" Visibility="Hidden" IsEnabled="False" FontFamily="Consolas" FontSize="20" TextAlignment="Center"/>
+		<TextBox x:Name="DieBox6" HorizontalAlignment="Left" Margin="1531,860,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="119" Visibility="Hidden" IsEnabled="False" FontFamily="Consolas" FontSize="20" TextAlignment="Center"/>
+		<TextBox x:Name="DieBox7" HorizontalAlignment="Left" Margin="1651,860,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="119" Visibility="Hidden" IsEnabled="False" FontFamily="Consolas" FontSize="20" TextAlignment="Center"/>
+	</Grid>
+</Window>

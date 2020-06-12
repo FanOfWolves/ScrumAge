@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ScrumageEngine.MapSpace;
+using ScrumageEngine.BoardSpace;
 using ScrumageEngine.Exceptions;
 using System.Text;
 using ScrumageEngine.Objects.Items;

@@ -6,10 +6,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ScrumageWpf {
+namespace ScrumageEngine {
 	/// <summary>
 	/// Interaction logic for App.xaml
 	/// </summary>
 	public partial class App : Application {
+/*		protected override void OnStartup(StartupEventArgs e) {
+			base.OnStartup(e);
+			StartWindow sw = new StartWindow();
+			sw.Show();
+			MainWindow mw = new MainWindow(sw.playerCount);
+			mw.Show();
+		}*/
 	}
 }

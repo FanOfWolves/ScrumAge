@@ -34,7 +34,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// </summary>
 		/// <returns>String representation of the card</returns>
 		public override String ToString() {
-			return "Implement this ToString!!";
+			return Name;
 		}
 	}
 }

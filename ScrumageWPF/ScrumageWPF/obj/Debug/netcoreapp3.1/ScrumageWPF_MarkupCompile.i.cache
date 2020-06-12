@@ -4,17 +4,17 @@
 exe
 C#
 .cs
-C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\
+C:\Users\EDWARDSMR\Desktop\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\obj\Debug\netcoreapp3.1\
 ScrumageWPF
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-C:\Users\EDWARDSMR\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\App.xaml
-11151548125
+C:\Users\EDWARDSMR\Desktop\ScrummageGitRepo\ScrumageWPF\ScrumageWPF\App.xaml
+21734987118
 
-14-900160185
-1961066672492
-MainWindow.xaml;
+16-2120290934
+1921654412462
+Windows\MainWindow.xaml;Windows\StartWindow.xaml;
 
 True
 

@@ -14,7 +14,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// <summary>
 		/// Die's face representation.
 		/// </summary>
-		private static char[][] DieFace = new char[5][];
+		private char[][] DieFace = new char[5][];
 		/// <summary>
 		/// Overloaded Die Constructor, value passed in is value of the die.
 		/// </summary>

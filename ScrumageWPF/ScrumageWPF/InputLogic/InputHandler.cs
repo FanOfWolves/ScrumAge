@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using static System.Console;
-using ScrumageEngine.MapSpace;
-using static ScrumageEngine.MapSpace.Board;
+using ScrumageEngine.BoardSpace;
+using static ScrumageEngine.BoardSpace.Board;
 using ScrumageEngine.Exceptions;
 using ScrumageEngine.Objects.Humans;
 using ScrumageEngine.Objects.Items;
@@ -13,7 +13,7 @@ using ScrumageEngine.Objects.Items;
 
 /*
  * WE NEED TO PLAN OUT WHERE INSTANCES WILL ACTUALLY BE! Should only the board be instanciated on the GUI? Should the board + players be on the GUI? Should
- * nothing be on the GUI? Etc. This will be discussed in the design part of the first meeting on June 10@11 AM with the developers!
+ * nothing be on the GUI? Etc. This will be discussed in the  part of the first meeting on June 10@11 AM with the developers!
  * */
 
 
@@ -31,9 +31,6 @@ namespace ScrumageEngine.InputLogic {
 		/// A list of inputs handled, length specified in RecordInputs function
 		/// </summary>
 		private static List<String> recentInputs = new List<String>();
-
-		// This property will likely be moved to the Board class when that is created in implementation
-		private static String[] PawnLevels = {"Front End", "Back End", "Full Stack"};
 		/// <summary>
 		/// A random to be used in returning values based on inputs(use this as gloval random)
 		/// </summary>
@@ -61,11 +58,11 @@ namespace ScrumageEngine.InputLogic {
 		/// </summary>
 		/// <param name="mostRecentInput">The input that needs to be recorded.</param>
 		public static void RecordInputs(String mostRecentInput) {
-			if (recentInputs.Count < 5) {							// This number is the max that is to be recorded
+			if(recentInputs.Count < 20) {                            // This number is the max that is to be recorded
 				recentInputs.Insert(0, mostRecentInput);
-			} else {												// If the input list is already full
-				recentInputs.RemoveAt(4);							// Remove the last input(total number -1)
-				recentInputs.Insert(0, mostRecentInput);			// Then put the new input at the top
+			} else {                                                // If the input list is already full
+				recentInputs.RemoveAt(19);                           // Remove the last input(total number -1)
+				recentInputs.Insert(0, mostRecentInput);            // Then put the new input at the top
 			}
 		}
 
@@ -74,18 +71,18 @@ namespace ScrumageEngine.InputLogic {
 		/// </summary>
 		/// <param name="playerInput">The input to be handled</param>
 		/// <param name="player">The player that inputted</param>
-		public static void HandleInput(String playerInput, Player player, Board board) {
+		public static void HandleInput(String playerInput, Player player, Game game, List<Pawn> pawns) {
 			RecordInputs(playerInput);
 			playerInput = playerInput.ToLower().Replace(" the", ""); // In case of console user input, the word "the" means nothing
-			String[] inputArr = playerInput.Split(' ');				 // Split the input by space
+			String[] inputArr = playerInput.Split(' ');              // Split the input by space
 			try {
-				if (inputArr.Length >= 2) {							 // If the the input is only one word, no argument was given which is invalid based on this handling
-					DetermineCommand(inputArr, player, board);				 // This is where magic happens, this function takes each part of the input and does the specified action
+				if(inputArr.Length >= 2) {                           // If the the input is only one word, no argument was given which is invalid based on this handling
+					DetermineCommand(inputArr, player, game, pawns);                // This is where magic happens, this function takes each part of the input and does the specified action
 				} else {
-					throw new InvalidInputEx(inputArr);				 // If the command is invalid, throw an exception
+					throw new InvalidInputEx(inputArr);              // If the command is invalid, throw an exception
 				}
-			} catch (InvalidInputEx ex) {
-				WriteLine(ex.GetMessage(inputArr));					// Change this line to however we tell user something went wrong
+			} catch(InvalidInputEx ex) {
+				WriteLine(ex.GetMessage(inputArr));                 // Change this line to however we tell user something went wrong
 			}
 		}
 
@@ -96,37 +93,25 @@ namespace ScrumageEngine.InputLogic {
 		/// <param name="inputArr">The array of command and args</param>
 		/// <param name="player">The player that did the input</param>
 		/// <param name="board">The state of the board</param>
-		private static void DetermineCommand(String[] inputArr, Player player, Board board) {
-			switch (inputArr[0]) {
-				case "add": {	// Command
-
-						/*
-						 * Don't do this in implementation! Each case should get a helper function!!!!!
-						 * 
-						 */
-						if(inputArr[1] == "pawn") { // Arg 1
-							player.GivePawn(PawnLevels[Rand.Next(3)]);
-						}else if(inputArr[1] == "card") {
-							if(inputArr[2] == "feature") { // Arg 2
-								player.AddToFeatures(new Card("Type", "Name", "Would be a feature card"));
-							}else if(inputArr[2] == "story") {
-								player.AddToUserStories(new Card("Type", "Name", "Would be a story card"));
-							}
-						}
+		private static void DetermineCommand(String[] inputArr, Player player, Game game, List<Pawn> pawns) {
+			switch(inputArr[0]) {
+				case "add": {   // Command
+						if(inputArr[1] == "pawn") // Arg 1
+							GivePlayerPawn(inputArr, player, game); // Action Helper Function
+						else if(inputArr[1] == "card")
+							GivePlayerCard(inputArr, player);
 						break;
-				}
+					}
 				case "move": {
 						if(inputArr[1] == "pawn") {
-							Pawn tempPawn = player.TakePawn(inputArr[2]);
-							board.GetNodeByID(1).AddPawn(tempPawn);
+							MovePawn(pawns, player, game.board.GetNodeByName($"{inputArr[2]} {inputArr[3]}"));
 						}
 						break;
 					}
 				case "roll": {
 						if(inputArr[1] == "dice") {
 							int dieCount = Int32.Parse(inputArr[2]);
-
-							//board.dice = RollDice(dieCount);
+							game.board.dice = RollDice(dieCount);
 						}
 						break;
 					}
@@ -135,6 +120,24 @@ namespace ScrumageEngine.InputLogic {
 					throw new InvalidInputEx(inputArr);
 			}
 		}
+
+		private static void GivePlayerCard(String[] inputArr, Player player) {	// Replace with inherited Card children?
+			if(inputArr[2] == "artifact") { // Arg 2
+				player.AddToFeatures(new Card("Artifact", "Name", "Would be a feature card")); // Also these should be existing cards when those are created
+			} else if(inputArr[2] == "agility") {
+				player.AddToUserStories(new Card("Agility", "Name", "Would be a story card"));
+			}
+		}
+
+		private static void GivePlayerPawn(String[] inputArr, Player player, Game game) {
+			if(inputArr.Length == 2)
+				player.GivePawn(game.PawnLevels[Rand.Next(3)]);
+			else if(inputArr.Length == 3)
+				player.GivePawn(game.PawnLevels[int.Parse(inputArr[2])]);
+			else if(inputArr.Length == 4)
+				player.GivePawn($"{inputArr[2]} {inputArr[3]}");
+		}
+
 
 		/// <summary>
 		/// Roll a specified number of dice and return them as a List.
@@ -147,6 +150,24 @@ namespace ScrumageEngine.InputLogic {
 				dice.Add(new Die((Rand.Next(6) + 1)));
 			}
 			return dice;
+		}
+
+		private static void MovePawn(List<Pawn> pawns, Player player, Node node) {
+			if(PlayerOwnsAll(pawns, player.PlayerID)) {
+				foreach(Pawn p in pawns) {
+					player.TakePawn(p);
+					node.AddPawn(p);
+				}
+			}
+		}
+
+		private static Boolean PlayerOwnsAll(List<Pawn> pawns, int playerID) {
+			foreach(Pawn p in pawns) {
+				if(p.PawnID != playerID) {
+					return false;
+				}
+			}
+			return true;
 		}
 	}
 }
