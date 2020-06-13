@@ -10,7 +10,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// <summary>
 		/// Die's value.
 		/// </summary>
-		public int Value { get; }
+		public Int32 Value { get; }
 		/// <summary>
 		/// Die's face representation.
 		/// </summary>
@@ -19,20 +19,20 @@ namespace ScrumageEngine.Objects.Items {
 		/// Overloaded Die Constructor, value passed in is value of the die.
 		/// </summary>
 		/// <param name="value">The value of the die.</param>
-		public Die(int value) {
+		public Die(Int32 value) {
 			Value = value;
 			DieFace = CalcDieFace(value);
 		}
 
 		/// <summary>
-		/// Inserts dots into the die's face based on the value
+		/// Inserts dots Int32o the die's face based on the value
 		/// </summary>
 		/// <param name="dieVal">The value of the die</param>
 		/// <returns>2D char array representation of the die.</returns>
-		char[][] CalcDieFace(int dieVal) {
+		char[][] CalcDieFace(Int32 dieVal) {
 			char[][] dieFace = InitDieFace();
 			if(dieVal == 0) return dieFace;
-			bool isEven = dieVal % 2 == 0;
+			Boolean isEven = dieVal % 2 == 0;
 			if(isEven) {
 				dieFace[1][2] = '*';
 				dieFace[3][6] = '*';
@@ -69,7 +69,7 @@ namespace ScrumageEngine.Objects.Items {
 											 "|       |\n" +
 											 " ------- "), $"[\n]");
 			char[][] dieFace = new char[5][];
-			int i = 0;
+			Int32 i = 0;
 			while(i < dieStart.Length) {
 				dieFace[i] = dieStart[i].ToCharArray();
 				i++;
@@ -78,12 +78,12 @@ namespace ScrumageEngine.Objects.Items {
 		}
 
 		/// <summary>
-		/// Creates a printable version of the die's face representation.
+		/// Creates a prInt32able version of the die's face representation.
 		/// </summary>
 		/// <returns>A string representation of the die.</returns>
 		public String DrawDie() {
 			String dieString = "";
-			int i = 0, j = 0;
+			Int32 i = 0, j = 0;
 			while(i < DieFace.Length) {
 				while(j < DieFace[i].Length) {
 					dieString += DieFace[i][j];

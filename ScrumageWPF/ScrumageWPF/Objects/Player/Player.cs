@@ -13,7 +13,7 @@ namespace ScrumageEngine.Objects.Humans {
 		/// <summary>
 		/// An ID to be used for the player for easier identification than their name
 		/// </summary>
-		public int PlayerID { get; set; }
+		public Int32 PlayerID { get; set; }
 		/// <summary>
 		/// The player's name to be used as a representation on the board
 		/// </summary>
@@ -33,40 +33,40 @@ namespace ScrumageEngine.Objects.Humans {
 		/// <summary>
 		/// The amount of budget the player recieves every turn
 		/// </summary>
-		public int Budget { get; set; }
+		public Int32 Budget { get; set; }
 		/// <summary>
 		/// The amount of funds that the player currently has to be used to deploy pawns
 		/// </summary>
-		public int Funds { get; set; }
+		public Int32 Funds { get; set; }
 		/// <summary>
-		/// The feature points represent the overall score for the player
+		/// The feature poInt32s represent the overall score for the player
 		/// </summary>
-		public int FeaturePoints { get; set; } // Still need to determine how to calculate these
+		public Int32 FeaturePoInt32s { get; set; } // Still need to determine how to calculate these
 		/// <summary>
 		/// Player overloaded constructor
 		/// </summary>
 		/// <param name="playerID">The player's ID</param>
 		/// <param name="playerName">The player's name</param>
-		public Player(int playerID, String playerName) {
+		public Player(Int32 playerID, String playerName) {
 			PlayerID = playerID;
 			PlayerName = playerName;
-			FeaturePoints = 0;
+			FeaturePoInt32s = 0;
 			Budget = 1;
 			Funds = Budget;
 		}
 		/// <summary>
-		/// A group of functions that are used to interact with Items, i.e. giving players pawn, cards, or checking if player has a certain type of pawn
+		/// A group of functions that are used to Int32eract with Items, i.e. giving players pawn, cards, or checking if player has a certain type of pawn
 		/// </summary>
 		#region Item Related Methods
 		/// <summary>
-		/// Adds an already existing pawn into the player's pawn inventory
+		/// Adds an already existing pawn Int32o the player's pawn inventory
 		/// </summary>
 		/// <param name="pawn">An existing pawn that the player is moving back</param>
 		public void GivePawn(Pawn pawn) {
 			this.Pawns.Add(pawn);
 		}
 		/// <summary>
-		/// Adds a User Story card into the player's User Stories inventory
+		/// Adds a User Story card Int32o the player's User Stories inventory
 		/// </summary>
 		/// <param name="userStory">The card to be added</param>
 		public void AddToUserStories(Card userStory) {
@@ -103,18 +103,18 @@ namespace ScrumageEngine.Objects.Humans {
 		/// <summary>
 		/// Gives a pawn of a specified level(a NEW pawn) to the player
 		/// </summary>
-		/// <param name="pawnLevel">The pawn level to be added</param>
-		public void GivePawn(String pawnLevel) {
-			Pawns.Add(new Pawn(PlayerID, pawnLevel));
+		/// <param name="PawnType">The pawn level to be added</param>
+		public void GivePawn(String PawnType) {
+			Pawns.Add(new Pawn(PlayerID, PawnType));
 		}
 		/// <summary>
 		/// Takes a pawn from the player based on a pawn level
 		/// </summary>
-		/// <param name="pawnLevel">The level of the pawn to be taken</param>
+		/// <param name="PawnType">The level of the pawn to be taken</param>
 		/// <returns></returns>
-		public Pawn TakePawn(String pawnLevel) {
+		public Pawn TakePawn(String PawnType) {
 			Pawn retPawn = new Pawn();
-			if((retPawn = HasPawn(pawnLevel)) != new Pawn()) {
+			if((retPawn = HasPawn(PawnType)) != new Pawn()) {
 				return retPawn;
 			}
 			return retPawn;
@@ -122,16 +122,16 @@ namespace ScrumageEngine.Objects.Humans {
 		/// <summary>
 		/// Determines if a player has a pawn of a specified level then returns that pawn. If pawn of that level is not found, returns default "none" pawn.
 		/// </summary>
-		/// <param name="pawnLevel">The pawn level to be found</param>
+		/// <param name="PawnType">The pawn level to be found</param>
 		/// <returns></returns>
-		public Pawn HasPawn(String pawnLevel) {
+		public Pawn HasPawn(String PawnType) {
 			Pawn retPawn = new Pawn();
-			pawnLevel = pawnLevel.ToLower();
+			PawnType = PawnType.ToLower();
 			foreach(Pawn pawn in Pawns) {
-				if(pawn.PawnLevel.ToLower().Equals(pawnLevel)) {
+				if(pawn.PawnType.ToLower().Equals(PawnType)) {
 					retPawn = pawn;
 					break;
-				} else if(pawn.PawnLevel.Contains(pawnLevel)) {
+				} else if(pawn.PawnType.Contains(PawnType)) {
 					retPawn = pawn;
 					break;
 				} else {

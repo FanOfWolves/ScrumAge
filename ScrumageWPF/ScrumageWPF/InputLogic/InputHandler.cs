@@ -20,7 +20,7 @@ using ScrumageEngine.Objects.Items;
 
 namespace ScrumageEngine.InputLogic {
 	/// <summary>
-	/// Static class that handles input from the user, send information into this as a space delimited String(Command Argument Arguemnt ...)
+	/// Static class that handles input from the user, send information Int32o this as a space delimited String(Command Argument Arguemnt ...)
 	/// </summary>
 	public static class InputHandler {
 		/// <summary>
@@ -74,9 +74,9 @@ namespace ScrumageEngine.InputLogic {
 		public static void GivePlayerCard(String cardType, Player player) { // Replace with inherited Card children?
 			RecordInputs($"{player.PlayerName} took {cardType}");
 			if(cardType == "artifact") { // Arg 2
-				player.AddToFeatures(new Card("Artifact", "Name", "Would be a feature card")); // Also these should be existing cards when those are created
+				player.AddToFeatures(new Card("Artifact", "Name")); // Also these should be existing cards when those are created
 			} else if(cardType == "agility") {
-				player.AddToUserStories(new Card("Agility", "Name", "Would be a story card"));
+				player.AddToUserStories(new Card("Agility", "Name"));
 			}
 		}
 
@@ -90,9 +90,9 @@ namespace ScrumageEngine.InputLogic {
 			RecordInputs($"{ player.PlayerName} received pawn");
 			String[] inputArr = input.Split(' ');
 			if(inputArr[0] == "")
-				player.GivePawn(game.PawnLevels[Rand.Next(2)]);
+				player.GivePawn(game.PawnTypes[Rand.Next(2)]);
 			else if(inputArr.Length == 1)
-				player.GivePawn(game.PawnLevels[int.Parse(inputArr[0])]);
+				player.GivePawn(game.PawnTypes[Int32.Parse(inputArr[0])]);
 			else if(inputArr.Length == 2)
 				player.GivePawn($"{inputArr[0]} {inputArr[1]}");
 		}
@@ -103,7 +103,7 @@ namespace ScrumageEngine.InputLogic {
 		/// </summary>
 		/// <param name="diceCount">The number of dice to roll.</param>
 		/// <returns>A list of the dice.</returns>
-		public static void RollDice(int diceCount, Game game) {
+		public static void RollDice(Int32 diceCount, Game game) {
 			game.RollDice(diceCount, Rand);
 			RecordInputs($"{diceCount} dice rolled, Results: {game.DiceValues()}"); // Add results
 		}
@@ -134,7 +134,7 @@ namespace ScrumageEngine.InputLogic {
 		private static String ListPawns(List<Pawn> pawns) {
 			String retString = "";
 			foreach(Pawn p in pawns) {
-				retString += p.PawnLevel + ", ";
+				retString += p.PawnType + ", ";
 			}
 			return retString;
 		}

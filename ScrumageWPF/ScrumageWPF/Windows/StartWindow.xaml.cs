@@ -12,19 +12,19 @@ using System.Windows.Shapes;
 
 namespace ScrumageEngine {
 	/// <summary>
-	/// Interaction logic for StartWindow.xaml
+	/// Int32eraction logic for StartWindow.xaml
 	/// </summary>
 	public partial class StartWindow : Window {
-		private int playerCount = 0;
+		private Int32 playerCount = 0;
 		private List<String> Names = new List<String>();
 		public StartWindow() {
 			InitializeComponent();
 		}
 
 		private void PlayerCountCombo_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-			playerCount = int.Parse(PlayerCountCombo.SelectedItem.ToString());
+			playerCount = Int32.Parse(PlayerCountCombo.SelectedItem.ToString());
 			P1NameBox.Visibility = Visibility.Visible;
-			for(int i = 0; i < 4; i++) {
+			for(Int32 i = 0; i < 4; i++) {
 				if(i < playerCount) {
 					(FindName($"P{i + 1}Label") as Label).Visibility = Visibility.Visible;
 					(FindName($"P{i + 1}NameBox") as TextBox).Visibility = Visibility.Visible;
@@ -51,7 +51,7 @@ namespace ScrumageEngine {
 		private Boolean GetNames() {
 			TextBox temp = new TextBox();
 			Boolean retBool = true;
-			for(int i = 0; i < 4; i++) {
+			for(Int32 i = 0; i < 4; i++) {
 				if(i < playerCount && (temp = (FindName($"P{i + 1}NameBox") as TextBox)).Text != "") {
 					Names.Add(temp.Text);
 				} else if(i < playerCount && (temp = (FindName($"P{i + 1}NameBox") as TextBox)).Text == "") {

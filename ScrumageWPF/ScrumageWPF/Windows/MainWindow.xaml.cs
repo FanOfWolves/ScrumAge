@@ -15,12 +15,12 @@ using static ScrumageEngine.InputLogic.InputHandler;
 
 namespace ScrumageEngine {
 	/// <summary>
-	/// Interaction logic for MainWindow.xaml
+	/// Int32eraction logic for MainWindow.xaml
 	/// </summary>
 	public partial class MainWindow : Window {
-		private int PlayerCount = 0;
+		private Int32 PlayerCount = 0;
 		Game game;
-		private int currentPlayerID;
+		private Int32 currentPlayerID;
 		private List<Pawn> SelectedPawns = new List<Pawn>();
 		public MainWindow(List<String> playerNames) {
 			PlayerCount = playerNames.Count;
@@ -48,7 +48,7 @@ namespace ScrumageEngine {
 		/// <param name="playerNames">The names of the players collected in the first GUI.</param>
 		void InitPlayerTab(List<String> playerNames) {
 			TabItem temp = null;
-			for(int i = 0; i < playerNames.Count; i++) {
+			for(Int32 i = 0; i < playerNames.Count; i++) {
 				temp = PlayerTabControl.Items[i] as TabItem;
 				temp.Visibility = Visibility.Visible;
 				temp.IsEnabled = true;
@@ -57,7 +57,6 @@ namespace ScrumageEngine {
 				UpdatePawnBox(GetPlayerPawnBoxByID(i), game.Players[i].Pawns);
 				// Whatever else needs to be initialized at the start of the game for players goes here.
 			}
-			
 		}
 
 		/// <summary>
@@ -98,19 +97,19 @@ namespace ScrumageEngine {
 		}
 
 		/// <summary>
-		/// Updates the Sprint log with the currently contained inputs.
+		/// Updates the SprInt32 log with the currently contained inputs.
 		/// </summary>
 		void LogInput() {
 			ClearLog();
 			foreach(String input in GetRecentInputs())
-				SprintLogBox.Items.Add(input);
+				SprInt32LogBox.Items.Add(input);
 		}
 
 		/// <summary>
-		/// Clears the sprint log.
+		/// Clears the sprInt32 log.
 		/// </summary>
 		void ClearLog() {
-			SprintLogBox.Items.Clear();
+			SprInt32LogBox.Items.Clear();
 		}
 
 		/// <summary>
@@ -119,7 +118,7 @@ namespace ScrumageEngine {
 		/// <param name="dice">The list of dice that were just rolled.</param>
 		private void UpdateDieBoxes(List<Die> dice) {
 			TextBox tempBox = null;
-			for(int i = 0; i < 7; i++) {
+			for(Int32 i = 0; i < 7; i++) {
 				if(i < dice.Count) {
 					tempBox = FindName($"DieBox{i + 1}") as TextBox;
 					tempBox.Visibility = Visibility.Visible;
@@ -157,7 +156,7 @@ namespace ScrumageEngine {
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		private ListBox GetPlayerPawnBoxByID(int id) {
+		private ListBox GetPlayerPawnBoxByID(Int32 id) {
 			switch(id) {
 				case 0: return P1PawnBox;
 				case 1: return P2PawnBox;
@@ -190,7 +189,7 @@ namespace ScrumageEngine {
 
 
 		private void TestDiceBtn_Click(object sender, RoutedEventArgs e) {
-			RollDice(int.Parse(DiceCountCombo.SelectedItem.ToString()), game);
+			RollDice(Int32.Parse(DiceCountCombo.SelectedItem.ToString()), game);
 			UpdateDieBoxes(game.board.dice);
 			LogInput();
 		}

@@ -8,14 +8,14 @@ namespace ScrumageEngine.BoardSpace {
 	public class Game {
 		public List<Player> Players { get; set; }
 		public Board board = new Board();
-		public String[] PawnLevels = { "Front End", "Back End", "Full Stack" };
+		public String[] PawnTypes = { "Front End", "Back End", "Full Stack" };
 		public Game(List<String> playerNames) {
 			Players = InitPlayers(playerNames);
 		}
 
 		private List<Player> InitPlayers(List<String> playerNames) {
 			List<Player> retPlayers = new List<Player>();
-			for(int i = 0; i < playerNames.Count; i++) {
+			for(Int32 i = 0; i < playerNames.Count; i++) {
 				retPlayers.Add(new Player(i, playerNames[i]));
 				// Whatever else needs to be done when players are created goes here.
 				retPlayers[i].GivePawn("Front End");
@@ -53,9 +53,9 @@ namespace ScrumageEngine.BoardSpace {
 			}
 		}
 
-		internal void RollDice(int diceCount, Random rand) {
+		internal void RollDice(Int32 diceCount, Random rand) {
 			board.dice.Clear();
-			for(int i = 0; i < diceCount; i++) {
+			for(Int32 i = 0; i < diceCount; i++) {
 				board.dice.Add(new Die(rand.Next(6) + 1));
 			}
 		}

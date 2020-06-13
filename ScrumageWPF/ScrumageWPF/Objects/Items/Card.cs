@@ -8,7 +8,10 @@ namespace ScrumageEngine.Objects.Items {
 	/// <summary>
 	/// Card extends Item, Used to represent a Card within the game
 	/// </summary>
-	public class Card : Item{
+	public class Card{
+
+		public String Name { get; set; }
+
 		/// <summary>
 		/// The Type of card that is being created
 		/// </summary>
@@ -16,19 +19,18 @@ namespace ScrumageEngine.Objects.Items {
 		/// <summary>
 		/// The requirements for the player to obtain this card
 		/// </summary>
-		public List<Item> Requirements { get; set; }
+		public List<Resource> Requirements { get; set; }
 		/// <summary>
 		/// Card overloaded constructor
 		/// </summary>
 		/// <param name="type">The type of card being created</param>
 		/// <param name="name">The name of the card</param>
 		/// <param name="message">The text for the card</param>
-		public Card(String type, String name, String message) : base(name, message) {
+		public Card(String type, String name){
 			CardType = type;
-			Name = name;
-			Message = message;
 			// Determine how to create reqs in implementation for game
 		}
+
 		/// <summary>
 		/// ToString to be used to display the card
 		/// </summary>

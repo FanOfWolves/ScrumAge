@@ -23,8 +23,8 @@
 		<Label Content="Technical Hut" HorizontalAlignment="Left" Margin="956,358,0,0" VerticalAlignment="Top" FontSize="20"/>
 		<ListBox x:Name="BudgetIncreaseBox" Margin="1156,400,560,642" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
 		<Label Content="Budget Increase" HorizontalAlignment="Left" Margin="1182,350,0,0" VerticalAlignment="Top" FontSize="20"/>
-		<ListBox x:Name="InterviewNodeBox" Margin="1424,400,292,642" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-		<Label Content="Interview" HorizontalAlignment="Left" Margin="1481,350,0,0" VerticalAlignment="Top" FontSize="20"/>
+		<ListBox x:Name="Int32erviewNodeBox" Margin="1424,400,292,642" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+		<Label Content="Int32erview" HorizontalAlignment="Left" Margin="1481,350,0,0" VerticalAlignment="Top" FontSize="20"/>
 		<ListBox x:Name="ReassignmentNodeBox" Margin="1681,400,35,580" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
 		<Label Content="Reassignment" HorizontalAlignment="Left" Margin="1717,350,0,0" VerticalAlignment="Top" FontSize="20"/>
 		<ListBox x:Name="Artifact1Box" Margin="918,611,798,431" FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
@@ -98,10 +98,10 @@
 					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-1,76,0,0" VerticalAlignment="Top" FontSize="20"/>
 					<Label x:Name="P1BudgetLabel" Content="Budget:" HorizontalAlignment="Left" Margin="48,113,0,0" VerticalAlignment="Top" FontSize="26"/>
 					<Label x:Name="P1FundsLabel" Content="Funds:" HorizontalAlignment="Left" Margin="48,158,0,0" VerticalAlignment="Top" FontSize="26"/>
-					<Label x:Name="P1SprintLabel" Content="Sprint Cost:" HorizontalAlignment="Left" Margin="48,203,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P1SprInt32Label" Content="SprInt32 Cost:" HorizontalAlignment="Left" Margin="48,203,0,0" VerticalAlignment="Top" FontSize="26"/>
 					<Label x:Name="P1ScoreLabel" Content="Score:" HorizontalAlignment="Left" Margin="39,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P1ScoreValue" Content="####" HorizontalAlignment="Left" Margin="121,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
-					<Label x:Name="P1SprintValue" Content="####" HorizontalAlignment="Left" Margin="195,205,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P1SprInt32Value" Content="####" HorizontalAlignment="Left" Margin="195,205,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P1FundsValue" Content="####" HorizontalAlignment="Left" Margin="137,158,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P1BudgetValue" Content="####" HorizontalAlignment="Left" Margin="151,113,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P1NameValue" Content="###################" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" FontSize="26" Height="49"/>
@@ -149,10 +149,10 @@
 					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-1,76,0,0" VerticalAlignment="Top" FontSize="20"/>
 					<Label x:Name="P2BudgetLabel" Content="Budget:" HorizontalAlignment="Left" Margin="48,113,0,0" VerticalAlignment="Top" FontSize="26"/>
 					<Label x:Name="P2FundsLabel" Content="Funds:" HorizontalAlignment="Left" Margin="48,158,0,0" VerticalAlignment="Top" FontSize="26"/>
-					<Label x:Name="P2SprintLabel" Content="Sprint Cost:" HorizontalAlignment="Left" Margin="48,203,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P2SprInt32Label" Content="SprInt32 Cost:" HorizontalAlignment="Left" Margin="48,203,0,0" VerticalAlignment="Top" FontSize="26"/>
 					<Label x:Name="P2ScoreLabel" Content="Score:" HorizontalAlignment="Left" Margin="39,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P2ScoreValue" Content="####" HorizontalAlignment="Left" Margin="121,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
-					<Label x:Name="P2SprintValue" Content="####" HorizontalAlignment="Left" Margin="195,205,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P2SprInt32Value" Content="####" HorizontalAlignment="Left" Margin="195,205,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P2FundsValue" Content="####" HorizontalAlignment="Left" Margin="137,158,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P2BudgetValue" Content="####" HorizontalAlignment="Left" Margin="151,113,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P2NameValue" Content="###################" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" FontSize="26" Height="47"/>
@@ -200,10 +200,10 @@
 					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-1,76,0,0" VerticalAlignment="Top" FontSize="20"/>
 					<Label x:Name="P3BudgetLabel" Content="Budget:" HorizontalAlignment="Left" Margin="48,113,0,0" VerticalAlignment="Top" FontSize="26"/>
 					<Label x:Name="P3FundsLabel" Content="Funds:" HorizontalAlignment="Left" Margin="48,158,0,0" VerticalAlignment="Top" FontSize="26"/>
-					<Label x:Name="P3SprintLabel" Content="Sprint Cost:" HorizontalAlignment="Left" Margin="48,203,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P3SprInt32Label" Content="SprInt32 Cost:" HorizontalAlignment="Left" Margin="48,203,0,0" VerticalAlignment="Top" FontSize="26"/>
 					<Label x:Name="P3ScoreLabel" Content="Score:" HorizontalAlignment="Left" Margin="39,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P3ScoreValue" Content="####" HorizontalAlignment="Left" Margin="121,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
-					<Label x:Name="P3SprintValue" Content="####" HorizontalAlignment="Left" Margin="195,205,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P3SprInt32Value" Content="####" HorizontalAlignment="Left" Margin="195,205,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P3FundsValue" Content="####" HorizontalAlignment="Left" Margin="137,158,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P3BudgetValue" Content="####" HorizontalAlignment="Left" Margin="151,113,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P3NameValue" Content="###################" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
@@ -251,10 +251,10 @@
 					<Label Content="----------------------------------------------------------------" HorizontalAlignment="Left" Margin="-1,76,0,0" VerticalAlignment="Top" FontSize="20"/>
 					<Label x:Name="P4BudgetLabel" Content="Budget:" HorizontalAlignment="Left" Margin="48,113,0,0" VerticalAlignment="Top" FontSize="26"/>
 					<Label x:Name="P4FundsLabel" Content="Funds:" HorizontalAlignment="Left" Margin="48,158,0,0" VerticalAlignment="Top" FontSize="26"/>
-					<Label x:Name="P4SprintLabel" Content="Sprint Cost:" HorizontalAlignment="Left" Margin="48,203,0,0" VerticalAlignment="Top" FontSize="26"/>
+					<Label x:Name="P4SprInt32Label" Content="SprInt32 Cost:" HorizontalAlignment="Left" Margin="48,203,0,0" VerticalAlignment="Top" FontSize="26"/>
 					<Label x:Name="P4ScoreLabel" Content="Score:" HorizontalAlignment="Left" Margin="39,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P4ScoreValue" Content="####" HorizontalAlignment="Left" Margin="121,50,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
-					<Label x:Name="P4SprintValue" Content="####" HorizontalAlignment="Left" Margin="195,205,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
+					<Label x:Name="P4SprInt32Value" Content="####" HorizontalAlignment="Left" Margin="195,205,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P4FundsValue" Content="####" HorizontalAlignment="Left" Margin="137,158,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P4BudgetValue" Content="####" HorizontalAlignment="Left" Margin="151,113,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
 					<Label x:Name="P4NameValue" Content="###################" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
@@ -282,8 +282,8 @@
 				</Grid>
 			</TabItem>
 		</TabControl>
-		<ListBox x:Name="SprintLogBox" Margin="535,668,1007,10"/>
-		<Label Content="Sprint Log" HorizontalAlignment="Left" Margin="628,598,0,0" VerticalAlignment="Top" FontSize="40"/>
+		<ListBox x:Name="SprInt32LogBox" Margin="535,668,1007,10"/>
+		<Label Content="SprInt32 Log" HorizontalAlignment="Left" Margin="628,598,0,0" VerticalAlignment="Top" FontSize="40"/>
 		<Button x:Name="ExitBtn" Content="Exit" HorizontalAlignment="Left" Margin="1779,1025,0,0" VerticalAlignment="Top" Height="45" Width="127" Click="ExitBtn_Click" FontSize="26"/>
 		<Button x:Name="TestBtn" Content="Test" HorizontalAlignment="Left" Margin="1828,961,0,0" VerticalAlignment="Top" Height="59" Width="82" FontSize="40" Click="TestBtn_Click"/>
 		<TextBox x:Name="DieBox1" HorizontalAlignment="Left" Margin="931,860,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="119" Visibility="Hidden" IsEnabled="False" FontFamily="Consolas" FontSize="20" TextAlignment="Center"/>
