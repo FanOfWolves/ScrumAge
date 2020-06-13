@@ -29,7 +29,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// Node default constructor, does not assign any values(can likely be scrapped)
 		/// </summary>
 		public Node() {
-			//Just used as an initializer to avoid null poInt32ers
+			//Just used as an initializer to avoid null pointers
 		}
 		/// <summary>
 		/// Node Overloaded constructor, creates an instance of the Node
