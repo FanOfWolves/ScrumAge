@@ -13,6 +13,11 @@ namespace ScrumageEngine.BoardSpace {
 			Players = InitPlayers(playerNames);
 		}
 
+		/// <summary>
+		/// Initializes players and returns them as a list.
+		/// </summary>
+		/// <param name="playerNames">The list of names for the players.</param>
+		/// <returns>A list of the players.</returns>
 		private List<Player> InitPlayers(List<String> playerNames) {
 			List<Player> retPlayers = new List<Player>();
 			for(Int32 i = 0; i < playerNames.Count; i++) {
@@ -53,6 +58,11 @@ namespace ScrumageEngine.BoardSpace {
 			}
 		}
 
+		/// <summary>
+		/// Uses a global random to roll a specified number of dice.
+		/// </summary>
+		/// <param name="diceCount">The number of dice wish to be rolled.</param>
+		/// <param name="rand">A global random.</param>
 		internal void RollDice(Int32 diceCount, Random rand) {
 			board.dice.Clear();
 			for(Int32 i = 0; i < diceCount; i++) {
@@ -60,6 +70,10 @@ namespace ScrumageEngine.BoardSpace {
 			}
 		}
 
+		/// <summary>
+		/// Represents current dice values in a single string for the log.
+		/// </summary>
+		/// <returns>String of current dice values.</returns>
 		internal String DiceValues() {
 			String retString = "";
 			foreach(Die d in board.dice) {
