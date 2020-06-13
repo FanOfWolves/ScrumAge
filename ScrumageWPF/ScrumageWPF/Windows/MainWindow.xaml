@@ -55,7 +55,7 @@
 		<Label Content="Card info label" HorizontalAlignment="Left" Margin="1192,734,0,0" VerticalAlignment="Top" FontSize="20" MouseDoubleClick="Label_MouseDoubleClick" Cursor="Hand" FontWeight="Bold"/>
 		<Label Content="Card info label" HorizontalAlignment="Left" Margin="1484,727,0,0" VerticalAlignment="Top" FontSize="20" MouseDoubleClick="Label_MouseDoubleClick" Cursor="Hand" FontWeight="Bold"/>
 		<Label Content="Card info label" HorizontalAlignment="Left" Margin="1717,727,0,0" VerticalAlignment="Top" FontSize="20" MouseDoubleClick="Label_MouseDoubleClick" Cursor="Hand" FontWeight="Bold"/>
-		<TabControl x:Name="PlayerTabControl" Margin="0,0,1390,10" SelectedIndex="0" SelectionChanged="PlayerTabControl_SelectionChanged">
+		<TabControl x:Name="PlayerTabControl" Margin="0,0,1390,10" SelectedIndex="0">
 			<TabItem x:Name="P1Tab" Header="Player 1" Background="#FFE5E5E5" BorderBrush="#FFACACAC" IsEnabled="False" Visibility="Hidden">
 				<Grid x:Name="P1Grid" Background="#FFE5E5E5">
 					<Label x:Name="P1NameLabel" Content="Name:" HorizontalAlignment="Left" Margin="33,10,0,0" VerticalAlignment="Top" FontSize="26" Height="40"/>
@@ -267,7 +267,7 @@
 					<Label Content="Current Phase" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="26"/>
 					<Label Content="Phase Label" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" FontSize="20"/>
 					<Label Content="---------------------------------------------------------------------------------------------------------------------" HorizontalAlignment="Left" Margin="-85,102,0,0" VerticalAlignment="Top"/>
-					<ComboBox x:Name="NodeComboBox" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Width="288" Height="46"/>
+					<ComboBox x:Name="NodeComboBox" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Width="288" Height="46" SelectedIndex="0"/>
 					<Label Content="Location:" HorizontalAlignment="Left" Margin="101,133,0,0" VerticalAlignment="Top" FontSize="40" Height="76" Width="214"/>
 					<Button x:Name="MovePawnBtn" Content="Move Pawn" HorizontalAlignment="Center" Margin="0,401,0,0" VerticalAlignment="Top" Height="88" Width="236" FontSize="40" Click="MovePawnBtn_Click"/>
 				</Grid>
@@ -303,5 +303,6 @@
 			<System:String>6</System:String>
 			<System:String>7</System:String>
 		</ComboBox>
+		<Label x:Name="curp" Content="Label" HorizontalAlignment="Left" Margin="1064,1040,0,0" VerticalAlignment="Top" FontSize="20"/>
 	</Grid>
 </Window>

@@ -16,9 +16,13 @@ namespace ScrumageEngine.BoardSpace {
 		private List<Player> InitPlayers(List<String> playerNames) {
 			List<Player> retPlayers = new List<Player>();
 			for(int i = 0; i < playerNames.Count; i++) {
-				retPlayers.Add(new Player(i + 1, playerNames[i]));
+				retPlayers.Add(new Player(i, playerNames[i]));
 				// Whatever else needs to be done when players are created goes here.
-
+				retPlayers[i].GivePawn("Front End");
+				retPlayers[i].GivePawn("Front End");
+				retPlayers[i].GivePawn("Back End");
+				retPlayers[i].GivePawn("Back End");
+				retPlayers[i].GivePawn("Back End");
 			}
 			return retPlayers;
 		}
@@ -47,6 +51,21 @@ namespace ScrumageEngine.BoardSpace {
 					// Set DoneWithPhased
 				
 			}
+		}
+
+		internal void RollDice(int diceCount, Random rand) {
+			board.dice.Clear();
+			for(int i = 0; i < diceCount; i++) {
+				board.dice.Add(new Die(rand.Next(6) + 1));
+			}
+		}
+
+		internal String DiceValues() {
+			String retString = "";
+			foreach(Die d in board.dice) {
+				retString += d.Value + " ";
+			}
+			return retString;
 		}
 	}
 }

@@ -34,7 +34,7 @@ namespace ScrumageEngine.InputLogic {
 		/// <summary>
 		/// A random to be used in returning values based on inputs(use this as gloval random)
 		/// </summary>
-		private static Random Rand = new Random();
+		private static Random Rand = new Random(); // Maybe move this to Game?
 		/// <summary>
 		/// Returns the current state of the recent inputs
 		/// </summary>
@@ -66,6 +66,11 @@ namespace ScrumageEngine.InputLogic {
 			}
 		}
 
+		/// <summary>
+		/// Gives the player the specified type of card.
+		/// </summary>
+		/// <param name="cardType">"artifact"/"agility" for the type of card wanted.</param>
+		/// <param name="player">The player requesting the card.</param>
 		public static void GivePlayerCard(String cardType, Player player) { // Replace with inherited Card children?
 			RecordInputs($"{player.PlayerName} took {cardType}");
 			if(cardType == "artifact") { // Arg 2
@@ -75,6 +80,12 @@ namespace ScrumageEngine.InputLogic {
 			}
 		}
 
+		/// <summary>
+		/// Gives the player a pawn based on an input
+		/// </summary>
+		/// <param name="player">The player requesting the pawn.</param>
+		/// <param name="game">Current State of the game.</param>
+		/// <param name="input">The type of pawn if specification is needed.</param>
 		public static void GivePlayerPawn(Player player, Game game, String input = "") {
 			RecordInputs($"{ player.PlayerName} received pawn");
 			String[] inputArr = input.Split(' ');
@@ -92,31 +103,40 @@ namespace ScrumageEngine.InputLogic {
 		/// </summary>
 		/// <param name="diceCount">The number of dice to roll.</param>
 		/// <returns>A list of the dice.</returns>
-		public static List<Die> RollDice(int diceCount) {
-			RecordInputs($"{diceCount} dice rolled");
-			List<Die> dice = new List<Die>();
-			for(int i = 0; i < diceCount; i++) {
-				dice.Add(new Die((Rand.Next(6) + 1)));
-			}
-			return dice;
+		public static void RollDice(int diceCount, Game game) {
+			game.RollDice(diceCount, Rand);
+			RecordInputs($"{diceCount} dice rolled, Results: {game.DiceValues()}"); // Add results
 		}
 
+		/// <summary>
+		/// Moves a pawn from the player's inventory to the specified node
+		/// </summary>
+		/// <param name="pawns">The list of pawns selected by the player</param>
+		/// <param name="player">The player requesting the move</param>
+		/// <param name="node">The node the player is trying to move to</param>
 		public static void MovePawn(List<Pawn> pawns, Player player, Node node) {
-			if(PlayerOwnsAll(pawns, player.PlayerID)) {
+			if(pawns.Count > 0) {
 				foreach(Pawn p in pawns) {
 					player.TakePawn(p);
 					node.AddPawn(p);
 				}
+				RecordInputs($"{ player.PlayerName} moved {ListPawns(pawns)} to {node.NodeName}");
+			}else if(pawns.Count == 0) {
+				RecordInputs($"{player.PlayerName} tried to move pawns that weren't theirs!");
 			}
 		}
 
-		public static Boolean PlayerOwnsAll(List<Pawn> pawns, int playerID) {
+		/// <summary>
+		/// Lists all of the pawns in a collection.
+		/// </summary>
+		/// <param name="pawns">The pawns to be listed.</param>
+		/// <returns>Comma separated pawn representation.</returns>
+		private static String ListPawns(List<Pawn> pawns) {
+			String retString = "";
 			foreach(Pawn p in pawns) {
-				if(p.PawnID != playerID) {
-					return false;
-				}
+				retString += p.PawnLevel + ", ";
 			}
-			return true;
+			return retString;
 		}
 	}
 }
