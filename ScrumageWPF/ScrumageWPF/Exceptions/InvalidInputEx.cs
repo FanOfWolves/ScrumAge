@@ -14,7 +14,7 @@ namespace ScrumageEngine.Exceptions {
 		/// <summary>
 		/// Overloaded Constructor, brings in the pre-split player input.
 		/// </summary>
-		/// <param name="inputArr">The user's input split Int32o an array by each part of the input.</param>
+		/// <param name="inputArr">The user's input split into an array by each part of the input.</param>
 		public InvalidInputEx(String[] inputArr) {
 			Message = GetMessage(inputArr);
 		}
