@@ -16,7 +16,7 @@ namespace ScrumageEngine.BoardSpace {
 		private List<Player> InitPlayers(List<String> playerNames) {
 			List<Player> retPlayers = new List<Player>();
 			for(Int32 i = 0; i < playerNames.Count; i++) {
-				retPlayers.Add(new Player(i, playerNames[i]));
+				retPlayers.Add(new Player(i+1, playerNames[i]));
 				// Whatever else needs to be done when players are created goes here.
 				retPlayers[i].GivePawn("Front End");
 				retPlayers[i].GivePawn("Front End");

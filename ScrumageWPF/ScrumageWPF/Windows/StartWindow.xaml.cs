@@ -10,21 +10,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ScrumageEngine {
+namespace ScrumageEngine.Windows {
 	/// <summary>
-	/// Int32eraction logic for StartWindow.xaml
+	/// Interaction logic for StartWindow.xaml
 	/// </summary>
 	public partial class StartWindow : Window {
-		private Int32 playerCount = 0;
+		private int playerCount = 0;
 		private List<String> Names = new List<String>();
 		public StartWindow() {
 			InitializeComponent();
 		}
 
 		private void PlayerCountCombo_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-			playerCount = Int32.Parse(PlayerCountCombo.SelectedItem.ToString());
+			playerCount = int.Parse(PlayerCountCombo.SelectedItem.ToString());
 			P1NameBox.Visibility = Visibility.Visible;
-			for(Int32 i = 0; i < 4; i++) {
+			for(int i = 0; i < 4; i++) {
 				if(i < playerCount) {
 					(FindName($"P{i + 1}Label") as Label).Visibility = Visibility.Visible;
 					(FindName($"P{i + 1}NameBox") as TextBox).Visibility = Visibility.Visible;
@@ -39,7 +39,7 @@ namespace ScrumageEngine {
 		private void ToGameBtn_Click(object sender, RoutedEventArgs e) {
 			if(playerCount != 0) {
 				if(GetNames()) {
-					MainWindow mw = new MainWindow(Names);
+					GameWindow mw = new GameWindow(Names);
 					mw.Show();
 					this.Close();
 				}
@@ -51,7 +51,7 @@ namespace ScrumageEngine {
 		private Boolean GetNames() {
 			TextBox temp = new TextBox();
 			Boolean retBool = true;
-			for(Int32 i = 0; i < 4; i++) {
+			for(int i = 0; i < 4; i++) {
 				if(i < playerCount && (temp = (FindName($"P{i + 1}NameBox") as TextBox)).Text != "") {
 					Names.Add(temp.Text);
 				} else if(i < playerCount && (temp = (FindName($"P{i + 1}NameBox") as TextBox)).Text == "") {

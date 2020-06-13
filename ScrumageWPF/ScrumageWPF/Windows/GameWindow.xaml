@@ -1,0 +1,602 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScrumageEngine.Windows"
+        xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Class="ScrumageEngine.Windows.GameWindow"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="GameWindow" 
+		WindowState="Maximized"
+		WindowStyle="None"
+        Height="825" 
+        Width="1420"
+        Background="#FFCFB997">
+	<Grid Margin="5">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="3*"/>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="5*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<TabControl x:Name="PlayerTabControl" Grid.Column="0" Grid.Row="0" SelectionChanged="PlayerTabControl_SelectionChanged">
+			<TabItem x:Name="PTab1" Background="#FFE5E5E5" BorderBrush="#FFACACAC" Header="Player 1" Visibility="Hidden">
+				<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+					<StackPanel Orientation="Vertical" Background="#FFE5E5E5">
+						<StackPanel Orientation="Horizontal">
+							<Label x:Name="P1NameLabel" HorizontalAlignment="Left" Content="Name:" Margin="1, 1, 1, 1" FontSize="26"/>
+							<Label x:Name="P1NameValue" Content="#######"  HorizontalAlignment="Left" FontSize="26"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<Label x:Name="P1ScoreLabel" Content="Score: " FontSize="22"/>
+							<Label x:Name="P1ScoreValue" Content="#######" FontSize="22"/>
+							<Label Content="Team Color:" FontSize="22"/>
+							<Label Content ="#####" FontSize="22"/>
+						</StackPanel>
+						<Separator/>
+
+						<StackPanel Orientation="Horizontal">
+							<Label HorizontalAlignment="Left" Content="Budget:" FontSize="26"/>
+							<Label x:Name="P1BudgetValue" HorizontalAlignment="Left" Content="$0.00" FontSize="26"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<Label HorizontalAlignment="Left" Content="Funds:" FontSize="26"/>
+							<Label HorizontalAlignment="Left" x:Name="P1FundValue" Content="$0.00" FontSize="26"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<Label HorizontalAlignment="Left" Content="Sprint Cost:" FontSize="26"/>
+							<Label HorizontalAlignment="Left" x:Name="P1Value" Content="$0.00" FontSize="26"/>
+						</StackPanel>
+						<Separator/>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<Label HorizontalAlignment="Center" Content="Resources" Grid.Column="0" Grid.Row="0" FontSize="22"/>
+							<Label HorizontalAlignment="Center" Content="Pawns" Grid.Column="1" Grid.Row="0" FontSize="22"/>
+							<ListBox x:Name="P1ResourceBox" SelectionMode="Multiple" Grid.Column="0" Grid.Row="1" Margin="5" MinHeight="175"/>
+							<ListBox x:Name="P1PawnBox" SelectionMode="Multiple" Grid.Column="1" Grid.Row="1" Margin="5" MinHeight="175"/>
+						</Grid>
+						<Separator/>
+						<Label Content="Cards" HorizontalAlignment="Center" FontSize="26"/>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="0"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<Label x:Name="P1ArtifactsCountLabel" FontWeight="Bold" HorizontalAlignment="Center" Content ="## of ##" FontSize="16" Grid.Column="0" Grid.Row="0"/>
+							<Label x:Name="P1AgilityCountLabel" FontWeight="Bold" HorizontalAlignment="Center" Content="## of ##" FontSize="16" Grid.Column="2" Grid.Row="0"/>
+
+							<DockPanel Grid.Column="0" Grid.Row="1" Margin="5, 0, 5, 0">
+								<Button x:Name="P1LeftArtifactsBtn" DockPanel.Dock="Left" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Button x:Name="P1RightArtifactsBtn" DockPanel.Dock="Right" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Label Content="Artifacts" FontSize="20" HorizontalAlignment="Center"/>
+							</DockPanel>
+							<DockPanel Grid.Column="2" Grid.Row="1" Margin="5, 0, 5, 0">
+								<Button x:Name="P1LeftAgilityBtn" DockPanel.Dock="Left" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Button x:Name="P1RightAgilityBtn" DockPanel.Dock="Right" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Label Content="Agility" FontSize="20" HorizontalAlignment="Center"/>
+							</DockPanel>
+
+							<ListBox x:Name="P1ArtifactBox" Grid.Column="0" Grid.Row="3" Margin="5" MinHeight="165"/>
+							<ListBox x:Name="P1AgilityBox" Grid.Column="2" Grid.Row="3" Margin="5" MinHeight="165"/>
+
+						</Grid>
+
+					</StackPanel>
+				</ScrollViewer>
+			</TabItem>
+			<TabItem x:Name="PTab2" Background="#FFE5E5E5" BorderBrush="#FFACACAC" Header="Player 2" Visibility="Hidden">
+				<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+					<StackPanel Orientation="Vertical" Background="#FFE5E5E5">
+						<StackPanel Orientation="Horizontal">
+							<Label x:Name="P2NameLabel" HorizontalAlignment="Left" Content="Name:" Margin="1, 1, 1, 1" FontSize="26"/>
+							<Label x:Name="P2NameValue" Content="#######"  HorizontalAlignment="Left" FontSize="26"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<Label x:Name="P2ScoreLabel" Content="Score: " FontSize="22"/>
+							<Label x:Name="P2ScoreValue" Content="#######" FontSize="22"/>
+							<Label Content="Team Color:" FontSize="22"/>
+							<Label Content ="#####" FontSize="22"/>
+						</StackPanel>
+						<Separator/>
+
+						<StackPanel Orientation="Horizontal">
+							<Label HorizontalAlignment="Left" Content="Budget:" FontSize="26"/>
+							<Label x:Name="P2BudgetValue" HorizontalAlignment="Left" Content="$0.00" FontSize="26"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<Label HorizontalAlignment="Left" Content="Funds:" FontSize="26"/>
+							<Label HorizontalAlignment="Left" x:Name="P2FundValue" Content="$0.00" FontSize="26"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<Label HorizontalAlignment="Left" Content="Sprint Cost:" FontSize="26"/>
+							<Label HorizontalAlignment="Left" x:Name="P2Value" Content="$0.00" FontSize="26"/>
+						</StackPanel>
+						<Separator/>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<Label HorizontalAlignment="Center" Content="Resources" Grid.Column="0" Grid.Row="0" FontSize="22"/>
+							<Label HorizontalAlignment="Center" Content="Pawns" Grid.Column="1" Grid.Row="0" FontSize="22"/>
+							<ListBox x:Name="P2ResourceBox" SelectionMode="Multiple" Grid.Column="0" Grid.Row="1" Margin="5" MinHeight="175"/>
+							<ListBox x:Name="P2PawnBox" SelectionMode="Multiple" Grid.Column="1" Grid.Row="1" Margin="5" MinHeight="175"/>
+						</Grid>
+						<Separator/>
+						<Label Content="Cards" HorizontalAlignment="Center" FontSize="26"/>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="0"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<Label x:Name="P2ArtifactsCountLabel" FontWeight="Bold" HorizontalAlignment="Center" Content ="## of ##" FontSize="16" Grid.Column="0" Grid.Row="0"/>
+							<Label x:Name="P2AgilityCountLabel" FontWeight="Bold" HorizontalAlignment="Center" Content="## of ##" FontSize="16" Grid.Column="2" Grid.Row="0"/>
+
+							<DockPanel Grid.Column="0" Grid.Row="1" Margin="5, 0, 5, 0">
+								<Button x:Name="P2LeftArtifactsBtn" DockPanel.Dock="Left" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Button x:Name="P2RightArtifactsBtn" DockPanel.Dock="Right" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Label Content="Artifacts" FontSize="20" HorizontalAlignment="Center"/>
+							</DockPanel>
+							<DockPanel Grid.Column="2" Grid.Row="1" Margin="5, 0, 5, 0">
+								<Button x:Name="P2LeftAgilityBtn" DockPanel.Dock="Left" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Button x:Name="P2RightAgilityBtn" DockPanel.Dock="Right" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Label Content="Agility" FontSize="20" HorizontalAlignment="Center"/>
+							</DockPanel>
+
+							<ListBox x:Name="P2ArtifactBox" Grid.Column="0" Grid.Row="3" Margin="5" MinHeight="165"/>
+							<ListBox x:Name="P2AgilityBox" Grid.Column="2" Grid.Row="3" Margin="5" MinHeight="165"/>
+
+						</Grid>
+
+					</StackPanel>
+				</ScrollViewer>
+			</TabItem>
+			<TabItem x:Name="PTab3" Background="#FFE5E5E5" BorderBrush="#FFACACAC" Header="Player 3" Visibility="Hidden">
+				<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+					<StackPanel Orientation="Vertical" Background="#FFE5E5E5">
+						<StackPanel Orientation="Horizontal">
+							<Label x:Name="P3NameLabel" HorizontalAlignment="Left" Content="Name:" Margin="1, 1, 1, 1" FontSize="26"/>
+							<Label x:Name="P3NameValue" Content="#######"  HorizontalAlignment="Left" FontSize="26"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<Label x:Name="P3ScoreLabel" Content="Score: " FontSize="22"/>
+							<Label x:Name="P3ScoreValue" Content="#######" FontSize="22"/>
+							<Label Content="Team Color:" FontSize="22"/>
+							<Label Content ="#####" FontSize="22"/>
+						</StackPanel>
+						<Separator/>
+
+						<StackPanel Orientation="Horizontal">
+							<Label HorizontalAlignment="Left" Content="Budget:" FontSize="26"/>
+							<Label x:Name="P3BudgetValue" HorizontalAlignment="Left" Content="$0.00" FontSize="26"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<Label HorizontalAlignment="Left" Content="Funds:" FontSize="26"/>
+							<Label HorizontalAlignment="Left" x:Name="P3FundValue" Content="$0.00" FontSize="26"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<Label HorizontalAlignment="Left" Content="Sprint Cost:" FontSize="26"/>
+							<Label HorizontalAlignment="Left" x:Name="P3Value" Content="$0.00" FontSize="26"/>
+						</StackPanel>
+						<Separator/>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<Label HorizontalAlignment="Center" Content="Resources" Grid.Column="0" Grid.Row="0" FontSize="22"/>
+							<Label HorizontalAlignment="Center" Content="Pawns" Grid.Column="1" Grid.Row="0" FontSize="22"/>
+							<ListBox x:Name="P3ResourceBox" SelectionMode="Multiple" Grid.Column="0" Grid.Row="1" Margin="5" MinHeight="175"/>
+							<ListBox x:Name="P3PawnBox" SelectionMode="Multiple" Grid.Column="1" Grid.Row="1" Margin="5" MinHeight="175"/>
+						</Grid>
+						<Separator/>
+						<Label Content="Cards" HorizontalAlignment="Center" FontSize="26"/>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="0"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<Label x:Name="P3ArtifactsCountLabel" FontWeight="Bold" HorizontalAlignment="Center" Content ="## of ##" FontSize="16" Grid.Column="0" Grid.Row="0"/>
+							<Label x:Name="P3AgilityCountLabel" FontWeight="Bold" HorizontalAlignment="Center" Content="## of ##" FontSize="16" Grid.Column="2" Grid.Row="0"/>
+
+							<DockPanel Grid.Column="0" Grid.Row="1" Margin="5, 0, 5, 0">
+								<Button x:Name="P3LeftArtifactsBtn" DockPanel.Dock="Left" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Button x:Name="P3RightArtifactsBtn" DockPanel.Dock="Right" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Label Content="Artifacts" FontSize="20" HorizontalAlignment="Center"/>
+							</DockPanel>
+							<DockPanel Grid.Column="2" Grid.Row="1" Margin="5, 0, 5, 0">
+								<Button x:Name="P3LeftAgilityBtn" DockPanel.Dock="Left" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Button x:Name="P3RightAgilityBtn" DockPanel.Dock="Right" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Label Content="Agility" FontSize="20" HorizontalAlignment="Center"/>
+							</DockPanel>
+
+							<ListBox x:Name="P3ArtifactBox" Grid.Column="0" Grid.Row="3" Margin="5" MinHeight="165"/>
+							<ListBox x:Name="P3AgilityBox" Grid.Column="2" Grid.Row="3" Margin="5" MinHeight="165"/>
+
+						</Grid>
+
+					</StackPanel>
+				</ScrollViewer>
+			</TabItem>
+			<TabItem x:Name="PTab5" Background="#FFE5E5E5" BorderBrush="#FFACACAC" Header="Player 4" Visibility="Hidden">
+				<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+					<StackPanel Orientation="Vertical" Background="#FFE5E5E5">
+						<StackPanel Orientation="Horizontal">
+							<Label x:Name="P4NameLabel" HorizontalAlignment="Left" Content="Name:" Margin="1, 1, 1, 1" FontSize="26"/>
+							<Label x:Name="P4NameValue" Content="#######"  HorizontalAlignment="Left" FontSize="26"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<Label x:Name="P4ScoreLabel" Content="Score: " FontSize="22"/>
+							<Label x:Name="P4ScoreValue" Content="#######" FontSize="22"/>
+							<Label Content="Team Color:" FontSize="22"/>
+							<Label Content ="#####" FontSize="22"/>
+						</StackPanel>
+						<Separator/>
+
+						<StackPanel Orientation="Horizontal">
+							<Label HorizontalAlignment="Left" Content="Budget:" FontSize="26"/>
+							<Label x:Name="P4BudgetValue" HorizontalAlignment="Left" Content="$0.00" FontSize="26"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<Label HorizontalAlignment="Left" Content="Funds:" FontSize="26"/>
+							<Label HorizontalAlignment="Left" x:Name="P4FundValue" Content="$0.00" FontSize="26"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<Label HorizontalAlignment="Left" Content="Sprint Cost:" FontSize="26"/>
+							<Label HorizontalAlignment="Left" x:Name="P4Value" Content="$0.00" FontSize="26"/>
+						</StackPanel>
+						<Separator/>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<Label HorizontalAlignment="Center" Content="Resources" Grid.Column="0" Grid.Row="0" FontSize="22"/>
+							<Label HorizontalAlignment="Center" Content="Pawns" Grid.Column="1" Grid.Row="0" FontSize="22"/>
+							<ListBox x:Name="P4ResourceBox" SelectionMode="Multiple" Grid.Column="0" Grid.Row="1" Margin="5" MinHeight="175"/>
+							<ListBox x:Name="P4PawnBox" SelectionMode="Multiple" Grid.Column="1" Grid.Row="1" Margin="5" MinHeight="175"/>
+						</Grid>
+						<Separator/>
+						<Label Content="Cards" HorizontalAlignment="Center" FontSize="26"/>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="0"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<Label x:Name="P4ArtifactsCountLabel" FontWeight="Bold" HorizontalAlignment="Center" Content ="## of ##" FontSize="16" Grid.Column="0" Grid.Row="0"/>
+							<Label x:Name="P4AgilityCountLabel" FontWeight="Bold" HorizontalAlignment="Center" Content="## of ##" FontSize="16" Grid.Column="2" Grid.Row="0"/>
+
+							<DockPanel Grid.Column="0" Grid.Row="1" Margin="5, 0, 5, 0">
+								<Button x:Name="P4LeftArtifactsBtn" DockPanel.Dock="Left" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Button x:Name="P4RightArtifactsBtn" DockPanel.Dock="Right" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Label Content="Artifacts" FontSize="20" HorizontalAlignment="Center"/>
+							</DockPanel>
+							<DockPanel Grid.Column="2" Grid.Row="1" Margin="5, 0, 5, 0">
+								<Button x:Name="P4LeftAgilityBtn" DockPanel.Dock="Left" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Button x:Name="P4RightAgilityBtn" DockPanel.Dock="Right" Width="26">
+									<Button.Background>
+										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+									</Button.Background>
+								</Button>
+								<Label Content="Agility" FontSize="20" HorizontalAlignment="Center"/>
+							</DockPanel>
+
+							<ListBox x:Name="P4ArtifactBox" Grid.Column="0" Grid.Row="3" Margin="5" MinHeight="165"/>
+							<ListBox x:Name="P4AgilityBox" Grid.Column="2" Grid.Row="3" Margin="5" MinHeight="165"/>
+
+						</Grid>
+
+					</StackPanel>
+				</ScrollViewer>
+			</TabItem>
+		</TabControl>
+		<!-- Phase Column -->
+		<DockPanel Grid.Column="1" Margin="5, 0, 0, 0">
+			<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Top">
+				<TabControl>
+					<TabItem Header="TabItem" Background="#FFE5E5E5" BorderBrush="#FFACACAC">
+						<!-- Phase Labels -->
+						<StackPanel Background="#FFE5E5E5">
+							<Label Content="Current Phase" HorizontalAlignment="Center" FontSize="24"/>
+							<Label Content="Phase Label" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+							<StackPanel>
+								<Separator/>
+							</StackPanel>
+							<Label Content="Location:" FontSize="32" HorizontalAlignment="Center"/>
+
+							<!-- Sprint Log -->
+
+							<!-- Location / Move Pawn -->
+							<ComboBox x:Name="NodeComboBox" FontSize="40" Margin="5, 20, 5, 0" SelectedIndex="0"/>
+							<Button x:Name="MovePawnBtn" Content="Move Pawn" FontSize="40" Margin="5, 20, 5, 10" Click="MovePawnBtn_Click"/>
+
+						</StackPanel>
+					</TabItem>
+					<TabItem Header="TestTab" Background="#FFE5E5E5" BorderBrush="#FFACACAC"/>
+				</TabControl>
+
+			</ScrollViewer>
+			<ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0, 50, 0, 0">
+				<Label FontSize="40" HorizontalAlignment="Center" Content="Sprint Log"/>
+			</ScrollViewer>
+
+			<ListBox x:Name="SprintLogBox" DockPanel.Dock="Top"/>
+
+		</DockPanel>
+		<!-- Third Column -->
+		<ScrollViewer Grid.Column="2" Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+			<Grid Margin="5, 0, 0, 0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+
+				<Grid.RowDefinitions>
+					<RowDefinition Height="1*"/>
+					<!-- Game Buttons (Test, Dice, Exit.. etc) -->
+					<RowDefinition Height="90"/>
+					<RowDefinition Height="120"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="128"/>
+					<RowDefinition Height="40"/>
+				</Grid.RowDefinitions>
+				<!-- 1st Column, best way I know how to do this. -->
+				<DockPanel Grid.Column="0" Grid.Row="0" Margin="5">
+					<Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center" FontWeight="Bold" Content="Resource 1"/>
+					<Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center" Content="Dev Requirement"/>
+					<ListBox DockPanel.Dock="Top" x:Name="Resource1Box"/>
+
+				</DockPanel>
+				<!-- 2nd Column, best way I know how to do this. -->
+				<DockPanel Grid.Column="1" Grid.Row="0" Margin="5">
+					<Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center" FontWeight="Bold" Content="Resource 1"/>
+					<Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center" Content="Dev Requirement"/>
+					<ListBox DockPanel.Dock="Top" x:Name="Resource2Box"/>
+				</DockPanel>
+				<!-- 3rd Column, best way I know how to do this. -->
+				<DockPanel Grid.Column="2" Grid.Row="0" Margin="5">
+					<Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center" FontWeight="Bold" Content="Resource 1"/>
+					<Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center" Content="Dev Requirement"/>
+					<ListBox DockPanel.Dock="Top" x:Name="Resource3Box"/>
+				</DockPanel>
+				<!-- 4th Column, best way I know how to do this. -->
+				<DockPanel Grid.Column="3" Grid.Row="0" Margin="5">
+					<Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center" FontWeight="Bold" Content="Resource 1"/>
+					<Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center" Content="Dev Requirement"/>
+					<ListBox DockPanel.Dock="Top" x:Name="Resource4Box"/>
+				</DockPanel>
+
+				<!-- Technical Hut -->
+				<DockPanel Grid.Column="0" Grid.Row="1" MaxHeight="80">
+					<Label FontSize="18" HorizontalAlignment="Center" DockPanel.Dock="Top" Content="Technical Hut"/>
+					<ListBox x:Name="TechnicalHutBox" Margin="5"/>
+				</DockPanel>
+
+				<!-- Budget Increase -->
+				<DockPanel Grid.Column="1" Grid.Row="1" MaxHeight="80">
+					<Label FontSize="18" HorizontalAlignment="Center" DockPanel.Dock="Top" Content="Budget Increase"/>
+					<ListBox x:Name="BudgetIncreaseBox" Margin="5"/>
+				</DockPanel>
+
+				<!-- Interview -->
+				<DockPanel Grid.Column="2" Grid.Row="1" MaxHeight="80">
+					<Label FontSize="18" HorizontalAlignment="Center" DockPanel.Dock="Top" Content="Interview"/>
+					<ListBox x:Name="InterviewNodeBox" Margin="5"/>
+				</DockPanel>
+
+				<!-- Reassignment -->
+				<DockPanel Grid.Column="3" Grid.Row="1" MaxHeight="80">
+					<Label FontSize="18" HorizontalAlignment="Center" DockPanel.Dock="Top" Content="Reassignment"/>
+					<ListBox x:Name="ReassignmentNodeBox" Margin="5"/>
+				</DockPanel>
+
+
+
+				<!-- third row (Artifact 1) -->
+				<DockPanel  Grid.Column="0" Grid.Row="2" MaxHeight="110">
+					<Label DockPanel.Dock="Top" FontSize="18" HorizontalAlignment="Center" Content="Artifact 1"/>
+					<Label DockPanel.Dock="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick" Content="Card info label"/>
+					<ListBox Margin="5" DockPanel.Dock="Top" x:Name="Artifact1Box"/>
+				</DockPanel>
+
+				<!-- third row (Artifact 1) -->
+				<DockPanel  Grid.Column="1" Grid.Row="2" MaxHeight="110">
+					<Label DockPanel.Dock="Top" FontSize="18" HorizontalAlignment="Center" Content="Artifact 2"/>
+					<Label DockPanel.Dock="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick" Content="Card info label"/>
+					<ListBox Margin="5" DockPanel.Dock="Top" x:Name="Artifact2Box"/>
+				</DockPanel>
+
+				<!-- third row (Artifact 3) -->
+				<DockPanel  Grid.Column="2" Grid.Row="2" MaxHeight="110">
+					<Label DockPanel.Dock="Top" FontSize="18" HorizontalAlignment="Center" Content="Artifact 3"/>
+					<Label DockPanel.Dock="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick" Content="Card info label"/>
+					<ListBox Margin="5" DockPanel.Dock="Top" x:Name="Artifact3Box"/>
+				</DockPanel>
+
+				<!-- third row (Artifact 4) -->
+				<DockPanel  Grid.Column="3" Grid.Row="2" MaxHeight="110">
+					<Label DockPanel.Dock="Top" FontSize="18" HorizontalAlignment="Center" Content="Artifact 4"/>
+					<Label DockPanel.Dock="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick" Content="Card info label"/>
+					<ListBox Margin="5" DockPanel.Dock="Top" x:Name="Artifact4Box"/>
+				</DockPanel>
+
+				<!-- fourth row (Agility 1) -->
+				<DockPanel  Grid.Column="0" Grid.Row="3" MaxHeight="110">
+					<Label DockPanel.Dock="Top" FontSize="18" HorizontalAlignment="Center" Content="Agility 1"/>
+					<Label DockPanel.Dock="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Content="Card info label"/>
+					<ListBox Margin="5" DockPanel.Dock="Top" x:Name="Agility1Box"/>
+				</DockPanel>
+
+				<!-- fourth row (Agility 2) -->
+				<DockPanel  Grid.Column="1" Grid.Row="3" MaxHeight="110">
+					<Label DockPanel.Dock="Top" FontSize="18" HorizontalAlignment="Center" Content="Agility 2"/>
+					<Label DockPanel.Dock="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Content="Card info label"/>
+					<ListBox Margin="5" DockPanel.Dock="Top" x:Name="Agility2Box"/>
+				</DockPanel>
+
+				<!-- fourth row (Agility 3) -->
+				<DockPanel  Grid.Column="2" Grid.Row="3" MaxHeight="110">
+					<Label DockPanel.Dock="Top" FontSize="18" HorizontalAlignment="Center" Content="Agility 3"/>
+					<Label DockPanel.Dock="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Content="Card info label"/>
+					<ListBox Margin="5" DockPanel.Dock="Top" x:Name="Agility3Box"/>
+				</DockPanel>
+
+				<!-- fourth row (Agility 4) -->
+				<DockPanel  Grid.Column="3" Grid.Row="3" MaxHeight="110">
+					<Label DockPanel.Dock="Top" FontSize="18" HorizontalAlignment="Center" Content="Agility 4"/>
+					<Label DockPanel.Dock="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Content="Card info label"/>
+					<ListBox Margin="5" DockPanel.Dock="Top" x:Name="Agility4Box"/>
+				</DockPanel>
+
+				<!-- Dice -->
+				<ScrollViewer Grid.Row="4" Grid.ColumnSpan="4" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+					<StackPanel Orientation="Horizontal">
+						<TextBox x:Name="DieBox1" DockPanel.Dock="Left" Margin="5" MaxHeight="128" Height="86" Width="86" MaxWidth="128" IsEnabled="False" Visibility="Hidden" FontFamily="Consolas" FontSize="15" TextAlignment="Center"/>
+						<TextBox x:Name="DieBox2" DockPanel.Dock="Left" Margin="5" MaxHeight="128" Height="86" Width="86" MaxWidth="128" IsEnabled="False" Visibility="Hidden" FontFamily="Consolas" FontSize="15" TextAlignment="Center"/>
+						<TextBox x:Name="DieBox3" DockPanel.Dock="Left" Margin="5" MaxHeight="128" Height="86" Width="86" MaxWidth="128" IsEnabled="False" Visibility="Hidden" FontFamily="Consolas" FontSize="15" TextAlignment="Center"/>
+						<TextBox x:Name="DieBox4" DockPanel.Dock="Left" Margin="5" MaxHeight="128" Height="86" Width="86" MaxWidth="128" IsEnabled="False" Visibility="Hidden" FontFamily="Consolas" FontSize="15" TextAlignment="Center"/>
+						<TextBox x:Name="DieBox5" DockPanel.Dock="Left" Margin="5" MaxHeight="128" Height="86" Width="86" MaxWidth="128" IsEnabled="False" Visibility="Hidden" FontFamily="Consolas" FontSize="15" TextAlignment="Center"/>
+						<TextBox x:Name="DieBox6" DockPanel.Dock="Left" Margin="5" MaxHeight="128" Height="86" Width="86" MaxWidth="128" IsEnabled="False" Visibility="Hidden" FontFamily="Consolas" FontSize="15" TextAlignment="Center"/>
+						<TextBox x:Name="DieBox7" DockPanel.Dock="Left" Margin="5" MaxHeight="128" Height="86" Width="86" MaxWidth="128" IsEnabled="False" Visibility="Hidden" FontFamily="Consolas" FontSize="15" TextAlignment="Center"/>
+					</StackPanel>
+				</ScrollViewer>
+
+
+				<!-- Buttons -->
+				<DockPanel Grid.Column="3" Grid.Row="5">
+					<Button x:Name="ExitBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Top" Click="ExitBtn_Click" Content="Exit"/>
+				</DockPanel>
+				<!-- Dice Button -->
+				<DockPanel Grid.Column="2" Grid.Row="5">
+					<Button x:Name="TestDiceBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Top" Click="TestDiceBtn_Click" Content="Roll Dice"/>
+				</DockPanel>
+				<!-- Test Button -->
+				<DockPanel Grid.Column="1" Grid.Row="5">
+					<Button x:Name="TestBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Top" Click="TestBtn_Click" Content="Test Button"/>
+				</DockPanel>
+				<ComboBox x:Name="DiceCountCombo" HorizontalAlignment="Left" Margin="128,0,0,0" Grid.Row="5" VerticalAlignment="Center" Width="42" SelectedIndex="-1" RenderTransformOrigin="0.667,0.546">
+					<System:String>1</System:String>
+					<System:String>2</System:String>
+					<System:String>3</System:String>
+					<System:String>4</System:String>
+					<System:String>5</System:String>
+					<System:String>6</System:String>
+					<System:String>7</System:String>
+				</ComboBox>
+			</Grid>
+		</ScrollViewer>
+	</Grid>
+</Window>

@@ -13,25 +13,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static ScrumageEngine.InputLogic.InputHandler;
 
-namespace ScrumageEngine {
-	/// <summary>
-	/// Int32eraction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window {
-		private Int32 PlayerCount = 0;
+namespace ScrumageEngine.Windows{
+    /// <summary>
+    /// Interaction logic for GameWindow.xaml
+    /// </summary>
+    public partial class GameWindow : Window
+    {
+		private int PlayerCount = 0;
 		Game game;
-		private Int32 currentPlayerID;
+		private int currentPlayerID;
 		private List<Pawn> SelectedPawns = new List<Pawn>();
-		public MainWindow(List<String> playerNames) {
+		public GameWindow(List<String> playerNames) {
 			PlayerCount = playerNames.Count;
 			game = new Game(playerNames);
 			InitializeComponent();
 			InitPlayerTab(playerNames);
 			InitLocationComboBox(game.board.GetAllNodes());
 			currentPlayerID = PlayerTabControl.SelectedIndex;
-			curp.Content = game.Players[currentPlayerID].PlayerName;
 		}
-
 		/// <summary>
 		/// Initializes the Node combobox with all nodes on the board(Make sure nodes are added to the Nodes list in Board).
 		/// </summary>
@@ -79,10 +78,10 @@ namespace ScrumageEngine {
 
 		private void TestBtn_Click(object sender, RoutedEventArgs e) {
 			// Test for adding a pawn
-			/*			GivePlayerPawn(game.Players[currentPlayerID], game); // Gives random pawn
-						GivePlayerPawn(game.Players[currentPlayerID], game, "0"); // 0 = FE, 1 = BE, 2 = FS
-						GivePlayerPawn(game.Players[currentPlayerID], game, "Full Stack"); // Just enter the name of the pawn
-						UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.Players[currentPlayerID].Pawns);*/
+			GivePlayerPawn(game.Players[currentPlayerID], game); // Gives random pawn
+			GivePlayerPawn(game.Players[currentPlayerID], game, "0"); // 0 = FE, 1 = BE, 2 = FS
+			GivePlayerPawn(game.Players[currentPlayerID], game, "Full Stack"); // Just enter the name of the pawn
+			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.Players[currentPlayerID].Pawns);
 
 			// Test for card(probably a better way of getting the TextBox)
 			/*GivePlayerCard("artifact", game.Players[currentPlayerID]);
@@ -90,9 +89,8 @@ namespace ScrumageEngine {
 			UpdateCardBox((PlayerTabControl.Items[currentPlayerID] as TabItem).FindName($"P{currentPlayerID + 1}ArtifactBox") as TextBox, game.Players[currentPlayerID].FeatureCards[0]);
 			UpdateCardBox((PlayerTabControl.Items[currentPlayerID] as TabItem).FindName($"P{currentPlayerID + 1}AgilityBox") as TextBox, game.Players[currentPlayerID].UserStories[0]);*/
 
-			currentPlayerID++;
-			if(currentPlayerID > PlayerCount - 1) currentPlayerID = 0;
-			curp.Content = game.Players[currentPlayerID].PlayerName;
+			//currentPlayerID++;
+			//if(currentPlayerID > PlayerCount - 1) currentPlayerID = 0;
 			LogInput();
 		}
 
@@ -102,14 +100,14 @@ namespace ScrumageEngine {
 		void LogInput() {
 			ClearLog();
 			foreach(String input in GetRecentInputs())
-				SprInt32LogBox.Items.Add(input);
+				SprintLogBox.Items.Add(input);
 		}
 
 		/// <summary>
 		/// Clears the sprInt32 log.
 		/// </summary>
 		void ClearLog() {
-			SprInt32LogBox.Items.Clear();
+			SprintLogBox.Items.Clear();
 		}
 
 		/// <summary>
