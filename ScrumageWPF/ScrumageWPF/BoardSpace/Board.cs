@@ -35,7 +35,7 @@ namespace ScrumageEngine.BoardSpace {
 		}
 
 		/// <summary>
-		/// 
+		/// Adds all nodes to the list of nodes.
 		/// </summary>
 		/// <param name="nodesOnMap"></param>
 		public void InitMap(List<Node> nodesOnMap) {// To add nodes to the map, create the node in vars

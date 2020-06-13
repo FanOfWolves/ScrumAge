@@ -21,9 +21,13 @@ namespace ScrumageEngine.Windows {
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// Makes name text boxes visible based on how many players are requested.
+		/// </summary>
+		/// <param name="sender">Player Count Combo Box.</param>
+		/// <param name="e">The combo box being changed.</param>
 		private void PlayerCountCombo_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 			playerCount = int.Parse(PlayerCountCombo.SelectedItem.ToString());
-			P1NameBox.Visibility = Visibility.Visible;
 			for(int i = 0; i < 4; i++) {
 				if(i < playerCount) {
 					(FindName($"P{i + 1}Label") as Label).Visibility = Visibility.Visible;
@@ -36,6 +40,11 @@ namespace ScrumageEngine.Windows {
 			}
 		}
 
+		/// <summary>
+		/// Retrieves the names from the text boxes, then passes them into the Game form as a list.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void ToGameBtn_Click(object sender, RoutedEventArgs e) {
 			if(playerCount != 0) {
 				if(GetNames()) {
@@ -48,6 +57,10 @@ namespace ScrumageEngine.Windows {
 			}
 		}
 
+		/// <summary>
+		/// Attempts to retrieve the player names from text boxes. If not all names are filled, tell player.
+		/// </summary>
+		/// <returns>true if all names are filled/false if not</returns>
 		private Boolean GetNames() {
 			TextBox temp = new TextBox();
 			Boolean retBool = true;
