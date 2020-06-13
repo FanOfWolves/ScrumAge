@@ -9,7 +9,7 @@ namespace ScrumageEngine.BoardSpace {
 		private Resource nodeResource;
 		
 		
-		public ResourceNode(Int32 nodeID, String nodeName) {
+		public ResourceNode(Int32 nodeID, String nodeName):base(nodeID, nodeName) {
 
 		}
 	}

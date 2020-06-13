@@ -13,36 +13,36 @@ namespace ScrumageEngine.BoardSpace {
 		/// The ID to use in identifying a node
 		/// </summary>
 		public Int32 NodeID { get; set; } = 0;
+
 		/// <summary>
 		/// A name to be used to display the node
 		/// </summary>
 		public String NodeName { get; set; } = "";
-		/// <summary>
-		/// A description to be used to describe the node if needed
-		/// </summary>
-		public String NodeDesc { get; set; } = "";
+
 		/// <summary>
 		/// The list of pawns that can be held in the node
 		/// </summary>
 		public List<Pawn> Pawns { get; set; }
+
 		/// <summary>
 		/// Node default constructor, does not assign any values(can likely be scrapped)
 		/// </summary>
 		public Node() {
-			//Just used as an initializer to avoid null poInt32ers
+			//Just used as an initializer to avoid null pointers
 		}
+
 		/// <summary>
 		/// Node Overloaded constructor, creates an instance of the Node
 		/// </summary>
 		/// <param name="nodeID">The ID used to identify the node</param>
 		/// <param name="nodeName">The name of the node</param>
 		/// <param name="nodeDesc">The node's description</param>
-		public Node(Int32 nodeID, String nodeName, String nodeDesc) : base() {
+		public Node(Int32 nodeID, String nodeName) : base() {
 			NodeID = nodeID;
 			NodeName = nodeName;
-			NodeDesc = nodeDesc;
 			Pawns = new List<Pawn>();
 		}
+
 		/// <summary>
 		/// Takes a pawn from a node, requires both the pawn level and the owning player's ID
 		/// </summary>
@@ -63,6 +63,7 @@ namespace ScrumageEngine.BoardSpace {
 			RemovePawn(retPawn);
 			return retPawn;
 		}
+
 		/// <summary>
 		/// Adds a pawn to the node's inventory
 		/// </summary>
@@ -70,6 +71,7 @@ namespace ScrumageEngine.BoardSpace {
 		public void AddPawn(Pawn pawn) {
 			Pawns.Add(pawn);
 		}
+
 		/// <summary>
 		/// Determines of a pawn exists within the node.
 		/// </summary>
@@ -92,6 +94,7 @@ namespace ScrumageEngine.BoardSpace {
 			}
 			return hasPawn;
 		}
+
 		/// <summary>
 		/// Removes a pawn from the node's inventory.
 		/// </summary>
