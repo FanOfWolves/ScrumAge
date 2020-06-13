@@ -9,6 +9,10 @@ namespace ScrumageEngine.BoardSpace {
 		public List<Player> Players { get; set; }
 		public Board board = new Board();
 		public String[] PawnTypes = { "Front End", "Back End", "Full Stack" };
+		/// <summary>
+		/// Game constructor
+		/// </summary>
+		/// <param name="playerNames">List of the player Names</param>
 		public Game(List<String> playerNames) {
 			Players = InitPlayers(playerNames);
 		}
