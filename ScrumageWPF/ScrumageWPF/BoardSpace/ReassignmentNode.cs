@@ -4,7 +4,11 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace ScrumageEngine.BoardSpace {
-    class ReassignmentNode: Node {
+    /// <summary>
+    /// Provides temporary funds to Players
+    /// </summary>
+    /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
+    class ReassignmentNode : Node {
 
         /// <summary>
         /// Instantiates a new instance of the <see cref = "ReassignmentNode"/> class
