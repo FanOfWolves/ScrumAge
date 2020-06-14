@@ -20,9 +20,9 @@ namespace ScrumageEngine.Windows{
     /// </summary>
     public partial class GameWindow : Window
     {
-		private int PlayerCount = 0;
+		private Int32 PlayerCount = 0;
 		Game game;
-		private int currentPlayerID;
+		private Int32 currentPlayerID;
 		private List<Pawn> SelectedPawns = new List<Pawn>();
 		public GameWindow(List<String> playerNames) {
 			PlayerCount = playerNames.Count;
@@ -65,7 +65,7 @@ namespace ScrumageEngine.Windows{
 		/// </summary>
 		/// <param name="sender">The label prompt.</param>
 		/// <param name="e">Prompt being clicked.</param>
-		private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+		private void Label_MouseDoubleClick(Object sender, MouseButtonEventArgs e) {
 			MessageBox.Show("Make GUI to display card requirements");
 		}
 
@@ -74,11 +74,11 @@ namespace ScrumageEngine.Windows{
 		/// </summary>
 		/// <param name="sender">The Exit button.</param>
 		/// <param name="e">The button being pressed.</param>
-		private void ExitBtn_Click(object sender, RoutedEventArgs e) {
+		private void ExitBtn_Click(Object sender, RoutedEventArgs e) {
 			Application.Current.Shutdown();
 		}
 
-		private void TestBtn_Click(object sender, RoutedEventArgs e) {
+		private void TestBtn_Click(Object sender, RoutedEventArgs e) {
 			// Test for adding a pawn
 			GivePlayerPawn(game.Players[currentPlayerID], game); // Gives random pawn
 			GivePlayerPawn(game.Players[currentPlayerID], game, "0"); // 0 = FE, 1 = BE, 2 = FS
@@ -167,7 +167,7 @@ namespace ScrumageEngine.Windows{
 		}
 
 		// Maybe not keep this?
-		private void PlayerTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+		private void PlayerTabControl_SelectionChanged(Object sender, SelectionChangedEventArgs e) {
 			currentPlayerID = (sender as TabControl).SelectedIndex;
 		}
 
@@ -176,7 +176,7 @@ namespace ScrumageEngine.Windows{
 		/// </summary>
 		/// <param name="sender">"Move" button in Phase 1 panel.</param>
 		/// <param name="e">The button being pressed.</param>
-		private void MovePawnBtn_Click(object sender, RoutedEventArgs e) {
+		private void MovePawnBtn_Click(Object sender, RoutedEventArgs e) {
 			SelectedPawns.Clear();
 			foreach(Pawn p in GetPlayerPawnBoxByID(currentPlayerID).SelectedItems) {
 				SelectedPawns.Add(p);
@@ -188,13 +188,19 @@ namespace ScrumageEngine.Windows{
 		}
 
 
-		private void TestDiceBtn_Click(object sender, RoutedEventArgs e) {
+		private void TestDiceBtn_Click(Object sender, RoutedEventArgs e) {
 			RollDice(Int32.Parse(DiceCountCombo.SelectedItem.ToString()), game);
 			UpdateDieBoxes(game.board.dice);
 			LogInput();
 		}
 
-		private void NodeActionBtn_Click(object sender, RoutedEventArgs e) {
+		/// <summary>
+		/// Handles the Click event of the NodeActionBtn control. For when the current Player
+		/// wants to activate a Node on the Board
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+		private void NodeActionBtn_Click(Object sender, RoutedEventArgs e) {
 			ActivateNode(game.Players[currentPlayerID], game.board.GetNodeByName(NodeComboBox2.SelectedItem.ToString()));
 			UpdatePawnBox(FindName($"{NodeComboBox2.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.board.GetNodeByName(NodeComboBox.SelectedItem.ToString()).Pawns);
 			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.Players[currentPlayerID].Pawns);
