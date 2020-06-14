@@ -191,5 +191,9 @@ namespace ScrumageEngine.Windows{
 			UpdateDieBoxes(game.board.dice);
 			LogInput();
 		}
+
+		private void TabControl_SelectionChanged(Object sender, SelectionChangedEventArgs e) {
+
+		}
 	}
 }

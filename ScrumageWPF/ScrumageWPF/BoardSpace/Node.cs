@@ -107,7 +107,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// Action that the node runs every phase
 		/// </summary>
 		/// <returns></returns>
-		public virtual List<Pawn> DoAction() {
+		public virtual List<Pawn> DoAction(Int32 playerID) {
 			return new List<Pawn>();
 		}
 	}

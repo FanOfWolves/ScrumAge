@@ -12,7 +12,7 @@ namespace ScrumageEngine.BoardSpace {
 
 
 
-		// This class is the content of the game, adding nodes, items, surroundings, creatures, etc here puts them Int32o the game. Unless something is being done to the engine specifically, anything
+		// This class is the content of the game, adding nodes, items, surroundings, creatures, etc here puts them into the game. Unless something is being done to the engine specifically, anything
 		//      added needs to only be in this class to avoid functionality problems with the engine. Nothing in this class in concrete, and can/will be changed based on the design of the game. Current
 		//      objects are only for example and testing. If you wish to add functionality to the engine, feel free to do so but BE CAREFUL!!!!!!! Ask Michael for help if need be.
 		private List<Node> Nodes = new List<Node>();
@@ -20,14 +20,14 @@ namespace ScrumageEngine.BoardSpace {
 
 
 
-		private Node Resource1 = new Node(2, "Resource 1", "");
-		private Node Resource2 = new Node(3, "Resource 2", "");
-		private Node Resource3 = new Node(2, "Resource 3", "");
-		private Node Resource4 = new Node(2, "Resource 4", "");
-		private Node TechnicalHut = new Node(1, "Technical Hut", "Pawns get trained here");
-		private Node BudgetIncrease = new Node(1, "Budget Increase", "Pawns get trained here");
-		private Node Int32erview = new Node(1, "Int32erview Node", "Pawns get trained here");
-		private Node Reassignment = new Node(1, "Reassignment Node", "Pawns get trained here");
+		private Node Resource1 = new Node(2, "Resource 1");
+		private Node Resource2 = new Node(3, "Resource 2");
+		private Node Resource3 = new Node(2, "Resource 3");
+		private Node Resource4 = new Node(2, "Resource 4");
+		private Node TechnicalHut = new UpgradeNode(1, "Technical Hut");
+		private Node BudgetIncrease = new Node(1, "Budget Increase");
+		private Node Interview = new Node(1, "Interview Node");
+		private Node Reassignment = new Node(1, "Reassignment Node");
 		public Board() {
 			if (Nodes.Count == 0) {
 				InitMap(Nodes);
@@ -46,7 +46,7 @@ namespace ScrumageEngine.BoardSpace {
 			nodesOnMap.Add(Resource4);
 			nodesOnMap.Add(TechnicalHut);
 			nodesOnMap.Add(BudgetIncrease);
-			nodesOnMap.Add(Int32erview);
+			nodesOnMap.Add(Interview);
 			nodesOnMap.Add(Reassignment);
 		}
 		/// <summary>
