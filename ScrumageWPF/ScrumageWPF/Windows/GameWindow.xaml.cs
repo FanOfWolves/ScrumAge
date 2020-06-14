@@ -191,5 +191,9 @@ namespace ScrumageEngine.Windows{
 			UpdateDieBoxes(game.board.dice);
 			LogInput();
 		}
+
+		private void NodeActionBtn_Click(object sender, RoutedEventArgs e) {
+			// Make a call here for a function in InputHanlder.
+		}
 	}
 }
