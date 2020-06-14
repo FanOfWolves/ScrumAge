@@ -1,4 +1,5 @@
-﻿using ScrumageEngine.Objects.Items;
+﻿using ScrumageEngine.Objects.Humans;
+using ScrumageEngine.Objects.Items;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,16 +20,14 @@ namespace ScrumageEngine.BoardSpace {
 			}
         }*/
 
-        public override List<Pawn> DoAction(Int32 playerIdP) {
-            List<Pawn> _pawnsToReturn = new List<Pawn>();
-            
+        public override String DoAction(Player playerP) {
+            int playerID = playerP.PlayerID;
             foreach(Pawn pawn in base.Pawns) {
-                if(pawn.PawnID != playerIdP) continue;
+                if(pawn.PawnID != playerID) continue;
                 
             }
+            return "";
 
-            _pawnsToReturn.TrimExcess();
-            return _pawnsToReturn;
         }
-    }
+	}
 }

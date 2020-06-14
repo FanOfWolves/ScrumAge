@@ -1,4 +1,5 @@
 ﻿using ScrumageEngine.BoardSpace;
+using ScrumageEngine.Objects.Humans;
 using ScrumageEngine.Objects.Items;
 using System;
 using System.Collections.Generic;
@@ -28,16 +29,17 @@ namespace ScrumageEngine.Windows{
 			game = new Game(playerNames);
 			InitializeComponent();
 			InitPlayerTab(playerNames);
-			InitLocationComboBox(game.board.GetAllNodes());
+			InitComboBox(NodeComboBox, game.board.GetAllNodes());
+			InitComboBox(NodeComboBox2, game.board.GetAllNodes());
 			currentPlayerID = PlayerTabControl.SelectedIndex;
 		}
 		/// <summary>
 		/// Initializes the Node combobox with all nodes on the board(Make sure nodes are added to the Nodes list in Board).
 		/// </summary>
 		/// <param name="nodes">The list of Nodes on the board.</param>
-		void InitLocationComboBox(List<Node> nodes) {
+		void InitComboBox(ComboBox comboBox, List<Node> nodes) {
 			foreach(Node node in nodes) {
-				NodeComboBox.Items.Add(node.NodeName);
+				comboBox.Items.Add(node.NodeName);
 			}
 		}
 
@@ -193,7 +195,12 @@ namespace ScrumageEngine.Windows{
 		}
 
 		private void NodeActionBtn_Click(object sender, RoutedEventArgs e) {
-			// Make a call here for a function in InputHanlder.
+			ActivateNode(game.Players[currentPlayerID], game.board.GetNodeByName(NodeComboBox2.SelectedItem.ToString()));
+			UpdatePawnBox(FindName($"{NodeComboBox2.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.board.GetNodeByName(NodeComboBox.SelectedItem.ToString()).Pawns);
+			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.Players[currentPlayerID].Pawns);
+			LogInput();
 		}
+
+
 	}
 }

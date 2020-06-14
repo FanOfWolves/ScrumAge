@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using ScrumageEngine.Objects;
+using ScrumageEngine.Objects.Humans;
 using ScrumageEngine.Objects.Items;
 
 namespace ScrumageEngine.BoardSpace {
 	/// <summary>
 	/// A Node is an area that can hold pawns outside of the player's inventory
 	/// </summary>
-	public class Node {
+	public abstract class Node {
 		/// <summary>
 		/// The ID to use in identifying a node
 		/// </summary>
@@ -103,12 +104,10 @@ namespace ScrumageEngine.BoardSpace {
 			Pawns.Remove(pawn);
 		}
 
-        /// <summary>
+		/// <summary>
 		/// Action that the node runs every phase
 		/// </summary>
 		/// <returns></returns>
-		public virtual List<Pawn> DoAction(Int32 playerID) {
-			return new List<Pawn>();
-		}
+		public abstract String DoAction(Player player);
 	}
 }

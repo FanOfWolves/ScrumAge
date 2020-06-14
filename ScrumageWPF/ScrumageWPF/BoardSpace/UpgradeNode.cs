@@ -19,24 +19,24 @@ namespace ScrumageEngine.BoardSpace
         }
         #endregion
 
-        public override List<Pawn> DoAction(Int32 playerIdP) {
-            List<Pawn> _pawnsToReturn = new List<Pawn>();
-
-            foreach(Pawn pawn in base.Pawns) {
+        //Assumes does not pass Full Stack
+        public override String DoAction(Player playerP) {
+            Int32 _playerID = playerP.PlayerID;
+           
+            for(Int32 i = 0; i < base.Pawns.Count; i++) {
+                
                 //!!TODO: Reformat these conditionals
-                if(pawn.PawnID != playerIdP) {
+                if(base.Pawns[i].PawnID != _playerID) {
                     continue;
                 }
-                if(pawn.PawnType == "Back End" || pawn.PawnType == "Front End") {
-                    pawn.PawnType = "Full Stack";
+                if(base.Pawns[i].PawnType == "Back End" || base.Pawns[i].PawnType == "Front End") {
+                    base.Pawns[i].PawnType = "Full Stack";
+                    playerP.GivePawn(base.Pawns[i]);
+                    base.Pawns.Remove(base.Pawns[i]);
+                    return $"{playerP.PlayerName} retrieved Full Stack pawn from Technical Hut";
                 }
-
-                _pawnsToReturn.Add(pawn);
-                base.Pawns.Remove(pawn);
             }
-
-            _pawnsToReturn.TrimExcess();
-            return _pawnsToReturn;
+            return $"{playerP.PlayerName} failed to upgrade a pawn";
         }
     }
 }

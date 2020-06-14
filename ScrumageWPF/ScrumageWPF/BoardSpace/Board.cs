@@ -20,14 +20,14 @@ namespace ScrumageEngine.BoardSpace {
 
 
 
-		private Node Resource1 = new Node(2, "Resource 1");
-		private Node Resource2 = new Node(3, "Resource 2");
-		private Node Resource3 = new Node(2, "Resource 3");
-		private Node Resource4 = new Node(2, "Resource 4");
+		private Node Resource1 = new ResourceNode(2, "Resource 1");
+		private Node Resource2 = new ResourceNode(3, "Resource 2");
+		private Node Resource3 = new ResourceNode(2, "Resource 3");
+		private Node Resource4 = new ResourceNode(2, "Resource 4");
 		private Node TechnicalHut = new UpgradeNode(1, "Technical Hut");
-		private Node BudgetIncrease = new Node(1, "Budget Increase");
-		private Node Interview = new Node(1, "Interview Node");
-		private Node Reassignment = new Node(1, "Reassignment Node");
+		private Node BudgetIncrease = new ResourceNode(1, "Budget Increase");
+		private Node Interview = new HiringNode(1, "Interview Node");
+		private Node Reassignment = new ResourceNode(1, "Reassignment Node");
 		public Board() {
 			if (Nodes.Count == 0) {
 				InitMap(Nodes);
@@ -60,7 +60,7 @@ namespace ScrumageEngine.BoardSpace {
 					return node;
 				}
 			}
-			return new Node();
+			return null;
 		}
 		public List<Node> GetAllNodes() {
 			return Nodes;
@@ -72,7 +72,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// <param name="nodeID">The ID of the node to be found</param>
 		/// <returns>The node if node exists, default node if it does not.</returns>
 		public Node GetNodeByID(Int32 nodeID) {
-			Node retNode = new Node();
+			Node retNode = null;
 			foreach (Node node in Nodes) {
 				if (node.NodeID == nodeID) {
 					retNode = node;

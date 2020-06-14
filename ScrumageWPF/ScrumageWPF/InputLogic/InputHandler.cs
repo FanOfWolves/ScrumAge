@@ -138,5 +138,10 @@ namespace ScrumageEngine.InputLogic {
 			}
 			return retString;
 		}
+
+		public static void ActivateNode(Player player, Node node) {
+			String nodeLog = node.DoAction(player);
+			RecordInputs(nodeLog);
+		}
 	}
 }
