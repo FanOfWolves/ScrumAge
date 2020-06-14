@@ -404,7 +404,7 @@
 		<!-- Phase Column -->
 		<DockPanel Grid.Column="1" Margin="5, 0, 0, 0">
 			<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Top">
-				<TabControl>
+				<TabControl Height="334">
 					<TabItem Header="TabItem" Background="#FFE5E5E5" BorderBrush="#FFACACAC">
 						<!-- Phase Labels -->
 						<StackPanel Background="#FFE5E5E5">
@@ -423,7 +423,23 @@
 
 						</StackPanel>
 					</TabItem>
-					<TabItem Header="TestTab" Background="#FFE5E5E5" BorderBrush="#FFACACAC"/>
+					<TabItem Header="TestTab" Background="#FFE5E5E5" BorderBrush="#FFACACAC">
+						<StackPanel Background="#FFE5E5E5">
+							<Label Content="Current Phase" HorizontalAlignment="Center" FontSize="24"/>
+							<Label Content="Phase Label" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+							<StackPanel>
+								<Separator/>
+							</StackPanel>
+							<Label Content="Location:" FontSize="32" HorizontalAlignment="Center"/>
+
+							<!-- Sprint Log -->
+
+							<!-- Location / Move Pawn -->
+							<ComboBox x:Name="NodeComboBox2" FontSize="40" Margin="5, 20, 5, 0" SelectedIndex="0"/>
+							<Button x:Name="NodeActionBtn" Content="Node Action" FontSize="40" Margin="5, 20, 5, 10" Click="NodeActionBtn_Click"/>
+
+						</StackPanel>
+					</TabItem>
 				</TabControl>
 
 			</ScrollViewer>

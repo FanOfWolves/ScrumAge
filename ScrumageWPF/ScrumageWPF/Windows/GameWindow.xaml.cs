@@ -192,8 +192,8 @@ namespace ScrumageEngine.Windows{
 			LogInput();
 		}
 
-		private void TabControl_SelectionChanged(Object sender, SelectionChangedEventArgs e) {
-
+		private void NodeActionBtn_Click(object sender, RoutedEventArgs e) {
+			// Make a call here for a function in InputHanlder.
 		}
 	}
 }
