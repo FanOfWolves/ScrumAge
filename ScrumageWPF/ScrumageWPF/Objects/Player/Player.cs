@@ -140,6 +140,14 @@ namespace ScrumageEngine.Objects.Humans {
 			}
 			return retPawn;
 		}
+
+		/// <summary>
+		/// Increases the budget of this Player instance
+		/// </summary>
+		/// <param name="additionalBudgetP">The additional budget to give this Player</param>
+		public void IncreaseBudget(Int32 additionalBudgetP) {
+			this.Budget += additionalBudgetP;
+		}
 		#endregion
 	}
 }

@@ -6,8 +6,9 @@ using System.Text;
 
 namespace ScrumageEngine.BoardSpace {
     /// <summary>
-    /// A <see cref = "Node"/> that handles the hiring of new <seealso cref = "Pawn"/>s
+    /// Provides players with new Pawns based on chance
     /// </summary>
+    /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
     public class HiringNode: Node {
 
         #region Fields

@@ -6,6 +6,10 @@ using System.Text;
 
 namespace ScrumageEngine.BoardSpace
 {
+    /// <summary>
+    /// Upgrades pawns to Full Stack type
+    /// </summary>
+    /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
     class UpgradeNode : Node
     {
         #region Fields
