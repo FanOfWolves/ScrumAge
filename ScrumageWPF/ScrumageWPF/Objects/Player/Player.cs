@@ -148,6 +148,15 @@ namespace ScrumageEngine.Objects.Humans {
 		public void IncreaseBudget(Int32 additionalBudgetP) {
 			this.Budget += additionalBudgetP;
 		}
+
+		/// <summary>
+		/// Gives player additional funds
+		/// </summary>
+		/// <param name="fundsToGiveP">The funds to give</param>
+		public void GiveFunds(Int32 fundsToGiveP) {
+			this.Funds += fundsToGiveP;
+		}
+
 		#endregion
 	}
 }
