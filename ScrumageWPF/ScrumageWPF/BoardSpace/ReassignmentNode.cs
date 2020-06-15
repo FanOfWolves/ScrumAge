@@ -10,6 +10,9 @@ namespace ScrumageEngine.BoardSpace {
     /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
     class ReassignmentNode : Node {
 
+        public override Int32 MaxPawnLimit { get { return 4; } }
+
+
         /// <summary>
         /// Instantiates a new instance of the <see cref = "ReassignmentNode"/> class
         /// </summary>

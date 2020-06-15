@@ -1,4 +1,5 @@
 ﻿using ScrumageEngine.BoardSpace;
+using ScrumageEngine.Exceptions;
 using ScrumageEngine.Objects.Humans;
 using ScrumageEngine.Objects.Items;
 using System;
@@ -181,9 +182,14 @@ namespace ScrumageEngine.Windows{
 			foreach(Pawn p in GetPlayerPawnBoxByID(currentPlayerID).SelectedItems) {
 				SelectedPawns.Add(p);
 			}
-			MovePawn(SelectedPawns, game.Players[currentPlayerID], game.board.GetNodeByName(NodeComboBox.SelectedItem.ToString()));
-			UpdatePawnBox(FindName($"{NodeComboBox.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.board.GetNodeByName(NodeComboBox.SelectedItem.ToString()).Pawns);
-			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.Players[currentPlayerID].Pawns);
+			try {
+				MovePawn(SelectedPawns, game.Players[currentPlayerID], game.board.GetNodeByName(NodeComboBox.SelectedItem.ToString()));
+				UpdatePawnBox(FindName($"{NodeComboBox.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.board.GetNodeByName(NodeComboBox.SelectedItem.ToString()).Pawns);
+				UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.Players[currentPlayerID].Pawns);
+			}
+			catch(MovePawnException _exception) {
+				MessageBox.Show(_exception.Message);
+			}
 			LogInput();
 		}
 

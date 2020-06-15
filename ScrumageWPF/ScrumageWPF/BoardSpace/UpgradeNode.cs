@@ -16,6 +16,7 @@ namespace ScrumageEngine.BoardSpace
 
         #endregion
 
+        public override Int32 MaxPawnLimit { get { return 1; } }
 
         #region Constructors
         /// <summary>

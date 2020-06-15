@@ -4,11 +4,15 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace ScrumageEngine.BoardSpace {
+
+
     /// <summary>
     /// Provides budget to players that place their pawns here
     /// </summary>
     /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
     class BudgetNode : Node {
+
+        public override Int32 MaxPawnLimit { get { return 4; } }
 
         #region Constructors        
         /// <summary>
