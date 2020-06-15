@@ -25,14 +25,17 @@ namespace ScrumageEngine.BoardSpace {
 		/// </summary>
 		public List<Pawn> Pawns { get; set; }
 
+		public Int32 NumberOfPawns { get { return this.Pawns.Count; } }
 
-		private readonly Int32 maxPawnLimit;
-		public Int32 MaxPawnLimit {
-			get { return this.maxPawnLimit; }
-		}
 
+		public virtual Int32 MaxPawnLimit { get { return 7; } }
+
+		/// <summary>
+		/// Ats the maximum pawns.
+		/// </summary>
+		/// <returns></returns>
 		public Boolean AtMaxPawns() {
-			if(Pawns.Count >= maxPawnLimit) {
+			if(Pawns.Count >= MaxPawnLimit) {
 				return true;
 			}
 			return false;
@@ -53,10 +56,9 @@ namespace ScrumageEngine.BoardSpace {
 		/// <param name="nodeName">The name of the node</param>
 		/// <param name="maxPawns">The limit on the number of pawns for this node</param>
 		/// <param name="nodeDesc">The node's description</param>
-		public Node(Int32 nodeID, String nodeName, Int32 maxPawns) : base() {
+		public Node(Int32 nodeID, String nodeName) : base() {
 			NodeID = nodeID;
 			NodeName = nodeName;
-			this.maxPawnLimit = maxPawns;
 			Pawns = new List<Pawn>();
 		}
 

@@ -115,14 +115,18 @@ namespace ScrumageEngine.InputLogic {
 		/// <param name="player">The player requesting the move</param>
 		/// <param name="node">The node the player is trying to move to</param>
 		public static void MovePawn(List<Pawn> pawns, Player player, Node node) {
-			if(pawns.Count > 0 && pawns.Count + node.Pawns.Count <= node.MaxPawnLimit) {
+			Int32 _newTotalOfPawnsInNode = pawns.Count + node.NumberOfPawns;
+			Boolean _nodeFull = _newTotalOfPawnsInNode >= node.MaxPawnLimit;
+			if(pawns.Count > 0 && !_nodeFull) {
 				foreach(Pawn p in pawns) {
 					player.TakePawn(p);
 					node.AddPawn(p);
 				}
-				RecordInputs($"{ player.PlayerName} moved {ListPawns(pawns)} to {node.NodeName}");
+				RecordInputs($"{player.PlayerName} moved {ListPawns(pawns)} to {node.NodeName}");
 			}else if(pawns.Count == 0) {
 				RecordInputs($"{player.PlayerName} tried to move pawns that weren't theirs!");
+			}else if(_nodeFull) {
+				RecordInputs($"{player.PlayerName} tried to move too many pawns to {node.NodeName}");
 			}
 		}
 

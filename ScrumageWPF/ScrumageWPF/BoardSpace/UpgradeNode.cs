@@ -16,6 +16,8 @@ namespace ScrumageEngine.BoardSpace
 
         #endregion
 
+        public override Int32 MaxPawnLimit { get { return 1; } }
+
         #region Constructors
         public UpgradeNode(Int32 nodeID, String nodeName) : base(nodeID, nodeName) { 
 
