@@ -27,13 +27,6 @@ namespace ScrumageEngine.BoardSpace
 
             
         }
-
-        /// <summary>
-        /// Default Constructor: Initializes a new instance of the <see cref="UpgradeNode"/> class.
-        /// </summary>
-        public UpgradeNode() {
-
-		}
         #endregion
 
         /// <summary>
