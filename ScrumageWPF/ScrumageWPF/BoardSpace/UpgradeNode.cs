@@ -18,6 +18,11 @@ namespace ScrumageEngine.BoardSpace
 
 
         #region Constructors
+        /// <summary>
+        /// UpgradeNode constructor with base from parent Node class.
+        /// </summary>
+        /// <param name="nodeID">The node's ID.</param>
+        /// <param name="nodeName">The node's name.</param>
         public UpgradeNode(Int32 nodeID, String nodeName) : base(nodeID, nodeName) { 
 
             
