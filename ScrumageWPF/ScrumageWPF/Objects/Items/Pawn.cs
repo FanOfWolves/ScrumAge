@@ -50,7 +50,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// </summary>
 		/// <param name="PawnType">The type of pawn</param>
 		/// <returns>How much this pawn costs per turn : Int32</returns>
-		private Int32 CalcCost(String PawnType) {
+		private Int32 CalcCost(String pawnType) {
 			return 0;
 		}
 
