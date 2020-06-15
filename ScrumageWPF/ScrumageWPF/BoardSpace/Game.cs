@@ -37,10 +37,10 @@ namespace ScrumageEngine.BoardSpace {
 		}
 
         /// <summary>
-        /// Returns a given node by name
+        /// Returns a given node by name.
         /// </summary>
-        /// <param name="nodeName"></param>
-        /// <returns></returns>
+        /// <param name="nodeName">Name of the node to be returned.</param>
+        /// <returns>The node requested.</returns>
 		public Node GetNodeByName(String nodeName) {
 			Node retNode = board.GetNodeByName(nodeName);
 
