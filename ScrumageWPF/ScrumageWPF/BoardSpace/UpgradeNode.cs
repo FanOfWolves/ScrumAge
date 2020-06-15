@@ -23,7 +23,11 @@ namespace ScrumageEngine.BoardSpace
         }
         #endregion
 
-        //Assumes does not pass Full Stack
+        /// <summary>
+        /// Upgrades a pawn and returns the upgraded pawn to the owning player.
+        /// </summary>
+        /// <param name="playerP">The player that owns the pawn.</param>
+        /// <returns>A string to be logged in the Sprint Log.</returns>
         public override String DoAction(Player playerP) {
             Int32 _playerID = playerP.PlayerID;
            
