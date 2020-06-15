@@ -16,11 +16,16 @@ namespace ScrumageEngine.BoardSpace
 
         #endregion
 
+
         #region Constructors
         public UpgradeNode(Int32 nodeID, String nodeName) : base(nodeID, nodeName) { 
 
             
         }
+
+        public UpgradeNode() {
+
+		}
         #endregion
 
         /// <summary>
