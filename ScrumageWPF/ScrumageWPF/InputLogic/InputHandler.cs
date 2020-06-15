@@ -7,6 +7,7 @@ using static ScrumageEngine.BoardSpace.Board;
 using ScrumageEngine.Exceptions;
 using ScrumageEngine.Objects.Humans;
 using ScrumageEngine.Objects.Items;
+using System.Linq.Expressions;
 
 
 
@@ -125,8 +126,10 @@ namespace ScrumageEngine.InputLogic {
 				RecordInputs($"{player.PlayerName} moved {ListPawns(pawns)} to {node.NodeName}");
 			}else if(pawns.Count == 0) {
 				RecordInputs($"{player.PlayerName} tried to move pawns that weren't theirs!");
+				throw new MovePawnException("You cannot move another player's pawns.");
 			}else if(_nodeFull) {
 				RecordInputs($"{player.PlayerName} tried to move too many pawns to {node.NodeName}");
+				throw new MovePawnException($"You are moving too many pawns to {node.NodeName}");
 			}
 		}
 
