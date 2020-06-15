@@ -139,6 +139,12 @@ namespace ScrumageEngine.InputLogic {
 			return retString;
 		}
 
+
+		/// <summary>
+		/// Calls the selected node's DoAction function.
+		/// </summary>
+		/// <param name="player">The player that selected the node.</param>
+		/// <param name="node">The node that was selected in the GUI.</param>
 		public static void ActivateNode(Player player, Node node) {
 			String nodeLog = node.DoAction(player);
 			RecordInputs(nodeLog);
