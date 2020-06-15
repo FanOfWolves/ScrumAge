@@ -115,7 +115,7 @@ namespace ScrumageEngine.InputLogic {
 		/// <param name="player">The player requesting the move</param>
 		/// <param name="node">The node the player is trying to move to</param>
 		public static void MovePawn(List<Pawn> pawns, Player player, Node node) {
-			if(pawns.Count > 0) {
+			if(pawns.Count > 0 && pawns.Count + node.Pawns.Count <= node.MaxPawnLimit) {
 				foreach(Pawn p in pawns) {
 					player.TakePawn(p);
 					node.AddPawn(p);
