@@ -36,6 +36,11 @@ namespace ScrumageEngine.BoardSpace {
 			return retPlayers;
 		}
 
+        /// <summary>
+        /// Returns a given node by name
+        /// </summary>
+        /// <param name="nodeName"></param>
+        /// <returns></returns>
 		public Node GetNodeByName(String nodeName) {
 			Node retNode = board.GetNodeByName(nodeName);
 
