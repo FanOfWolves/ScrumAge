@@ -16,14 +16,23 @@ namespace ScrumageEngine.BoardSpace
 
         #endregion
 
+
         #region Constructors
         public UpgradeNode(Int32 nodeID, String nodeName) : base(nodeID, nodeName) { 
 
             
         }
+
+        public UpgradeNode() {
+
+		}
         #endregion
 
-        //Assumes does not pass Full Stack
+        /// <summary>
+        /// Upgrades a pawn and returns the upgraded pawn to the owning player.
+        /// </summary>
+        /// <param name="playerP">The player that owns the pawn.</param>
+        /// <returns>A string to be logged in the Sprint Log.</returns>
         public override String DoAction(Player playerP) {
             Int32 _playerID = playerP.PlayerID;
            

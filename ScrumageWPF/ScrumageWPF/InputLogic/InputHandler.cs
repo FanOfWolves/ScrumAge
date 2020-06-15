@@ -20,7 +20,7 @@ using ScrumageEngine.Objects.Items;
 
 namespace ScrumageEngine.InputLogic {
 	/// <summary>
-	/// Static class that handles input from the user, send information Into this as a space delimited String(Command Argument Arguemnt ...)
+	/// Static class that handles input from the user, send information Int32o this as a space delimited String(Command Argument Arguemnt ...)
 	/// </summary>
 	public static class InputHandler {
 		/// <summary>
@@ -139,11 +139,12 @@ namespace ScrumageEngine.InputLogic {
 			return retString;
 		}
 
+
 		/// <summary>
-		/// Activates the action of a node
+		/// Calls the selected node's DoAction function.
 		/// </summary>
-		/// <param name="player">The player activating the node</param>
-		/// <param name="node">The node to be activated</param>
+		/// <param name="player">The player that selected the node.</param>
+		/// <param name="node">The node that was selected in the GUI.</param>
 		public static void ActivateNode(Player player, Node node) {
 			String nodeLog = node.DoAction(player);
 			RecordInputs(nodeLog);
