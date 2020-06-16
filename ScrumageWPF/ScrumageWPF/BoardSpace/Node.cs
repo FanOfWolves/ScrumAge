@@ -25,6 +25,22 @@ namespace ScrumageEngine.BoardSpace {
 		/// </summary>
 		public List<Pawn> Pawns { get; set; }
 
+		public Int32 NumberOfPawns { get { return this.Pawns.Count; } }
+
+
+		public virtual Int32 MaxPawnLimit { get { return 7; } }
+
+		/// <summary>
+		/// Ats the maximum pawns.
+		/// </summary>
+		/// <returns></returns>
+		public Boolean AtMaxPawns() {
+			if(Pawns.Count >= MaxPawnLimit) {
+				return true;
+			}
+			return false;
+		}
+
 		/// <summary>
 		/// Node default constructor, does not assign any values(can likely be scrapped)
 		/// </summary>
@@ -32,11 +48,13 @@ namespace ScrumageEngine.BoardSpace {
 			//Just used as an initializer to avoid null pointers
 		}
 
+
 		/// <summary>
 		/// Node Overloaded constructor, creates an instance of the Node
 		/// </summary>
 		/// <param name="nodeID">The ID used to identify the node</param>
 		/// <param name="nodeName">The name of the node</param>
+		/// <param name="maxPawns">The limit on the number of pawns for this node</param>
 		/// <param name="nodeDesc">The node's description</param>
 		public Node(Int32 nodeID, String nodeName) : base() {
 			NodeID = nodeID;

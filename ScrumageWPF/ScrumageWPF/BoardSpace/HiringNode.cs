@@ -17,6 +17,8 @@ namespace ScrumageEngine.BoardSpace {
         private readonly Random randomHiringGenerator;
         #endregion
 
+        public override Int32 MaxPawnLimit { get { return 2; } }
+
         #region Constructors
         /// <summary>
         /// Instantiates a new instance of the <see cref = "HiringNode"/> class

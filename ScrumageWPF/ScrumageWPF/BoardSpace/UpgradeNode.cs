@@ -16,14 +16,25 @@ namespace ScrumageEngine.BoardSpace
 
         #endregion
 
+        public override Int32 MaxPawnLimit { get { return 1; } }
+
         #region Constructors
+        /// <summary>
+        /// UpgradeNode constructor with base from parent Node class.
+        /// </summary>
+        /// <param name="nodeID">The node's ID.</param>
+        /// <param name="nodeName">The node's name.</param>
         public UpgradeNode(Int32 nodeID, String nodeName) : base(nodeID, nodeName) { 
 
             
         }
         #endregion
 
-        //Assumes does not pass Full Stack
+        /// <summary>
+        /// Upgrades a pawn and returns the upgraded pawn to the owning player.
+        /// </summary>
+        /// <param name="playerP">The player that owns the pawn.</param>
+        /// <returns>A string to be logged in the Sprint Log.</returns>
         public override String DoAction(Player playerP) {
             Int32 _playerID = playerP.PlayerID;
            

@@ -27,7 +27,7 @@ namespace ScrumageEngine.Objects.Humans {
 		/// </summary>
 		public List<Card> UserStories = new List<Card>();
 		/// <summary>
-		/// A list of the player's Feature cards ti hold obtained cards
+		/// A list of the player's Feature cards to hold obtained cards
 		/// </summary>
 		public List<Card> FeatureCards = new List<Card>();
 		/// <summary>
@@ -39,9 +39,9 @@ namespace ScrumageEngine.Objects.Humans {
 		/// </summary>
 		public Int32 Funds { get; set; }
 		/// <summary>
-		/// The feature poInt32s represent the overall score for the player
+		/// The feature pointss represent the overall score for the player
 		/// </summary>
-		public Int32 FeaturePoInt32s { get; set; } // Still need to determine how to calculate these
+		public Int32 FeaturePoints { get; set; } // Still need to determine how to calculate these
 		/// <summary>
 		/// Player overloaded constructor
 		/// </summary>
@@ -50,7 +50,7 @@ namespace ScrumageEngine.Objects.Humans {
 		public Player(Int32 playerID, String playerName) {
 			PlayerID = playerID;
 			PlayerName = playerName;
-			FeaturePoInt32s = 0;
+			FeaturePoints = 0;
 			Budget = 1;
 			Funds = Budget;
 		}
