@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ScrumageEngine.Objects.Humans;
+using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Objects.Items;
 using System.Text;
 
@@ -9,7 +9,7 @@ namespace ScrumageEngine.BoardSpace {
 		private List<Player> Players { get; }
 		private Board board = new Board();
 		private String[] PawnTypes = {"Front End", "Back End", "Full Stack"};
-		private int phase = 1;
+		private Int32 phase = 1;
 		private static Random Rand = new Random(); // Maybe move this to Game?
 
 		/// <summary>
@@ -49,11 +49,17 @@ namespace ScrumageEngine.BoardSpace {
 			return board.GetNodeByName(nodeName);
 		}
 
-		public Node GetNodeByID(int nodeIDP) {
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="nodeIDP"></param>
+		/// <returns></returns>
+		public Node GetNodeByID(Int32 nodeIDP) {
 			return board.GetNodeByID(nodeIDP);
 		}
 
-		public Player GetPlayerByID(int playerIDP) {
+		public Player GetPlayerByID(Int32 playerIDP) {
 			return Players.Find(player => player.PlayerID == playerIDP);
 		}
 
@@ -66,7 +72,7 @@ namespace ScrumageEngine.BoardSpace {
 			// set DoneWithPhase = true;
 		}
 
-		private void CheckPhase(int phase) {
+		private void CheckPhase(Int32 phase) {
 			if (phase == 1) PhaseOne();
 			else if (phase == 2) PhaseTwo();
 			else if (phase == 3) PhaseThree();
@@ -95,6 +101,8 @@ namespace ScrumageEngine.BoardSpace {
 		public List<String> ShowDice() {
 			return board.ShowDice();
 		}
+
+		// Move this to Board and call that
 		/// <summary>
 		/// Represents current dice values in a single string for the log.
 		/// </summary>
@@ -108,7 +116,7 @@ namespace ScrumageEngine.BoardSpace {
 			return retString;
 		}
 
-		public void GivePlayerCard(int playerIDP, String cardTypeP) {
+		public void GivePlayerCard(Int32 playerIDP, String cardTypeP) {
 			Player player = GetPlayerByID(playerIDP);
 			if (cardTypeP == "artifact") {
 				player.AddToArtifacts(board.GetTopArtifact());
@@ -117,12 +125,12 @@ namespace ScrumageEngine.BoardSpace {
 			}
 		}
 
-		public String GetPawnType(int indexP) {
+		public String GetPawnType(Int32 indexP) {
 			return PawnTypes[indexP];
 		}
 
 		public List<String> GetNodeNames() {
-			List<String> nodeNames = new List<string>();
+			List<String> nodeNames = new List<String>();
 			board.GetAllNodes().ForEach(node =>
 			{
 				nodeNames.Add(node.NodeName);
@@ -144,7 +152,7 @@ namespace ScrumageEngine.BoardSpace {
 
 		public void GivePlayerPawn(Int32 playerIDP, Int32 iPawnTypeP, String sPawnTypeP) {
 			String[] inputArr = sPawnTypeP.Split(' ');
-			var player = GetPlayerByID(playerIDP);
+			Player player = GetPlayerByID(playerIDP);
 			if(inputArr[0] == "")
 				player.GivePawn(GetPawnType(Rand.Next(2)));
 			else if(inputArr.Length == 1)
@@ -153,7 +161,7 @@ namespace ScrumageEngine.BoardSpace {
 				player.GivePawn($"{inputArr[0]} {inputArr[1]}");
 		}
 
-		public void MovePawn(List<String> pawnsP, int playerIDP, String nodeName) {
+		public void MovePawn(List<String> pawnsP, Int32 playerIDP, String nodeName) {
 			Player player = GetPlayerByID(playerIDP);
 			Pawn pawn;
 			Node node = GetNodeByName(nodeName);

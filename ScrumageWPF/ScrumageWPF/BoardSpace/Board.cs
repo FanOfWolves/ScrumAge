@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using ScrumageEngine.BoardSpace;
 using System.Text;
-using ScrumageEngine.Objects.Humans;
+using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Objects.Items;
 
 namespace ScrumageEngine.BoardSpace {

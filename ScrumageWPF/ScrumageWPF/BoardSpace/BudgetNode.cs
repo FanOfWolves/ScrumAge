@@ -1,4 +1,4 @@
-﻿using ScrumageEngine.Objects.Humans;
+﻿using ScrumageEngine.Objects.Player;
 using System;
 using System.Collections.Generic;
 using System.Text;
