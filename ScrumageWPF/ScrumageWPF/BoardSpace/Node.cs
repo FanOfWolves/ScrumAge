@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Navigation;
 using ScrumageEngine.Objects;
 using ScrumageEngine.Objects.Humans;
 using ScrumageEngine.Objects.Items;
@@ -28,7 +29,8 @@ namespace ScrumageEngine.BoardSpace {
 		public Int32 NumberOfPawns { get { return this.Pawns.Count; } }
 
 
-		public virtual Int32 MaxPawnLimit { get { return 7; } }
+		private Int32 maxPawnLimit = 7;
+		public virtual Int32 MaxPawnLimit { get { return maxPawnLimit; } }
 
 		/// <summary>
 		/// Ats the maximum pawns.
@@ -120,6 +122,12 @@ namespace ScrumageEngine.BoardSpace {
 		/// <param name="pawn">The pawn to be removed</param>
 		public void RemovePawn(Pawn pawn) {
 			Pawns.Remove(pawn);
+		}
+
+		public List<String> ListPawns() {
+			List<String> retList = new List<String>();
+			Pawns.ForEach(pawn => retList.Add(pawn.ToString()));
+			return retList;
 		}
 
 		/// <summary>

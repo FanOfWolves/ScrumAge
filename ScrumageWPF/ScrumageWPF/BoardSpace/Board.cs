@@ -16,9 +16,9 @@ namespace ScrumageEngine.BoardSpace {
 		//      added needs to only be in this class to avoid functionality problems with the engine. Nothing in this class in concrete, and can/will be changed based on the design of the game. Current
 		//      objects are only for example and testing. If you wish to add functionality to the engine, feel free to do so but BE CAREFUL!!!!!!! Ask Michael for help if need be.
 		private List<Node> Nodes = new List<Node>();
-		public List<Die> dice = new List<Die>();
-
-
+		private List<Die> dice = new List<Die>();
+		private Stack<Card> Artifacts = new Stack<Card>();
+		private Stack<Card> Agility = new Stack<Card>();
 
 		private Node Resource1 = new ResourceNode(2, "Resource 1");
 		private Node Resource2 = new ResourceNode(3, "Resource 2");
@@ -28,6 +28,8 @@ namespace ScrumageEngine.BoardSpace {
 		private Node BudgetIncrease = new ResourceNode(1, "Budget Increase");
 		private Node Interview = new HiringNode(1, "Interview Node");
 		private Node Reassignment = new ResourceNode(1, "Reassignment Node");
+		private Card TestCard1 = new Card("artifact", "Test Artifact");
+		private Card TestCard2 = new Card("agility", "Test Agility");
 		public Board() {
 			if (Nodes.Count == 0) {
 				InitMap(Nodes);
@@ -48,6 +50,8 @@ namespace ScrumageEngine.BoardSpace {
 			nodesOnMap.Add(BudgetIncrease);
 			nodesOnMap.Add(Interview);
 			nodesOnMap.Add(Reassignment);
+			Artifacts.Push(TestCard1);
+			Agility.Push(TestCard2);
 		}
 		/// <summary>
 		/// Obtains a node based on the node's name.
@@ -66,6 +70,22 @@ namespace ScrumageEngine.BoardSpace {
 			return Nodes;
 		}
 
+		public Stack<Card> GetArtifacts() {
+			return Artifacts;
+		}
+
+		public Stack<Card> GetAgility() {
+			return Agility;
+		}
+
+		public Card GetTopArtifact() {
+			return Artifacts.Pop();
+		}
+
+		public Card GetTopAgility() {
+			return Agility.Pop();
+		}
+
 		/// <summary>
 		/// Obtains a node based on ID, can be used to easily get a node.
 		/// </summary>
@@ -79,6 +99,38 @@ namespace ScrumageEngine.BoardSpace {
 				}
 			}
 			return retNode;
+		}
+
+		public List<Die> GetDice() {
+			return dice;
+		}
+
+		public void ClearDice() {
+			dice.Clear();
+		}
+
+		public void RollDice(int diceCount, Random rand) {
+			for(Int32 i = 0; i < diceCount; i++) {
+				dice.Add(new Die(rand.Next(6) + 1));
+			}
+		}
+
+		public List<String> ShowDice() {
+			List<String> retList = new List<String>();
+			dice.ForEach(die => retList.Add(die.DrawDie()));
+			return retList;
+		}
+
+		public List<String> ListNodePawns(String nodeNameP) {
+			return GetNodeByName(nodeNameP).ListPawns();
+		}
+
+		public int GetMaxPawnsInNode(String nodeNameP) {
+			return GetNodeByName(nodeNameP).MaxPawnLimit;
+		}
+
+		public int GetPawnCountInNode(String nodeNameP) {
+			return GetNodeByName(nodeNameP).NumberOfPawns;
 		}
 	}
 

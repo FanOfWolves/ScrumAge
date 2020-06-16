@@ -1,18 +1,10 @@
 ﻿using ScrumageEngine.BoardSpace;
 using ScrumageEngine.Exceptions;
-using ScrumageEngine.Objects.Humans;
-using ScrumageEngine.Objects.Items;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using static ScrumageEngine.InputLogic.InputHandler;
 
 namespace ScrumageEngine.Windows{
@@ -24,23 +16,23 @@ namespace ScrumageEngine.Windows{
 		private Int32 PlayerCount = 0;
 		Game game;
 		private Int32 currentPlayerID;
-		private List<Pawn> SelectedPawns = new List<Pawn>();
+		private List<String> SelectedPawns = new List<String>();
 		public GameWindow(List<String> playerNames) {
 			PlayerCount = playerNames.Count;
 			game = new Game(playerNames);
 			InitializeComponent();
 			InitPlayerTab(playerNames);
-			InitComboBox(NodeComboBox, game.board.GetAllNodes());
-			InitComboBox(NodeComboBox2, game.board.GetAllNodes());
+			InitComboBox(NodeComboBox, game.GetNodeNames());
+			InitComboBox(NodeComboBox2, game.GetNodeNames());
 			currentPlayerID = PlayerTabControl.SelectedIndex;
 		}
 		/// <summary>
 		/// Initializes the Node combobox with all nodes on the board(Make sure nodes are added to the Nodes list in Board).
 		/// </summary>
 		/// <param name="nodes">The list of Nodes on the board.</param>
-		void InitComboBox(ComboBox comboBox, List<Node> nodes) {
-			foreach(Node node in nodes) {
-				comboBox.Items.Add(node.NodeName);
+		void InitComboBox(ComboBox comboBox, List<String> nodes) {
+			foreach(String node in nodes) {
+				comboBox.Items.Add(node);
 			}
 		}
 
@@ -55,8 +47,8 @@ namespace ScrumageEngine.Windows{
 				temp.Visibility = Visibility.Visible;
 				temp.IsEnabled = true;
 				temp.Header = playerNames[i];
-				(temp.FindName($"P{i + 1}NameValue") as Label).Content = playerNames[i];
-				UpdatePawnBox(GetPlayerPawnBoxByID(i), game.Players[i].Pawns);
+				(temp.FindName($"P{i+1}NameValue") as Label).Content = playerNames[i];
+				UpdatePawnBox(GetPlayerPawnBoxByID(i+1), game.GetPlayerPawns(i+1));
 				// Whatever else needs to be initialized at the start of the game for players goes here.
 			}
 		}
@@ -81,10 +73,10 @@ namespace ScrumageEngine.Windows{
 
 		private void TestBtn_Click(Object sender, RoutedEventArgs e) {
 			// Test for adding a pawn
-			GivePlayerPawn(game.Players[currentPlayerID], game); // Gives random pawn
-			GivePlayerPawn(game.Players[currentPlayerID], game, "0"); // 0 = FE, 1 = BE, 2 = FS
-			GivePlayerPawn(game.Players[currentPlayerID], game, "Full Stack"); // Just enter the name of the pawn
-			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.Players[currentPlayerID].Pawns);
+			GivePlayerPawn(game, currentPlayerID); // Gives random pawn
+			GivePlayerPawn(game, currentPlayerID, "0"); // 0 = FE, 1 = BE, 2 = FS
+			GivePlayerPawn(game, currentPlayerID, "Full Stack"); // Just enter the name of the pawn
+			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
 
 			// Test for card(probably a better way of getting the TextBox)
 			/*GivePlayerCard("artifact", game.Players[currentPlayerID]);
@@ -117,13 +109,13 @@ namespace ScrumageEngine.Windows{
 		/// Updates the dice display.
 		/// </summary>
 		/// <param name="dice">The list of dice that were just rolled.</param>
-		private void UpdateDieBoxes(List<Die> dice) {
+		private void UpdateDieBoxes(List<String> dice) {
 			TextBox tempBox = null;
 			for(Int32 i = 0; i < 7; i++) {
 				if(i < dice.Count) {
 					tempBox = FindName($"DieBox{i + 1}") as TextBox;
 					tempBox.Visibility = Visibility.Visible;
-					tempBox.Text = dice[i].DrawDie();
+					tempBox.Text = dice[i];
 				} else {
 					tempBox = FindName($"DieBox{i + 1}") as TextBox;
 					tempBox.Visibility = Visibility.Hidden;
@@ -136,9 +128,9 @@ namespace ScrumageEngine.Windows{
 		/// </summary>
 		/// <param name="pawnBox">The ListBox to be updated.</param>
 		/// <param name="pawns">The pawns inside the location the ListBox represents.</param>
-		private void UpdatePawnBox(ListBox pawnBox, List<Pawn> pawns) {
+		private void UpdatePawnBox(ListBox pawnBox, List<String> pawns) {
 			pawnBox.Items.Clear();
-			foreach(Pawn p in pawns) {
+			foreach(String p in pawns) {
 				pawnBox.Items.Add(p);
 			}
 		}
@@ -148,9 +140,9 @@ namespace ScrumageEngine.Windows{
 		/// </summary>
 		/// <param name="cardBox">The display to update.</param>
 		/// <param name="card">The new card to be displayed.</param>
-		private void UpdateCardBox(TextBox cardBox, Card card) {
+/*		private void UpdateCardBox(TextBox cardBox, Card card) {
 			cardBox.Text = card.ToString();
-		}
+		}*/
 
 		/// <summary>
 		/// Returns the player's pawn List Box by the Player's ID
@@ -159,17 +151,18 @@ namespace ScrumageEngine.Windows{
 		/// <returns></returns>
 		private ListBox GetPlayerPawnBoxByID(Int32 id) {
 			switch(id) {
-				case 0: return P1PawnBox;
-				case 1: return P2PawnBox;
-				case 2: return P3PawnBox;
-				case 3: return P4PawnBox;
+				case 1: return P1PawnBox;
+				case 2: return P2PawnBox;
+				case 3: return P3PawnBox;
+				case 4: return P4PawnBox;
 				default: return P1PawnBox;
 			}
 		}
 
 		// Maybe not keep this?
 		private void PlayerTabControl_SelectionChanged(Object sender, SelectionChangedEventArgs e) {
-			currentPlayerID = (sender as TabControl).SelectedIndex;
+			currentPlayerID = (sender as TabControl).SelectedIndex + 1;
+			CurrentPlayerIDLabel.Content = currentPlayerID;
 		}
 
 		/// <summary>
@@ -179,13 +172,13 @@ namespace ScrumageEngine.Windows{
 		/// <param name="e">The button being pressed.</param>
 		private void MovePawnBtn_Click(Object sender, RoutedEventArgs e) {
 			SelectedPawns.Clear();
-			foreach(Pawn p in GetPlayerPawnBoxByID(currentPlayerID).SelectedItems) {
+			foreach(String p in GetPlayerPawnBoxByID(currentPlayerID).SelectedItems) {
 				SelectedPawns.Add(p);
 			}
 			try {
-				MovePawn(SelectedPawns, game.Players[currentPlayerID], game.board.GetNodeByName(NodeComboBox.SelectedItem.ToString()));
-				UpdatePawnBox(FindName($"{NodeComboBox.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.board.GetNodeByName(NodeComboBox.SelectedItem.ToString()).Pawns);
-				UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.Players[currentPlayerID].Pawns);
+				MovePawn(game, SelectedPawns, currentPlayerID, NodeComboBox.SelectedItem.ToString());
+				UpdatePawnBox(FindName($"{NodeComboBox.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.GetNodePawns(NodeComboBox.SelectedItem.ToString()));
+				UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
 			}
 			catch(MovePawnException _exception) {
 				MessageBox.Show(_exception.Message);
@@ -195,8 +188,8 @@ namespace ScrumageEngine.Windows{
 
 
 		private void TestDiceBtn_Click(Object sender, RoutedEventArgs e) {
-			RollDice(Int32.Parse(DiceCountCombo.SelectedItem.ToString()), game);
-			UpdateDieBoxes(game.board.dice);
+			RollDice(game, Int32.Parse(DiceCountCombo.SelectedItem.ToString()));
+			UpdateDieBoxes(game.ShowDice());
 			LogInput();
 		}
 
@@ -207,9 +200,9 @@ namespace ScrumageEngine.Windows{
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
 		private void NodeActionBtn_Click(Object sender, RoutedEventArgs e) {
-			ActivateNode(game.Players[currentPlayerID], game.board.GetNodeByName(NodeComboBox2.SelectedItem.ToString()));
-			UpdatePawnBox(FindName($"{NodeComboBox2.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.board.GetNodeByName(NodeComboBox.SelectedItem.ToString()).Pawns);
-			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.Players[currentPlayerID].Pawns);
+			ActivateNode(game, currentPlayerID, NodeComboBox2.SelectedItem.ToString());
+			UpdatePawnBox(FindName($"{NodeComboBox2.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.GetNodePawns(NodeComboBox.SelectedItem.ToString()));
+			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
 			LogInput();
 		}
 
