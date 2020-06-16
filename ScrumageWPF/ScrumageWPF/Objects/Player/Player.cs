@@ -14,10 +14,16 @@ namespace ScrumageEngine.Objects.Humans {
 		/// An ID to be used for the player for easier identification than their name
 		/// </summary>
 		public Int32 PlayerID { get; set; }
+
 		/// <summary>
 		/// The player's name to be used as a representation on the board
 		/// </summary>
-		public String PlayerName { get; set; }
+
+		private String playerName;
+		public String PlayerName {
+			get { return playerName; }
+		}
+
 		/// <summary>
 		/// A list of the player's (currently held) pawn
 		/// </summary>
@@ -25,11 +31,11 @@ namespace ScrumageEngine.Objects.Humans {
 		/// <summary>
 		/// A list of the player's User Story cards to hold obtained cards
 		/// </summary>
-		public List<Card> UserStories = new List<Card>();
+		public List<Card> Artifacts = new List<Card>();
 		/// <summary>
 		/// A list of the player's Feature cards to hold obtained cards
 		/// </summary>
-		public List<Card> FeatureCards = new List<Card>();
+		public List<Card> Agility = new List<Card>();
 		/// <summary>
 		/// The amount of budget the player recieves every turn
 		/// </summary>
@@ -47,9 +53,9 @@ namespace ScrumageEngine.Objects.Humans {
 		/// </summary>
 		/// <param name="playerID">The player's ID</param>
 		/// <param name="playerName">The player's name</param>
-		public Player(Int32 playerID, String playerName) {
+		public Player(Int32 playerID, String playerNameP) {
 			PlayerID = playerID;
-			PlayerName = playerName;
+			playerName = playerNameP;
 			FeaturePoints = 0;
 			Budget = 1;
 			Funds = Budget;
@@ -69,15 +75,15 @@ namespace ScrumageEngine.Objects.Humans {
 		/// Adds a User Story card Int32o the player's User Stories inventory
 		/// </summary>
 		/// <param name="userStory">The card to be added</param>
-		public void AddToUserStories(Card userStory) {
-			this.UserStories.Add(userStory);
+		public void AddToArtifacts(Card userStory) {
+			this.Artifacts.Add(userStory);
 		}
 		/// <summary>
 		/// Adds a Feature card to the User's Feature inventory
 		/// </summary>
 		/// <param name="feature">The feature to be added</param>
-		public void AddToFeatures(Card feature) {
-			this.FeatureCards.Add(feature);
+		public void AddToAgility(Card feature) {
+			this.Agility.Add(feature);
 		}
 		/// <summary>
 		/// Removes a pawn rom the user's pawn inventory
@@ -90,15 +96,15 @@ namespace ScrumageEngine.Objects.Humans {
 		/// Removes a card from the player's User Stories inventory
 		/// </summary>
 		/// <param name="userStory">The User Story to be removed</param>
-		public void RemoveFromUserStories(Card userStory) {
-			this.UserStories.Remove(userStory);
+		public void RemoveFromArtifacts(Card artifactP) {
+			this.Artifacts.Remove(artifactP);
 		}
 		/// <summary>
 		/// Removes a Feature card from the Features inventory
 		/// </summary>
 		/// <param name="feature">The Feature to be removed</param>
-		public void RemoveFromFeatures(Card feature) {
-			this.FeatureCards.Remove(feature);
+		public void RemoveFromAgility(Card agilityP) {
+			this.Agility.Remove(agilityP);
 		}
 		/// <summary>
 		/// Gives a pawn of a specified level(a NEW pawn) to the player
@@ -115,6 +121,7 @@ namespace ScrumageEngine.Objects.Humans {
 		public Pawn TakePawn(String PawnType) {
 			Pawn retPawn = new Pawn();
 			if((retPawn = HasPawn(PawnType)) != new Pawn()) {
+				Pawns.Remove(retPawn);
 				return retPawn;
 			}
 			return retPawn;
@@ -157,6 +164,11 @@ namespace ScrumageEngine.Objects.Humans {
 			this.Funds += fundsToGiveP;
 		}
 
+		public List<String> ListPawns() {
+			List<String> retList = new List<String>();
+			Pawns.ForEach(pawn => retList.Add(pawn.ToString()));
+			return retList;
+		}
 		#endregion
 	}
 }

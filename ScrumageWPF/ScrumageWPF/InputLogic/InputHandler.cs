@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using static System.Console;
 using ScrumageEngine.BoardSpace;
-using static ScrumageEngine.BoardSpace.Board;
 using ScrumageEngine.Exceptions;
-using ScrumageEngine.Objects.Humans;
-using ScrumageEngine.Objects.Items;
 using System.Linq.Expressions;
 
 
@@ -32,10 +29,7 @@ namespace ScrumageEngine.InputLogic {
 		/// A list of inputs handled, length specified in RecordInputs function
 		/// </summary>
 		private static List<String> recentInputs = new List<String>();
-		/// <summary>
-		/// A random to be used in returning values based on inputs(use this as gloval random)
-		/// </summary>
-		private static Random Rand = new Random(); // Maybe move this to Game?
+
 		/// <summary>
 		/// Returns the current state of the recent inputs
 		/// </summary>
@@ -72,13 +66,9 @@ namespace ScrumageEngine.InputLogic {
 		/// </summary>
 		/// <param name="cardType">"artifact"/"agility" for the type of card wanted.</param>
 		/// <param name="player">The player requesting the card.</param>
-		public static void GivePlayerCard(String cardType, Player player) { // Replace with inherited Card children?
-			RecordInputs($"{player.PlayerName} took {cardType}");
-			if(cardType == "artifact") { // Arg 2
-				player.AddToFeatures(new Card("Artifact", "Name")); // Also these should be existing cards when those are created
-			} else if(cardType == "agility") {
-				player.AddToUserStories(new Card("Agility", "Name"));
-			}
+		public static void GivePlayerCard(Game game, String cardTypeP, Int32 playerIDP) { // Replace with inherited Card children?
+			game.GivePlayerCard(playerIDP, cardTypeP); // Also these should be existing cards when those are created
+			RecordInputs($"{game.GetPlayerNameByID(playerIDP)} took {cardTypeP}");
 		}
 
 		/// <summary>
@@ -87,15 +77,10 @@ namespace ScrumageEngine.InputLogic {
 		/// <param name="player">The player requesting the pawn.</param>
 		/// <param name="game">Current State of the game.</param>
 		/// <param name="input">The type of pawn if specification is needed.</param>
-		public static void GivePlayerPawn(Player player, Game game, String input = "") {
-			RecordInputs($"{ player.PlayerName} received pawn");
-			String[] inputArr = input.Split(' ');
-			if(inputArr[0] == "")
-				player.GivePawn(game.PawnTypes[Rand.Next(2)]);
-			else if(inputArr.Length == 1)
-				player.GivePawn(game.PawnTypes[Int32.Parse(inputArr[0])]);
-			else if(inputArr.Length == 2)
-				player.GivePawn($"{inputArr[0]} {inputArr[1]}");
+		public static void GivePlayerPawn(Game game, Int32 playerIDP, String input = "") {
+			String playerName = game.GetPlayerNameByID(playerIDP);
+			RecordInputs($"{playerName} received pawn");
+
 		}
 
 
@@ -104,8 +89,8 @@ namespace ScrumageEngine.InputLogic {
 		/// </summary>
 		/// <param name="diceCount">The number of dice to roll.</param>
 		/// <returns>A list of the dice.</returns>
-		public static void RollDice(Int32 diceCount, Game game) {
-			game.RollDice(diceCount, Rand);
+		public static void RollDice(Game game, Int32 diceCount) {
+			game.RollDice(diceCount);
 			RecordInputs($"{diceCount} dice rolled, Results: {game.DiceValues()}"); // Add results
 		}
 
@@ -115,21 +100,20 @@ namespace ScrumageEngine.InputLogic {
 		/// <param name="pawns">The list of pawns selected by the player</param>
 		/// <param name="player">The player requesting the move</param>
 		/// <param name="node">The node the player is trying to move to</param>
-		public static void MovePawn(List<Pawn> pawns, Player player, Node node) {
+		public static void MovePawn(Game game, List<String> pawns, Int32 playerIDP, String nodeNameP) {
+			var player = game.GetPlayerByID(playerIDP);
+			var node = game.GetNodeByName(nodeNameP);
 			Int32 _newTotalOfPawnsInNode = pawns.Count + node.NumberOfPawns;
 			Boolean _nodeFull = _newTotalOfPawnsInNode > node.MaxPawnLimit;
 			if(pawns.Count > 0 && !_nodeFull) {
-				foreach(Pawn p in pawns) {
-					player.TakePawn(p);
-					node.AddPawn(p);
-				}
-				RecordInputs($"{player.PlayerName} moved {ListPawns(pawns)} to {node.NodeName}");
+				game.MovePawn(pawns, playerIDP, nodeNameP);
+				RecordInputs($"{player.PlayerName} moved {ListPawns(pawns)} to {nodeNameP}");
 			}else if(pawns.Count == 0) {
 				RecordInputs($"{player.PlayerName} tried to move pawns that weren't theirs!");
 				throw new MovePawnException("You cannot move another player's pawns.");
 			}else if(_nodeFull) {
-				RecordInputs($"{player.PlayerName} tried to move too many pawns to {node.NodeName}");
-				throw new MovePawnException($"You are moving too many pawns to {node.NodeName}");
+				RecordInputs($"{player.PlayerName} tried to move too many pawns to {nodeNameP}");
+				throw new MovePawnException($"You are moving too many pawns to {nodeNameP}");
 			}
 		}
 
@@ -138,10 +122,10 @@ namespace ScrumageEngine.InputLogic {
 		/// </summary>
 		/// <param name="pawns">The pawns to be listed.</param>
 		/// <returns>Comma separated pawn representation.</returns>
-		private static String ListPawns(List<Pawn> pawns) {
+		private static String ListPawns(List<String> pawns) {
 			String retString = "";
-			foreach(Pawn p in pawns) {
-				retString += p.PawnType + ", ";
+			foreach(String p in pawns) {
+				retString += p + ", ";
 			}
 			return retString;
 		}
@@ -152,8 +136,10 @@ namespace ScrumageEngine.InputLogic {
 		/// </summary>
 		/// <param name="player">The player that selected the node.</param>
 		/// <param name="node">The node that was selected in the GUI.</param>
-		public static void ActivateNode(Player player, Node node) {
-			String nodeLog = node.DoAction(player);
+		public static void ActivateNode(Game game, int playerIDP, String nodeNameP) {
+			var player = game.GetPlayerByID(playerIDP);
+			var node = game.GetNodeByName(nodeNameP);
+			String nodeLog = game.DoAction(nodeNameP, playerIDP);
 			RecordInputs(nodeLog);
 		}
 	}

@@ -6,9 +6,12 @@ using System.Text;
 
 namespace ScrumageEngine.BoardSpace {
 	public class Game {
-		public List<Player> Players { get; set; }
-		public Board board = new Board();
-		public String[] PawnTypes = { "Front End", "Back End", "Full Stack" };
+		private List<Player> Players { get; }
+		private Board board = new Board();
+		private String[] PawnTypes = {"Front End", "Back End", "Full Stack"};
+		private int phase = 1;
+		private static Random Rand = new Random(); // Maybe move this to Game?
+
 		/// <summary>
 		/// Game constructor
 		/// </summary>
@@ -24,8 +27,8 @@ namespace ScrumageEngine.BoardSpace {
 		/// <returns>A list of the players.</returns>
 		private List<Player> InitPlayers(List<String> playerNames) {
 			List<Player> retPlayers = new List<Player>();
-			for(Int32 i = 0; i < playerNames.Count; i++) {
-				retPlayers.Add(new Player(i+1, playerNames[i]));
+			for (Int32 i = 0; i < playerNames.Count; i++) {
+				retPlayers.Add(new Player(i + 1, playerNames[i]));
 				// Whatever else needs to be done when players are created goes here.
 				retPlayers[i].GivePawn("Front End");
 				retPlayers[i].GivePawn("Front End");
@@ -33,38 +36,50 @@ namespace ScrumageEngine.BoardSpace {
 				retPlayers[i].GivePawn("Back End");
 				retPlayers[i].GivePawn("Back End");
 			}
+
 			return retPlayers;
 		}
 
-        /// <summary>
-        /// Returns a given node by name.
-        /// </summary>
-        /// <param name="nodeName">Name of the node to be returned.</param>
-        /// <returns>The node requested.</returns>
+		/// <summary>
+		/// Returns a given node by name.
+		/// </summary>
+		/// <param name="nodeName">Name of the node to be returned.</param>
+		/// <returns>The node requested.</returns>
 		public Node GetNodeByName(String nodeName) {
-			Node retNode = board.GetNodeByName(nodeName);
+			return board.GetNodeByName(nodeName);
+		}
 
-			// Keep track of what just happened
-			//			--> Check if all players have moved all pawns
-			//					--> If so, move to next phase
-			//					--> If not, move to next player with false CompletedPhase
-			// Call the function in Board
-			CheckPlayerPawns();
-			CheckPhase();
-			return retNode;
+		public Node GetNodeByID(int nodeIDP) {
+			return board.GetNodeByID(nodeIDP);
+		}
+
+		public Player GetPlayerByID(int playerIDP) {
+			return Players.Find(player => player.PlayerID == playerIDP);
+		}
+
+		public List<Player> GetAllPlayers() {
+			return Players;
 		}
 
 		private void CheckPlayerPawns() {
 			// If currentPlayer.Pawns.Items.Count == 0
-				// set DoneWithPhase = true;
+			// set DoneWithPhase = true;
 		}
 
-		private void CheckPhase() {
-			foreach(Player player in Players) {
-				// If player has moved all pawns,
-					// Set DoneWithPhased
-				
-			}
+		private void CheckPhase(int phase) {
+			if (phase == 1) PhaseOne();
+			else if (phase == 2) PhaseTwo();
+			else if (phase == 3) PhaseThree();
+		}
+
+		private void PhaseOne() { }
+
+		private void PhaseTwo() {
+			throw new NotImplementedException();
+		}
+
+		private void PhaseThree() {
+			throw new NotImplementedException();
 		}
 
 		/// <summary>
@@ -72,23 +87,84 @@ namespace ScrumageEngine.BoardSpace {
 		/// </summary>
 		/// <param name="diceCount">The number of dice wish to be rolled.</param>
 		/// <param name="rand">A global random.</param>
-		internal void RollDice(Int32 diceCount, Random rand) {
-			board.dice.Clear();
-			for(Int32 i = 0; i < diceCount; i++) {
-				board.dice.Add(new Die(rand.Next(6) + 1));
-			}
+		internal void RollDice(Int32 diceCount) {
+			board.ClearDice();
+			board.RollDice(diceCount, Rand);
 		}
 
+		public List<String> ShowDice() {
+			return board.ShowDice();
+		}
 		/// <summary>
 		/// Represents current dice values in a single string for the log.
 		/// </summary>
 		/// <returns>String of current dice values.</returns>
 		internal String DiceValues() {
 			String retString = "";
-			foreach(Die d in board.dice) {
+			foreach (Die d in board.GetDice()) {
 				retString += d.Value + " ";
 			}
+
 			return retString;
+		}
+
+		public void GivePlayerCard(int playerIDP, String cardTypeP) {
+			Player player = GetPlayerByID(playerIDP);
+			if (cardTypeP == "artifact") {
+				player.AddToArtifacts(board.GetTopArtifact());
+			}else if (cardTypeP == "agility") {
+				player.AddToAgility(board.GetTopAgility());
+			}
+		}
+
+		public String GetPawnType(int indexP) {
+			return PawnTypes[indexP];
+		}
+
+		public List<String> GetNodeNames() {
+			List<String> nodeNames = new List<string>();
+			board.GetAllNodes().ForEach(node =>
+			{
+				nodeNames.Add(node.NodeName);
+			});
+			return nodeNames;
+		}
+
+		public List<String> GetPlayerPawns(Int32 playerIDP) {
+			return GetPlayerByID(playerIDP).ListPawns();
+		}
+
+		public List<String> GetNodePawns(String nodeNameP) {
+			return board.ListNodePawns(nodeNameP);
+		}
+
+		public String GetPlayerNameByID(Int32 playerIDP) {
+			return GetPlayerByID(playerIDP).PlayerName;
+		}
+
+		public void GivePlayerPawn(Int32 playerIDP, Int32 iPawnTypeP, String sPawnTypeP) {
+			String[] inputArr = sPawnTypeP.Split(' ');
+			var player = GetPlayerByID(playerIDP);
+			if(inputArr[0] == "")
+				player.GivePawn(GetPawnType(Rand.Next(2)));
+			else if(inputArr.Length == 1)
+				player.GivePawn(GetPawnType(Int32.Parse(inputArr[0])));
+			else if(inputArr.Length == 2)
+				player.GivePawn($"{inputArr[0]} {inputArr[1]}");
+		}
+
+		public void MovePawn(List<String> pawnsP, int playerIDP, String nodeName) {
+			Player player = GetPlayerByID(playerIDP);
+			Pawn pawn;
+			Node node = GetNodeByName(nodeName);
+			foreach(String p in pawnsP) {
+				pawn = player.TakePawn(p.Split(',')[0]);
+				node.AddPawn(pawn);
+			}
+		}
+
+		public String DoAction(String nodeNameP, Int32 playerIDP) {
+			return GetNodeByName(nodeNameP).DoAction(GetPlayerByID(playerIDP));
 		}
 	}
 }
