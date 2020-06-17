@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 namespace ScrumageEngine.Objects.Items {
 	public class Die {
 
+		#region Properties
 		/// <summary>
 		/// Die's value.
 		/// </summary>
@@ -18,6 +19,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// Die's face representation.
 		/// </summary>
 		private char[][] DieFace = new char[5][];
+		#endregion
 
 
 		/// <summary>

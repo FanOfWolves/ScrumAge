@@ -10,7 +10,7 @@ namespace ScrumageEngine.Objects.Items {
 	/// </summary>
 	public class Card{
 
-
+		#region Properties
 		/// <summary>
 		/// Name of the card, a way to represent which card will be viewed when card info label is selected.
 		/// </summary>
@@ -27,7 +27,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// The requirements for the player to obtain this card
 		/// </summary>
 		public List<Resource> Requirements { get; set; }
-
+		#endregion
 
 		/// <summary>
 		/// Card overloaded constructor

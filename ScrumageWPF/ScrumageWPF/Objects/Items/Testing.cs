@@ -4,10 +4,11 @@ using System.Text;
 
 namespace ScrumageEngine.Objects.Items {
 	class Testing: Resource {
+        #region Properties
         private const Int32 fullStackChance = 25;
         private const Int32 frontEndChance = 5;
         private const Int32 backEndChance = 5;
-
+        #endregion
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Testing"/> class.

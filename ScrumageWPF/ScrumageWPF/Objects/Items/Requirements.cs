@@ -8,7 +8,7 @@ namespace ScrumageEngine.Objects.Items {
 	/// </summary>
 	class Requirements : Resource {
 
-        #region Fields
+        #region Properties
         private const Int32 fullStackChance = 20;
         private const Int32 frontEndChance = 20;
         private const Int32 backEndChance = 10;
