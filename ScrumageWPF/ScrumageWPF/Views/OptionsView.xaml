@@ -12,12 +12,12 @@
         <Label FontSize="24" FontWeight="Black" HorizontalAlignment="Center">Player Setup</Label>
 
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="135" Margin="0, 45, 0, 0">
-            <ComboBox x:Name="cbPlayerList" Margin="5"></ComboBox>
+            <ComboBox x:Name="cbPlayerList" Margin="5" SelectionChanged="cbPlayerList_ValueChanged" Text="select players" IsEditable="True" IsReadOnly="True"></ComboBox>
             <!-- Player List Container -->
             <StackPanel x:Name="playerButtons">
 
             </StackPanel>
-            <Button Margin="5">Confirm</Button>
+            <Button x:Name="btnConfirm" Margin="5" Click="btnConfirm_Click" FontSize="18">Confirm</Button>
         </StackPanel>
     </Grid>
 </Page>

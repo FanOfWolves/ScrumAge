@@ -19,7 +19,7 @@ namespace ScrumageEngine.Windows
     public partial class MainMenu : Window
     {
 
-        private List<string> playerList;
+        private List<string> playerList = new List<string>();
         public MainMenu()
         {
             InitializeComponent();
@@ -32,9 +32,7 @@ namespace ScrumageEngine.Windows
         /// <param name="e"></param>
         private void btnStartGame_Click(object sender, RoutedEventArgs e)
         {
-            StartWindow window = new StartWindow();
-            window.Show();
-            this.Close();
+            Main.Content = new StartView();
         }
 
         /// <summary>
