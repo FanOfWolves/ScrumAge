@@ -24,7 +24,7 @@ namespace ScrumageEngine.Objects.Items {
         /// <summary>
         /// The requirements for the player to obtain this card
         /// </summary>
-        public List<Resource> Requirements { get; set; }
+        public List<Resource> cardRequirements { get; set; }
 		#endregion
 
 
