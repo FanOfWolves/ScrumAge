@@ -10,25 +10,25 @@ namespace ScrumageEngine.Objects.Items {
 	/// </summary>
 	public class Card{
 
-
+		#region Fields
 		/// <summary>
-		/// Name of the card, a way to represent which card will be viewed when card info label is selected.
-		/// </summary>
-		public String Name { get; set; }
+        /// Name of the card, a way to represent which card will be viewed when card info label is selected.
+        /// </summary>
+        public String Name { get; set; }
+
+        /// <summary>
+        /// The Type of card that is being created
+        /// </summary>
+        public String CardType { get; set; }
+
+        /// <summary>
+        /// The requirements for the player to obtain this card
+        /// </summary>
+        public List<Resource> Requirements { get; set; }
+		#endregion
 
 
-		/// <summary>
-		/// The Type of card that is being created
-		/// </summary>
-		public String CardType { get; set; }
-
-
-		/// <summary>
-		/// The requirements for the player to obtain this card
-		/// </summary>
-		public List<Resource> Requirements { get; set; }
-
-
+		#region Constructors
 		/// <summary>
 		/// Card overloaded constructor
 		/// </summary>
@@ -39,14 +39,18 @@ namespace ScrumageEngine.Objects.Items {
 			CardType = type;
 			// Determine how to create reqs in implementation for game
 		}
+		#endregion
 
 
+		#region Class Converters
 		/// <summary>
-		/// ToString to be used to display the card
-		/// </summary>
-		/// <returns>String representation of the card</returns>
-		public override String ToString() {
-			return Name;
-		}
+        /// ToString to be used to display the card
+        /// </summary>
+        /// <returns>String representation of the card</returns>
+        public override String ToString() {
+            return Name;
+        }
+        #endregion
+
 	}
 }
