@@ -8,6 +8,7 @@ namespace ScrumageEngine.Objects.Items {
         private const Int32 frontEndChance = 5;
         private const Int32 backEndChance = 5;
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Testing"/> class.
         /// </summary>

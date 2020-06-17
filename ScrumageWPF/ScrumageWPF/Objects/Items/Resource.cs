@@ -16,6 +16,7 @@ namespace ScrumageEngine.Objects.Items {
         private const Int32 frontEndChance = 0;
         private const Int32 backEndChance = 0;
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Resource"/> class.
         /// </summary>
@@ -27,6 +28,12 @@ namespace ScrumageEngine.Objects.Items {
 			FullStackChance = 0;
 		}
 
+
+        /// <summary>
+        /// Determines the chance based on the type of pawn passed in.
+        /// </summary>
+        /// <param name="pawnP">The pawn being used to attempt the resource collection.</param>
+        /// <returns>The amount of resources collected.</returns>
         public virtual Int32 GetChance(Pawn pawnP) {
             switch(pawnP.PawnType) {
                 case "Full Stack":
