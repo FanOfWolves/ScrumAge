@@ -19,6 +19,10 @@
                             <Setter Property="FontWeight" Value="Bold"></Setter>
                             <Setter Property="FontSize" Value ="22"></Setter>
                         </Trigger>
+                        <EventTrigger RoutedEvent="PreviewMouseDown">
+                            <SoundPlayerAction Source="/Sounds/ButtonClick.wav"  />
+                        </EventTrigger>
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

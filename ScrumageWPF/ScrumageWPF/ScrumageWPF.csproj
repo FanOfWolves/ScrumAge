@@ -11,6 +11,11 @@
   <ItemGroup>
     <None Remove="Images\LeftArrow.jpg" />
     <None Remove="Images\RightArrow.jpg" />
+    <None Remove="Resources\b.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Sounds\ButtonClick.wav" />
   </ItemGroup>
 
   <ItemGroup>
