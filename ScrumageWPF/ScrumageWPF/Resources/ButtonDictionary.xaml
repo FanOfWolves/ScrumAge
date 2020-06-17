@@ -17,6 +17,7 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Opacity" Value="0.8" />
                             <Setter Property="FontWeight" Value="Bold"></Setter>
+                            <Setter Property="FontSize" Value ="22"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
