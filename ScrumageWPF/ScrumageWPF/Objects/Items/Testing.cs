@@ -19,10 +19,5 @@ namespace ScrumageEngine.Objects.Items {
             FrontEndChance = frontEndChance;
             BackEndChance = backEndChance;
         }
-
-        public override Int32 GetChance(Pawn p)
-        {
-            throw new NotImplementedException();
-        }
-    }
+	}
 }

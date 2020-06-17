@@ -5,7 +5,7 @@ using ScrumageEngine.Exceptions;
 using System.Text;
 using ScrumageEngine.Objects.Items;
 
-namespace ScrumageEngine.Objects.Humans {
+namespace ScrumageEngine.Objects.Player {
 	/// <summary>
 	/// Player class used to represent and retain information about a player
 	/// </summary>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Navigation;
 using ScrumageEngine.Objects;
-using ScrumageEngine.Objects.Humans;
+using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Objects.Items;
 
 namespace ScrumageEngine.BoardSpace {
