@@ -32,7 +32,7 @@ namespace ScrumageEngine.Windows
         /// <param name="e"></param>
         private void btnStartGame_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new StartView();
+            Main.Content = new StartView(playerList);
         }
 
         /// <summary>

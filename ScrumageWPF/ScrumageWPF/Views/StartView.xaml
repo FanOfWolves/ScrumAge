@@ -9,8 +9,9 @@
       Title="StartView">
 
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="150">
-            <Button Margin="5, 20, 5, 5">Start Game</Button>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="175">
+            <Label x:Name="lblTotalPlayers" FontSize="22">Total Players: 0</Label>
+            <Button x:Name="btnStart" Click="btnStart_Click" Margin="5, 20, 5, 5" FontSize="18">Start Game</Button>
         </StackPanel>
     </Grid>
 </Page>
