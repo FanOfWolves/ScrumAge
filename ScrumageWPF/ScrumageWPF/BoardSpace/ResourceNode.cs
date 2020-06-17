@@ -29,6 +29,7 @@ namespace ScrumageEngine.BoardSpace {
             return successChance <= _result;
         }
 
+
         public override String DoAction(Player player) {
             List<Pawn> _playerPawns = GatherPlayerPawns(player.PlayerID);
             
@@ -40,9 +41,10 @@ namespace ScrumageEngine.BoardSpace {
 
             Boolean _getResource = RollForResource(_resourceAcquireChance);
             if (_getResource == true) {
+                player.AddResource();
                 //returns the did they do the do thing
                 //player.acquireResource();
-               
+
             }
             else {
                 

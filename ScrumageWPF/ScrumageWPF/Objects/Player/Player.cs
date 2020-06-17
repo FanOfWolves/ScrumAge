@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ScrumageEngine.BoardSpace;
 using ScrumageEngine.Exceptions;
 using System.Text;
+using System.Windows.Media.Animation;
 using ScrumageEngine.Objects.Items;
 
 namespace ScrumageEngine.Objects.Player {
@@ -23,6 +24,8 @@ namespace ScrumageEngine.Objects.Player {
 		public String PlayerName {
 			get { return playerName; }
 		}
+
+        
 
 		/// <summary>
 		/// A list of the player's (currently held) pawn
@@ -59,6 +62,7 @@ namespace ScrumageEngine.Objects.Player {
 			FeaturePoints = 0;
 			Budget = 1;
 			Funds = Budget;
+			this.playerResources = new ResourceContainer();
 		}
 		/// <summary>
 		/// A group of functions that are used to Int32eract with Items, i.e. giving players pawn, cards, or checking if player has a certain type of pawn
@@ -170,5 +174,33 @@ namespace ScrumageEngine.Objects.Player {
 			return retList;
 		}
 		#endregion
+
+
+		#region Resources
+		private ResourceContainer playerResources;
+
+		/// <summary>
+		/// Adds the resource to the player's ResourceContainer
+		/// </summary>
+		/// <param name="resource">The resource to be added</param>
+		public void AddResource(Resource resource) {
+			this.playerResources.AddResource(resource);
+        }
+
+		/// <summary>
+		/// Pays resource from the player's resources.
+		/// </summary>
+		/// <param name="resource">The resource to be paid.</param>
+		/// <param name="resourceAmount">The amount to be paid.</param>
+		/// <returns>
+		///		<c>true</c> if player had enough resources; otherwise <c>false</c>
+		/// </returns>
+		public Boolean TakeResource(Resource resource, Int32 resourceAmount) {
+            return this.playerResources.TakeResources(resource, resourceAmount);
+        }
+
+		#endregion
+
+
 	}
 }
