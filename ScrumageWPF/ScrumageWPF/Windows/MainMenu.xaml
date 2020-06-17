@@ -33,7 +33,7 @@
         <DockPanel Grid.Column="0">
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Right"></Border>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 0, 0, 0" MinWidth="180" MaxWidth="200" MinHeight="35">
-                <Label HorizontalAlignment="Center" FontSize="32" FontFamily="Comic Sans MS" FontWeight="Bold" Margin="0, 0, 0, 10">Scrum Age</Label>
+                <Label HorizontalAlignment="Center" FontSize="32" FontWeight="Bold" Margin="0, 0, 0, 10">Scrum Age</Label>
                 <Button x:Name="btnStartGame" FontSize="20" Margin="5" BorderBrush="Transparent" Background="{x:Null}" Click="btnStartGame_Click">Start Game
                 </Button>
                 <Button x:Name="btnHelp" FontSize="20" Margin="5" Background="{x:Null}" BorderBrush="Transparent" Click="btnHelp_Click">Help</Button>
