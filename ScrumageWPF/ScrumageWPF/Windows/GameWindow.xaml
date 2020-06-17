@@ -519,8 +519,6 @@
 					<ListBox x:Name="ReassignmentNodeBox" Margin="5"/>
 				</DockPanel>
 
-
-
 				<!-- third row (Artifact 1) -->
 				<DockPanel  Grid.Column="0" Grid.Row="2" MaxHeight="110">
 					<Label DockPanel.Dock="Top" FontSize="18" HorizontalAlignment="Center" Content="Artifact 1"/>
