@@ -4,22 +4,21 @@ using System.Text;
 
 namespace ScrumageEngine.Objects.Items {
 	/// <summary>
-	/// 
+	/// Design Resource
 	/// </summary>
 	public class Design : Resource {
-        private const Int32 fullStackChance = 20;
-        private const Int32 frontEndChance = 20;
-        private const Int32 backEndChance = 10;
+        private const String RESOURCE_NAME = "Design";
+        private const Int32 FULL_STACK_CHANCE = 20;
+        private const Int32 FRONT_END_CHANCE = 20;
+        private const Int32 BACK_END_CHANCE = 10;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Design"/> class.
         /// </summary>
-        /// <param name="name">The name of the resource</param>
-        public Design(String name):base(name) {
-            Name = name;
-            FullStackChance = fullStackChance;
-            FrontEndChance = frontEndChance;
-            BackEndChance = backEndChance;
-		}
+        public Design():base(RESOURCE_NAME) {
+            this.FullStackChance = FULL_STACK_CHANCE;
+            this.FrontEndChance = FRONT_END_CHANCE;
+            this.BackEndChance = BACK_END_CHANCE;
+        }
 	}
 }
