@@ -157,10 +157,10 @@ namespace ScrumageEngine.BoardSpace {
 			if (inputArr[0] == "") {
 				pawnType = GetPawnType(Rand.Next(2));
 				player.GivePawn(pawnType);
-			} if (inputArr.Length == 1) {
+			} else if (inputArr.Length == 1) {
 				pawnType = GetPawnType(Int32.Parse(inputArr[0]));
 				player.GivePawn(pawnType);
-			} if (inputArr.Length == 2) {
+			} else if (inputArr.Length == 2) {
 				pawnType = $"{inputArr[0]} {inputArr[1]}";
 				player.GivePawn(pawnType);
 			}
