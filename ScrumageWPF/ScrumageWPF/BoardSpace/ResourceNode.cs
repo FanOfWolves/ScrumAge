@@ -29,8 +29,6 @@ namespace ScrumageEngine.BoardSpace {
             return successChance <= _result;
         }
 
-        
-
         public override String DoAction(Player player) {
             List<Pawn> _playerPawns = GatherPlayerPawns(player.PlayerID);
             
