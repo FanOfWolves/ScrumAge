@@ -1,20 +1,23 @@
 ﻿using System;
-
+using ScrumageEngine.Objects.Items;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace ScrumageEngine.Objects.Items {
     /// <summary>
     /// Base class for resources.
     /// </summary>
-    public abstract class Resource {
-		public String Name { get; set; }
+    public abstract class Resource : IEquatable<Resource> {
+		public String Name { get; private set; }
 		public Int32 FrontEndChance { get; set; }
 		public Int32 BackEndChance { get; set; }
 		public Int32 FullStackChance { get; set; }
-        private const Int32 fullStackChance = 0;
-        private const Int32 frontEndChance = 0;
-        private const Int32 backEndChance = 0;
+
+
+        private readonly Int32 FRONT_END_CHANCE;
+        private readonly Int32 BACK_END_CHANCE;
+        private readonly Int32 FULL_STACK_CHANCE;
 
 
         /// <summary>
@@ -28,23 +31,63 @@ namespace ScrumageEngine.Objects.Items {
 			FullStackChance = 0;
 		}
 
-
         /// <summary>
-        /// Determines the chance based on the type of pawn passed in.
+        /// Copy Constructor. Initializes a new instance of the <see cref="Resource"/> class.
         /// </summary>
-        /// <param name="pawnP">The pawn being used to attempt the resource collection.</param>
-        /// <returns>The amount of resources collected.</returns>
-        public virtual Int32 GetChance(Pawn pawnP) {
+        /// <param name="other">The original Resource to copy.</param>
+        public Resource(Resource other) {
+            Name = other.Name;
+            FrontEndChance = other.FrontEndChance;
+            BackEndChance = other.BackEndChance;
+            FullStackChance = other.FullStackChance;
+        }
+
+        public Int32 GetChance(Pawn pawnP) {
             switch(pawnP.PawnType) {
                 case "Full Stack":
-                    return fullStackChance;
+                    return this.FULL_STACK_CHANCE;
                 case "Back End":
-                    return backEndChance;
+                    return this.BACK_END_CHANCE;
                 case "Front End":
-                    return frontEndChance;
+                    return this.FRONT_END_CHANCE;
                 default:
                     return 0;
             }
         }
+
+        public Boolean Equals(Resource other) {
+            if (other is null) return false;
+            return this.Name == other.Name;
+        }
+
+        public override Boolean Equals(Object obj) {
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return obj.GetType() == this.GetType() && Equals((Resource) obj);
+        }
+
+        public override Int32 GetHashCode() {
+            return (Name != null ? Name.GetHashCode() : 0);
+        }
+
+
+
+        public static Boolean operator ==(Resource left, Resource right) {
+            return left?.Name == right?.Name;
+        }
+
+        public static Boolean operator !=(Resource left, Resource right) {
+            return left?.Name != right?.Name;
+        }
+
+        public Resource DeepCopy() {
+            Resource _copy = (Resource) this.MemberwiseClone();
+            _copy.FrontEndChance = FrontEndChance;
+            _copy.BackEndChance = BackEndChance;
+            _copy.FullStackChance = FullStackChance;
+            _copy.Name = Name;
+            return _copy;
+        }
+
     }
 }

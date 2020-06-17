@@ -9,9 +9,10 @@ namespace ScrumageEngine.Objects.Items {
 	class Requirements : Resource {
 
         #region Fields
-        private const Int32 fullStackChance = 20;
-        private const Int32 frontEndChance = 20;
-        private const Int32 backEndChance = 10;
+        private const String RESOURCE_NAME = "Requirements";
+        private const Int32 FULL_STACK_CHANCE = 20;
+        private const Int32 FRONT_END_CHANCE = 20;
+        private const Int32 BACK_END_CHANCE = 10;
         #endregion
 
 
@@ -19,9 +20,10 @@ namespace ScrumageEngine.Objects.Items {
         /// <summary>
         /// Initializes a new instance of the <see cref="Requirements"/> class.
         /// </summary>
-        /// <param name="name">The name of the resource</param>
-        public Requirements(String name): base(name) {
-
+        public Requirements(): base(RESOURCE_NAME) {
+            this.FrontEndChance = FRONT_END_CHANCE;
+            this.BackEndChance = BACK_END_CHANCE;
+            this.FullStackChance = FULL_STACK_CHANCE;
         }
         #endregion
     }
