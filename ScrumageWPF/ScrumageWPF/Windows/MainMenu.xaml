@@ -10,17 +10,7 @@
         Title="ScrumAge - Main Menu" Height="450" Width="800">
 
     <Window.Resources>
-        <!-- Button Hover Effect -->
-        <Style TargetType="{x:Type Button}">
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="FontWeight" Value="Bold" />
-                    <Setter Property="Cursor" Value="Hand"></Setter>
-                    <Setter Property="FontSize" Value="22"></Setter>
-                    <Setter Property="Background" Value="Transparent"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <ResourceDictionary Source="../Resources/ButtonDictionary.xaml" />
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -30,15 +20,14 @@
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Column="0">
-            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Right"></Border>
+        <DockPanel Grid.Column="0" Background="Cornsilk">
+            <Border BorderBrush="Black" BorderThickness="0.5" DockPanel.Dock="Right"></Border>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 0, 0, 0" MinWidth="180" MaxWidth="200" MinHeight="35">
                 <Label HorizontalAlignment="Center" FontSize="32" FontWeight="Bold" Margin="0, 0, 0, 10">Scrum Age</Label>
-                <Button x:Name="btnStartGame" FontSize="20" Margin="5" BorderBrush="Transparent" Background="{x:Null}" Click="btnStartGame_Click">Start Game
-                </Button>
-                <Button x:Name="btnHelp" FontSize="20" Margin="5" Background="{x:Null}" BorderBrush="Transparent" Click="btnHelp_Click">Help</Button>
-                <Button x:Name="btnOptions" FontSize="20" Margin="5" Background="{x:Null}" BorderBrush="Transparent" Click="btnOptions_Click">Options</Button>
-                <Button x:Name="btnExitGame" FontSize="20" Margin="5" Background="{x:Null}" BorderBrush="Transparent" Click="btnExitGame_Click">Exit Game</Button>
+                <Button Style="{StaticResource MainMenuButtonStyle}" x:Name="btnStartGame" Margin="5" Click="btnStartGame_Click">Start Game</Button>
+                <Button Style="{StaticResource MainMenuButtonStyle}" x:Name="btnHelp" Margin="5" Click="btnHelp_Click">Help</Button>
+                <Button Style="{StaticResource MainMenuButtonStyle}" x:Name="btnOptions"  Margin="5" Click="btnOptions_Click">Options</Button>
+                <Button Style="{StaticResource MainMenuButtonStyle}" x:Name="btnExitGame" FontSize="20" Margin="5"  Click="btnExitGame_Click">Exit Game</Button>
             </StackPanel>
         </DockPanel>
         <!-- Right side Panel, 'ViewModels' -->
