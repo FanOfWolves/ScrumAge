@@ -8,7 +8,7 @@ namespace ScrumageEngine.Objects.Items {
 	/// <summary>
 	/// Card extends Item, Used to represent a Card within the game
 	/// </summary>
-	public class Card{
+	public abstract class Card{
 
 		#region Fields
 		/// <summary>
@@ -34,7 +34,6 @@ namespace ScrumageEngine.Objects.Items {
 		/// </summary>
 		/// <param name="type">The type of card being created</param>
 		/// <param name="name">The name of the card</param>
-		/// <param name="message">The text for the card</param>
 		public Card(String type, String name){
 			CardType = type;
 			// Determine how to create reqs in implementation for game
