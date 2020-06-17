@@ -52,7 +52,7 @@ namespace ScrumageEngine.Windows
         /// <param name="e"></param>
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
-
+            new HelpView().Show();
         }
 
         /// <summary>
