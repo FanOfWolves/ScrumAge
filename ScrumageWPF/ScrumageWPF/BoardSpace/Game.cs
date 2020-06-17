@@ -150,15 +150,22 @@ namespace ScrumageEngine.BoardSpace {
 			return GetPlayerByID(playerIDP).PlayerName;
 		}
 
-		public void GivePlayerPawn(Int32 playerIDP, Int32 iPawnTypeP, String sPawnTypeP) {
-			String[] inputArr = sPawnTypeP.Split(' ');
+		public String GivePlayerPawn(Int32 playerIDP, String pawnTypeP) {
+			String[] inputArr = pawnTypeP.Split(' ');
 			Player player = GetPlayerByID(playerIDP);
-			if(inputArr[0] == "")
-				player.GivePawn(GetPawnType(Rand.Next(2)));
-			else if(inputArr.Length == 1)
-				player.GivePawn(GetPawnType(Int32.Parse(inputArr[0])));
-			else if(inputArr.Length == 2)
-				player.GivePawn($"{inputArr[0]} {inputArr[1]}");
+			String pawnType = "";
+			if (inputArr[0] == "") {
+				pawnType = GetPawnType(Rand.Next(2));
+				player.GivePawn(pawnType);
+			} if (inputArr.Length == 1) {
+				pawnType = GetPawnType(Int32.Parse(inputArr[0]));
+				player.GivePawn(pawnType);
+			} if (inputArr.Length == 2) {
+				pawnType = $"{inputArr[0]} {inputArr[1]}";
+				player.GivePawn(pawnType);
+			}
+			return $"{player.PlayerName} received a {pawnType} pawn";
+			//return "";
 		}
 
 		public void MovePawn(List<String> pawnsP, Int32 playerIDP, String nodeName) {

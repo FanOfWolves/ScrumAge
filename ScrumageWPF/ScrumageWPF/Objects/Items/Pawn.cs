@@ -11,20 +11,24 @@ namespace ScrumageEngine.Objects.Items {
 	/// </summary>
 	public class Pawn {
 
+
 		/// <summary>
 		/// The pawn's ID will be the same as the owning player's ID, used to determine if a pawn is a players upon a move.
 		/// </summary>
 		public Int32 PawnID { get; set; }
+
 
 		/// <summary>
 		/// The level of the pawn used to determine if a pawn can do a specific task
 		/// </summary>
 		public String PawnType { get; set; }
 
+
 		/// <summary>
 		/// The cost this pawn requires per turn
 		/// </summary>
 		public Int32 PawnCost { get; set; }
+
 
 		/// <summary>
 		/// Default constructor, used to create a default pawn that represents a pawn of a specific type not being found. If this pawn is returned, handle as if no pawn is returned.
@@ -33,6 +37,7 @@ namespace ScrumageEngine.Objects.Items {
 			PawnID = 0;
 			PawnType = "None";
 		}
+
 
 		/// <summary>
 		/// Pawn overloaded constructor, used to create pawns owned by an existing player.
@@ -45,6 +50,7 @@ namespace ScrumageEngine.Objects.Items {
 			PawnCost = CalcCost(PawnType);
 		}
 
+
 		/// <summary>
 		/// Calculates the required cost per turn for the created pawn. Cost is determined by the type of pawn.
 		/// </summary>
@@ -53,6 +59,7 @@ namespace ScrumageEngine.Objects.Items {
 		private Int32 CalcCost(String pawnType) {
 			return 0;
 		}
+
 
 		/// <summary>
 		/// Represents the pawn as a String
