@@ -28,26 +28,38 @@ namespace ScrumageEngine.Objects.Player {
 		/// A list of the player's (currently held) pawn
 		/// </summary>
 		public List<Pawn> Pawns = new List<Pawn>();
+
+
 		/// <summary>
 		/// A list of the player's User Story cards to hold obtained cards
 		/// </summary>
 		public List<Card> Artifacts = new List<Card>();
+
+
 		/// <summary>
 		/// A list of the player's Feature cards to hold obtained cards
 		/// </summary>
 		public List<Card> Agility = new List<Card>();
+
+
 		/// <summary>
-		/// The amount of budget the player recieves every turn
+		/// The amount of budget the player receives every turn
 		/// </summary>
 		public Int32 Budget { get; set; }
+
+
 		/// <summary>
 		/// The amount of funds that the player currently has to be used to deploy pawns
 		/// </summary>
 		public Int32 Funds { get; set; }
+
+
 		/// <summary>
-		/// The feature pointss represent the overall score for the player
+		/// The feature points represent the overall score for the player
 		/// </summary>
 		public Int32 FeaturePoints { get; set; } // Still need to determine how to calculate these
+
+
 		/// <summary>
 		/// Player overloaded constructor
 		/// </summary>
@@ -60,6 +72,8 @@ namespace ScrumageEngine.Objects.Player {
 			Budget = 1;
 			Funds = Budget;
 		}
+
+
 		/// <summary>
 		/// A group of functions that are used to Int32eract with Items, i.e. giving players pawn, cards, or checking if player has a certain type of pawn
 		/// </summary>
@@ -71,6 +85,8 @@ namespace ScrumageEngine.Objects.Player {
 		public void GivePawn(Pawn pawn) {
 			this.Pawns.Add(pawn);
 		}
+
+
 		/// <summary>
 		/// Adds a User Story card Int32o the player's User Stories inventory
 		/// </summary>
@@ -78,6 +94,8 @@ namespace ScrumageEngine.Objects.Player {
 		public void AddToArtifacts(Card userStory) {
 			this.Artifacts.Add(userStory);
 		}
+
+
 		/// <summary>
 		/// Adds a Feature card to the User's Feature inventory
 		/// </summary>
@@ -85,13 +103,8 @@ namespace ScrumageEngine.Objects.Player {
 		public void AddToAgility(Card feature) {
 			this.Agility.Add(feature);
 		}
-		/// <summary>
-		/// Removes a pawn rom the user's pawn inventory
-		/// </summary>
-		/// <param name="pawn">The pawn to be removed</param>
-		public void TakePawn(Pawn pawn) {
-			this.Pawns.Remove(pawn);
-		}
+
+
 		/// <summary>
 		/// Removes a card from the player's User Stories inventory
 		/// </summary>
@@ -99,6 +112,8 @@ namespace ScrumageEngine.Objects.Player {
 		public void RemoveFromArtifacts(Card artifactP) {
 			this.Artifacts.Remove(artifactP);
 		}
+
+
 		/// <summary>
 		/// Removes a Feature card from the Features inventory
 		/// </summary>
@@ -106,6 +121,8 @@ namespace ScrumageEngine.Objects.Player {
 		public void RemoveFromAgility(Card agilityP) {
 			this.Agility.Remove(agilityP);
 		}
+
+
 		/// <summary>
 		/// Gives a pawn of a specified level(a NEW pawn) to the player
 		/// </summary>
@@ -113,6 +130,8 @@ namespace ScrumageEngine.Objects.Player {
 		public void GivePawn(String PawnType) {
 			Pawns.Add(new Pawn(PlayerID, PawnType));
 		}
+
+
 		/// <summary>
 		/// Takes a pawn from the player based on a pawn level
 		/// </summary>
@@ -126,6 +145,8 @@ namespace ScrumageEngine.Objects.Player {
 			}
 			return retPawn;
 		}
+
+
 		/// <summary>
 		/// Determines if a player has a pawn of a specified level then returns that pawn. If pawn of that level is not found, returns default "none" pawn.
 		/// </summary>
@@ -148,6 +169,7 @@ namespace ScrumageEngine.Objects.Player {
 			return retPawn;
 		}
 
+
 		/// <summary>
 		/// Increases the budget of this Player instance
 		/// </summary>
@@ -155,6 +177,7 @@ namespace ScrumageEngine.Objects.Player {
 		public void IncreaseBudget(Int32 additionalBudgetP) {
 			this.Budget += additionalBudgetP;
 		}
+
 
 		/// <summary>
 		/// Gives player additional funds
@@ -164,6 +187,11 @@ namespace ScrumageEngine.Objects.Player {
 			this.Funds += fundsToGiveP;
 		}
 
+
+		/// <summary>
+		/// Creates a List Of Strings representation of the pawns in the player's inventory.
+		/// </summary>
+		/// <returns>A list of strings containing info on the current pawns in the player's inventory.</returns>
 		public List<String> ListPawns() {
 			List<String> retList = new List<String>();
 			Pawns.ForEach(pawn => retList.Add(pawn.ToString()));

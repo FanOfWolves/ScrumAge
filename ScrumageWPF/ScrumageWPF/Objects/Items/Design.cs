@@ -11,6 +11,7 @@ namespace ScrumageEngine.Objects.Items {
         private const Int32 frontEndChance = 20;
         private const Int32 backEndChance = 10;
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Design"/> class.
         /// </summary>
