@@ -63,8 +63,8 @@
 							</Grid.RowDefinitions>
 							<Label HorizontalAlignment="Center" Content="Resources" Grid.Column="0" Grid.Row="0" FontSize="22"/>
 							<Label HorizontalAlignment="Center" Content="Pawns" Grid.Column="1" Grid.Row="0" FontSize="22"/>
-							<ListBox x:Name="P1ResourceBox" SelectionMode="Multiple" Grid.Column="0" Grid.Row="1" Margin="5" MinHeight="175"/>
-							<ListBox x:Name="P1PawnBox" SelectionMode="Multiple" Grid.Column="1" Grid.Row="1" Margin="5" MinHeight="175"/>
+							<ListBox x:Name="P1ResourceBox" SelectionMode="Multiple" Grid.Column="0" Grid.Row="1" Margin="5" MinHeight="175" MaxHeight="200"/>
+							<ListBox x:Name="P1PawnBox" SelectionMode="Multiple" Grid.Column="1" Grid.Row="1" Margin="5" MinHeight="175" MaxHeight="200"/>
 						</Grid>
 						<Separator/>
 						<Label Content="Cards" HorizontalAlignment="Center" FontSize="26"/>
@@ -110,10 +110,10 @@
 								<Label Content="Agility" FontSize="20" HorizontalAlignment="Center"/>
 							</DockPanel>
 
-							<ListBox x:Name="P1ArtifactBox" Grid.Column="0" Grid.Row="3" Margin="5" MinHeight="165"/>
-							<ListBox x:Name="P1AgilityBox" Grid.Column="2" Grid.Row="3" Margin="5" MinHeight="165"/>
+                            <ListBox x:Name="P1ArtifactBox" Grid.Column="0" Grid.Row="3" Margin="5" MinHeight="165" MaxHeight="200"/>
+                            <ListBox x:Name="P1AgilityBox" Grid.Column="2" Grid.Row="3" Margin="5" MinHeight="165" MaxHeight="200"/>
 
-						</Grid>
+                        </Grid>
 
 					</StackPanel>
 				</ScrollViewer>
@@ -157,8 +157,8 @@
 							</Grid.RowDefinitions>
 							<Label HorizontalAlignment="Center" Content="Resources" Grid.Column="0" Grid.Row="0" FontSize="22"/>
 							<Label HorizontalAlignment="Center" Content="Pawns" Grid.Column="1" Grid.Row="0" FontSize="22"/>
-							<ListBox x:Name="P2ResourceBox" SelectionMode="Multiple" Grid.Column="0" Grid.Row="1" Margin="5" MinHeight="175"/>
-							<ListBox x:Name="P2PawnBox" SelectionMode="Multiple" Grid.Column="1" Grid.Row="1" Margin="5" MinHeight="175"/>
+                            <ListBox x:Name="P2ResourceBox" SelectionMode="Multiple" Grid.Column="0" Grid.Row="1" Margin="5" MinHeight="175" MaxHeight="200"/>
+                            <ListBox x:Name="P2PawnBox" SelectionMode="Multiple" Grid.Column="1" Grid.Row="1" Margin="5" MinHeight="175" MaxHeight="200"/> 
 						</Grid>
 						<Separator/>
 						<Label Content="Cards" HorizontalAlignment="Center" FontSize="26"/>
@@ -204,8 +204,8 @@
 								<Label Content="Agility" FontSize="20" HorizontalAlignment="Center"/>
 							</DockPanel>
 
-							<ListBox x:Name="P2ArtifactBox" Grid.Column="0" Grid.Row="3" Margin="5" MinHeight="165"/>
-							<ListBox x:Name="P2AgilityBox" Grid.Column="2" Grid.Row="3" Margin="5" MinHeight="165"/>
+							<ListBox x:Name="P2ArtifactBox" Grid.Column="0" Grid.Row="3" Margin="5" MinHeight="165" MaxHeight="200"/>
+                            <ListBox x:Name="P2AgilityBox" Grid.Column="2" Grid.Row="3" Margin="5" MinHeight="165" MaxHeight="200"/>
 
 						</Grid>
 
@@ -251,8 +251,8 @@
 							</Grid.RowDefinitions>
 							<Label HorizontalAlignment="Center" Content="Resources" Grid.Column="0" Grid.Row="0" FontSize="22"/>
 							<Label HorizontalAlignment="Center" Content="Pawns" Grid.Column="1" Grid.Row="0" FontSize="22"/>
-							<ListBox x:Name="P3ResourceBox" SelectionMode="Multiple" Grid.Column="0" Grid.Row="1" Margin="5" MinHeight="175"/>
-							<ListBox x:Name="P3PawnBox" SelectionMode="Multiple" Grid.Column="1" Grid.Row="1" Margin="5" MinHeight="175"/>
+                            <ListBox x:Name="P3ResourceBox" SelectionMode="Multiple" Grid.Column="0" Grid.Row="1" Margin="5" MinHeight="175" MaxHeight="200"/>
+                            <ListBox x:Name="P3PawnBox" SelectionMode="Multiple" Grid.Column="1" Grid.Row="1" Margin="5" MinHeight="175" MaxHeight="200"/>
 						</Grid>
 						<Separator/>
 						<Label Content="Cards" HorizontalAlignment="Center" FontSize="26"/>
@@ -298,8 +298,8 @@
 								<Label Content="Agility" FontSize="20" HorizontalAlignment="Center"/>
 							</DockPanel>
 
-							<ListBox x:Name="P3ArtifactBox" Grid.Column="0" Grid.Row="3" Margin="5" MinHeight="165"/>
-							<ListBox x:Name="P3AgilityBox" Grid.Column="2" Grid.Row="3" Margin="5" MinHeight="165"/>
+                            <ListBox x:Name="P3ArtifactBox" Grid.Column="0" Grid.Row="3" Margin="5" MinHeight="165" MaxHeight="200"/>
+                            <ListBox x:Name="P3AgilityBox" Grid.Column="2" Grid.Row="3" Margin="5" MinHeight="165" MaxHeight="200"/>
 
 						</Grid>
 
@@ -345,8 +345,8 @@
 							</Grid.RowDefinitions>
 							<Label HorizontalAlignment="Center" Content="Resources" Grid.Column="0" Grid.Row="0" FontSize="22"/>
 							<Label HorizontalAlignment="Center" Content="Pawns" Grid.Column="1" Grid.Row="0" FontSize="22"/>
-							<ListBox x:Name="P4ResourceBox" SelectionMode="Multiple" Grid.Column="0" Grid.Row="1" Margin="5" MinHeight="175"/>
-							<ListBox x:Name="P4PawnBox" SelectionMode="Multiple" Grid.Column="1" Grid.Row="1" Margin="5" MinHeight="175"/>
+                            <ListBox x:Name="P4ResourceBox" SelectionMode="Multiple" Grid.Column="0" Grid.Row="1" Margin="5" MinHeight="175" MaxHeight="200"/>
+                            <ListBox x:Name="P4PawnBox" SelectionMode="Multiple" Grid.Column="1" Grid.Row="1" Margin="5" MinHeight="175" MaxHeight="200"/>
 						</Grid>
 						<Separator/>
 						<Label Content="Cards" HorizontalAlignment="Center" FontSize="26"/>
@@ -392,8 +392,8 @@
 								<Label Content="Agility" FontSize="20" HorizontalAlignment="Center"/>
 							</DockPanel>
 
-							<ListBox x:Name="P4ArtifactBox" Grid.Column="0" Grid.Row="3" Margin="5" MinHeight="165"/>
-							<ListBox x:Name="P4AgilityBox" Grid.Column="2" Grid.Row="3" Margin="5" MinHeight="165"/>
+                            <ListBox x:Name="P4ArtifactBox" Grid.Column="0" Grid.Row="3" Margin="5" MinHeight="165" MaxHeight="200"/>
+                            <ListBox x:Name="P4AgilityBox" Grid.Column="2" Grid.Row="3" Margin="5" MinHeight="165" MaxHeight="200"/>
 
 						</Grid>
 
@@ -518,8 +518,6 @@
 					<Label FontSize="18" HorizontalAlignment="Center" DockPanel.Dock="Top" Content="Reassignment"/>
 					<ListBox x:Name="ReassignmentNodeBox" Margin="5"/>
 				</DockPanel>
-
-
 
 				<!-- third row (Artifact 1) -->
 				<DockPanel  Grid.Column="0" Grid.Row="2" MaxHeight="110">
