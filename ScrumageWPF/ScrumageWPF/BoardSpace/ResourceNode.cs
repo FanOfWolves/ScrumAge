@@ -11,10 +11,13 @@ namespace ScrumageEngine.BoardSpace {
     /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
     public class ResourceNode : Node
     {
+        #region Fields
         private readonly Resource nodeResource = null;
         private const Int32 RESOURCE_BASE_CHANCE = 20;
         private readonly Random resourceChanceCalculator;
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="ResourceNode"/> class.
         /// </summary>
@@ -23,8 +26,10 @@ namespace ScrumageEngine.BoardSpace {
         /// <param name="nodeResource">The node's resource.</param>
         public ResourceNode(Int32 nodeID, String nodeName, Resource nodeResource) : base(nodeID, nodeName) {
             this.nodeResource = nodeResource;
-            this.resourceChanceCalculator = new Random();   
+            this.resourceChanceCalculator = new Random();
         }
+        #endregion
+
 
         /// <summary>
         /// Gathers the player pawns from this node.
