@@ -135,6 +135,7 @@ namespace ScrumageEngine.Views
             return true;
         }
 
+
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
             if (Validate())
