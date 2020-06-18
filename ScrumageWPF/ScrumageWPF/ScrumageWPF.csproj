@@ -6,7 +6,12 @@
     <UseWPF>true</UseWPF>
     <RootNamespace>ScrumageEngine</RootNamespace>
     <AssemblyName>ScrumageEngine</AssemblyName>
+    <StartupObject></StartupObject>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="TestDriver.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="Images\LeftArrow.jpg" />

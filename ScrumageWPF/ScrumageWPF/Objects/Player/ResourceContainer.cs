@@ -28,8 +28,7 @@ namespace ScrumageEngine.Objects.Player {
 
 		public ResourceContainer(Int32[] reqs) {
 			resourceDictionary = InitDictionary(reqs);
-
-		}
+        }
 
 
 		private Dictionary<Resource, Int32> InitDictionary(Int32[] reqs = null) {

@@ -98,7 +98,7 @@ namespace ScrumageEngine.BoardSpace {
                 return $"{playerP.PlayerName} failed to obtain a card.";
             }
 
-            playerP.AddToArtifacts(TakeCard(playerP));
+            playerP.AddToCards(TakeCard(playerP));
             return $"{playerP.PlayerName} obtained a new card!";
         }
         #endregion
