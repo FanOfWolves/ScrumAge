@@ -4,6 +4,7 @@ using ScrumageEngine.BoardSpace;
 using System.Text;
 using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Objects.Items;
+using ScrumageEngine.Objects.Items.Cards;
 
 namespace ScrumageEngine.BoardSpace {
 	public class Board {
@@ -28,8 +29,8 @@ namespace ScrumageEngine.BoardSpace {
 		private Node BudgetIncrease = new BudgetNode(6, "Budget Increase");
 		private Node Interview = new HiringNode(7, "Interview Node");
 		private Node Reassignment = new ReassignmentNode(8, "Reassignment Node");
-		private Card TestCard1 = new Card("artifact", "Test Artifact");
-		private Card TestCard2 = new Card("agility", "Test Agility");
+		private Card TestCard1 = new Card("artifact", "Test Artifact", new ResourceContainer());
+		private Card TestCard2 = new Card("agility", "Test Agility", new ResourceContainer());
 		public Board() {
 			if (Nodes.Count == 0) {
 				InitMap(Nodes);

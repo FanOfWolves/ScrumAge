@@ -10,7 +10,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
     /// <summary>
     /// Abstract class representing cards
     /// </summary>
-    abstract class Card {
+    public class Card {
 
         #region Fields
 
@@ -26,15 +26,22 @@ namespace ScrumageEngine.Objects.Items.Cards {
         /// <summary>
         /// Initializes a new instance of the <see cref="Card"/> class.
         /// </summary>
-        public Card(ResourceContainer cardRequirementsP) {
+        public Card(String nameP, String descriptionP, ResourceContainer cardRequirementsP) {
+	        this.cardName = nameP;
+	        this.cardDesc = descriptionP;
             this.cardRequirements = cardRequirementsP;
         }
         #endregion
 
         #region Methods
 
-        public abstract String Display();
-        public abstract override String ToString();
+        public String Display() {
+	        return "Will be abstract";
+        }
+
+        public override String ToString() {
+	        return "Will be abstract";
+        }
         public ResourceContainer GetCardRequirements() {
             return this.cardRequirements;//TODO: Shallow reference?
         }
