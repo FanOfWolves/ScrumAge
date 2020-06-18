@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ScrumageEngine.Objects.Items;
+using ScrumageEngine.Objects.Items.Cards;
 using ScrumageEngine.Objects.Player;
 
 namespace ScrumageEngine.BoardSpace {
@@ -12,7 +13,7 @@ namespace ScrumageEngine.BoardSpace {
     class CardNode : Node {
 
         #region Fields
-        private List<Card> nodeCards;
+        private Stack<Card> nodeCards = new Stack<Card>();
 
         private readonly Int32 cardLevel;
         #endregion
@@ -25,9 +26,11 @@ namespace ScrumageEngine.BoardSpace {
         /// <param name="nodeName">Name of the node.</param>
         /// <param name="cardLevel">The level of the cards in this node</param>
         /// <param name="cards">The cards for this node</param>
-        public CardNode(Int32 nodeId, String nodeName, Int32 cardLevel, List<Card> cards) : base(nodeId, nodeName) {
+        public CardNode(Int32 nodeId, String nodeName, Int32 cardLevel, IEnumerable<Card> cards) : base(nodeId, nodeName) {
             this.cardLevel = cardLevel;
-            this.nodeCards = cards;     //TODO: Check if we need to do a deep copy
+            foreach (Card card in cards) {
+                this.nodeCards.Push(card);
+            }
         }
         #endregion
 
@@ -42,8 +45,15 @@ namespace ScrumageEngine.BoardSpace {
             return this.nodeCards.Count == 0;
         }
 
-        private Boolean CheckCardCost(ResourceContainer playerResources) {
-            
+        /// <summary>
+        /// Checks if player can afford the card on top of the stack
+        /// </summary>
+        /// <param name="playerP">The player</param>
+        /// <returns>
+        ///     <c>true</c> if player has enough to pay for card; otherwise, <c>false</c>
+        /// </returns>
+        private Boolean CheckCardCost(Player playerP) { 
+            return (playerP.GetPlayerResources() >= this.nodeCards.Peek().GetCardRequirements());
         }
 
         /// <summary>
@@ -57,6 +67,19 @@ namespace ScrumageEngine.BoardSpace {
             return _playerPawns;
         }
 
+        /// <summary>
+        /// Takes the top card from this node.
+        /// </summary>
+        /// <param name="playerP">The player to give the card to</param>
+        /// <returns>the card from the top of the stack</returns>
+        private Card TakeCard(Player playerP) {
+            Card _theCard = this.nodeCards.Pop();
+            Resource[] _givenTypes = _theCard.GetCardRequirements().GetResourceTypes();
+            foreach (Resource _resource in _givenTypes) {
+                playerP.TakeResource(_resource, _theCard.GetCardRequirements()[_resource]);
+            }
+            return _theCard;
+        }
 
         #region Inherited: Node Methods
         /// <summary>
@@ -65,9 +88,18 @@ namespace ScrumageEngine.BoardSpace {
         /// <param name="playerP">the acting player</param>
         /// <returns>a string log denoting the acting player and the result</returns>
         public override String DoAction(Player playerP) {
-            List<Pawn> _playerPawns
+            List<Pawn> _playerPawns = GatherPlayerPawns(playerP.PlayerID);
+            foreach (Pawn _pawn in _playerPawns) {
+                playerP.GivePawn(_pawn);
+            }
 
+            Boolean _gainCard = CheckCardCost(playerP);
+            if (!_gainCard) {
+                return $"{playerP.PlayerName} failed to obtain a card.";
+            }
 
+            playerP.AddToArtifacts(TakeCard(playerP));
+            return $"{playerP.PlayerName} obtained a new card!";
         }
         #endregion
     }
