@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Objects.Items;
 using System.Text;
+using System.Windows;
 
 namespace ScrumageEngine.BoardSpace {
 	public class Game {
@@ -11,6 +12,7 @@ namespace ScrumageEngine.BoardSpace {
 		private String[] PawnTypes = {"Front End", "Back End", "Full Stack"};
 		private Int32 phase = 1;
 		private static Random Rand = new Random(); // Maybe move this to Game?
+		private int currentPlayerIndex = 0;
 
 		/// <summary>
 		/// Game constructor
@@ -67,18 +69,36 @@ namespace ScrumageEngine.BoardSpace {
 			return Players;
 		}
 
-		private void CheckPlayerPawns() {
-			// If currentPlayer.Pawns.Items.Count == 0
-			// set DoneWithPhase = true;
-		}
-
 		private void CheckPhase(Int32 phase) {
 			if (phase == 1) PhaseOne();
 			else if (phase == 2) PhaseTwo();
 			else if (phase == 3) PhaseThree();
 		}
 
-		private void PhaseOne() { }
+
+		private void PhaseOne() { // UPDATE GUI PHASE BOX!
+			if (AllPawnsMoved()) {
+				phase = 2;
+				currentPlayerIndex = 0;
+				MessageBox.Show("Phase one complete!");
+			} else {
+				currentPlayerIndex++;
+				if (currentPlayerIndex >= Players.Count) {
+					currentPlayerIndex = 0;
+				}
+			}
+		}
+
+
+		private Boolean AllPawnsMoved() {
+			Boolean allPlayersFinished = true;
+			foreach (Player p in Players) {
+				if (p.Pawns.Count > 0) {
+					allPlayersFinished = false;
+				}
+			}
+			return allPlayersFinished;
+		}
 
 		private void PhaseTwo() {
 			throw new NotImplementedException();
@@ -165,7 +185,6 @@ namespace ScrumageEngine.BoardSpace {
 				player.GivePawn(pawnType);
 			}
 			return $"{player.PlayerName} received a {pawnType} pawn";
-			//return "";
 		}
 
 		public void MovePawn(List<String> pawnsP, Int32 playerIDP, String nodeName) {
@@ -176,9 +195,11 @@ namespace ScrumageEngine.BoardSpace {
 				pawn = player.TakePawn(p.Split(',')[0]);
 				node.AddPawn(pawn);
 			}
+			CheckPhase(phase);
 		}
 
 		public String DoAction(String nodeNameP, Int32 playerIDP) {
+			CheckPhase(phase);
 			return GetNodeByName(nodeNameP).DoAction(GetPlayerByID(playerIDP));
 		}
 	}

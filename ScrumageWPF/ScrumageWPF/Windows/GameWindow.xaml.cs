@@ -73,10 +73,10 @@ namespace ScrumageEngine.Windows{
 
 		private void TestBtn_Click(Object sender, RoutedEventArgs e) {
 			// Test for adding a pawn
-			GivePlayerPawn(game, currentPlayerID); // Gives random pawn
+			/*GivePlayerPawn(game, currentPlayerID); // Gives random pawn
 			GivePlayerPawn(game, currentPlayerID, "0"); // 0 = FE, 1 = BE, 2 = FS
 			GivePlayerPawn(game, currentPlayerID, "Full Stack"); // Just enter the name of the pawn
-			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
+			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.GetPlayerPawns(currentPlayerID));*/
 
 			// Test for card(probably a better way of getting the TextBox)
 			/*GivePlayerCard("artifact", game.Players[currentPlayerID]);
@@ -86,6 +86,11 @@ namespace ScrumageEngine.Windows{
 
 			//currentPlayerID++;
 			//if(currentPlayerID > PlayerCount - 1) currentPlayerID = 0;
+
+			IncrementPlayer();
+			//PlayerTabControl.SelectedIndex = currentPlayerID-1;
+
+
 			LogInput();
 		}
 
@@ -165,6 +170,14 @@ namespace ScrumageEngine.Windows{
 			CurrentPlayerIDLabel.Content = currentPlayerID;
 		}
 
+
+		private void IncrementPlayer() {
+			if (++currentPlayerID > PlayerCount) {
+				currentPlayerID = 1;
+			}
+			PlayerTabControl.SelectedIndex = currentPlayerID - 1;
+		}
+
 		/// <summary>
 		/// Player clicks this button after pawns and a destination node are selected to move the pawns.
 		/// </summary>
@@ -179,6 +192,7 @@ namespace ScrumageEngine.Windows{
 				MovePawn(game, SelectedPawns, currentPlayerID, NodeComboBox.SelectedItem.ToString());
 				UpdatePawnBox(FindName($"{NodeComboBox.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.GetNodePawns(NodeComboBox.SelectedItem.ToString()));
 				UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
+				IncrementPlayer();
 			}
 			catch(MovePawnException _exception) {
 				MessageBox.Show(_exception.Message);
