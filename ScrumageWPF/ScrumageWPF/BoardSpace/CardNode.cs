@@ -31,17 +31,42 @@ namespace ScrumageEngine.BoardSpace {
         }
         #endregion
 
-        #region Inherited: Node Methods
 
+        /// <summary>
+        /// Indicates if this node is out of cards
+        /// </summary>
+        /// <returns>
+        ///     <c>true</c> if node is out of cards; Otherwise, <c>false</c>
+        /// </returns>
+        public Boolean OutOfCards() {
+            return this.nodeCards.Count == 0;
+        }
+
+        //This method is related to the Dictionary shit that Michael is doing on Card.cs
+        private Boolean CheckCardCost(ResourceContainer playerResources) {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Gathers the player pawns from this node.
+        /// </summary>
+        /// <param name="playerId">The player identifier.</param>
+        /// <returns>the player's pawns from this node</returns>
+        private List<Pawn> GatherPlayerPawns(Int32 playerId) {
+            List<Pawn> _playerPawns = Pawns.FindAll(_playerPawn => _playerPawn.PawnID == playerId);
+            Pawns.RemoveAll(_playerPawn => _playerPawn.PawnID == playerId);
+            return _playerPawns;
+        }
+
+
+        #region Inherited: Node Methods
         /// <summary>
         /// Attempt to take the top Card from this node
         /// </summary>
         /// <param name="playerP">the acting player</param>
         /// <returns>a string log denoting the acting player and the result</returns>
         public override String DoAction(Player playerP) {
-            throw new NotImplementedException();
-
-            
+            return "Card Node Not Implemented";
         }
         #endregion
     }
