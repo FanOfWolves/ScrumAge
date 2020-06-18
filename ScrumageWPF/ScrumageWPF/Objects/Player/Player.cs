@@ -59,6 +59,7 @@ namespace ScrumageEngine.Objects.Player {
 		/// </summary>
 		public Int32 FeaturePoints { get; set; } // Still need to determine how to calculate these
 
+		public Boolean FinishedPhase { get; set; }
 
 		/// <summary>
 		/// Player overloaded constructor
@@ -71,7 +72,9 @@ namespace ScrumageEngine.Objects.Player {
 			FeaturePoints = 0;
 			Budget = 1;
 			Funds = Budget;
+			FinishedPhase = false;
 		}
+
 
 
 		/// <summary>

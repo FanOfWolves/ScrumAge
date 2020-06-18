@@ -44,7 +44,7 @@ namespace ScrumageEngine.Windows{
 			TabItem temp = null;
 			for(Int32 i = 0; i < playerNames.Count; i++) {
 				temp = PlayerTabControl.Items[i] as TabItem;
-				temp.Visibility = Visibility.Visible;
+				//temp.Visibility = Visibility.Visible;
 				temp.IsEnabled = true;
 				temp.Header = playerNames[i];
 				(temp.FindName($"P{i+1}NameValue") as Label).Content = playerNames[i];

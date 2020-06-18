@@ -12,7 +12,7 @@ namespace ScrumageEngine.BoardSpace {
 		private String[] PawnTypes = {"Front End", "Back End", "Full Stack"};
 		private Int32 phase = 1;
 		private static Random Rand = new Random(); // Maybe move this to Game?
-		private int currentPlayerIndex = 0;
+		public int currentPlayerIndex = 0;
 
 		/// <summary>
 		/// Game constructor
@@ -82,9 +82,13 @@ namespace ScrumageEngine.BoardSpace {
 				currentPlayerIndex = 0;
 				MessageBox.Show("Phase one complete!");
 			} else {
+				if (Players[currentPlayerIndex].Pawns.Count == 0) Players[currentPlayerIndex].FinishedPhase = true;
 				currentPlayerIndex++;
-				if (currentPlayerIndex >= Players.Count) {
-					currentPlayerIndex = 0;
+				if(currentPlayerIndex >= Players.Count - 1) currentPlayerIndex = 0;
+				while (Players[currentPlayerIndex].FinishedPhase) {
+					if(currentPlayerIndex >= Players.Count-1) currentPlayerIndex = 0;
+					else currentPlayerIndex++;
+
 				}
 			}
 		}
