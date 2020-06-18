@@ -39,11 +39,38 @@ namespace ScrumageEngine.Objects.Items.Cards {
             return this.cardRequirements;//TODO: Shallow reference?
         }
 
-        public Boolean TryPayCost(ResourceContainer payment) {
+        /// <summary>
+        /// Attempt to purchase this card.
+        /// </summary>
+        /// <param name="payment">The payment offered by the player.</param>
+        /// <param name="returnedCard">The returned card.</param>
+        /// <returns>
+        ///     <c>true</c> if payment was successful; Othewise, <c>false</c>.
+        /// </returns>
+        public Boolean TryPayCost(ResourceContainer payment, out Card returnedCard) {
+            returnedCard = null;
             Resource[] _typesInPayment = payment.GetResourceTypes();
+
+
+            // Verify payment is enough for all required resources
             foreach(Resource _type in _typesInPayment) {
-                
+                Int32 _amountToPay = this.cardRequirements.GetResourceAmount(_type);
+                Int32 _amountInPayment = payment.GetResourceAmount(_type);
+                if (_amountInPayment >= _amountToPay)
+                    continue;
+                return false;
             }
+
+            // Complete transaction
+            foreach (Resource _type in _typesInPayment) {
+                Int32 _amountToPay = this.cardRequirements.GetResourceAmount(_type);
+                Int32 _amountInPayment = payment.GetResourceAmount(_type);
+                payment.TakeResources(_type, _amountToPay);
+            }
+
+            // Give card
+            returnedCard = this;
+            return true;
         }
         #endregion
     }
