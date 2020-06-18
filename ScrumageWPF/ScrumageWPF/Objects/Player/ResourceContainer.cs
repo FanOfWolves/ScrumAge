@@ -54,6 +54,19 @@ namespace ScrumageEngine.Objects.Player {
         }
 
         /// <summary>
+        /// Gets the resource types.
+        /// </summary>
+        /// <returns>an array of all resource types in this container</returns>
+        public String[] GetResourceTypes() {
+            List<String> _outputTypes = new List<string>();
+            foreach (KeyValuePair<Resource, Int32> res in this.resourceDictionary) {
+                _outputTypes.Add(res.Key.Name);
+            }
+            _outputTypes.TrimExcess();
+            return _outputTypes.ToArray();
+        }
+
+        /// <summary>
         /// Determines the amount of the specified resource in this container
         /// </summary>
         /// <param name="neededResource">The needed resource.</param>
