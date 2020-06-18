@@ -29,8 +29,8 @@ namespace ScrumageEngine.BoardSpace {
 		private Node BudgetIncrease = new BudgetNode(6, "Budget Increase");
 		private Node Interview = new HiringNode(7, "Interview Node");
 		private Node Reassignment = new ReassignmentNode(8, "Reassignment Node");
-		private Card TestCard1 = new Card("artifact", "Test Artifact", new ResourceContainer());
-		private Card TestCard2 = new Card("agility", "Test Agility", new ResourceContainer());
+		private Card TestCard1 = new Card("artifact", "Test Artifact", new []{4,3,2,1});
+		private Card TestCard2 = new Card("agility", "Test Agility", new []{1,2,3,4});
 		public Board() {
 			if (Nodes.Count == 0) {
 				InitMap(Nodes);

@@ -69,18 +69,6 @@ namespace ScrumageEngine.InputLogic {
 			}
 		}
 
-
-		/// <summary>
-		/// Gives the player the specified type of card.
-		/// </summary>
-		/// <param name="cardType">"artifact"/"agility" for the type of card wanted.</param>
-		/// <param name="player">The player requesting the card.</param>
-		public static void GivePlayerCard(Game game, String cardTypeP, Int32 playerIDP) { // Replace with inherited Card children?
-			game.GivePlayerCard(playerIDP, cardTypeP); // Also these should be existing cards when those are created
-			RecordInputs($"{game.GetPlayerNameByID(playerIDP)} took {cardTypeP}");
-		}
-
-
 		/// <summary>
 		/// Gives the player a pawn based on an input
 		/// </summary>
