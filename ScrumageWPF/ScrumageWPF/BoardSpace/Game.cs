@@ -184,8 +184,13 @@ namespace ScrumageEngine.BoardSpace {
 		}
 
 
-        #region Player Tracking
-        public List<Card> GetPlayerAgilityCards(Int32 playerId) {
+		#region Player Tracking		
+		/// <summary>
+		/// Gets the player agility cards.
+		/// </summary>
+		/// <param name="playerId">The player identifier.</param>
+		/// <returns>a list of the player's cards</returns>
+		public List<Card> GetPlayerAgilityCards(Int32 playerId) {
             return this.Players.Find(_player => _player.PlayerID == playerId).Agility;
         }
 

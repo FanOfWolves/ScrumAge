@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using ScrumageEngine.BoardSpace;
 using ScrumageEngine.Exceptions;
 using System.Text;
 using System.Windows.Media.Animation;
+using System.Windows.Navigation;
 using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Items.Cards;
 
@@ -26,42 +28,192 @@ namespace ScrumageEngine.Objects.Player {
 			get { return playerName; }
 		}
 
-        
+
+		#region Inventory
+
+		#region Pawns
+		/// <summary>
+        /// A list of the player's (currently held) pawn
+        /// </summary>
+        public List<Pawn> Pawns = new List<Pawn>();
 
 		/// <summary>
-		/// A list of the player's (currently held) pawn
+		/// Gets or sets the total pawns the player owns (including those not currently with them).
 		/// </summary>
-		public List<Pawn> Pawns = new List<Pawn>();
-
+		/// <value>
+		/// The total pawns.
+		/// </value>
+		public Int32 TotalPawns { get; private set; }
 
 		/// <summary>
-		/// A list of the player's User Story cards to hold obtained cards
+		/// Gets the current pawns in this player's inventory
 		/// </summary>
-		public List<Card> Artifacts = new List<Card>();
+		/// <value>
+		/// The current pawns.
+		/// </value>
+		public Int32 CurrentPawns {
+            get { return this.Pawns.Count;}
+        }
+
+        /// <summary>
+        /// Adds an already existing pawn Int32o the player's pawn inventory
+        /// </summary>
+        /// <param name="pawn">An existing pawn that the player is moving back</param>
+        public void GivePawn(Pawn pawn) {
+            this.Pawns.Add(pawn);
+        }
+
+        /// <summary>
+        /// Gives a pawn of a specified level(a NEW pawn) to the player
+        /// </summary>
+        /// <param name="PawnType">The pawn level to be added</param>
+        public void GivePawn(String PawnType) {
+            Pawns.Add(new Pawn(PlayerID, PawnType));
+        }
+
+        /// <summary>
+        /// Takes a pawn from the player based on a pawn level
+        /// </summary>
+        /// <param name="PawnType">The level of the pawn to be taken</param>
+        /// <returns></returns>
+        public Pawn TakePawn(String PawnType) {
+            Pawn retPawn = new Pawn();
+            if((retPawn = HasPawn(PawnType)) != new Pawn()) {
+                Pawns.Remove(retPawn);
+                return retPawn;
+            }
+            return retPawn;
+        }
+
+        /// <summary>
+        /// Determines if a player has a pawn of a specified level then returns that pawn. If pawn of that level is not found, returns default "none" pawn.
+        /// </summary>
+        /// <param name="PawnType">The pawn level to be found</param>
+        /// <returns></returns>
+        public Pawn HasPawn(String PawnType) {
+            Pawn retPawn = new Pawn();
+            PawnType = PawnType.ToLower();
+            foreach(Pawn pawn in Pawns) {
+                if(pawn.PawnType.ToLower().Equals(PawnType)) {
+                    retPawn = pawn;
+                    break;
+                }
+                else if(pawn.PawnType.Contains(PawnType)) {
+                    retPawn = pawn;
+                    break;
+                }
+                else {
+                    continue;
+                }
+            }
+            return retPawn;
+        }
+        #endregion
 
 
+        #region Agility Cards
+        /// <summary>
+        /// A list of the player's Feature cards to hold obtained cards
+        /// </summary>
+        public List<Card> Agility = new List<Card>();
+
+        /// <summary>
+        /// Adds a Feature card to the User's Feature inventory
+        /// </summary>
+        /// <param name="feature">The feature to be added</param>
+        public void AddToAgility(Card feature) {
+            this.Agility.Add(feature);
+        }
+
+        /// <summary>
+        /// Removes a Feature card from the Features inventory
+        /// </summary>
+        /// <param name="feature">The Feature to be removed</param>
+        public void RemoveFromAgility(Card agilityP) {
+            this.Agility.Remove(agilityP);
+        }
+        #endregion
+
+        #region Artifact Cards
+        /// <summary>
+        /// Adds a User Story card Int32o the player's User Stories inventory
+        /// </summary>
+        /// <param name="userStory">The card to be added</param>
+        public void AddToArtifacts(Card userStory) {
+            this.Artifacts.Add(userStory);
+        }
+
+
+
+
+
+        /// <summary>
+        /// Removes a card from the player's User Stories inventory
+        /// </summary>
+        /// <param name="userStory">The User Story to be removed</param>
+        public void RemoveFromArtifacts(Card artifactP) {
+            this.Artifacts.Remove(artifactP);
+        }
+
+
+        #endregion"
+
+
+
+
+
+
+        /// <summary>
+        /// A list of the player's User Story cards to hold obtained cards
+        /// </summary>
+        public List<Card> Artifacts = new List<Card>();
+
+       
+
+        #region Resources
+        private ResourceContainer playerResources;
+
+        /// <summary>
+        /// Adds the resource to the player's ResourceContainer
+        /// </summary>
+        /// <param name="resource">The resource to be added</param>
+        public void AddResource(Resource resource) {
+            this.playerResources.AddResource(resource);
+        }
+
+        /// <summary>
+        /// Pays resource from the player's resources.
+        /// </summary>
+        /// <param name="resource">The resource to be paid.</param>
+        /// <param name="resourceAmount">The amount to be paid.</param>
+        /// <returns>
+        ///		<c>true</c> if player had enough resources; otherwise <c>false</c>
+        /// </returns>
+        public Boolean TakeResource(Resource resource, Int32 resourceAmount) {
+            return this.playerResources.TakeResources(resource, resourceAmount);
+        }
+
+		#endregion
+
+		#endregion
+
+		#region Stats
 		/// <summary>
-		/// A list of the player's Feature cards to hold obtained cards
-		/// </summary>
-		public List<Card> Agility = new List<Card>();
+        /// The amount of budget the player receives every turn
+        /// </summary>
+        public Int32 Budget { get; set; }
 
+        /// <summary>
+        /// The amount of funds that the player currently has to be used to deploy pawns
+        /// </summary>
+        public Int32 Funds { get; set; }
 
-		/// <summary>
-		/// The amount of budget the player receives every turn
-		/// </summary>
-		public Int32 Budget { get; set; }
+        /// <summary>
+        /// The feature points represent the overall score for the player
+        /// </summary>
+        public Int32 FeaturePoints { get; set; } // Still need to determine how to calculate these
 
-
-		/// <summary>
-		/// The amount of funds that the player currently has to be used to deploy pawns
-		/// </summary>
-		public Int32 Funds { get; set; }
-
-
-		/// <summary>
-		/// The feature points represent the overall score for the player
-		/// </summary>
-		public Int32 FeaturePoints { get; set; } // Still need to determine how to calculate these
+		#endregion
 
 
 		/// <summary>
@@ -83,96 +235,13 @@ namespace ScrumageEngine.Objects.Player {
 		/// A group of functions that are used to Int32eract with Items, i.e. giving players pawn, cards, or checking if player has a certain type of pawn
 		/// </summary>
 		#region Item Related Methods
-		/// <summary>
-		/// Adds an already existing pawn Int32o the player's pawn inventory
-		/// </summary>
-		/// <param name="pawn">An existing pawn that the player is moving back</param>
-		public void GivePawn(Pawn pawn) {
-			this.Pawns.Add(pawn);
-		}
+		
 
 
-		/// <summary>
-		/// Adds a User Story card Int32o the player's User Stories inventory
-		/// </summary>
-		/// <param name="userStory">The card to be added</param>
-		public void AddToArtifacts(Card userStory) {
-			this.Artifacts.Add(userStory);
-		}
+		
 
 
-		/// <summary>
-		/// Adds a Feature card to the User's Feature inventory
-		/// </summary>
-		/// <param name="feature">The feature to be added</param>
-		public void AddToAgility(Card feature) {
-			this.Agility.Add(feature);
-		}
-
-
-		/// <summary>
-		/// Removes a card from the player's User Stories inventory
-		/// </summary>
-		/// <param name="userStory">The User Story to be removed</param>
-		public void RemoveFromArtifacts(Card artifactP) {
-			this.Artifacts.Remove(artifactP);
-		}
-
-
-		/// <summary>
-		/// Removes a Feature card from the Features inventory
-		/// </summary>
-		/// <param name="feature">The Feature to be removed</param>
-		public void RemoveFromAgility(Card agilityP) {
-			this.Agility.Remove(agilityP);
-		}
-
-
-		/// <summary>
-		/// Gives a pawn of a specified level(a NEW pawn) to the player
-		/// </summary>
-		/// <param name="PawnType">The pawn level to be added</param>
-		public void GivePawn(String PawnType) {
-			Pawns.Add(new Pawn(PlayerID, PawnType));
-		}
-
-
-		/// <summary>
-		/// Takes a pawn from the player based on a pawn level
-		/// </summary>
-		/// <param name="PawnType">The level of the pawn to be taken</param>
-		/// <returns></returns>
-		public Pawn TakePawn(String PawnType) {
-			Pawn retPawn = new Pawn();
-			if((retPawn = HasPawn(PawnType)) != new Pawn()) {
-				Pawns.Remove(retPawn);
-				return retPawn;
-			}
-			return retPawn;
-		}
-
-
-		/// <summary>
-		/// Determines if a player has a pawn of a specified level then returns that pawn. If pawn of that level is not found, returns default "none" pawn.
-		/// </summary>
-		/// <param name="PawnType">The pawn level to be found</param>
-		/// <returns></returns>
-		public Pawn HasPawn(String PawnType) {
-			Pawn retPawn = new Pawn();
-			PawnType = PawnType.ToLower();
-			foreach(Pawn pawn in Pawns) {
-				if(pawn.PawnType.ToLower().Equals(PawnType)) {
-					retPawn = pawn;
-					break;
-				} else if(pawn.PawnType.Contains(PawnType)) {
-					retPawn = pawn;
-					break;
-				} else {
-					continue;
-				}
-			}
-			return retPawn;
-		}
+		
 
 
 		/// <summary>
@@ -205,30 +274,7 @@ namespace ScrumageEngine.Objects.Player {
 		#endregion
 
 
-		#region Resources
-		private ResourceContainer playerResources;
-
-		/// <summary>
-		/// Adds the resource to the player's ResourceContainer
-		/// </summary>
-		/// <param name="resource">The resource to be added</param>
-		public void AddResource(Resource resource) {
-			this.playerResources.AddResource(resource);
-        }
-
-		/// <summary>
-		/// Pays resource from the player's resources.
-		/// </summary>
-		/// <param name="resource">The resource to be paid.</param>
-		/// <param name="resourceAmount">The amount to be paid.</param>
-		/// <returns>
-		///		<c>true</c> if player had enough resources; otherwise <c>false</c>
-		/// </returns>
-		public Boolean TakeResource(Resource resource, Int32 resourceAmount) {
-            return this.playerResources.TakeResources(resource, resourceAmount);
-        }
-
-		#endregion
+		
 
 
 	}
