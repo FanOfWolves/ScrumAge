@@ -69,28 +69,31 @@ namespace ScrumageEngine.BoardSpace {
 			return Players;
 		}
 
-		private void CheckPhase(Int32 phase) {
-			if (phase == 1) PhaseOne();
-			else if (phase == 2) PhaseTwo();
-			else if (phase == 3) PhaseThree();
+		private Boolean CheckPhase(Int32 phase) {
+			if (phase == 1) return PhaseOne();
+			else if (phase == 2) return PhaseTwo();
+			else if (phase == 3) return PhaseThree();
+			return false;
 		}
 
 
-		private void PhaseOne() { // UPDATE GUI PHASE BOX!
+		private Boolean PhaseOne() { // UPDATE GUI PHASE BOX!
 			if (AllPawnsMoved()) {
 				phase = 2;
 				currentPlayerIndex = 0;
-				MessageBox.Show("Phase one complete!");
+				return true;
 			} else {
 				if (Players[currentPlayerIndex].Pawns.Count == 0) Players[currentPlayerIndex].FinishedPhase = true;
 				currentPlayerIndex++;
-				if(currentPlayerIndex >= Players.Count - 1) currentPlayerIndex = 0;
+				if (currentPlayerIndex >= Players.Count - 1) currentPlayerIndex = 0;
 				while (Players[currentPlayerIndex].FinishedPhase) {
-					if(currentPlayerIndex >= Players.Count-1) currentPlayerIndex = 0;
+					if (currentPlayerIndex >= Players.Count - 1) currentPlayerIndex = 0;
 					else currentPlayerIndex++;
 
 				}
 			}
+
+			return false;
 		}
 
 
@@ -104,12 +107,12 @@ namespace ScrumageEngine.BoardSpace {
 			return allPlayersFinished;
 		}
 
-		private void PhaseTwo() {
-			throw new NotImplementedException();
+		private Boolean PhaseTwo() {
+			return true;
 		}
 
-		private void PhaseThree() {
-			throw new NotImplementedException();
+		private Boolean PhaseThree() {
+			return true;
 		}
 
 		/// <summary>
@@ -191,7 +194,7 @@ namespace ScrumageEngine.BoardSpace {
 			return $"{player.PlayerName} received a {pawnType} pawn";
 		}
 
-		public void MovePawn(List<String> pawnsP, Int32 playerIDP, String nodeName) {
+		public Boolean MovePawn(List<String> pawnsP, Int32 playerIDP, String nodeName) {
 			Player player = GetPlayerByID(playerIDP);
 			Pawn pawn;
 			Node node = GetNodeByName(nodeName);
@@ -199,7 +202,7 @@ namespace ScrumageEngine.BoardSpace {
 				pawn = player.TakePawn(p.Split(',')[0]);
 				node.AddPawn(pawn);
 			}
-			CheckPhase(phase);
+			return CheckPhase(phase);
 		}
 
 		public String DoAction(String nodeNameP, Int32 playerIDP) {

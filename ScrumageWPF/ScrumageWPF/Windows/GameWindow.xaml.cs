@@ -185,11 +185,12 @@ namespace ScrumageEngine.Windows{
 		/// <param name="e">The button being pressed.</param>
 		private void MovePawnBtn_Click(Object sender, RoutedEventArgs e) {
 			SelectedPawns.Clear();
+			Boolean phaseEnd = false;
 			foreach(String p in GetPlayerPawnBoxByID(currentPlayerID).SelectedItems) {
 				SelectedPawns.Add(p);
 			}
 			try {
-				MovePawn(game, SelectedPawns, currentPlayerID, NodeComboBox.SelectedItem.ToString());
+				phaseEnd = MovePawn(game, SelectedPawns, currentPlayerID, NodeComboBox.SelectedItem.ToString());
 				UpdatePawnBox(FindName($"{NodeComboBox.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.GetNodePawns(NodeComboBox.SelectedItem.ToString()));
 				UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
 				IncrementPlayer();
@@ -197,6 +198,8 @@ namespace ScrumageEngine.Windows{
 			catch(MovePawnException _exception) {
 				MessageBox.Show(_exception.Message);
 			}
+
+			if (phaseEnd) MessageBox.Show("Phase 1 has completed!");
 			LogInput();
 		}
 
