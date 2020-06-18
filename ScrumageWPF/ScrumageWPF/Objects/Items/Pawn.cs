@@ -11,7 +11,7 @@ namespace ScrumageEngine.Objects.Items {
 	/// </summary>
 	public class Pawn {
 
-
+		#region Properties
 		/// <summary>
 		/// The pawn's ID will be the same as the owning player's ID, used to determine if a pawn is a players upon a move.
 		/// </summary>
@@ -28,6 +28,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// The cost this pawn requires per turn
 		/// </summary>
 		public Int32 PawnCost { get; set; }
+		#endregion
 
 
 		/// <summary>
