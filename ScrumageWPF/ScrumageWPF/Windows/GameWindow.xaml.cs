@@ -90,7 +90,7 @@ namespace ScrumageEngine.Windows{
 		}
 
 		/// <summary>
-		/// Updates the SprInt32 log with the currently contained inputs.
+		/// Updates the Sprint2 log with the currently contained inputs.
 		/// </summary>
 		void LogInput() {
 			ClearLog();
@@ -99,7 +99,7 @@ namespace ScrumageEngine.Windows{
 		}
 
 		/// <summary>
-		/// Clears the sprInt32 log.
+		/// Clears the sprint log.
 		/// </summary>
 		void ClearLog() {
 			SprintLogBox.Items.Clear();
