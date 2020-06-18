@@ -9,6 +9,7 @@
         WindowStartupLocation="CenterScreen"
         Title="GameWindow" 
 		WindowState="Maximized"
+        WindowStyle="None"
         Height="825" 
         Width="1420"
         Background="#FFCFB997">
