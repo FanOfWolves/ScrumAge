@@ -40,8 +40,9 @@ namespace ScrumageEngine.Objects.Items.Cards {
         }
 
         public Boolean TryPayCost(ResourceContainer payment) {
-            for (Int32 i = 0; i < 4; i++) {
-                Int32 _amountHere = this.cardRequirements.GetResourceAmount()
+            Resource[] _typesInPayment = payment.GetResourceTypes();
+            foreach(Resource _type in _typesInPayment) {
+                
             }
         }
         #endregion
