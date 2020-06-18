@@ -33,6 +33,19 @@ namespace ScrumageEngine.Views
             Loaded += OnLoad;
         }
 
+
+        /// <summary>
+        /// Clears a TextBox's text when Focused
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClearButtonPreview(object sender, RoutedEventArgs e)
+        {
+            TextBox box = sender as TextBox;
+            box.Text = "";
+            box.GotFocus -= ClearButtonPreview;
+        }
+
         /// <summary>
         /// Creates a new options view, with namesList
         /// </summary>
@@ -88,6 +101,7 @@ namespace ScrumageEngine.Views
                 txtBox.FontSize = 16;
                 txtBox.Text = $"Player {i + 1}";
                 txtBox.Margin = new Thickness(0, 5, 0, 0);
+                txtBox.GotFocus += ClearButtonPreview;
                 playerButtons.Children.Add(txtBox);
             }
         }
@@ -107,6 +121,7 @@ namespace ScrumageEngine.Views
                 txtBox.FontSize = 16;
                 txtBox.Text = playerName;
                 txtBox.Margin = new Thickness(0, 5, 0, 0);
+                txtBox.GotFocus += ClearButtonPreview;
                 playerButtons.Children.Add(txtBox);
                 CURRENT_PLAYERS++;
             }
