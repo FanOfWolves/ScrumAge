@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Objects.Items;
 using System.Text;
+using ScrumageEngine.Objects.Items.Cards;
 
 namespace ScrumageEngine.BoardSpace {
 	public class Game {
@@ -181,5 +182,22 @@ namespace ScrumageEngine.BoardSpace {
 		public String DoAction(String nodeNameP, Int32 playerIDP) {
 			return GetNodeByName(nodeNameP).DoAction(GetPlayerByID(playerIDP));
 		}
+
+
+        #region Player Tracking
+        public List<Card> GetPlayerAgilityCards(Int32 playerId) {
+            return this.Players.Find(_player => _player.PlayerID == playerId).Agility;
+        }
+
+        public List<Card> GetPlayerArtifactCards(Int32 playerId) {
+			return this.Players.Find(_player => _player.PlayerID == playerId).Artifacts;
+		}
+
+        public ResourceContainer GetPlayerResources() {
+            return null;
+        }
+
+        #endregion
+
 	}
 }
