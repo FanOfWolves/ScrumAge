@@ -52,9 +52,9 @@ namespace ScrumageEngine.Objects.Items.Cards {
         /// <param name="payment">The payment offered by the player.</param>
         /// <param name="returnedCard">The returned card.</param>
         /// <returns>
-        ///     <c>true</c> if payment was successful; Othewise, <c>false</c>.
+        ///     <c>true</c> if payment was successful; Otherwise, <c>false</c>.
         /// </returns>
-        public Boolean TryPayCost(ResourceContainer payment, out Card returnedCard) {
+        public Boolean TryPayCost(ref ResourceContainer payment, out Card returnedCard) {
             returnedCard = null;
             Resource[] _typesInPayment = payment.GetResourceTypes();
 
