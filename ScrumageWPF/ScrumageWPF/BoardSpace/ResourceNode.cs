@@ -63,9 +63,9 @@ namespace ScrumageEngine.BoardSpace {
             List<Pawn> _playerPawns = GatherPlayerPawns(player.PlayerID);
             
             Int32 _resourceAcquireChance = RESOURCE_BASE_CHANCE;
-            foreach (Pawn pawn in _playerPawns) {
-                _resourceAcquireChance += nodeResource.GetChance(pawn);
-                player.GivePawn(pawn);
+            foreach (Pawn _pawn in _playerPawns) {
+                _resourceAcquireChance += this.nodeResource.GetChance(_pawn);
+                player.GivePawn(_pawn);
             }
 
             Boolean _getResource = RollForResource(_resourceAcquireChance);
