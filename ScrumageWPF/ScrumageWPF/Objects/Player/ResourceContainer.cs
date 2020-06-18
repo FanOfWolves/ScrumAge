@@ -57,10 +57,10 @@ namespace ScrumageEngine.Objects.Player {
         /// Gets the resource types.
         /// </summary>
         /// <returns>an array of all resource types in this container</returns>
-        public String[] GetResourceTypes() {
-            List<String> _outputTypes = new List<string>();
-            foreach (KeyValuePair<Resource, Int32> res in this.resourceDictionary) {
-                _outputTypes.Add(res.Key.Name);
+        public Resource[] GetResourceTypes() {
+            List<Resource> _outputTypes = new List<Resource>();
+            foreach(KeyValuePair<Resource, Int32> res in this.resourceDictionary) {
+                _outputTypes.Add(res.Key);
             }
             _outputTypes.TrimExcess();
             return _outputTypes.ToArray();
