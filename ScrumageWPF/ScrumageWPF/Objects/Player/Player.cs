@@ -5,6 +5,7 @@ using ScrumageEngine.Exceptions;
 using System.Text;
 using System.Windows.Media.Animation;
 using ScrumageEngine.Objects.Items;
+using ScrumageEngine.Objects.Items.Cards;
 
 namespace ScrumageEngine.Objects.Player {
 	/// <summary>
