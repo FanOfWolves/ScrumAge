@@ -25,7 +25,7 @@ namespace ScrumageEngine.BoardSpace {
         /// <param name="nodeName">Name of the node.</param>
         /// <param name="cardLevel">The level of the cards in this node</param>
         /// <param name="cards">The cards for this node</param>
-        public CardNode(Int32 nodeId, String nodeName, Int32 cardLevel, List<Card> cards):base(nodeId, nodeName) {
+        public CardNode(Int32 nodeId, String nodeName, Int32 cardLevel, List<Card> cards) : base(nodeId, nodeName) {
             this.cardLevel = cardLevel;
             this.nodeCards = cards;     //TODO: Check if we need to do a deep copy
         }
@@ -42,9 +42,8 @@ namespace ScrumageEngine.BoardSpace {
             return this.nodeCards.Count == 0;
         }
 
-        //This method is related to the Dictionary shit that Michael is doing on Card.cs
         private Boolean CheckCardCost(ResourceContainer playerResources) {
-            throw new NotImplementedException();
+            
         }
 
         /// <summary>
@@ -66,7 +65,9 @@ namespace ScrumageEngine.BoardSpace {
         /// <param name="playerP">the acting player</param>
         /// <returns>a string log denoting the acting player and the result</returns>
         public override String DoAction(Player playerP) {
-            return "Card Node Not Implemented";
+            List<Pawn> _playerPawns
+
+
         }
         #endregion
     }
