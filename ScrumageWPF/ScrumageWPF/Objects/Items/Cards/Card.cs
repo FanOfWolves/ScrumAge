@@ -47,7 +47,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
         /// <returns>
         ///     <c>true</c> if payment was successful; Otherwise, <c>false</c>.
         /// </returns>
-        public Boolean TryPayCost(ResourceContainer payment, out Card returnedCard) {
+        public Boolean TryPayCost(ref ResourceContainer payment, out Card returnedCard) {
             returnedCard = null;
             Resource[] _typesInPayment = payment.GetResourceTypes();
 
