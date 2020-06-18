@@ -9,6 +9,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
     /// <seealso cref="ScrumageEngine.Objects.Items.Cards.Card" />
     class ArtifactCard : Card {
 
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="ArtifactCard"/> class.
         /// </summary>
@@ -18,6 +19,6 @@ namespace ScrumageEngine.Objects.Items.Cards {
         public ArtifactCard(String nameP, String descP, Int32[] costs) : base(nameP, descP, costs) {
 
         }
-
+        #endregion
     }
 }
