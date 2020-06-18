@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Objects.Items;
 using System.Text;
+using System.Windows;
 
 namespace ScrumageEngine.BoardSpace {
 	public class Game {
@@ -11,6 +12,7 @@ namespace ScrumageEngine.BoardSpace {
 		private String[] PawnTypes = {"Front End", "Back End", "Full Stack"};
 		private Int32 phase = 1;
 		private static Random Rand = new Random(); // Maybe move this to Game?
+		public int currentPlayerIndex = 0;
 
 		/// <summary>
 		/// Game constructor
@@ -67,25 +69,50 @@ namespace ScrumageEngine.BoardSpace {
 			return Players;
 		}
 
-		private void CheckPlayerPawns() {
-			// If currentPlayer.Pawns.Items.Count == 0
-			// set DoneWithPhase = true;
+		private Boolean CheckPhase(Int32 phase) {
+			if (phase == 1) return PhaseOne();
+			else if (phase == 2) return PhaseTwo();
+			else if (phase == 3) return PhaseThree();
+			return false;
 		}
 
-		private void CheckPhase(Int32 phase) {
-			if (phase == 1) PhaseOne();
-			else if (phase == 2) PhaseTwo();
-			else if (phase == 3) PhaseThree();
+
+		private Boolean PhaseOne() { // UPDATE GUI PHASE BOX!
+			if (AllPawnsMoved()) {
+				phase = 2;
+				currentPlayerIndex = 0;
+				return true;
+			} else {
+				if (Players[currentPlayerIndex].Pawns.Count == 0) Players[currentPlayerIndex].FinishedPhase = true;
+				currentPlayerIndex++;
+				if (currentPlayerIndex >= Players.Count - 1) currentPlayerIndex = 0;
+				while (Players[currentPlayerIndex].FinishedPhase) {
+					if (currentPlayerIndex >= Players.Count - 1) currentPlayerIndex = 0;
+					else currentPlayerIndex++;
+
+				}
+			}
+
+			return false;
 		}
 
-		private void PhaseOne() { }
 
-		private void PhaseTwo() {
-			throw new NotImplementedException();
+		private Boolean AllPawnsMoved() {
+			Boolean allPlayersFinished = true;
+			foreach (Player p in Players) {
+				if (p.Pawns.Count > 0) {
+					allPlayersFinished = false;
+				}
+			}
+			return allPlayersFinished;
 		}
 
-		private void PhaseThree() {
-			throw new NotImplementedException();
+		private Boolean PhaseTwo() {
+			return true;
+		}
+
+		private Boolean PhaseThree() {
+			return true;
 		}
 
 		/// <summary>
@@ -165,10 +192,9 @@ namespace ScrumageEngine.BoardSpace {
 				player.GivePawn(pawnType);
 			}
 			return $"{player.PlayerName} received a {pawnType} pawn";
-			//return "";
 		}
 
-		public void MovePawn(List<String> pawnsP, Int32 playerIDP, String nodeName) {
+		public Boolean MovePawn(List<String> pawnsP, Int32 playerIDP, String nodeName) {
 			Player player = GetPlayerByID(playerIDP);
 			Pawn pawn;
 			Node node = GetNodeByName(nodeName);
@@ -176,9 +202,11 @@ namespace ScrumageEngine.BoardSpace {
 				pawn = player.TakePawn(p.Split(',')[0]);
 				node.AddPawn(pawn);
 			}
+			return CheckPhase(phase);
 		}
 
 		public String DoAction(String nodeNameP, Int32 playerIDP) {
+			CheckPhase(phase);
 			return GetNodeByName(nodeNameP).DoAction(GetPlayerByID(playerIDP));
 		}
 	}
