@@ -15,6 +15,7 @@ namespace ScrumageEngine.Objects.Items {
         private const Int32 BACK_END_CHANCE = 10;
         #endregion
 
+
         #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="Requirements"/> class.

@@ -7,14 +7,21 @@ using System.Text.RegularExpressions;
 
 namespace ScrumageEngine.Objects.Items {
 	public class Die {
+
+		#region Properties
 		/// <summary>
 		/// Die's value.
 		/// </summary>
 		public Int32 Value { get; }
+
+
 		/// <summary>
 		/// Die's face representation.
 		/// </summary>
 		private char[][] DieFace = new char[5][];
+		#endregion
+
+
 		/// <summary>
 		/// Overloaded Die Constructor, value passed in is value of the die.
 		/// </summary>
@@ -24,12 +31,13 @@ namespace ScrumageEngine.Objects.Items {
 			DieFace = CalcDieFace(value);
 		}
 
+
 		/// <summary>
 		/// Inserts dots Int32o the die's face based on the value
 		/// </summary>
 		/// <param name="dieVal">The value of the die</param>
 		/// <returns>2D char array representation of the die.</returns>
-		char[][] CalcDieFace(Int32 dieVal) {
+		private char[][] CalcDieFace(Int32 dieVal) {
 			char[][] dieFace = InitDieFace();
 			if(dieVal == 0) return dieFace;
 			Boolean isEven = dieVal % 2 == 0;
@@ -58,11 +66,12 @@ namespace ScrumageEngine.Objects.Items {
 			return dieFace;
 		}
 
+
 		/// <summary>
 		/// Instanciates the die's face.
 		/// </summary>
 		/// <returns>2D char array of blank representation of a die.</returns>
-		char[][] InitDieFace() {
+		private char[][] InitDieFace() {
 			String[] dieStart = Regex.Split((" -------\n" +
 											 "|       |\n" +
 											 "|       |\n" +
@@ -76,6 +85,7 @@ namespace ScrumageEngine.Objects.Items {
 			}
 			return dieFace;
 		}
+
 
 		/// <summary>
 		/// Creates a prInt32able version of the die's face representation.

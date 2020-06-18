@@ -13,6 +13,7 @@ namespace ScrumageEngine.Objects.Items {
         private const Int32 FRONT_END_CHANCE = 5;
         private const Int32 BACK_END_CHANCE = 5;
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Testing"/> class.
         /// </summary>
