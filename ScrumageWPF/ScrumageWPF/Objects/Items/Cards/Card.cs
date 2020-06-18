@@ -33,7 +33,6 @@ namespace ScrumageEngine.Objects.Items.Cards {
         }
         #endregion
 
-        #region Methods
 
         public String Display() {
 	        return "Will be abstract";
@@ -45,34 +44,5 @@ namespace ScrumageEngine.Objects.Items.Cards {
         public ResourceContainer GetCardRequirements() {
             return this.cardRequirements;//TODO: Shallow reference?
         }
-
-        /// <summary>
-        /// Attempt to purchase this card.
-        /// </summary>
-        /// <param name="payment">The payment offered by the player.</param>
-        /// <param name="returnedCard">The returned card.</param>
-        /// <returns>
-        ///     <c>true</c> if payment was successful; Otherwise, <c>false</c>.
-        /// </returns>
-        public Boolean TryPayCost(Player.Player player, out Card returnedCard) {
-            returnedCard = null;
-            Resource[] _typesInPayment = payment.GetResourceTypes();
-
-            Boolean _isEnough = payment >= this.cardRequirements;
-            if (!_isEnough)
-                return false;
-
-            // Complete transaction
-            foreach (Resource _type in _typesInPayment) {
-                Int32 _amountToPay = this.cardRequirements.GetResourceAmount(_type);
-                Int32 _amountInPayment = payment.GetResourceAmount(_type);
-                payment.TakeResources(_type, _amountToPay);
-            }
-
-            // Give card
-            returnedCard = this;
-            return true;
-        }
-        #endregion
     }
 }
