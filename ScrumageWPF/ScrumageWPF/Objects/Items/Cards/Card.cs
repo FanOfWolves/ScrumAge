@@ -26,10 +26,10 @@ namespace ScrumageEngine.Objects.Items.Cards {
         /// <summary>
         /// Initializes a new instance of the <see cref="Card"/> class.
         /// </summary>
-        public Card(String nameP, String descriptionP, ResourceContainer cardRequirementsP) {
+        public Card(String nameP, String descriptionP, Int32[] resourcesCosts) {
 	        this.cardName = nameP;
 	        this.cardDesc = descriptionP;
-            this.cardRequirements = cardRequirementsP;
+            this.cardRequirements = new ResourceContainer(resourcesCosts);
         }
         #endregion
 
@@ -54,19 +54,13 @@ namespace ScrumageEngine.Objects.Items.Cards {
         /// <returns>
         ///     <c>true</c> if payment was successful; Otherwise, <c>false</c>.
         /// </returns>
-        public Boolean TryPayCost(ref ResourceContainer payment, out Card returnedCard) {
+        public Boolean TryPayCost(Player.Player player, out Card returnedCard) {
             returnedCard = null;
             Resource[] _typesInPayment = payment.GetResourceTypes();
 
-
-            // Verify payment is enough for all required resources
-            foreach(Resource _type in _typesInPayment) {
-                Int32 _amountToPay = this.cardRequirements.GetResourceAmount(_type);
-                Int32 _amountInPayment = payment.GetResourceAmount(_type);
-                if (_amountInPayment >= _amountToPay)
-                    continue;
+            Boolean _isEnough = payment >= this.cardRequirements;
+            if (!_isEnough)
                 return false;
-            }
 
             // Complete transaction
             foreach (Resource _type in _typesInPayment) {
