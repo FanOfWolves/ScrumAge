@@ -19,8 +19,7 @@ namespace ScrumageEngine.Objects.Player {
 		/// <summary>
 		/// The player's name to be used as a representation on the board
 		/// </summary>
-
-		private String playerName;
+        private String playerName;
 		public String PlayerName {
 			get { return playerName; }
 		}
@@ -87,27 +86,52 @@ namespace ScrumageEngine.Objects.Player {
         /// <summary>
         /// Gives a pawn of a specified level(a NEW pawn) to the player
         /// </summary>
-        /// <param name="PawnType">The pawn level to be added</param>
-        public void GivePawn(String PawnType) {
-            Pawns.Add(new Pawn(PlayerID, PawnType));
+        /// <param name="pawnType">The pawn level to be added</param>
+        public void GivePawn(String pawnType) {
+            this.Pawns.Add(new Pawn(PlayerID, pawnType));
         }
 
         /// <summary>
         /// Takes a pawn from the player based on a pawn level
         /// </summary>
-        /// <param name="PawnType">The level of the pawn to be taken</param>
+        /// <param name="pawnType">The level of the pawn to be taken</param>
         /// <returns></returns>
-        public Pawn TakePawn(String PawnType) {
+        public Pawn TakePawn(String pawnType) {
             Pawn retPawn = new Pawn();
-            if((retPawn = HasPawn(PawnType)) != new Pawn()) {
+            if((retPawn = HasPawn(pawnType)) != new Pawn()) {
                 Pawns.Remove(retPawn);
                 return retPawn;
             }
             return retPawn;
         }
-		#endregion
 
-		#region Cards
+        /// <summary>
+        /// Determines if a player has a pawn of a specified level then returns that pawn. If pawn of that level is not found, returns default "none" pawn.
+        /// </summary>
+        /// <param name="PawnType">The pawn level to be found</param>
+        /// <returns></returns>
+        public Pawn HasPawn(String PawnType) {
+            Pawn retPawn = new Pawn();
+            PawnType = PawnType.ToLower();
+            foreach(Pawn pawn in Pawns) {
+                if(pawn.PawnType.ToLower().Equals(PawnType)) {
+                    retPawn = pawn;
+                    break;
+                }
+                else if(pawn.PawnType.Contains(PawnType)) {
+                    retPawn = pawn;
+                    break;
+                }
+                else {
+                    continue;
+                }
+            }
+            return retPawn;
+        }
+
+        #endregion
+
+        #region Cards
         /// <summary>
         /// A list of the player's User Story cards to hold obtained cards
         /// </summary>
