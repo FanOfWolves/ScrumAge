@@ -25,11 +25,25 @@ namespace ScrumageEngine.Objects.Player {
 			get { return playerName; }
 		}
 
+        /// <summary>
+        /// Player overloaded constructor
+        /// </summary>
+        /// <param name="playerID">The player's ID</param>
+        /// <param name="playerName">The player's name</param>
+        public Player(Int32 playerID, String playerNameP) {
+            PlayerID = playerID;
+            playerName = playerNameP;
+            FeaturePoints = 0;
+            Budget = 1;
+            Funds = Budget;
+            this.playerResources = new ResourceContainer(new int[] { 0, 0, 0, 0 });
+            FinishedPhase = false;
+        }
 
-		#region Inventory
+        #region Inventory
 
-		#region Pawns
-		/// <summary>
+        #region Pawns
+        /// <summary>
         /// A list of the player's (currently held) pawn
         /// </summary>
         public List<Pawn> Pawns = new List<Pawn>();
@@ -95,10 +109,20 @@ namespace ScrumageEngine.Objects.Player {
 
 		#region Cards
         /// <summary>
-        /// Adds to player's cards
+        /// A list of the player's User Story cards to hold obtained cards
         /// </summary>
-        /// <param name="card">The card to be added</param>
-        public void AddToCards(Card card) {
+        public List<Card> Artifacts = new List<Card>();
+
+		/// <summary>
+		/// A list of the player's Feature cards to hold obtained cards
+		/// </summary>
+		public List<Card> Agility = new List<Card>();
+
+		/// <summary>
+		/// Adds to player's cards
+		/// </summary>
+		/// <param name="card">The card to be added</param>
+		public void AddToCards(Card card) {
             if(card.GetType() == typeof(AgilityCard)) {
                 this.Agility.Add(card);
             }
@@ -120,50 +144,9 @@ namespace ScrumageEngine.Objects.Player {
         public void RemoveFromAgility(Card agilityP) {
             this.Agility.Remove(agilityP);
         }
-        #endregion
+		#endregion
 
-
-
-
-
-
-
-
-        /// <summary>
-        /// A list of the player's User Story cards to hold obtained cards
-        /// </summary>
-        public List<Card> Artifacts = new List<Card>();
-		#endregion"
-
-
-
-		public Boolean FinishedPhase { get; set; }
-
-		/// <summary>
-		/// Player overloaded constructor
-		/// </summary>
-		/// <param name="playerID">The player's ID</param>
-		/// <param name="playerName">The player's name</param>
-		public Player(Int32 playerID, String playerNameP) {
-			PlayerID = playerID;
-			playerName = playerNameP;
-			FeaturePoints = 0;
-			Budget = 1;
-			Funds = Budget;
-			FinishedPhase = false;
-		}
-
-
-		/// <summary>
-		/// A group of functions that are used to Int32eract with Items, i.e. giving players pawn, cards, or checking if player has a certain type of pawn
-		/// </summary>
-		#region Item Related Methods
-
-        
-
-       
-
-        #region Resources
+		#region Resources
         private ResourceContainer playerResources;
 
         /// <summary>
@@ -186,12 +169,12 @@ namespace ScrumageEngine.Objects.Player {
             return this.playerResources.TakeResources(resource, resourceAmount);
         }
 
-		#endregion
+        #endregion
 
-		#endregion
+        #endregion
 
-		#region Stats
-		/// <summary>
+        #region Stats
+        /// <summary>
         /// The amount of budget the player receives every turn
         /// </summary>
         public Int32 Budget { get; set; }
@@ -206,61 +189,24 @@ namespace ScrumageEngine.Objects.Player {
         /// </summary>
         public Int32 FeaturePoints { get; set; } // Still need to determine how to calculate these
 
-		#endregion
+        /// <summary>
+        /// Increases the budget of this Player instance
+        /// </summary>
+        /// <param name="additionalBudgetP">The additional budget to give this Player</param>
+        public void IncreaseBudget(Int32 additionalBudgetP) {
+            this.Budget += additionalBudgetP;
+        }
 
+        /// <summary>
+        /// Gives player additional funds
+        /// </summary>
+        /// <param name="fundsToGiveP">The funds to give</param>
+        public void GiveFunds(Int32 fundsToGiveP) {
+            this.Funds += fundsToGiveP;
+        }
 
-		/// <summary>
-		/// Player overloaded constructor
-		/// </summary>
-		/// <param name="playerID">The player's ID</param>
-		/// <param name="playerName">The player's name</param>
-		public Player(Int32 playerID, String playerNameP) {
-			PlayerID = playerID;
-			playerName = playerNameP;
-			FeaturePoints = 0;
-			Budget = 1;
-			Funds = Budget;
-			this.playerResources = new ResourceContainer();
-		}
+        #endregion
 
-
-		/// <summary>
-		/// A group of functions that are used to Int32eract with Items, i.e. giving players pawn, cards, or checking if player has a certain type of pawn
-		/// </summary>
-		#region Item Related Methods
-		
-
-
-		
-
-
-		
-
-
-		/// <summary>
-		/// Increases the budget of this Player instance
-		/// </summary>
-		/// <param name="additionalBudgetP">The additional budget to give this Player</param>
-		public void IncreaseBudget(Int32 additionalBudgetP) {
-			this.Budget += additionalBudgetP;
-		}
-
-
-		/// <summary>
-		/// Gives player additional funds
-		/// </summary>
-		/// <param name="fundsToGiveP">The funds to give</param>
-		public void GiveFunds(Int32 fundsToGiveP) {
-			this.Funds += fundsToGiveP;
-		}
-
-
-
-		#endregion
-
-
-		
-
-
-	}
+        public Boolean FinishedPhase { get; set; }
+    }
 }
