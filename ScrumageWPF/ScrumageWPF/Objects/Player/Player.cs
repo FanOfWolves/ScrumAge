@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using ScrumageEngine.BoardSpace;
 using ScrumageEngine.Exceptions;
 using System.Text;
-using System.Windows.Media.Animation;
-using System.Windows.Navigation;
 using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Items.Cards;
 
@@ -85,30 +82,21 @@ namespace ScrumageEngine.Objects.Player {
             return retPawn;
         }
 
-        /// <summary>
-        /// Determines if a player has a pawn of a specified level then returns that pawn. If pawn of that level is not found, returns default "none" pawn.
-        /// </summary>
-        /// <param name="PawnType">The pawn level to be found</param>
-        /// <returns></returns>
-        public Pawn HasPawn(String PawnType) {
-            Pawn retPawn = new Pawn();
-            PawnType = PawnType.ToLower();
-            foreach(Pawn pawn in Pawns) {
-                if(pawn.PawnType.ToLower().Equals(PawnType)) {
-                    retPawn = pawn;
-                    break;
-                }
-                else if(pawn.PawnType.Contains(PawnType)) {
-                    retPawn = pawn;
-                    break;
-                }
-                else {
-                    continue;
-                }
-            }
-            return retPawn;
-        }
-        #endregion
+		public Boolean FinishedPhase { get; set; }
+
+		/// <summary>
+		/// Player overloaded constructor
+		/// </summary>
+		/// <param name="playerID">The player's ID</param>
+		/// <param name="playerName">The player's name</param>
+		public Player(Int32 playerID, String playerNameP) {
+			PlayerID = playerID;
+			playerName = playerNameP;
+			FeaturePoints = 0;
+			Budget = 1;
+			Funds = Budget;
+			FinishedPhase = false;
+		}
 
 
         #region Agility Cards
@@ -134,26 +122,31 @@ namespace ScrumageEngine.Objects.Player {
         }
         #endregion
 
-        #region Artifact Cards
-        /// <summary>
-        /// Adds a User Story card Int32o the player's User Stories inventory
-        /// </summary>
-        /// <param name="userStory">The card to be added</param>
-        public void AddToArtifacts(Card userStory) {
-            this.Artifacts.Add(userStory);
-        }
+		/// <summary>
+		/// Adds a User Story card Int32o the player's User Stories inventory
+		/// </summary>
+		/// <param name="userStory">The card to be added</param>
+		public void AddToArtifacts(Card userStory) {
+			this.Artifacts.Add(userStory);
+		}
 
 
+		/// <summary>
+		/// Adds a Feature card to the User's Feature inventory
+		/// </summary>
+		/// <param name="feature">The feature to be added</param>
+		public void AddToAgility(Card feature) {
+			this.Agility.Add(feature);
+		}
 
 
-
-        /// <summary>
-        /// Removes a card from the player's User Stories inventory
-        /// </summary>
-        /// <param name="userStory">The User Story to be removed</param>
-        public void RemoveFromArtifacts(Card artifactP) {
-            this.Artifacts.Remove(artifactP);
-        }
+		/// <summary>
+		/// Removes a card from the player's User Stories inventory
+		/// </summary>
+		/// <param name="userStory">The User Story to be removed</param>
+		public void RemoveFromArtifacts(Card artifactP) {
+			this.Artifacts.Remove(artifactP);
+		}
 
 
         #endregion"
