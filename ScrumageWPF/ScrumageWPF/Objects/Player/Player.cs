@@ -35,7 +35,7 @@ namespace ScrumageEngine.Objects.Player {
             FeaturePoints = 0;
             Budget = 1;
             Funds = Budget;
-            this.playerResources = new ResourceContainer(new int[] { 0, 0, 0, 0 });
+            this.playerResources = new ResourceContainer(new Int32[] { 0, 0, 0, 0 });
             FinishedPhase = false;
         }
 
@@ -156,7 +156,7 @@ namespace ScrumageEngine.Objects.Player {
         /// <summary>
         /// Removes a card from the player's User Stories inventory
         /// </summary>
-        /// <param name="userStory">The User Story to be removed</param>
+        /// <param name="artifactP">The artifact card to be removed</param>
         public void RemoveFromArtifacts(Card artifactP) {
             this.Artifacts.Remove(artifactP);
         }
@@ -164,7 +164,7 @@ namespace ScrumageEngine.Objects.Player {
         /// <summary>
         /// Removes a Feature card from the Features inventory
         /// </summary>
-        /// <param name="feature">The Feature to be removed</param>
+        /// <param name="agilityP">The agility card to be removed</param>
         public void RemoveFromAgility(Card agilityP) {
             this.Agility.Remove(agilityP);
         }
