@@ -50,7 +50,7 @@ namespace ScrumageEngine.Windows{
 				temp.IsEnabled = true;
 				temp.Header = playerNames[i];
 				(temp.FindName($"P{i+1}NameValue") as Label).Content = playerNames[i];
-				UpdatePawnBox(GetPlayerPawnBoxByID(i+1), game.GetPlayerPawns(i+1));
+				UpdatePawnBox(FindPlayerPawnBox(i+1), game.GetPlayerPawns(i+1));
 				// Whatever else needs to be initialized at the start of the game for players goes here.
 			}
 		}
@@ -175,7 +175,7 @@ namespace ScrumageEngine.Windows{
 		private void MovePawnBtn_Click(Object sender, RoutedEventArgs e) {
 			SelectedPawns.Clear();
 			Boolean phaseEnd = false;
-			foreach(String p in GetPlayerPawnBoxByID(currentPlayerID).SelectedItems) {
+			foreach(String p in FindPlayerPawnBox(this.currentPlayerID).SelectedItems) {
 				SelectedPawns.Add(p);
 			}
 			try {
@@ -185,7 +185,7 @@ namespace ScrumageEngine.Windows{
 
                 Object obj = FindName($"{NodeComboBox.SelectedItem.ToString().Replace(" ", "")}Box");
 				UpdatePawnBox(FindName($"{NodeComboBox.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.GetNodePawns(NodeComboBox.SelectedItem.ToString()));
-				UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
+				UpdatePawnBox(FindPlayerPawnBox(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
 				IncrementPlayer();
 			}
 			catch(MovePawnException _exception) {
@@ -211,9 +211,8 @@ namespace ScrumageEngine.Windows{
 		/// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
 		private void NodeActionBtn_Click(Object sender, RoutedEventArgs e) {
 			ActivateNode(game, currentPlayerID, NodeComboBox2.SelectedItem.ToString());
-			UpdatePawnBox(FindName($"{NodeComboBox2.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.GetNodePawns(NodeComboBox.SelectedItem.ToString()));
+			UpdatePawnBox(FindName($"{NodeComboBox2.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.GetNodePawns(NodeComboBox2.SelectedItem.ToString()));
 			UpdatePlayerInformation(this.currentPlayerID);
-            //UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
 			LogInput();
 		}
 
@@ -226,6 +225,15 @@ namespace ScrumageEngine.Windows{
 		/// <returns>the resource box belonging to this player</returns>
 		private ListBox FindResourceBox(Int32 playerIdP) {
             return FindName($"P{playerIdP}ResourceBox") as ListBox;
+        }
+
+		/// <summary>
+		/// Finds the player's pawn box.
+		/// </summary>
+		/// <param name="playerIdP">The player identifier.</param>
+		/// <returns>the pawn box belonging to this player</returns>
+		private ListBox FindPlayerPawnBox(Int32 playerIdP) {
+            return FindName($"P{playerIdP}PawnBox") as ListBox;
         }
 
         /// <summary>
@@ -260,8 +268,8 @@ namespace ScrumageEngine.Windows{
 
             // Update inventory display
             UpdatePlayerResourceDisplay(FindResourceBox(playerIdP), this.game.GetPlayerResources(playerIdP));
-            UpdatePawnBox(GetPlayerPawnBoxByID(playerIdP), this.game.GetPlayerPawns(playerIdP));
-
+            UpdatePawnBox(FindPlayerPawnBox(playerIdP), this.game.GetPlayerPawns(playerIdP));
+			//TODO: Update Cards
 
             // Update stats
             //	update budget
