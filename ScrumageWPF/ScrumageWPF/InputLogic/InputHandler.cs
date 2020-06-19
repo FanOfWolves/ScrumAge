@@ -98,14 +98,14 @@ namespace ScrumageEngine.InputLogic {
 		/// <param name="pawns">The list of pawns selected by the player</param>
 		/// <param name="player">The player requesting the move</param>
 		/// <param name="node">The node the player is trying to move to</param>
-		public static void MovePawn(Game gameP, List<String> pawnsP, Int32 playerIDP, String nodeNameP) {
+		public static Boolean MovePawn(Game gameP, List<String> pawnsP, Int32 playerIDP, String nodeNameP) {
 			var player = gameP.GetPlayerByID(playerIDP);
 			var node = gameP.GetNodeByName(nodeNameP);
 			Int32 _newTotalOfPawnsInNode = pawnsP.Count + node.NumberOfPawns;
 			Boolean _nodeFull = _newTotalOfPawnsInNode > node.MaxPawnLimit;
 			if(pawnsP.Count > 0 && !_nodeFull) {
-				gameP.MovePawn(pawnsP, playerIDP, nodeNameP);
 				RecordInputs($"{player.PlayerName} moved {ListPawns(pawnsP)} to {nodeNameP}");
+				return gameP.MovePawn(pawnsP, playerIDP, nodeNameP);
 			}else if(pawnsP.Count == 0) {
 				RecordInputs($"{player.PlayerName} tried to move pawns that weren't theirs!");
 				throw new MovePawnException("You cannot move another player's pawns.");
@@ -113,6 +113,7 @@ namespace ScrumageEngine.InputLogic {
 				RecordInputs($"{player.PlayerName} tried to move too many pawns to {nodeNameP}");
 				throw new MovePawnException($"You are moving too many pawns to {nodeNameP}");
 			}
+			return false;
 		}
 
 
