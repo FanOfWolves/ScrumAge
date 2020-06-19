@@ -4,6 +4,7 @@ using ScrumageEngine.Objects.Items;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Collections;
+using System.Linq;
 
 namespace ScrumageEngine.Objects.Player {
     /// <summary>
@@ -21,14 +22,31 @@ namespace ScrumageEngine.Objects.Player {
 		/// Initializes a new instance of the <see cref="ResourceContainer"/> class.
 		/// </summary>
 		public ResourceContainer() {
-            resourceDictionary = new Dictionary<Resource, Int32>();
+			resourceDictionary = InitDictionary(new Int32[]{0, 0, 0, 0});
+
+		}
+
+		public ResourceContainer(Int32[] reqs) {
+			resourceDictionary = InitDictionary(reqs);
         }
 
-        /// <summary>
-        /// Adds a resource to this container.
-        /// </summary>
-        /// <param name="newResource">The new resource to add</param>
-        public void AddResource(Resource newResource) {
+
+		private Dictionary<Resource, Int32> InitDictionary(Int32[] reqs = null) {
+			Dictionary<Resource, Int32> retDictionary = new Dictionary<Resource, Int32> {
+				{ new Requirements(), reqs[0] },
+				{ new Design(), reqs[1] },
+				{ new Implementation(), reqs[2] },
+				{ new Testing(), reqs[3] }
+			};
+			return retDictionary;
+		}
+
+
+		/// <summary>
+		/// Adds a resource to this container.
+		/// </summary>
+		/// <param name="newResource">The new resource to add</param>
+		public void AddResource(Resource newResource) {
 	        this[newResource]++;
         }
 
@@ -41,13 +59,7 @@ namespace ScrumageEngine.Objects.Player {
         ///   <c>true</c> if it has enough of the specified resource; otherwise, <c>false</c>.
         /// </returns>
         public Boolean HasResourceAmount(Resource neededResource, Int32 neededAmount) {
-            Boolean _hasResource = this.resourceDictionary.TryGetValue(neededResource, out Int32 _amountHere);
-            if (!_hasResource) {
-                return false;
-            }
-            else {
-                return _amountHere >= neededAmount;
-            }
+	        return this[neededResource] >= neededAmount;
         }
 
         /// <summary>
@@ -55,12 +67,7 @@ namespace ScrumageEngine.Objects.Player {
         /// </summary>
         /// <returns>an array of all resource types in this container</returns>
         public Resource[] GetResourceTypes() {
-            List<Resource> _outputTypes = new List<Resource>();
-            foreach(KeyValuePair<Resource, Int32> res in this.resourceDictionary) {
-                _outputTypes.Add(res.Key);
-            }
-            _outputTypes.TrimExcess();
-            return _outputTypes.ToArray();
+	        return resourceDictionary.Keys.ToArray();
         }
 
         /// <summary>
@@ -69,13 +76,7 @@ namespace ScrumageEngine.Objects.Player {
         /// <param name="neededResource">The needed resource.</param>
         /// <returns>the amount of that resource in this container</returns>
         public Int32 GetResourceAmount(Resource neededResource) {
-            Boolean _hasResource = this.resourceDictionary.TryGetValue(neededResource, out Int32 _amountHere);
-            if (_hasResource) {
-                return _amountHere;
-            }
-            else {
-                return 0;
-            }
+	        return this[neededResource];
         }
 
         /// <summary>
@@ -87,10 +88,9 @@ namespace ScrumageEngine.Objects.Player {
         ///     <c>true</c> if resource payment successful; otherwise, <c>false</c>.
         /// </returns>
         public Boolean TakeResources(Resource neededResource, Int32 neededAmount) {
-            Boolean _hasResource = this.resourceDictionary.TryGetValue(neededResource, out Int32 _amountHere);
-            if (!_hasResource || _amountHere < neededAmount)
+	        if (this[neededResource] < neededAmount)
                 return false;
-            this.resourceDictionary[neededResource] = _amountHere - neededAmount;
+	        this[neededResource] -= neededAmount;
             return true;
         }
 
@@ -106,14 +106,25 @@ namespace ScrumageEngine.Objects.Player {
 					return this[new Testing()];
 				throw new IndexOutOfRangeException();
 			}
-		}
+			set {
+				if(i == 0)
+					this[new Requirements()] = value;
+				if(i == 1)
+					this[new Design()] = value;
+				if(i == 2)
+					this[new Implementation()] = value;
+				if(i == 3)
+					this[new Testing()]= value;
+				throw new IndexOutOfRangeException();
+			}
+        }
 
 		public Int32 this[Resource r] {
 			get {
-				return resourceDictionary[r];
+				return this.resourceDictionary[r];
 			}
 			set {
-				resourceDictionary[r] = value;
+				this.resourceDictionary[r] = value;
 			}
 		}
 

@@ -26,14 +26,13 @@ namespace ScrumageEngine.Objects.Items.Cards {
         /// <summary>
         /// Initializes a new instance of the <see cref="Card"/> class.
         /// </summary>
-        public Card(String nameP, String descriptionP, ResourceContainer cardRequirementsP) {
+        public Card(String nameP, String descriptionP, Int32[] resourcesCosts) {
 	        this.cardName = nameP;
 	        this.cardDesc = descriptionP;
-            this.cardRequirements = cardRequirementsP;
+            this.cardRequirements = new ResourceContainer(resourcesCosts);
         }
         #endregion
 
-        #region Methods
 
         public String Display() {
 	        return "Will be abstract";
@@ -45,40 +44,5 @@ namespace ScrumageEngine.Objects.Items.Cards {
         public ResourceContainer GetCardRequirements() {
             return this.cardRequirements;//TODO: Shallow reference?
         }
-
-        /// <summary>
-        /// Attempt to purchase this card.
-        /// </summary>
-        /// <param name="payment">The payment offered by the player.</param>
-        /// <param name="returnedCard">The returned card.</param>
-        /// <returns>
-        ///     <c>true</c> if payment was successful; Otherwise, <c>false</c>.
-        /// </returns>
-        public Boolean TryPayCost(ref ResourceContainer payment, out Card returnedCard) {
-            returnedCard = null;
-            Resource[] _typesInPayment = payment.GetResourceTypes();
-
-
-            // Verify payment is enough for all required resources
-            foreach(Resource _type in _typesInPayment) {
-                Int32 _amountToPay = this.cardRequirements.GetResourceAmount(_type);
-                Int32 _amountInPayment = payment.GetResourceAmount(_type);
-                if (_amountInPayment >= _amountToPay)
-                    continue;
-                return false;
-            }
-
-            // Complete transaction
-            foreach (Resource _type in _typesInPayment) {
-                Int32 _amountToPay = this.cardRequirements.GetResourceAmount(_type);
-                Int32 _amountInPayment = payment.GetResourceAmount(_type);
-                payment.TakeResources(_type, _amountToPay);
-            }
-
-            // Give card
-            returnedCard = this;
-            return true;
-        }
-        #endregion
     }
 }

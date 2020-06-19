@@ -99,19 +99,10 @@ namespace ScrumageEngine.Objects.Player {
 		}
 
 
-        #region Agility Cards
-        /// <summary>
-        /// A list of the player's Feature cards to hold obtained cards
-        /// </summary>
-        public List<Card> Agility = new List<Card>();
-
-        /// <summary>
-        /// Adds a Feature card to the User's Feature inventory
-        /// </summary>
-        /// <param name="feature">The feature to be added</param>
-        public void AddToAgility(Card feature) {
-            this.Agility.Add(feature);
-        }
+		/// <summary>
+		/// A group of functions that are used to Int32eract with Items, i.e. giving players pawn, cards, or checking if player has a certain type of pawn
+		/// </summary>
+		#region Item Related Methods
 
         /// <summary>
         /// Removes a Feature card from the Features inventory
@@ -122,31 +113,25 @@ namespace ScrumageEngine.Objects.Player {
         }
         #endregion
 
+		#region Cards
 		/// <summary>
-		/// Adds a User Story card Int32o the player's User Stories inventory
-		/// </summary>
-		/// <param name="userStory">The card to be added</param>
-		public void AddToArtifacts(Card userStory) {
-			this.Artifacts.Add(userStory);
-		}
+        /// Adds to player's cards
+        /// </summary>
+        /// <param name="card">The card to be added</param>
+        public void AddToCards(Card card) {
+            if(card.GetType() == typeof(AgilityCard)) {
+                this.Agility.Add(card);
+            }
+            this.Artifacts.Add(card);
+        }
 
-
-		/// <summary>
-		/// Adds a Feature card to the User's Feature inventory
-		/// </summary>
-		/// <param name="feature">The feature to be added</param>
-		public void AddToAgility(Card feature) {
-			this.Agility.Add(feature);
-		}
-
-
-		/// <summary>
-		/// Removes a card from the player's User Stories inventory
-		/// </summary>
-		/// <param name="userStory">The User Story to be removed</param>
-		public void RemoveFromArtifacts(Card artifactP) {
-			this.Artifacts.Remove(artifactP);
-		}
+        /// <summary>
+        /// Removes a card from the player's User Stories inventory
+        /// </summary>
+        /// <param name="userStory">The User Story to be removed</param>
+        public void RemoveFromArtifacts(Card artifactP) {
+            this.Artifacts.Remove(artifactP);
+        }
 
 
         #endregion"
