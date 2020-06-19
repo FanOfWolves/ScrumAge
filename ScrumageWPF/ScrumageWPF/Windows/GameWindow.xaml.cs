@@ -19,6 +19,16 @@ namespace ScrumageEngine.Windows{
 		Game game;
 		private Int32 currentPlayerID;
 		private List<String> SelectedPawns = new List<String>();
+
+        private String PawnboxForPlacementNode {
+            get { return this.NodeComboBox.SelectedItem.ToString(); }
+        }
+
+        private String PawnboxForActionNode {
+            get { return this.NodeComboBox2.SelectionBoxItem.ToString();  }
+        }
+
+
 		public GameWindow(List<String> playerNames) {
 			PlayerCount = playerNames.Count;
 			game = new Game(playerNames);
@@ -179,12 +189,9 @@ namespace ScrumageEngine.Windows{
 				SelectedPawns.Add(p);
 			}
 			try {
-				phaseEnd = MovePawn(game, SelectedPawns, currentPlayerID, NodeComboBox.SelectedItem.ToString());
-                String _temp = $"{this.NodeComboBox.SelectionBoxItem.ToString()}";
-                String _temp2 = $"{_temp.Replace(" ", "")}Box";
+				phaseEnd = MovePawn(game, SelectedPawns, currentPlayerID, PawnboxForPlacementNode);
 
-                Object obj = FindName($"{NodeComboBox.SelectedItem.ToString().Replace(" ", "")}Box");
-				UpdatePawnBox(FindName($"{NodeComboBox.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.GetNodePawns(NodeComboBox.SelectedItem.ToString()));
+				UpdatePawnBox(FindNodePawnBoxPhase1(), game.GetNodePawns(PawnboxForPlacementNode));
 				UpdatePawnBox(FindPlayerPawnBox(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
 				IncrementPlayer();
 			}
@@ -210,8 +217,8 @@ namespace ScrumageEngine.Windows{
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
 		private void NodeActionBtn_Click(Object sender, RoutedEventArgs e) {
-			ActivateNode(game, currentPlayerID, NodeComboBox2.SelectedItem.ToString());
-			UpdatePawnBox(FindName($"{NodeComboBox2.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.GetNodePawns(NodeComboBox2.SelectedItem.ToString()));
+			ActivateNode(game, currentPlayerID, PawnboxForActionNode);
+			UpdatePawnBox(FindNodePawnBoxPhase2(), game.GetNodePawns(PawnboxForActionNode));
 			UpdatePlayerInformation(this.currentPlayerID);
 			LogInput();
 		}
@@ -236,31 +243,25 @@ namespace ScrumageEngine.Windows{
             return FindName($"P{playerIdP}PawnBox") as ListBox;
         }
 
-        /// <summary>
-        /// Returns the player's pawn List Box by the Player's ID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        private ListBox GetPlayerPawnBoxByID(Int32 id) {
-            switch(id) {
-                case 1:
-                    return P1PawnBox;
-                case 2:
-                    return P2PawnBox;
-                case 3:
-                    return P3PawnBox;
-                case 4:
-                    return P4PawnBox;
-                default:
-                    return P1PawnBox;
-            }
+		/// <summary>
+		/// Finds the currently selected node pawn-box from the placement phase combo-box.
+		/// </summary>
+		/// <returns>the pawn-box for the selected node</returns>
+		private ListBox FindNodePawnBoxPhase1() {
+            return FindName($"{this.NodeComboBox.SelectedItem.ToString().Replace(" ","")}Box") as ListBox;
         }
 
+		/// <summary>
+		/// Finds the currently selected node pawn-box from the action phase combo-box
+		/// </summary>
+		/// <returns>the pawn-box for the selected ndoe</returns>
+		private ListBox FindNodePawnBoxPhase2() {
+			return FindName($"{this.NodeComboBox2.SelectedItem.ToString().Replace(" ","")}Box") as ListBox;
+        }
 		#endregion
 
 		#region Update Player Display
-
-		/// <summary>
+        /// <summary>
 		/// Updates the player's information display.
 		/// </summary>
 		/// <param name="playerIdP">The player identifier</param>
