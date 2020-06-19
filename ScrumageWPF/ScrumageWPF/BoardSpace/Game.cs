@@ -213,11 +213,21 @@ namespace ScrumageEngine.BoardSpace {
             return this.Players.Find(_player => _player.PlayerID == playerId).Agility;
         }
 
-        public List<Card> GetPlayerArtifactCards(Int32 playerId) {
+		/// <summary>
+		/// Gets the player artifact cards.
+		/// </summary>
+		/// <param name="playerId">The player identifier.</param>
+		/// <returns>a list of the player's cards</returns>
+		public List<Card> GetPlayerArtifactCards(Int32 playerId) {
 			return this.Players.Find(_player => _player.PlayerID == playerId).Artifacts;
 		}
 
-        public ResourceContainer GetPlayerResources(Int32 playerIdP) {
+		/// <summary>
+		/// Gets the player resources.
+		/// </summary>
+		/// <param name="playerIdP">The player identifier.</param>
+		/// <returns>the player's resources</returns>
+		public ResourceContainer GetPlayerResources(Int32 playerIdP) {
             return GetPlayerByID(playerIdP).GetPlayerResources();
         }
 
