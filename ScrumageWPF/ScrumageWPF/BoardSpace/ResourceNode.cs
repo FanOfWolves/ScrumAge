@@ -51,7 +51,7 @@ namespace ScrumageEngine.BoardSpace {
         /// </returns>
         private Boolean RollForResource(Int32 successChance) {
             Int32 _result = this.resourceChanceCalculator.Next(0,101);
-            return successChance <= _result;
+            return successChance >= _result;
         }
 
         /// <summary>

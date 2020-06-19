@@ -477,7 +477,7 @@
                         <Label DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Open Spots:"/>
                         <Label x:Name="lblR1SpotValue" DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="0"/>
                     </StackPanel>
-                    <ListBox DockPanel.Dock="Top" x:Name="Resource1Box"/>
+                    <ListBox DockPanel.Dock="Top" x:Name="RequirementsBox"/>
 
 				</DockPanel>
 				<!-- 2nd Column, best way I know how to do this. -->
@@ -488,7 +488,7 @@
                         <Label DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Open Spots:"/>
                         <Label x:Name="lblR2SpotValue" DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="0"/>
                     </StackPanel>
-                    <ListBox DockPanel.Dock="Top" x:Name="Resource2Box"/>
+                    <ListBox DockPanel.Dock="Top" x:Name="DesignBox"/>
 				</DockPanel>
 				<!-- 3rd Column, best way I know how to do this. -->
 				<DockPanel Grid.Column="2" Grid.Row="0" Margin="5">
@@ -498,7 +498,7 @@
                         <Label DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Open Spots:"/>
                         <Label x:Name="lblR3SpotValue" DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="0"/>
                     </StackPanel>
-                    <ListBox DockPanel.Dock="Top" x:Name="Resource3Box"/>
+                    <ListBox DockPanel.Dock="Top" x:Name="ImplementationBox"/>
 				</DockPanel>
 				<!-- 4th Column, best way I know how to do this. -->
 				<DockPanel Grid.Column="3" Grid.Row="0" Margin="5">
@@ -508,7 +508,7 @@
                         <Label DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Open Spots:"/>
                         <Label x:Name="lblR4SpotValue" DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="0"/>
                     </StackPanel>
-                    <ListBox DockPanel.Dock="Top" x:Name="Resource4Box"/>
+                    <ListBox DockPanel.Dock="Top" x:Name="TestingBox"/>
 				</DockPanel>
 
 				<!-- Technical Hut -->
