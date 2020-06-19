@@ -4,6 +4,7 @@ using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Objects.Items;
 using System.Text;
 using System.Windows;
+using ScrumageEngine.Objects.Items.Cards;
 
 namespace ScrumageEngine.BoardSpace {
 	public class Game {
@@ -143,16 +144,7 @@ namespace ScrumageEngine.BoardSpace {
 			return retString;
 		}
 
-		public void GivePlayerCard(Int32 playerIDP, String cardTypeP) {
-			Player player = GetPlayerByID(playerIDP);
-			if (cardTypeP == "artifact") {
-				player.AddToArtifacts(board.GetTopArtifact());
-			}else if (cardTypeP == "agility") {
-				player.AddToAgility(board.GetTopAgility());
-			}
-		}
-
-		public String GetPawnType(Int32 indexP) {
+        public String GetPawnType(Int32 indexP) {
 			return PawnTypes[indexP];
 		}
 
@@ -209,5 +201,37 @@ namespace ScrumageEngine.BoardSpace {
 			CheckPhase(phase);
 			return GetNodeByName(nodeNameP).DoAction(GetPlayerByID(playerIDP));
 		}
+
+
+		#region Player Tracking		
+		/// <summary>
+		/// Gets the player agility cards.
+		/// </summary>
+		/// <param name="playerId">The player identifier.</param>
+		/// <returns>a list of the player's cards</returns>
+		public List<Card> GetPlayerAgilityCards(Int32 playerId) {
+            return this.Players.Find(_player => _player.PlayerID == playerId).Agility;
+        }
+
+		/// <summary>
+		/// Gets the player artifact cards.
+		/// </summary>
+		/// <param name="playerId">The player identifier.</param>
+		/// <returns>a list of the player's cards</returns>
+		public List<Card> GetPlayerArtifactCards(Int32 playerId) {
+			return this.Players.Find(_player => _player.PlayerID == playerId).Artifacts;
+		}
+
+		/// <summary>
+		/// Gets the player resources.
+		/// </summary>
+		/// <param name="playerIdP">The player identifier.</param>
+		/// <returns>the player's resources</returns>
+		public ResourceContainer GetPlayerResources(Int32 playerIdP) {
+            return GetPlayerByID(playerIdP).GetPlayerResources();
+        }
+
+        #endregion
+
 	}
 }

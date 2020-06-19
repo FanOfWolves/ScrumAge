@@ -4,6 +4,7 @@ using ScrumageEngine.BoardSpace;
 using System.Text;
 using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Objects.Items;
+using ScrumageEngine.Objects.Items.Cards;
 
 namespace ScrumageEngine.BoardSpace {
 	public class Board {
@@ -20,16 +21,16 @@ namespace ScrumageEngine.BoardSpace {
 		private Stack<Card> Artifacts = new Stack<Card>();
 		private Stack<Card> Agility = new Stack<Card>();
 
-		private Node Resource1 = new ResourceNode(2, "Resource 1");
-		private Node Resource2 = new ResourceNode(3, "Resource 2");
-		private Node Resource3 = new ResourceNode(2, "Resource 3");
-		private Node Resource4 = new ResourceNode(2, "Resource 4");
-		private Node TechnicalHut = new UpgradeNode(1, "Technical Hut");
-		private Node BudgetIncrease = new ResourceNode(1, "Budget Increase");
-		private Node Interview = new HiringNode(1, "Interview Node");
-		private Node Reassignment = new ResourceNode(1, "Reassignment Node");
-		private Card TestCard1 = new Card("artifact", "Test Artifact");
-		private Card TestCard2 = new Card("agility", "Test Agility");
+		private Node Resource1 = new ResourceNode(1, "Requirements", new Requirements());
+		private Node Resource2 = new ResourceNode(2, "Design", new Design());
+		private Node Resource3 = new ResourceNode(3, "Implementation", new Implementation());
+		private Node Resource4 = new ResourceNode(4, "Testing", new Testing());
+		private Node TechnicalHut = new UpgradeNode(5, "Technical Hut");
+		private Node BudgetIncrease = new BudgetNode(6, "Budget Increase");
+		private Node Interview = new HiringNode(7, "Interview Node");
+		private Node Reassignment = new ReassignmentNode(8, "Reassignment Node");
+		private Card TestCard1 = new Card("artifact", "Test Artifact", new []{4,3,2,1});
+		private Card TestCard2 = new Card("agility", "Test Agility", new []{1,2,3,4});
 		public Board() {
 			if (Nodes.Count == 0) {
 				InitMap(Nodes);

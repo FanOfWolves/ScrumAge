@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ScrumageEngine.Objects.Items;
+using ScrumageEngine.Objects.Player;
 using static ScrumageEngine.InputLogic.InputHandler;
 
 namespace ScrumageEngine.Windows{
@@ -17,6 +19,16 @@ namespace ScrumageEngine.Windows{
 		Game game;
 		private Int32 currentPlayerID;
 		private List<String> SelectedPawns = new List<String>();
+
+        private String PawnboxForPlacementNode {
+            get { return this.NodeComboBox.SelectedItem.ToString(); }
+        }
+
+        private String PawnboxForActionNode {
+            get { return this.NodeComboBox2.SelectionBoxItem.ToString();  }
+        }
+
+
 		public GameWindow(List<String> playerNames) {
 			PlayerCount = playerNames.Count;
 			game = new Game(playerNames);
@@ -48,7 +60,7 @@ namespace ScrumageEngine.Windows{
 				temp.IsEnabled = true;
 				temp.Header = playerNames[i];
 				(temp.FindName($"P{i+1}NameValue") as Label).Content = playerNames[i];
-				UpdatePawnBox(GetPlayerPawnBoxByID(i+1), game.GetPlayerPawns(i+1));
+				UpdatePawnBox(FindPlayerPawnBox(i+1), game.GetPlayerPawns(i+1));
 				// Whatever else needs to be initialized at the start of the game for players goes here.
 			}
 		}
@@ -95,7 +107,7 @@ namespace ScrumageEngine.Windows{
 		}
 
 		/// <summary>
-		/// Updates the SprInt32 log with the currently contained inputs.
+		/// Updates the Sprint2 log with the currently contained inputs.
 		/// </summary>
 		void LogInput() {
 			ClearLog();
@@ -104,7 +116,7 @@ namespace ScrumageEngine.Windows{
 		}
 
 		/// <summary>
-		/// Clears the sprInt32 log.
+		/// Clears the sprint log.
 		/// </summary>
 		void ClearLog() {
 			SprintLogBox.Items.Clear();
@@ -149,20 +161,7 @@ namespace ScrumageEngine.Windows{
 			cardBox.Text = card.ToString();
 		}*/
 
-		/// <summary>
-		/// Returns the player's pawn List Box by the Player's ID
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
-		private ListBox GetPlayerPawnBoxByID(Int32 id) {
-			switch(id) {
-				case 1: return P1PawnBox;
-				case 2: return P2PawnBox;
-				case 3: return P3PawnBox;
-				case 4: return P4PawnBox;
-				default: return P1PawnBox;
-			}
-		}
+		
 
 		// Maybe not keep this?
 		private void PlayerTabControl_SelectionChanged(Object sender, SelectionChangedEventArgs e) {
@@ -186,13 +185,14 @@ namespace ScrumageEngine.Windows{
 		private void MovePawnBtn_Click(Object sender, RoutedEventArgs e) {
 			SelectedPawns.Clear();
 			Boolean phaseEnd = false;
-			foreach(String p in GetPlayerPawnBoxByID(currentPlayerID).SelectedItems) {
+			foreach(String p in FindPlayerPawnBox(this.currentPlayerID).SelectedItems) {
 				SelectedPawns.Add(p);
 			}
 			try {
-				phaseEnd = MovePawn(game, SelectedPawns, currentPlayerID, NodeComboBox.SelectedItem.ToString());
-				UpdatePawnBox(FindName($"{NodeComboBox.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.GetNodePawns(NodeComboBox.SelectedItem.ToString()));
-				UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
+				phaseEnd = MovePawn(game, SelectedPawns, currentPlayerID, PawnboxForPlacementNode);
+
+				UpdatePawnBox(FindNodePawnBoxPhase1(), game.GetNodePawns(PawnboxForPlacementNode));
+				UpdatePawnBox(FindPlayerPawnBox(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
 				IncrementPlayer();
 			}
 			catch(MovePawnException _exception) {
@@ -217,11 +217,83 @@ namespace ScrumageEngine.Windows{
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
 		private void NodeActionBtn_Click(Object sender, RoutedEventArgs e) {
-			ActivateNode(game, currentPlayerID, NodeComboBox2.SelectedItem.ToString());
-			UpdatePawnBox(FindName($"{NodeComboBox2.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.GetNodePawns(NodeComboBox.SelectedItem.ToString()));
-			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
+			ActivateNode(game, currentPlayerID, PawnboxForActionNode);
+			UpdatePawnBox(FindNodePawnBoxPhase2(), game.GetNodePawns(PawnboxForActionNode));
+			UpdatePlayerInformation(this.currentPlayerID);
 			LogInput();
 		}
+
+
+		#region Find Component Helper Methods		
+		/// <summary>
+		/// Finds a player's resource box.
+		/// </summary>
+		/// <param name="playerIdP">The player identifier</param>
+		/// <returns>the resource box belonging to this player</returns>
+		private ListBox FindResourceBox(Int32 playerIdP) {
+            return FindName($"P{playerIdP}ResourceBox") as ListBox;
+        }
+
+		/// <summary>
+		/// Finds the player's pawn box.
+		/// </summary>
+		/// <param name="playerIdP">The player identifier.</param>
+		/// <returns>the pawn box belonging to this player</returns>
+		private ListBox FindPlayerPawnBox(Int32 playerIdP) {
+            return FindName($"P{playerIdP}PawnBox") as ListBox;
+        }
+
+		/// <summary>
+		/// Finds the currently selected node pawn-box from the placement phase combo-box.
+		/// </summary>
+		/// <returns>the pawn-box for the selected node</returns>
+		private ListBox FindNodePawnBoxPhase1() {
+            return FindName($"{this.NodeComboBox.SelectedItem.ToString().Replace(" ","")}Box") as ListBox;
+        }
+
+		/// <summary>
+		/// Finds the currently selected node pawn-box from the action phase combo-box
+		/// </summary>
+		/// <returns>the pawn-box for the selected ndoe</returns>
+		private ListBox FindNodePawnBoxPhase2() {
+			return FindName($"{this.NodeComboBox2.SelectedItem.ToString().Replace(" ","")}Box") as ListBox;
+        }
+		#endregion
+
+		#region Update Player Display
+        /// <summary>
+		/// Updates the player's information display.
+		/// </summary>
+		/// <param name="playerIdP">The player identifier</param>
+		private void UpdatePlayerInformation(Int32 playerIdP) {
+
+            // Update inventory display
+            UpdatePlayerResourceDisplay(FindResourceBox(playerIdP), this.game.GetPlayerResources(playerIdP));
+            UpdatePawnBox(FindPlayerPawnBox(playerIdP), this.game.GetPlayerPawns(playerIdP));
+			//TODO: Update Cards
+
+            // Update stats
+            //	update budget
+            //	update score
+            //	update funds
+        }
+
+		/// <summary>
+		/// Updates the player resource box display.
+		/// </summary>
+		/// <param name="resourceBox">The resource box to be updated</param>
+		/// <param name="playerResourcesP">The player's resources</param>
+		private void UpdatePlayerResourceDisplay(ListBox resourceBox, ResourceContainer playerResourcesP) {
+            resourceBox.Items.Clear();
+            Resource[] _resources = playerResourcesP.GetResourceTypes();
+            foreach(Resource _type in _resources) {
+                String _lineItem = $"{_type.Name}   {playerResourcesP[_type]}";
+                resourceBox.Items.Add(_lineItem);
+            }
+        }
+
+
+		#endregion
 
 
 	}
