@@ -217,8 +217,8 @@ namespace ScrumageEngine.BoardSpace {
 			return this.Players.Find(_player => _player.PlayerID == playerId).Artifacts;
 		}
 
-        public ResourceContainer GetPlayerResources() {
-            return null;
+        public ResourceContainer GetPlayerResources(Int32 playerIdP) {
+            return GetPlayerByID(playerIdP).GetPlayerResources();
         }
 
         #endregion

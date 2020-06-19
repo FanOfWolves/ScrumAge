@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ScrumageEngine.Objects.Items;
+using ScrumageEngine.Objects.Player;
 using static ScrumageEngine.InputLogic.InputHandler;
 
 namespace ScrumageEngine.Windows{
@@ -149,20 +151,7 @@ namespace ScrumageEngine.Windows{
 			cardBox.Text = card.ToString();
 		}*/
 
-		/// <summary>
-		/// Returns the player's pawn List Box by the Player's ID
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
-		private ListBox GetPlayerPawnBoxByID(Int32 id) {
-			switch(id) {
-				case 1: return P1PawnBox;
-				case 2: return P2PawnBox;
-				case 3: return P3PawnBox;
-				case 4: return P4PawnBox;
-				default: return P1PawnBox;
-			}
-		}
+		
 
 		// Maybe not keep this?
 		private void PlayerTabControl_SelectionChanged(Object sender, SelectionChangedEventArgs e) {
@@ -191,6 +180,10 @@ namespace ScrumageEngine.Windows{
 			}
 			try {
 				phaseEnd = MovePawn(game, SelectedPawns, currentPlayerID, NodeComboBox.SelectedItem.ToString());
+                String _temp = $"{this.NodeComboBox.SelectionBoxItem.ToString()}";
+                String _temp2 = $"{_temp.Replace(" ", "")}Box";
+
+                Object obj = FindName($"{NodeComboBox.SelectedItem.ToString().Replace(" ", "")}Box");
 				UpdatePawnBox(FindName($"{NodeComboBox.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.GetNodePawns(NodeComboBox.SelectedItem.ToString()));
 				UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
 				IncrementPlayer();
@@ -219,9 +212,79 @@ namespace ScrumageEngine.Windows{
 		private void NodeActionBtn_Click(Object sender, RoutedEventArgs e) {
 			ActivateNode(game, currentPlayerID, NodeComboBox2.SelectedItem.ToString());
 			UpdatePawnBox(FindName($"{NodeComboBox2.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox, game.GetNodePawns(NodeComboBox.SelectedItem.ToString()));
-			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
+			UpdatePlayerInformation(this.currentPlayerID);
+            //UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
 			LogInput();
 		}
+
+
+		#region Find Component Helper Methods		
+		/// <summary>
+		/// Finds a player's resource box.
+		/// </summary>
+		/// <param name="playerIdP">The player identifier</param>
+		/// <returns>the resource box belonging to this player</returns>
+		private ListBox FindResourceBox(Int32 playerIdP) {
+            return FindName($"P{playerIdP}ResourceBox") as ListBox;
+        }
+
+        /// <summary>
+        /// Returns the player's pawn List Box by the Player's ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private ListBox GetPlayerPawnBoxByID(Int32 id) {
+            switch(id) {
+                case 1:
+                    return P1PawnBox;
+                case 2:
+                    return P2PawnBox;
+                case 3:
+                    return P3PawnBox;
+                case 4:
+                    return P4PawnBox;
+                default:
+                    return P1PawnBox;
+            }
+        }
+
+		#endregion
+
+		#region Update Player Display
+
+		/// <summary>
+		/// Updates the player's information display.
+		/// </summary>
+		/// <param name="playerIdP">The player identifier</param>
+		private void UpdatePlayerInformation(Int32 playerIdP) {
+
+            // Update inventory display
+            UpdatePlayerResourceDisplay(FindResourceBox(playerIdP), this.game.GetPlayerResources(playerIdP));
+            UpdatePawnBox(GetPlayerPawnBoxByID(playerIdP), this.game.GetPlayerPawns(playerIdP));
+
+
+            // Update stats
+            //	update budget
+            //	update score
+            //	update funds
+        }
+
+		/// <summary>
+		/// Updates the player resource box display.
+		/// </summary>
+		/// <param name="resourceBox">The resource box to be updated</param>
+		/// <param name="playerResourcesP">The player's resources</param>
+		private void UpdatePlayerResourceDisplay(ListBox resourceBox, ResourceContainer playerResourcesP) {
+            resourceBox.Items.Clear();
+            Resource[] _resources = playerResourcesP.GetResourceTypes();
+            foreach(Resource _type in _resources) {
+                String _lineItem = $"{_type.Name}   {playerResourcesP[_type]}";
+                resourceBox.Items.Add(_lineItem);
+            }
+        }
+
+
+		#endregion
 
 
 	}

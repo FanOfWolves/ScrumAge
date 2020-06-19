@@ -193,6 +193,10 @@ namespace ScrumageEngine.Objects.Player {
             return this.playerResources.TakeResources(resource, resourceAmount);
         }
 
+        public ResourceContainer GetPlayerResources() {
+            return this.playerResources;
+        }
+
         #endregion
 
         #endregion
