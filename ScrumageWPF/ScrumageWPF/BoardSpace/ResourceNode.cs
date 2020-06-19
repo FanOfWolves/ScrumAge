@@ -61,7 +61,7 @@ namespace ScrumageEngine.BoardSpace {
         /// <returns>a log indicating if the player acquired the resource or not</returns>
         public override String DoAction(Player player) {
             List<Pawn> _playerPawns = GatherPlayerPawns(player.PlayerID);
-            
+
             Int32 _resourceAcquireChance = RESOURCE_BASE_CHANCE;
             foreach (Pawn _pawn in _playerPawns) {
                 _resourceAcquireChance += this.nodeResource.GetChance(_pawn);
