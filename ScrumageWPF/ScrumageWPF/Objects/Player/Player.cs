@@ -53,10 +53,20 @@ namespace ScrumageEngine.Objects.Player {
         }
 
         /// <summary>
-        /// Adds an already existing pawn Int32o the player's pawn inventory
+        /// Creates a List Of Strings representation of the pawns in the player's inventory.
         /// </summary>
-        /// <param name="pawn">An existing pawn that the player is moving back</param>
-        public void GivePawn(Pawn pawn) {
+        /// <returns>A list of strings containing info on the current pawns in the player's inventory.</returns>
+        public List<String> ListPawns() {
+            List<String> retList = new List<String>();
+            Pawns.ForEach(pawn => retList.Add(pawn.ToString()));
+            return retList;
+        }
+
+		/// <summary>
+		/// Adds an already existing pawn Int32o the player's pawn inventory
+		/// </summary>
+		/// <param name="pawn">An existing pawn that the player is moving back</param>
+		public void GivePawn(Pawn pawn) {
             this.Pawns.Add(pawn);
         }
 
@@ -81,6 +91,51 @@ namespace ScrumageEngine.Objects.Player {
             }
             return retPawn;
         }
+		#endregion
+
+		#region Cards
+        /// <summary>
+        /// Adds to player's cards
+        /// </summary>
+        /// <param name="card">The card to be added</param>
+        public void AddToCards(Card card) {
+            if(card.GetType() == typeof(AgilityCard)) {
+                this.Agility.Add(card);
+            }
+            this.Artifacts.Add(card);
+        }
+
+        /// <summary>
+        /// Removes a card from the player's User Stories inventory
+        /// </summary>
+        /// <param name="userStory">The User Story to be removed</param>
+        public void RemoveFromArtifacts(Card artifactP) {
+            this.Artifacts.Remove(artifactP);
+        }
+
+        /// <summary>
+        /// Removes a Feature card from the Features inventory
+        /// </summary>
+        /// <param name="feature">The Feature to be removed</param>
+        public void RemoveFromAgility(Card agilityP) {
+            this.Agility.Remove(agilityP);
+        }
+        #endregion
+
+
+
+
+
+
+
+
+        /// <summary>
+        /// A list of the player's User Story cards to hold obtained cards
+        /// </summary>
+        public List<Card> Artifacts = new List<Card>();
+		#endregion"
+
+
 
 		public Boolean FinishedPhase { get; set; }
 
@@ -104,47 +159,7 @@ namespace ScrumageEngine.Objects.Player {
 		/// </summary>
 		#region Item Related Methods
 
-        /// <summary>
-        /// Removes a Feature card from the Features inventory
-        /// </summary>
-        /// <param name="feature">The Feature to be removed</param>
-        public void RemoveFromAgility(Card agilityP) {
-            this.Agility.Remove(agilityP);
-        }
-        #endregion
-
-		#region Cards
-		/// <summary>
-        /// Adds to player's cards
-        /// </summary>
-        /// <param name="card">The card to be added</param>
-        public void AddToCards(Card card) {
-            if(card.GetType() == typeof(AgilityCard)) {
-                this.Agility.Add(card);
-            }
-            this.Artifacts.Add(card);
-        }
-
-        /// <summary>
-        /// Removes a card from the player's User Stories inventory
-        /// </summary>
-        /// <param name="userStory">The User Story to be removed</param>
-        public void RemoveFromArtifacts(Card artifactP) {
-            this.Artifacts.Remove(artifactP);
-        }
-
-
-        #endregion"
-
-
-
-
-
-
-        /// <summary>
-        /// A list of the player's User Story cards to hold obtained cards
-        /// </summary>
-        public List<Card> Artifacts = new List<Card>();
+        
 
        
 
@@ -240,15 +255,7 @@ namespace ScrumageEngine.Objects.Player {
 		}
 
 
-		/// <summary>
-		/// Creates a List Of Strings representation of the pawns in the player's inventory.
-		/// </summary>
-		/// <returns>A list of strings containing info on the current pawns in the player's inventory.</returns>
-		public List<String> ListPawns() {
-			List<String> retList = new List<String>();
-			Pawns.ForEach(pawn => retList.Add(pawn.ToString()));
-			return retList;
-		}
+
 		#endregion
 
 
