@@ -143,16 +143,7 @@ namespace ScrumageEngine.BoardSpace {
 			return retString;
 		}
 
-		public void GivePlayerCard(Int32 playerIDP, String cardTypeP) {
-			Player player = GetPlayerByID(playerIDP);
-			if (cardTypeP == "artifact") {
-				player.AddToArtifacts(board.GetTopArtifact());
-			}else if (cardTypeP == "agility") {
-				player.AddToAgility(board.GetTopAgility());
-			}
-		}
-
-		public String GetPawnType(Int32 indexP) {
+        public String GetPawnType(Int32 indexP) {
 			return PawnTypes[indexP];
 		}
 
