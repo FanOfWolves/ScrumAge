@@ -153,7 +153,7 @@ namespace ScrumageEngine.Windows{
 		}
 
 		/// <summary>
-		/// Udates a specified card display.
+		/// Updates a specified card display.
 		/// </summary>
 		/// <param name="cardBox">The display to update.</param>
 		/// <param name="card">The new card to be displayed.</param>
@@ -169,12 +169,14 @@ namespace ScrumageEngine.Windows{
 			CurrentPlayerIDLabel.Content = currentPlayerID;
 		}
 
-
+		/// <summary>
+		/// Updates the current player id to the next player.
+		/// </summary>
 		private void IncrementPlayer() {
-			if (++currentPlayerID > PlayerCount) {
-				currentPlayerID = 1;
+			if (++this.currentPlayerID > this.PlayerCount) {
+				this.currentPlayerID = 1;
 			}
-			PlayerTabControl.SelectedIndex = currentPlayerID - 1;
+			this.PlayerTabControl.SelectedIndex = this.currentPlayerID - 1;
 		}
 
 		/// <summary>
@@ -183,16 +185,16 @@ namespace ScrumageEngine.Windows{
 		/// <param name="sender">"Move" button in Phase 1 panel.</param>
 		/// <param name="e">The button being pressed.</param>
 		private void MovePawnBtn_Click(Object sender, RoutedEventArgs e) {
-			SelectedPawns.Clear();
+			this.SelectedPawns.Clear();
 			Boolean phaseEnd = false;
 			foreach(String p in FindPlayerPawnBox(this.currentPlayerID).SelectedItems) {
-				SelectedPawns.Add(p);
+				this.SelectedPawns.Add(p);
 			}
 			try {
-				phaseEnd = MovePawn(game, SelectedPawns, currentPlayerID, PawnboxForPlacementNode);
+				phaseEnd = MovePawn(this.game, this.SelectedPawns, this.currentPlayerID, PawnboxForPlacementNode);
 
 				UpdatePawnBox(FindNodePawnBoxPhase1(), game.GetNodePawns(PawnboxForPlacementNode));
-				UpdatePawnBox(FindPlayerPawnBox(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
+				UpdatePawnBox(FindPlayerPawnBox(this.currentPlayerID), this.game.GetPlayerPawns(this.currentPlayerID));
 				IncrementPlayer();
 			}
 			catch(MovePawnException _exception) {
@@ -205,8 +207,8 @@ namespace ScrumageEngine.Windows{
 
 
 		private void TestDiceBtn_Click(Object sender, RoutedEventArgs e) {
-			RollDice(game, Int32.Parse(DiceCountCombo.SelectedItem.ToString()));
-			UpdateDieBoxes(game.ShowDice());
+			RollDice(this.game, Int32.Parse(this.DiceCountCombo.SelectedItem.ToString()));
+			UpdateDieBoxes(this.game.ShowDice());
 			LogInput();
 		}
 
@@ -254,7 +256,7 @@ namespace ScrumageEngine.Windows{
 		/// <summary>
 		/// Finds the currently selected node pawn-box from the action phase combo-box
 		/// </summary>
-		/// <returns>the pawn-box for the selected ndoe</returns>
+		/// <returns>the pawn-box for the selected node</returns>
 		private ListBox FindNodePawnBoxPhase2() {
 			return FindName($"{this.NodeComboBox2.SelectedItem.ToString().Replace(" ","")}Box") as ListBox;
         }
