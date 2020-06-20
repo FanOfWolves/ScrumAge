@@ -170,13 +170,13 @@ namespace ScrumageEngine.Windows{
 		}
 
 		/// <summary>
-		/// Updates the current player id to the next player.
+		/// Updates the current player id to the next player
 		/// </summary>
 		private void IncrementPlayer() {
-			if (++this.currentPlayerID > this.PlayerCount) {
-				this.currentPlayerID = 1;
+			if (++currentPlayerID > PlayerCount) {
+				currentPlayerID = 1;
 			}
-			this.PlayerTabControl.SelectedIndex = this.currentPlayerID - 1;
+			PlayerTabControl.SelectedIndex = currentPlayerID - 1;
 		}
 
 		/// <summary>
@@ -185,16 +185,16 @@ namespace ScrumageEngine.Windows{
 		/// <param name="sender">"Move" button in Phase 1 panel.</param>
 		/// <param name="e">The button being pressed.</param>
 		private void MovePawnBtn_Click(Object sender, RoutedEventArgs e) {
-			this.SelectedPawns.Clear();
+			SelectedPawns.Clear();
 			Boolean phaseEnd = false;
 			foreach(String p in FindPlayerPawnBox(this.currentPlayerID).SelectedItems) {
-				this.SelectedPawns.Add(p);
+				SelectedPawns.Add(p);
 			}
 			try {
-				phaseEnd = MovePawn(this.game, this.SelectedPawns, this.currentPlayerID, PawnboxForPlacementNode);
+				phaseEnd = MovePawn(game, SelectedPawns, currentPlayerID, PawnboxForPlacementNode);
 
 				UpdatePawnBox(FindNodePawnBoxPhase1(), game.GetNodePawns(PawnboxForPlacementNode));
-				UpdatePawnBox(FindPlayerPawnBox(this.currentPlayerID), this.game.GetPlayerPawns(this.currentPlayerID));
+				UpdatePawnBox(FindPlayerPawnBox(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
 				IncrementPlayer();
 			}
 			catch(MovePawnException _exception) {
@@ -207,8 +207,8 @@ namespace ScrumageEngine.Windows{
 
 
 		private void TestDiceBtn_Click(Object sender, RoutedEventArgs e) {
-			RollDice(this.game, Int32.Parse(this.DiceCountCombo.SelectedItem.ToString()));
-			UpdateDieBoxes(this.game.ShowDice());
+			RollDice(game, Int32.Parse(DiceCountCombo.SelectedItem.ToString()));
+			UpdateDieBoxes(game.ShowDice());
 			LogInput();
 		}
 
