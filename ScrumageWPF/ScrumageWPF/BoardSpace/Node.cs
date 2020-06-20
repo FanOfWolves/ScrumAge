@@ -56,8 +56,6 @@ namespace ScrumageEngine.BoardSpace {
 		/// </summary>
 		/// <param name="nodeID">The ID used to identify the node</param>
 		/// <param name="nodeName">The name of the node</param>
-		/// <param name="maxPawns">The limit on the number of pawns for this node</param>
-		/// <param name="nodeDesc">The node's description</param>
 		public Node(Int32 nodeID, String nodeName) : base() {
 			NodeID = nodeID;
 			NodeName = nodeName;

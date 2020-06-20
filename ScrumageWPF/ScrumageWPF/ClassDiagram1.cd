@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ScrumageEngine.BoardSpace.Board" Collapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AYAhABQAOAaAEAIBAAAAAAAAgABEAQAMAAAICQAACAA=</HashCode>
+      <FileName>BoardSpace\Board.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.BoardSpace.BudgetNode">
+    <Position X="4.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>BoardSpace\BudgetNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.BoardSpace.CardNode" Collapsed="true">
+    <Position X="9.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAABAAACAAAAAAAAAACAICAAAAAgAAAAAAAA=</HashCode>
+      <FileName>BoardSpace\CardNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.BoardSpace.Game" Collapsed="true">
+    <Position X="21.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCAAIAUAAJCQIDIABAAQBAAAAgCsYAAAIEJEAQAACAA=</HashCode>
+      <FileName>BoardSpace\Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.BoardSpace.HiringNode" Collapsed="true">
+    <Position X="13.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACEAAgAAAAAAAAAAAAAAAAAAAAAIAAAIAAQAAAAAAAA=</HashCode>
+      <FileName>BoardSpace\HiringNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.BoardSpace.Node" Collapsed="true">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAABAAACpIEAAIACAAABABAAE=</HashCode>
+      <FileName>BoardSpace\Node.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.BoardSpace.ReassignmentNode">
+    <Position X="1.5" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>BoardSpace\ReassignmentNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.BoardSpace.ResourceNode">
+    <Position X="7" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAACAAAAACAAACAAAAAAAAIAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>BoardSpace\ResourceNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.BoardSpace.UpgradeNode" Collapsed="true">
+    <Position X="11.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>BoardSpace\UpgradeNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.Exceptions.InvalidInputEx" Collapsed="true">
+    <Position X="21.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Exceptions\InvalidInputEx.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.Exceptions.MovePawnException" Collapsed="true">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\MovePawnException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.InputLogic.InputHandler" Collapsed="true">
+    <Position X="19.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAEAAAAAAAIABAAAAAAIFAAAAAAAAABAABQAAAA=</HashCode>
+      <FileName>InputLogic\InputHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.Objects.Items.Cards.AgilityCard" Collapsed="true">
+    <Position X="2" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Items\AgilityCard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.Objects.Items.Cards.ArtifactCard" Collapsed="true">
+    <Position X="4.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Items\ArtifactCard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.Objects.Items.Cards.Card" Collapsed="true">
+    <Position X="3.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAEAAAAAQAAAAABgAAAAAEABAAAAgA=</HashCode>
+      <FileName>Objects\Items\Card.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.Objects.Items.Design" Collapsed="true">
+    <Position X="4.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAIAAAAAAAgAAA=</HashCode>
+      <FileName>Objects\Items\Design.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.Objects.Items.Die" Collapsed="true">
+    <Position X="19.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAABABAAAAAAAAAAEAgAAAAAAA=</HashCode>
+      <FileName>Objects\Items\Die.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.Objects.Items.Implementation" Collapsed="true">
+    <Position X="9" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAIAAAAAAAgAAA=</HashCode>
+      <FileName>Objects\Items\Implementation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.Objects.Items.Pawn" Collapsed="true">
+    <Position X="21.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgEIAAAAAAABAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Items\Pawn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.Objects.Items.Requirements" Collapsed="true">
+    <Position X="2.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAIAAAAAAAgAAA=</HashCode>
+      <FileName>Objects\Items\Requirements.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.Objects.Items.Resource" Collapsed="true">
+    <Position X="5.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAgABgAAAAAQAAAAIAIAAAAAAAAAAAiQ=</HashCode>
+      <FileName>Objects\Items\Resource.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ScrumageEngine.Objects.Items.Testing" Collapsed="true">
+    <Position X="6.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAIAAAAAAAgAAA=</HashCode>
+      <FileName>Objects\Items\Testing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.Objects.Player.Player" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAICAgAQBEIHAAAQgBBACEAAAAQYACBQAgAA=</HashCode>
+      <FileName>Objects\Player\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.Objects.Player.ResourceContainer" Collapsed="true">
+    <Position X="18" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQAAAAAAAAAAADACAAgEAAAAgAAAAAAAAAQQABQA=</HashCode>
+      <FileName>Objects\Player\ResourceContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrumageEngine.Views.OptionsView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAkAAAACAACgAAAAAAAACAABAgAAAACAAAAAAAAA=</HashCode>
+      <FileName>Views\OptionsView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ScrumageEngine.Views.StartView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAEAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\StartView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ScrumageEngine.Views.HelpView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Windows\HelpWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ScrumageEngine.Windows.GameWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAgQAAIEAAAAABBASFQAAAAAAAgAAACIEABAQAAAoYg=</HashCode>
+      <FileName>Windows\GameWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ScrumageEngine.Windows.MainMenu" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAIAAAAAAAIAAgAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Windows\MainMenu.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ScrumageEngine.App" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
