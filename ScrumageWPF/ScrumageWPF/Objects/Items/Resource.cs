@@ -14,22 +14,13 @@ namespace ScrumageEngine.Objects.Items {
 		public Int32 BackEndChance { get; set; }
 		public Int32 FullStackChance { get; set; }
 
-
-        private readonly Int32 FRONT_END_CHANCE;
-        private readonly Int32 BACK_END_CHANCE;
-        private readonly Int32 FULL_STACK_CHANCE;
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Resource"/> class.
         /// </summary>
         /// <param name="name">The name of the resource</param>
         public Resource(String name) {
 			Name = name;
-			FrontEndChance = 0;
-			BackEndChance = 0;
-			FullStackChance = 0;
-		}
+        }
 
         /// <summary>
         /// Copy Constructor. Initializes a new instance of the <see cref="Resource"/> class.
@@ -45,11 +36,11 @@ namespace ScrumageEngine.Objects.Items {
         public Int32 GetChance(Pawn pawnP) {
             switch(pawnP.PawnType) {
                 case "Full Stack":
-                    return this.FULL_STACK_CHANCE;
+                    return this.FullStackChance;
                 case "Back End":
-                    return this.BACK_END_CHANCE;
+                    return this.BackEndChance;
                 case "Front End":
-                    return this.FRONT_END_CHANCE;
+                    return this.FrontEndChance;
                 default:
                     return 0;
             }

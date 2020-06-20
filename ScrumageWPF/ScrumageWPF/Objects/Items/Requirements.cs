@@ -21,9 +21,9 @@ namespace ScrumageEngine.Objects.Items {
         /// Initializes a new instance of the <see cref="Requirements"/> class.
         /// </summary>
         public Requirements(): base(RESOURCE_NAME) {
-            this.FrontEndChance = FRONT_END_CHANCE;
-            this.BackEndChance = BACK_END_CHANCE;
-            this.FullStackChance = FULL_STACK_CHANCE;
+            base.FrontEndChance = FRONT_END_CHANCE;
+            base.BackEndChance = BACK_END_CHANCE;
+            base.FullStackChance = FULL_STACK_CHANCE;
         }
         #endregion
     }
