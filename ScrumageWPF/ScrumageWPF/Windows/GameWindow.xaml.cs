@@ -153,7 +153,7 @@ namespace ScrumageEngine.Windows{
 		}
 
 		/// <summary>
-		/// Udates a specified card display.
+		/// Updates a specified card display.
 		/// </summary>
 		/// <param name="cardBox">The display to update.</param>
 		/// <param name="card">The new card to be displayed.</param>
@@ -169,7 +169,9 @@ namespace ScrumageEngine.Windows{
 			CurrentPlayerIDLabel.Content = currentPlayerID;
 		}
 
-
+		/// <summary>
+		/// Updates the current player id to the next player
+		/// </summary>
 		private void IncrementPlayer() {
 			if (++currentPlayerID > PlayerCount) {
 				currentPlayerID = 1;
@@ -254,7 +256,7 @@ namespace ScrumageEngine.Windows{
 		/// <summary>
 		/// Finds the currently selected node pawn-box from the action phase combo-box
 		/// </summary>
-		/// <returns>the pawn-box for the selected ndoe</returns>
+		/// <returns>the pawn-box for the selected node</returns>
 		private ListBox FindNodePawnBoxPhase2() {
 			return FindName($"{this.NodeComboBox2.SelectedItem.ToString().Replace(" ","")}Box") as ListBox;
         }
