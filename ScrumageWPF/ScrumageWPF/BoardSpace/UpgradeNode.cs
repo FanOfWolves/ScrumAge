@@ -10,6 +10,7 @@ namespace ScrumageEngine.BoardSpace
     /// Upgrades pawns to Full Stack type
     /// </summary>
     /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
+    
     class UpgradeNode : Node
     {
         #region Fields

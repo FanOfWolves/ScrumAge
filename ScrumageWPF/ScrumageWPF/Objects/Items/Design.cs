@@ -11,8 +11,8 @@ namespace ScrumageEngine.Objects.Items {
         #region Fields
         private const String RESOURCE_NAME = "Design";
         private const Int32 FULL_STACK_CHANCE = 20;
-        private const Int32 FRONT_END_CHANCE = 20;
-        private const Int32 BACK_END_CHANCE = 10;
+        private const Int32 FRONT_END_CHANCE = 15;
+        private const Int32 BACK_END_CHANCE = 15;
         #endregion
 
         #region Constructors
