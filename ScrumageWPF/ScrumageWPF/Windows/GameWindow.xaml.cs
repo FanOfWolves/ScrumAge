@@ -173,10 +173,8 @@ namespace ScrumageEngine.Windows{
 		/// Updates the current player id to the next player
 		/// </summary>
 		private void IncrementPlayer() {
-			if (++currentPlayerID > PlayerCount) {
-				currentPlayerID = 1;
-			}
-			PlayerTabControl.SelectedIndex = currentPlayerID - 1;
+			currentPlayerID = game.currentPlayerIndex + 1;
+			PlayerTabControl.SelectedIndex = game.currentPlayerIndex;
 		}
 
 		/// <summary>
