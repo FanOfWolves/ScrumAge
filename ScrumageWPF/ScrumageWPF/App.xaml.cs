@@ -8,15 +8,8 @@ using System.Windows;
 
 namespace ScrumageEngine {
 	/// <summary>
-	/// Int32eraction logic for App.xaml
+	/// Interaction logic for App.xaml
 	/// </summary>
 	public partial class App : Application {
-/*		protected override void OnStartup(StartupEventArgs e) {
-			base.OnStartup(e);
-			StartWindow sw = new StartWindow();
-			sw.Show();
-			MainWindow mw = new MainWindow(sw.playerCount);
-			mw.Show();
-		}*/
 	}
 }
