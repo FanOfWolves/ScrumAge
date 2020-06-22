@@ -127,7 +127,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// </summary>
 		/// <returns></returns>
 		private Boolean PhaseTwo() {
-			return true;
+			return false;
 		}
 		/// <summary>
 		/// No implemented currently
