@@ -173,10 +173,8 @@ namespace ScrumageEngine.Windows{
 		/// Updates the current player id to the next player
 		/// </summary>
 		private void IncrementPlayer() {
-			if (++currentPlayerID > PlayerCount) {
-				currentPlayerID = 1;
-			}
-			PlayerTabControl.SelectedIndex = currentPlayerID - 1;
+			currentPlayerID = game.currentPlayerIndex + 1;
+			PlayerTabControl.SelectedIndex = game.currentPlayerIndex;
 		}
 
 		/// <summary>
@@ -260,6 +258,20 @@ namespace ScrumageEngine.Windows{
 		private ListBox FindNodePawnBoxPhase2() {
 			return FindName($"{this.NodeComboBox2.SelectedItem.ToString().Replace(" ","")}Box") as ListBox;
         }
+
+		
+		private Label FindPlayerScoreLabel(Int32 playerIdP){
+			return FindName($"P{playerIdP}ScoreValue") as Label;
+		}
+
+		private Label FindPlayerBudgetLabel(Int32 playerIdP){
+			return FindName($"P{playerIdP}Budget") as Label;
+		}
+
+
+		private Label FindPlayerFundsLabel(Int32 playerIdp){
+			return FindName($"P{playerIdp}Funds") as Label;
+		}
 		#endregion
 
 		#region Update Player Display
@@ -274,12 +286,26 @@ namespace ScrumageEngine.Windows{
             UpdatePawnBox(FindPlayerPawnBox(playerIdP), this.game.GetPlayerPawns(playerIdP));
 			//TODO: Update Cards
 
-            // Update stats
-            //	update budget
+            // Update Stats
+			//	update budget
+			UpdatePlayerBudgetDisplay(FindPlayerBudgetLabel(playerIdP), this.game.GetPlayerByID(playerIdP).Budget);
             //	update score
+			UpdatePlayerScoreDisplay(FindPlayerScoreLabel(playerIdP), this.game.GetPlayerByID(playerIdP).FeaturePoints);
             //	update funds
+			UpdatePlayerFundsDisplay(FindPlayerFundsLabel(playerIdP), this.game.GetPlayerByID(playerIdP).Funds);
         }
+	
+		private void UpdatePlayerFundsDisplay(Label playerLabelp, Int32 playerFundsp){
+			playerLabelp.Content = playerFundsp;
+		}
 
+		private void UpdatePlayerBudgetDisplay(Label playerLabelp, Int32 playerBudgetp){
+			playerLabelp.Content = playerBudgetp;
+		}
+
+		private void UpdatePlayerScoreDisplay(Label playerLabelp, Int32 playerScorep){
+			playerLabelp.Content = playerScorep;
+		}
 		/// <summary>
 		/// Updates the player resource box display.
 		/// </summary>
