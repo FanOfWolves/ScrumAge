@@ -36,7 +36,7 @@ namespace ScrumageEngine.Windows{
 			InitPlayerTab(playerNames);
 			InitComboBox(NodeComboBox, game.GetNodeNames());
 			InitComboBox(NodeComboBox2, game.GetNodeNames());
-			currentPlayerID = PlayerTabControl.SelectedIndex;
+			currentPlayerID = game.currentPlayerIndex+1;
 		}
 		/// <summary>
 		/// Initializes the Node combobox with all nodes on the board(Make sure nodes are added to the Nodes list in Board).

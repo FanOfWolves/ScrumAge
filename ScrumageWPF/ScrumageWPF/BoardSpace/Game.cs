@@ -105,12 +105,18 @@ namespace ScrumageEngine.BoardSpace {
 			}
 			return allPlayersFinished;
 		}
-
-		private Boolean PhaseTwo() {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <return></return>
+        private Boolean PhaseTwo() {
 			return true;
 		}
-
-		private Boolean PhaseThree() {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <return></return>
+        private Boolean PhaseThree() {
 			return true;
 		}
 
