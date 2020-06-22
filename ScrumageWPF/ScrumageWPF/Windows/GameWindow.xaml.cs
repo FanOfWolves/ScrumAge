@@ -225,12 +225,12 @@ namespace ScrumageEngine.Windows {
 		}
 
 		private Label FindPlayerBudgetLabel(Int32 playerIdP) {
-			return FindName($"P{playerIdP}Budget") as Label;
+			return FindName($"P{playerIdP}BudgetValue") as Label;
 		}
 
 
 		private Label FindPlayerFundsLabel(Int32 playerIdp) {
-			return FindName($"P{playerIdp}Funds") as Label;
+			return FindName($"P{playerIdp}FundsValue") as Label;
 		}
 		#endregion
 
@@ -248,11 +248,11 @@ namespace ScrumageEngine.Windows {
 
 			// Update Stats
 			//	update budget
-			//UpdatePlayerBudgetDisplay(FindPlayerBudgetLabel(playerIdP), this.game.GetPlayerByID(playerIdP).Budget);
+			UpdatePlayerBudgetDisplay(FindPlayerBudgetLabel(playerIdP), this.game.GetPlayerByID(playerIdP).Budget);
 			//	update score
-			//UpdatePlayerScoreDisplay(FindPlayerScoreLabel(playerIdP), this.game.GetPlayerByID(playerIdP).FeaturePoints);
+			UpdatePlayerScoreDisplay(FindPlayerScoreLabel(playerIdP), this.game.GetPlayerByID(playerIdP).FeaturePoints);
 			//	update funds
-			//UpdatePlayerFundsDisplay(FindPlayerFundsLabel(playerIdP), this.game.GetPlayerByID(playerIdP).Funds);
+			UpdatePlayerFundsDisplay(FindPlayerFundsLabel(playerIdP), this.game.GetPlayerByID(playerIdP).Funds);
 		}
 
 

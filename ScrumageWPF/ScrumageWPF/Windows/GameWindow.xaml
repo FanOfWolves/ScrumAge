@@ -45,7 +45,7 @@
 						</StackPanel>
 						<StackPanel Orientation="Horizontal">
 							<Label HorizontalAlignment="Left" Content="Funds:" FontSize="26"/>
-							<Label HorizontalAlignment="Left" x:Name="P1FundValue" Content="$0.00" FontSize="26"/>
+							<Label HorizontalAlignment="Left" x:Name="P1FundsValue" Content="$0.00" FontSize="26"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal">
 							<Label HorizontalAlignment="Left" Content="Sprint Cost:" FontSize="26"/>
