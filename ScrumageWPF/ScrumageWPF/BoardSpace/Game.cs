@@ -109,8 +109,11 @@ namespace ScrumageEngine.BoardSpace {
 			return false;
 		}
 
-
-		private Boolean AllPawnsMoved() {
+        /// <summary>
+        /// Boolean if all pawns have been moved
+        /// </summary>
+        /// <return>Boolean true if all pawns have moved from player inventory list</return>
+        private Boolean AllPawnsMoved() {
 			Boolean allPlayersFinished = true;
 			foreach (Player p in Players) {
 				if (p.Pawns.Count > 0) {

@@ -23,7 +23,7 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<TabControl x:Name="PlayerTabControl" Grid.Column="0" Grid.Row="0">
+		<TabControl x:Name="PlayerTabControl" Grid.Column="0" Grid.Row="0" SelectedIndex="0">
 			<TabItem x:Name="PTab1" Background="#FFE5E5E5" BorderBrush="#FFACACAC" Header="Player 1" Visibility="Hidden">
 				<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 					<StackPanel Orientation="Vertical" Background="#FFE5E5E5">

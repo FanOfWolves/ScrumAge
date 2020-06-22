@@ -60,7 +60,7 @@ namespace ScrumageEngine.Windows {
 			InitPlayerTab(playerNames);
 			InitComboBox(NodeComboBox, game.GetNodeNames());
 			InitComboBox(NodeComboBox2, game.GetNodeNames());
-			currentPlayerID = PlayerTabControl.SelectedIndex+1;
+			currentPlayerID = game.currentPlayerIndex+1;
 		}
 		#endregion
 
@@ -120,7 +120,7 @@ namespace ScrumageEngine.Windows {
 		private void MovePawnBtn_Click(Object sender, RoutedEventArgs e) {
 			SelectedPawns.Clear();
 			Boolean phaseEnd = false;
-			foreach(String p in FindPlayerPawnBox(this.currentPlayerID).SelectedItems) {
+			foreach(String p in FindPlayerPawnBox(currentPlayerID).SelectedItems) {
 				SelectedPawns.Add(p);
 			}
 			try {
