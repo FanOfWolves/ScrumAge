@@ -34,8 +34,8 @@ namespace ScrumageEngine.Objects.Player {
 		/// <summary>
 		/// Player overloaded constructor
 		/// </summary>
-		/// <param name="playerID">The player's ID</param>
-		/// <param name="playerName">The player's name</param>
+		/// <param name="playerID">The player's ID.</param>
+		/// <param name="playerNameP">The player's name.</param>
 		public Player(Int32 playerID, String playerNameP) {
             PlayerID = playerID;
             PlayerName = playerNameP;
@@ -176,9 +176,12 @@ namespace ScrumageEngine.Objects.Player {
         public void RemoveFromAgility(Card agilityP) {
             this.Agility.Remove(agilityP);
         }
-		#endregion
+        #endregion
 
-		#region Resources
+        #region Resources        
+        /// <summary>
+        /// The player resources. <see cref="ResourceContainer"/>.
+        /// </summary>
         private ResourceContainer playerResources;
 
         /// <summary>
@@ -201,6 +204,10 @@ namespace ScrumageEngine.Objects.Player {
             return this.playerResources.TakeResources(resource, resourceAmount);
         }
 
+        /// <summary>
+        /// Get the resource container of the player
+        /// </summary>
+        /// <returns>the resource container of the player</returns>
         public ResourceContainer GetPlayerResources() {
             return this.playerResources;
         }
