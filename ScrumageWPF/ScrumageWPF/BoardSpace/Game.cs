@@ -54,22 +54,33 @@ namespace ScrumageEngine.BoardSpace {
 
 
 		/// <summary>
-		/// 
+		/// Return node object from ID
 		/// </summary>
-		/// <param name="nodeIDP"></param>
-		/// <returns></returns>
+		/// <param name="nodeIDP">ID of node</param>
+		/// <returns>Node object</returns>
 		public Node GetNodeByID(Int32 nodeIDP) {
 			return board.GetNodeByID(nodeIDP);
 		}
-
+		/// <summary>
+		/// Retrieve Player ID
+		/// </summary>
+		/// <param name="playerIDP">Player Id set at start of game</param>
+		/// <returns>Player object</returns>
 		public Player GetPlayerByID(Int32 playerIDP) {
 			return Players.Find(player => player.PlayerID == playerIDP);
 		}
-
+		/// <summary>
+		/// Get all current player objects
+		/// </summary>
+		/// <returns>List of player objects</returns>
 		public List<Player> GetAllPlayers() {
 			return Players;
 		}
-
+		/// <summary>
+		/// Checks current game phase and returns phase method
+		/// </summary>
+		/// <param name="phase"></param>
+		/// <returns>Method for phase</returns>
 		private Boolean CheckPhase(Int32 phase) {
 			if (phase == 1) return PhaseOne();
 			else if (phase == 2) return PhaseTwo();
@@ -77,7 +88,10 @@ namespace ScrumageEngine.BoardSpace {
 			return false;
 		}
 
-
+		/// <summary>
+		/// Verifies if all pawns have been moved. Returns true if all pawns have been placed.
+		/// </summary>
+		/// <returns>boolean 1 if all pawns have been moved</returns>
 		private Boolean PhaseOne() { // UPDATE GUI PHASE BOX!
 			if (AllPawnsMoved()) {
 				phase = 2;

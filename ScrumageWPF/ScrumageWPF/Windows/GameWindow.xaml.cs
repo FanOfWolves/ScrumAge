@@ -60,7 +60,7 @@ namespace ScrumageEngine.Windows {
 			InitPlayerTab(playerNames);
 			InitComboBox(NodeComboBox, game.GetNodeNames());
 			InitComboBox(NodeComboBox2, game.GetNodeNames());
-			currentPlayerID = PlayerTabControl.SelectedIndex;
+			currentPlayerID = PlayerTabControl.SelectedIndex+1;
 		}
 		#endregion
 
