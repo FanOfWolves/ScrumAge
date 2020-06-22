@@ -23,7 +23,7 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<TabControl x:Name="PlayerTabControl" Grid.Column="0" Grid.Row="0" SelectionChanged="PlayerTabControl_SelectionChanged">
+		<TabControl x:Name="PlayerTabControl" Grid.Column="0" Grid.Row="0">
 			<TabItem x:Name="PTab1" Background="#FFE5E5E5" BorderBrush="#FFACACAC" Header="Player 1" Visibility="Hidden">
 				<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 					<StackPanel Orientation="Vertical" Background="#FFE5E5E5">
@@ -614,11 +614,9 @@
 					<Button x:Name="TestDiceBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Top" Click="TestDiceBtn_Click" Content="Roll Dice"/>
 				</DockPanel>
 				<!-- Test Button -->
-				<DockPanel Grid.Column="1" Grid.Row="5">
-					<Button x:Name="TestBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Top" Click="TestBtn_Click" Content="Test Button"/>
-				</DockPanel>
+				<DockPanel Grid.Column="1" Grid.Row="5"/>
 				<DockPanel Grid.Column="0" Grid.Row="5">
-					<ComboBox x:Name="DiceCountCombo" HorizontalAlignment="Left" Margin="128,0,0,0" Grid.Row="5" VerticalAlignment="Center" Width="42" SelectedIndex="0" RenderTransformOrigin="0.667,0.546">
+					<ComboBox x:Name="DiceCountCombo" HorizontalAlignment="Left" Margin="128,0,0,0" Grid.Row="5" VerticalAlignment="Center" Width="42" SelectedIndex="0" RenderTransformOrigin="3.214,0.477">
 						<System:String>1</System:String>
 						<System:String>2</System:String>
 						<System:String>3</System:String>

@@ -10,16 +10,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ScrumageEngine.Views
-{
-    /// <summary>
-    /// Interaction logic for HelpView.xaml
-    /// </summary>
-    public partial class HelpView : Window
-    {
-        public HelpView()
-        {
-            InitializeComponent();
-        }
-    }
+namespace ScrumageEngine.Views {
+	/// <summary>
+	/// Interaction logic for HelpView.xaml
+	/// </summary>
+	public partial class HelpView : Window {
+
+		/// <summary>
+		/// Initialize HelpView when called.
+		/// </summary>
+		public HelpView() {
+			InitializeComponent();
+		}
+	}
 }
