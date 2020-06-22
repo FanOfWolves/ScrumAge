@@ -28,14 +28,24 @@ namespace ScrumageEngine.Objects.Items.Cards {
         }
         #endregion
 
-
+        /// <summary>
+        /// Not yet implemented
+        /// </summary>
+        /// <returns></returns>
         public String Display() {
 	        return "Will be abstract";
         }
-
+        /// <summary>
+        /// Not yet implemented
+        /// </summary>
+        /// <returns></returns>
         public override String ToString() {
 	        return "Will be abstract";
         }
+        /// <summary>
+        /// Not yet implemented
+        /// </summary>
+        /// <returns></returns>
         public ResourceContainer GetCardRequirements() {
             return this.cardRequirements;//TODO: Shallow reference?
         }

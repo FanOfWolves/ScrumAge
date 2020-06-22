@@ -121,7 +121,10 @@ namespace ScrumageEngine.BoardSpace {
 		public void RemovePawn(Pawn pawn) {
 			Pawns.Remove(pawn);
 		}
-
+		/// <summary>
+		/// List pawns for current node
+		/// </summary>
+		/// <returns>List of pawn types</returns>
 		public List<String> ListPawns() {
 			List<String> retList = new List<String>();
 			Pawns.ForEach(pawn => retList.Add(pawn.ToString()));
