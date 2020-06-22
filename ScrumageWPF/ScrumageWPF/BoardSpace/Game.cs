@@ -11,7 +11,7 @@ namespace ScrumageEngine.BoardSpace {
 		private List<Player> Players { get; }
 		private Board board = new Board();
 		private String[] PawnTypes = {"Front End", "Back End", "Full Stack"};
-		private Int32 phase = 1;
+		public Int32 phase = 1;
 		private static Random Rand = new Random(); // Maybe move this to Game?
 		public int currentPlayerIndex = 0;
 
@@ -76,32 +76,23 @@ namespace ScrumageEngine.BoardSpace {
 		public List<Player> GetAllPlayers() {
 			return Players;
 		}
-		/// <summary>
-		/// Checks current game phase and returns phase method
-		/// </summary>
-		/// <param name="phase"></param>
-		/// <returns>Method for phase</returns>
-		private Boolean CheckPhase(Int32 phase) {
-			if (phase == 1) return PhaseOne();
-			else if (phase == 2) return PhaseTwo();
-			else if (phase == 3) return PhaseThree();
-			return false;
-		}
 
+		#region Phase Functions
 		/// <summary>
-		/// Verifies if all pawns have been moved. Returns true if all pawns have been placed.
+		/// Cycles through players allowing them to move pawn one move at a time until all pawns have been moved
 		/// </summary>
 		/// <returns>boolean 1 if all pawns have been moved</returns>
 		private Boolean PhaseOne() { // UPDATE GUI PHASE BOX!
-			if (AllPawnsMoved()) {
+			if(AllPawnsMoved()) {
 				phase = 2;
 				currentPlayerIndex = 0;
+				ResetPlayers();
 				return true;
 			} else {
-				if (Players[currentPlayerIndex].CurrentPawns == 0) {
+				if(Players[currentPlayerIndex].CurrentPawns == 0) {
 					Players[currentPlayerIndex].FinishedPhase = true;
 				}
-				if (++currentPlayerIndex >= Players.Count) currentPlayerIndex = 0;
+				if(++currentPlayerIndex >= Players.Count) currentPlayerIndex = 0;
 				while(Players[currentPlayerIndex].FinishedPhase || Players[currentPlayerIndex].CurrentPawns == 0) {
 					if(++currentPlayerIndex >= Players.Count) currentPlayerIndex = 0;
 				}
@@ -109,26 +100,30 @@ namespace ScrumageEngine.BoardSpace {
 			return false;
 		}
 
+
+
 		/// <summary>
-		/// Checks to see if all pawns have been moved
-		/// </summary>
-		/// <returns></returns>
-		private Boolean AllPawnsMoved() {
-			Boolean allPlayersFinished = true;
-			foreach (Player p in Players) {
-				if (p.Pawns.Count > 0) {
-					allPlayersFinished = false;
-				}
-			}
-			return allPlayersFinished;
-		}
-		/// <summary>
-		/// Not implemented currently
+		/// Cycles through players allowing them to activate nodes one node at a time until all players have done all possible activations
 		/// </summary>
 		/// <returns></returns>
 		private Boolean PhaseTwo() {
-			return false;
+			if(AllPlayersDone()) {
+				phase = 3;
+				currentPlayerIndex = 0;
+				ResetPlayers();
+				return true;
+			} else {
+				if(++currentPlayerIndex >= Players.Count) currentPlayerIndex = 0;
+				while(PlayerDoneWithActions(Players[currentPlayerIndex]) || Players[currentPlayerIndex].FinishedPhase) {
+					if(++currentPlayerIndex >= Players.Count) currentPlayerIndex = 0;
+				}
+				return false;
+			}
+			
+
 		}
+
+
 		/// <summary>
 		/// No implemented currently
 		/// </summary>
@@ -136,6 +131,81 @@ namespace ScrumageEngine.BoardSpace {
 		private Boolean PhaseThree() {
 			return true;
 		}
+
+
+		/// <summary>
+		/// Checks current game phase and returns phase method
+		/// </summary>
+		/// <param name="phase"></param>
+		/// <returns>Method for phase</returns>
+		private Boolean CheckPhase(Int32 phase) {
+			if(phase == 1) return PhaseOne();
+			else if(phase == 2) return PhaseTwo();
+			else if(phase == 3) return PhaseThree();
+			return false;
+		}
+
+
+		/// <summary>
+		/// Rests all of the players' FinishedPhase 
+		/// </summary>
+		private void ResetPlayers() {
+			foreach(Player p in Players) {
+				p.FinishedPhase = false;
+			}
+		}
+
+
+		/// <summary>
+		/// Checks to see if all pawns have been moved
+		/// </summary>
+		/// <returns></returns>
+		private Boolean AllPawnsMoved() {
+			Boolean allPlayersFinished = true;
+			foreach(Player p in Players) {
+				if(p.Pawns.Count > 0) {
+					allPlayersFinished = false;
+				}
+			}
+			return allPlayersFinished;
+		}
+
+
+		/// <summary>
+		/// Checks if the current player has finished all possible actions, if so changes thayers FinishedPhase property.
+		/// </summary>
+		/// <param name="playerP">The current player.</param>
+		/// <returns>True if player is finished, false if not.</returns>
+		private Boolean PlayerDoneWithActions(Player playerP) {
+			foreach(Node node in board.GetAllNodes()) {
+				if(node.HasPawn(playerP.PlayerID)) return false;
+			}
+			playerP.FinishedPhase = true;
+			return true;
+		}
+
+
+		/// <summary>
+		/// Iterates through all players and checks to see if all players have finished all actions.
+		/// </summary>
+		/// <returns>True if all players have finished.</returns>
+		private Boolean AllPlayersDone() {
+			foreach(Player p in Players) {
+				if(!PlayerDoneWithActions(p) || !p.FinishedPhase) return false;
+			}
+			return true;
+		}
+
+
+		/// <summary>
+		/// Checks if all players have finished actions, external call.
+		/// </summary>
+		/// <returns>True if all players have finished actions</returns>
+		internal Boolean CheckPlayerActions() {
+			return AllPlayersDone();
+		}
+
+		#endregion
 
 		/// <summary>
 		/// Uses a global random to roll a specified number of dice.
@@ -167,14 +237,18 @@ namespace ScrumageEngine.BoardSpace {
 
 			return retString;
 		}
+
+
 		/// <summary>
 		/// Get current pawn type of pawn object
 		/// </summary>
 		/// <param name="indexP"></param>
 		/// <returns>string of pawn type</returns>
-        public String GetPawnType(Int32 indexP) {
+		public String GetPawnType(Int32 indexP) {
 			return PawnTypes[indexP];
 		}
+
+
 		/// <summary>
 		/// Get current node names
 		/// </summary>
@@ -187,6 +261,8 @@ namespace ScrumageEngine.BoardSpace {
 			});
 			return nodeNames;
 		}
+
+
 		/// <summary>
 		/// Get current player pawns by ID
 		/// </summary>
@@ -195,6 +271,8 @@ namespace ScrumageEngine.BoardSpace {
 		public List<String> GetPlayerPawns(Int32 playerIDP) {
 			return GetPlayerByID(playerIDP).ListPawns();
 		}
+
+
 		/// <summary>
 		/// Get list of pawns at current node by node name
 		/// </summary>
@@ -203,6 +281,8 @@ namespace ScrumageEngine.BoardSpace {
 		public List<String> GetNodePawns(String nodeNameP) {
 			return board.ListNodePawns(nodeNameP);
 		}
+
+
 		/// <summary>
 		/// Get player name attribute by player ID
 		/// </summary>
@@ -211,6 +291,8 @@ namespace ScrumageEngine.BoardSpace {
 		public String GetPlayerNameByID(Int32 playerIDP) {
 			return GetPlayerByID(playerIDP).PlayerName;
 		}
+
+
 		/// <summary>
 		/// Creates pawn for player and adds to inventory
 		/// </summary>
@@ -233,6 +315,8 @@ namespace ScrumageEngine.BoardSpace {
 			}
 			return $"{player.PlayerName} received a {pawnType} pawn";
 		}
+
+
 		/// <summary>
 		/// Move pawn from inventory to node location
 		/// </summary>
@@ -250,6 +334,8 @@ namespace ScrumageEngine.BoardSpace {
 			}
 			return CheckPhase(phase);
 		}
+
+
 		/// <summary>
 		/// Resolve node by rolling dice or paying for cards.
 		/// </summary>
@@ -260,8 +346,6 @@ namespace ScrumageEngine.BoardSpace {
 			CheckPhase(phase);
 			return GetNodeByName(nodeNameP).DoAction(GetPlayerByID(playerIDP));
 		}
-
-
 		#region Player Tracking		
 		/// <summary>
 		/// Gets the player agility cards.
