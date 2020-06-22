@@ -146,8 +146,11 @@ namespace ScrumageEngine.BoardSpace {
 			board.ClearDice();
 			board.RollDice(diceCount, Rand);
 		}
-
-		public List<String> ShowDice() {
+        /// <summary>
+        /// Shows dice for GUI graphics
+        /// </summary>
+		/// <returns>List of strings showing die faces</returns>
+        public List<String> ShowDice() {
 			return board.ShowDice();
 		}
 
@@ -164,12 +167,18 @@ namespace ScrumageEngine.BoardSpace {
 
 			return retString;
 		}
-
+        /// <summary>
+        /// Get pawn type
+        /// </summary>
+        /// <param name="indexP">Returns name of pawn</param>
         public String GetPawnType(Int32 indexP) {
 			return PawnTypes[indexP];
 		}
-
-		public List<String> GetNodeNames() {
+        /// <summary>
+        /// Get current node names
+        /// </summary>
+        /// <returns>list of node names</returns>
+        public List<String> GetNodeNames() {
 			List<String> nodeNames = new List<String>();
 			board.GetAllNodes().ForEach(node =>
 			{
@@ -177,8 +186,11 @@ namespace ScrumageEngine.BoardSpace {
 			});
 			return nodeNames;
 		}
-
-		public List<String> GetPlayerPawns(Int32 playerIDP) {
+        /// <summary>
+        /// Get current node names
+        /// </summary>
+        /// <returns>list of node names</returns>
+        public List<String> GetPlayerPawns(Int32 playerIDP) {
 			return GetPlayerByID(playerIDP).ListPawns();
 		}
 

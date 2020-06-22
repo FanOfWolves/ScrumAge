@@ -104,6 +104,12 @@ namespace ScrumageEngine.Objects.Player {
             return true;
         }
 
+
+		/// <summary>
+		/// Indexer to allow a resource amount to be selected by an int value.
+		/// </summary>
+		/// <param name="i">The "index" in the dictionary</param>
+		/// <returns>The type of resource at that "index"'s amount</returns>
         private Int32 this[Int32 i] {
 			get {
 				if(i == 0)
@@ -129,6 +135,12 @@ namespace ScrumageEngine.Objects.Player {
 			}
         }
 
+
+		/// <summary>
+		/// Allows a resource amount to be selected from the dictionary with just a resource
+		/// </summary>
+		/// <param name="r">The resource type</param>
+		/// <returns>The selected resource's amount</returns>
 		public Int32 this[Resource r] {
 			get {
 				return this.resourceDictionary[r];
@@ -140,7 +152,12 @@ namespace ScrumageEngine.Objects.Player {
 
 
 
-
+		/// <summary>
+		/// Greater Than or Equal operator overload to allow ease of comparing two ResourceContainers
+		/// </summary>
+		/// <param name="playerResP">The player's resource container.</param>
+		/// <param name="reqsP">The resource container to compare it to.</param>
+		/// <returns>True if all resource types in the player inventory are greater than or equal that of the second container.</returns>
         public static Boolean operator >=(ResourceContainer playerResP, ResourceContainer reqsP) {
 			Boolean isGreaterEqual = true;
 			foreach (Resource r in playerResP.resourceDictionary.Keys) {
@@ -149,6 +166,13 @@ namespace ScrumageEngine.Objects.Player {
 			return isGreaterEqual;
 		}
 
+
+		/// <summary>
+		/// Less Than or Equal operator overload to allow easy of comparing two ResourceContainer
+		/// </summary>
+		/// <param name="playerResP"></param>
+		/// <param name="reqsP"></param>
+		/// <returns>True if all resource types in the player inventory are less than or equal that of the second container.</returns>
 		public static Boolean operator <=(ResourceContainer playerResP, ResourceContainer reqsP) {
 			Boolean isLess = true;
 			foreach(Resource r in playerResP.resourceDictionary.Keys) {
@@ -157,6 +181,13 @@ namespace ScrumageEngine.Objects.Player {
 			return isLess;
 		}
 
+
+		/// <summary>
+		/// Greater than overload to allow ease in comparing two resource containers.
+		/// </summary>
+		/// <param name="playerResP">Player resource node</param>
+		/// <param name="reqsP">Comparing resource node</param>
+		/// <returns>True if all player resources are higher value than comparison container.</returns>
 		public static Boolean operator >(ResourceContainer playerResP, ResourceContainer reqsP) {
 			Boolean isGreaterEqual = true;
 			foreach(Resource r in playerResP.resourceDictionary.Keys) {
@@ -165,6 +196,12 @@ namespace ScrumageEngine.Objects.Player {
 			return isGreaterEqual;
 		}
 
+		/// <summary>
+		/// Less than overload to allow ease in comparing two resource containers.
+		/// </summary>
+		/// <param name="playerResP">Player resource node</param>
+		/// <param name="reqsP">Comparing resource node</param>
+		/// <returns>True if all player resources are lower value than comparison container.</returns>
 		public static Boolean operator <(ResourceContainer playerResP, ResourceContainer reqsP) {
 			Boolean isLess = true;
 			foreach(Resource r in playerResP.resourceDictionary.Keys) {
