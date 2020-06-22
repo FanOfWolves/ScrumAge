@@ -12,6 +12,12 @@ namespace ScrumageEngine.BoardSpace {
     /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
     class BudgetNode : Node {
 
+        /// <summary>
+        /// Gets the maximum pawn limit for this Node.
+        /// </summary>
+        /// <value>
+        /// The maximum pawn limit.
+        /// </value>
         public override Int32 MaxPawnLimit { get { return 4; } }
 
         #region Constructors        
