@@ -33,6 +33,12 @@ namespace ScrumageEngine.Objects.Items {
             FullStackChance = other.FullStackChance;
         }
 
+
+        /// <summary>
+        /// Returns the change for any type of pawn the chance to successfully gather a resource.
+        /// </summary>
+        /// <param name="pawnP">The pawn to get the chance for.</param>
+        /// <returns>The chance for that pawn.</returns>
         public Int32 GetChance(Pawn pawnP) {
             switch(pawnP.PawnType) {
                 case "Full Stack":
@@ -46,11 +52,23 @@ namespace ScrumageEngine.Objects.Items {
             }
         }
 
+
+        /// <summary>
+        /// Allows two resources to be compared.
+        /// </summary>
+        /// <param name="other">Resource to compare to</param>
+        /// <returns>True if same type of resource, false if not.</returns>
         public Boolean Equals(Resource other) {
             if (other is null) return false;
             return this.Name == other.Name;
         }
 
+
+        /// <summary>
+        /// Allows two resources to be compared
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override Boolean Equals(Object obj) {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
