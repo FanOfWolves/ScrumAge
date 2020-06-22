@@ -12,65 +12,70 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ScrumageEngine.Windows;
 
-namespace ScrumageEngine.Views
-{
-    /// <summary>
-    /// Interaction logic for StartView.xaml
-    /// </summary>
-    public partial class StartView : Page
-    {
-        // Used to pass along to the Game class
-        private List<string> list;
+namespace ScrumageEngine.Views {
+	/// <summary>
+	/// Interaction logic for StartView.xaml
+	/// </summary>
+	public partial class StartView : Page {
 
-        public StartView()
-        {
-            InitializeComponent();
-        }
+		/// <summary>
+		/// A list to hold the names of the players once entered.
+		/// </summary>
+		private List<String> list;
 
-        public StartView(List<string> list)
-        {
-            InitializeComponent();
 
-            this.list = list;
-            lblTotalPlayers.Content = $"Total Players: {list.Count}";
-        }
+		/// <summary>
+		/// Initializes the view.
+		/// </summary>
+		public StartView() {
+			InitializeComponent();
+		}
 
-        private bool CanStartGame()
-        {
-            // not enough players
-            if (list.Count < 2)
-                return false;
 
-            return true;
-        }
+		/// <summary>
+		/// Initializes the start view with a list of names
+		/// </summary>
+		/// <param name="list">The list of names already passed</param>
+		public StartView(List<String> list) {
+			InitializeComponent();
 
-        /// <summary>
-        /// Starts the Game (and validates)
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnStart_Click(object sender, RoutedEventArgs e)
-        {
-            if (CanStartGame())
-            {
-                GameWindow mw = new GameWindow(list);
-                mw.Show();
+			this.list = list;
+			lblTotalPlayers.Content = $"Total Players: {list.Count}";
+		}
 
-                try
-                {
-                    Window.GetWindow(this).Close();
-                }
-                catch (Exception exception)
-                {
-                    Console.WriteLine(exception);
-                    throw;
-                }
 
-            }
-            else
-            {
-                MessageBox.Show("Failed to start game.", "ScrumAge");
-            }
-        }
-    }
+		/// <summary>
+		/// Determines if enough players have been created.
+		/// </summary>
+		/// <returns>True if enough/False if not.</returns>
+		private bool CanStartGame() {
+			// not enough players
+			if(list.Count < 2)
+				return false;
+
+			return true;
+		}
+
+		/// <summary>
+		/// Starts the Game (and validates)
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void btnStart_Click(object sender, RoutedEventArgs e) {
+			if(CanStartGame()) {
+				GameWindow mw = new GameWindow(list);
+				mw.Show();
+
+				try {
+					Window.GetWindow(this).Close();
+				} catch(Exception exception) {
+					Console.WriteLine(exception);
+					throw;
+				}
+
+			} else {
+				MessageBox.Show("Failed to start game.", "ScrumAge");
+			}
+		}
+	}
 }

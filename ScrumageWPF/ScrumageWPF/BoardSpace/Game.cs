@@ -54,22 +54,33 @@ namespace ScrumageEngine.BoardSpace {
 
 
 		/// <summary>
-		/// 
+		/// Return node object from ID
 		/// </summary>
-		/// <param name="nodeIDP"></param>
-		/// <returns></returns>
+		/// <param name="nodeIDP">ID of node</param>
+		/// <returns>Node object</returns>
 		public Node GetNodeByID(Int32 nodeIDP) {
 			return board.GetNodeByID(nodeIDP);
 		}
-
+		/// <summary>
+		/// Retrieve Player ID
+		/// </summary>
+		/// <param name="playerIDP">Player Id set at start of game</param>
+		/// <returns>Player object</returns>
 		public Player GetPlayerByID(Int32 playerIDP) {
 			return Players.Find(player => player.PlayerID == playerIDP);
 		}
-
+		/// <summary>
+		/// Get all current player objects
+		/// </summary>
+		/// <returns>List of player objects</returns>
 		public List<Player> GetAllPlayers() {
 			return Players;
 		}
-
+		/// <summary>
+		/// Checks current game phase and returns phase method
+		/// </summary>
+		/// <param name="phase"></param>
+		/// <returns>Method for phase</returns>
 		private Boolean CheckPhase(Int32 phase) {
 			if (phase == 1) return PhaseOne();
 			else if (phase == 2) return PhaseTwo();
@@ -77,7 +88,10 @@ namespace ScrumageEngine.BoardSpace {
 			return false;
 		}
 
-
+		/// <summary>
+		/// Verifies if all pawns have been moved. Returns true if all pawns have been placed.
+		/// </summary>
+		/// <returns>boolean 1 if all pawns have been moved</returns>
 		private Boolean PhaseOne() { // UPDATE GUI PHASE BOX!
 			if (AllPawnsMoved()) {
 				phase = 2;
@@ -95,7 +109,10 @@ namespace ScrumageEngine.BoardSpace {
 			return false;
 		}
 
-
+		/// <summary>
+		/// Checks to see if all pawns have been moved
+		/// </summary>
+		/// <returns></returns>
 		private Boolean AllPawnsMoved() {
 			Boolean allPlayersFinished = true;
 			foreach (Player p in Players) {
@@ -105,18 +122,18 @@ namespace ScrumageEngine.BoardSpace {
 			}
 			return allPlayersFinished;
 		}
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <return></return>
-        private Boolean PhaseTwo() {
+		/// <summary>
+		/// Not implemented currently
+		/// </summary>
+		/// <returns></returns>
+		private Boolean PhaseTwo() {
 			return true;
 		}
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <return></return>
-        private Boolean PhaseThree() {
+		/// <summary>
+		/// No implemented currently
+		/// </summary>
+		/// <returns></returns>
+		private Boolean PhaseThree() {
 			return true;
 		}
 
@@ -129,7 +146,10 @@ namespace ScrumageEngine.BoardSpace {
 			board.ClearDice();
 			board.RollDice(diceCount, Rand);
 		}
-
+		/// <summary>
+		/// Show graphical representatiion of die faces
+		/// </summary>
+		/// <returns>list of strings representing die faces</returns>
 		public List<String> ShowDice() {
 			return board.ShowDice();
 		}
@@ -147,11 +167,18 @@ namespace ScrumageEngine.BoardSpace {
 
 			return retString;
 		}
-
+		/// <summary>
+		/// Get current pawn type of pawn object
+		/// </summary>
+		/// <param name="indexP"></param>
+		/// <returns>string of pawn type</returns>
         public String GetPawnType(Int32 indexP) {
 			return PawnTypes[indexP];
 		}
-
+		/// <summary>
+		/// Get current node names
+		/// </summary>
+		/// <returns>List of node names</returns>
 		public List<String> GetNodeNames() {
 			List<String> nodeNames = new List<String>();
 			board.GetAllNodes().ForEach(node =>
@@ -160,19 +187,36 @@ namespace ScrumageEngine.BoardSpace {
 			});
 			return nodeNames;
 		}
-
+		/// <summary>
+		/// Get current player pawns by ID
+		/// </summary>
+		/// <param name="playerIDP"></param>
+		/// <returns>List of pawns</returns>
 		public List<String> GetPlayerPawns(Int32 playerIDP) {
 			return GetPlayerByID(playerIDP).ListPawns();
 		}
-
+		/// <summary>
+		/// Get list of pawns at current node by node name
+		/// </summary>
+		/// <param name="nodeNameP"></param>
+		/// <returns>list of pawns at node</returns>
 		public List<String> GetNodePawns(String nodeNameP) {
 			return board.ListNodePawns(nodeNameP);
 		}
-
+		/// <summary>
+		/// Get player name attribute by player ID
+		/// </summary>
+		/// <param name="playerIDP"></param>
+		/// <returns>Player name in string</returns>
 		public String GetPlayerNameByID(Int32 playerIDP) {
 			return GetPlayerByID(playerIDP).PlayerName;
 		}
-
+		/// <summary>
+		/// Creates pawn for player and adds to inventory
+		/// </summary>
+		/// <param name="playerIDP"></param>
+		/// <param name="pawnTypeP"></param>
+		/// <returns>string with pawn name</returns>
 		public String GivePlayerPawn(Int32 playerIDP, String pawnTypeP) {
 			String[] inputArr = pawnTypeP.Split(' ');
 			Player player = GetPlayerByID(playerIDP);
@@ -189,7 +233,13 @@ namespace ScrumageEngine.BoardSpace {
 			}
 			return $"{player.PlayerName} received a {pawnType} pawn";
 		}
-
+		/// <summary>
+		/// Move pawn from inventory to node location
+		/// </summary>
+		/// <param name="pawnsP"></param>
+		/// <param name="playerIDP"></param>
+		/// <param name="nodeName"></param>
+		/// <returns>boolean true if moved</returns>
 		public Boolean MovePawn(List<String> pawnsP, Int32 playerIDP, String nodeName) {
 			Player player = GetPlayerByID(playerIDP);
 			Pawn pawn;
@@ -200,7 +250,12 @@ namespace ScrumageEngine.BoardSpace {
 			}
 			return CheckPhase(phase);
 		}
-
+		/// <summary>
+		/// Resolve node by rolling dice or paying for cards.
+		/// </summary>
+		/// <param name="nodeNameP"></param>
+		/// <param name="playerIDP"></param>
+		/// <returns>string for console log of what has changed</returns>
 		public String DoAction(String nodeNameP, Int32 playerIDP) {
 			CheckPhase(phase);
 			return GetNodeByName(nodeNameP).DoAction(GetPlayerByID(playerIDP));

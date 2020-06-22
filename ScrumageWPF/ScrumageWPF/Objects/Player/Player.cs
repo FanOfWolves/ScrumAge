@@ -11,41 +11,49 @@ namespace ScrumageEngine.Objects.Player {
 	/// Player class used to represent and retain information about a player
 	/// </summary>
 	public class Player {
+		#region Properties
 		/// <summary>
 		/// An ID to be used for the player for easier identification than their name
 		/// </summary>
 		public Int32 PlayerID { get; set; }
 
-		/// <summary>
-		/// The player's name to be used as a representation on the board
-		/// </summary>
-        private String playerName;
-		public String PlayerName {
-			get { return playerName; }
-		}
 
         /// <summary>
-        /// Player overloaded constructor
+        /// The entered name for the player.
         /// </summary>
-        /// <param name="playerID">The player's ID</param>
-        /// <param name="playerName">The player's name</param>
-        public Player(Int32 playerID, String playerNameP) {
+		public String PlayerName { get; }
+
+
+        /// <summary>
+        /// A tracker for if the player has finished the current phase
+        /// </summary>
+		public Boolean FinishedPhase { get; set; }
+		#endregion
+
+		#region Constructor
+		/// <summary>
+		/// Player overloaded constructor
+		/// </summary>
+		/// <param name="playerID">The player's ID</param>
+		/// <param name="playerName">The player's name</param>
+		public Player(Int32 playerID, String playerNameP) {
             PlayerID = playerID;
-            playerName = playerNameP;
+            PlayerName = playerNameP;
             FeaturePoints = 0;
             Budget = 1;
             Funds = Budget;
             this.playerResources = new ResourceContainer(new Int32[] { 0, 0, 0, 0 });
             FinishedPhase = false;
         }
+		#endregion
 
-        #region Inventory
+		#region Inventory
 
-        #region Pawns
-        /// <summary>
-        /// A list of the player's (currently held) pawn
-        /// </summary>
-        public List<Pawn> Pawns = new List<Pawn>();
+		#region Pawns
+		/// <summary>
+		/// A list of the player's (currently held) pawn
+		/// </summary>
+		public List<Pawn> Pawns = new List<Pawn>();
 
 		/// <summary>
 		/// Gets or sets the total pawns the player owns (including those not currently with them).
@@ -235,6 +243,6 @@ namespace ScrumageEngine.Objects.Player {
 
         #endregion
 
-        public Boolean FinishedPhase { get; set; }
+
     }
 }

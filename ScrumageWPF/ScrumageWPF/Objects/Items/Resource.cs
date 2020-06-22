@@ -33,6 +33,12 @@ namespace ScrumageEngine.Objects.Items {
             FullStackChance = other.FullStackChance;
         }
 
+
+        /// <summary>
+        /// Returns the change for any type of pawn the chance to successfully gather a resource.
+        /// </summary>
+        /// <param name="pawnP">The pawn to get the chance for.</param>
+        /// <returns>The chance for that pawn.</returns>
         public Int32 GetChance(Pawn pawnP) {
             switch(pawnP.PawnType) {
                 case "Full Stack":
@@ -46,31 +52,65 @@ namespace ScrumageEngine.Objects.Items {
             }
         }
 
+
+        /// <summary>
+        /// Allows two resources to be compared.
+        /// </summary>
+        /// <param name="other">Resource to compare to</param>
+        /// <returns>True if same type of resource, false if not.</returns>
         public Boolean Equals(Resource other) {
             if (other is null) return false;
             return this.Name == other.Name;
         }
 
+
+        /// <summary>
+        /// Allows two resources to be compared
+        /// </summary>
+        /// <param name="obj">Object to compare to</param>
+        /// <returns>True of object is equal</returns>
         public override Boolean Equals(Object obj) {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
             return obj.GetType() == this.GetType() && Equals((Resource) obj);
         }
 
+
+        /// <summary>
+        /// returns a hash code for the object
+        /// </summary>
+        /// <returns>The hash code for the object</returns>
         public override Int32 GetHashCode() {
             return (Name != null ? Name.GetHashCode() : 0);
         }
 
 
-
+        /// <summary>
+        /// == operator overload to allow two resources to be compared.
+        /// </summary>
+        /// <param name="left">First resource to be comapred</param>
+        /// <param name="right">Second Resource to be compared</param>
+        /// <returns>True of both resources are equal</returns>
         public static Boolean operator ==(Resource left, Resource right) {
             return left?.Name == right?.Name;
         }
 
+
+        /// <summary>
+        /// != operator overload to allow two resources to be checked as not equal
+        /// </summary>
+        /// <param name="left">First resource to be compared.</param>
+        /// <param name="right">Second resource to be compared.</param>
+        /// <returns>true of resources are not equal.</returns>
         public static Boolean operator !=(Resource left, Resource right) {
             return left?.Name != right?.Name;
         }
 
+
+        /// <summary>
+        /// Makes a deep copy of the resource.
+        /// </summary>
+        /// <returns>A deep copy of the resource</returns>
         public Resource DeepCopy() {
             Resource _copy = (Resource) this.MemberwiseClone();
             _copy.FrontEndChance = FrontEndChance;
