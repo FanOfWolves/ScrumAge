@@ -26,11 +26,21 @@ namespace ScrumageEngine.Objects.Player {
 
 		}
 
+
+		/// <summary>
+		/// Constructor for resource container.
+		/// </summary>
+		/// <param name="reqs">An array of ints that represents values to initialize the container with.</param>
 		public ResourceContainer(Int32[] reqs) {
 			resourceDictionary = InitDictionary(reqs);
         }
 
 
+		/// <summary>
+		/// Initializes a dictionary 
+		/// </summary>
+		/// <param name="reqs"></param>
+		/// <returns></returns>
 		private Dictionary<Resource, Int32> InitDictionary(Int32[] reqs = null) {
 			Dictionary<Resource, Int32> retDictionary = new Dictionary<Resource, Int32> {
 				{ new Requirements(), reqs[0] },
