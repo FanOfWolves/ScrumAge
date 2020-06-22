@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,17 @@ namespace ScrumageEngine.Views
         public HelpView()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Open the Rules HTML file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        public void HelpView_Loaded(object sender, RoutedEventArgs args)
+        {
+            string curDir = Directory.GetCurrentDirectory();
+            this.webRules.Navigate(new Uri(String.Format("file:///{0}/Content/Rules/rules.html", curDir)));
         }
     }
 }

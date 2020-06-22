@@ -83,12 +83,18 @@ namespace ScrumageEngine.BoardSpace {
 				currentPlayerIndex = 0;
 				return true;
 			} else {
-				if (Players[currentPlayerIndex].Pawns.Count == 0) Players[currentPlayerIndex].FinishedPhase = true;
-				currentPlayerIndex++;
-				if (currentPlayerIndex >= Players.Count - 1) currentPlayerIndex = 0;
+                if (Players[currentPlayerIndex].Pawns.Count == 0) Players[currentPlayerIndex].FinishedPhase = true;
+                currentPlayerIndex++;
+                if (currentPlayerIndex >= Players.Count - 1) currentPlayerIndex = 0;
 				while (Players[currentPlayerIndex].FinishedPhase) {
-					if (currentPlayerIndex >= Players.Count - 1) currentPlayerIndex = 0;
-					else currentPlayerIndex++;
+                    if (currentPlayerIndex >= Players.Count - 1)
+                    {
+                        currentPlayerIndex = 0;
+                    }
+                    else
+                    {
+                        currentPlayerIndex++;
+                    }
 
 				}
 			}
