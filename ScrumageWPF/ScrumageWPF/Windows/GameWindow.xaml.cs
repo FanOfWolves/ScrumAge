@@ -20,18 +20,15 @@ namespace ScrumageEngine.Windows {
 		/// </summary>
 		Game game;
 
-
 		/// <summary>
 		/// The ID of the current player controlling the board.
 		/// </summary>
 		private Int32 currentPlayerID;
 
-
 		/// <summary>
 		/// A list of the pawns that are currently selected in the player's pawn box.
 		/// </summary>
 		private List<String> SelectedPawns = new List<String>();
-
 
 		/// <summary>
 		/// returns the combobox choice in the Placement Phase panel
@@ -39,7 +36,6 @@ namespace ScrumageEngine.Windows {
 		private String PawnboxForPlacementNode {
 			get { return NodeComboBox.SelectedItem.ToString(); }
 		}
-
 
 		/// <summary>
 		/// returns the combobox choice in the Action Phase panel
@@ -219,16 +215,29 @@ namespace ScrumageEngine.Windows {
 			return FindName($"{this.NodeComboBox2.SelectedItem.ToString().Replace(" ", "")}Box") as ListBox;
 		}
 
-
+		/// <summary>
+		/// Finds the indicated player's score value label
+		/// </summary>
+		/// <param name="playerIdP">The player identifier.</param>
+		/// <returns>the score value label of the player</returns>
 		private Label FindPlayerScoreLabel(Int32 playerIdP) {
 			return FindName($"P{playerIdP}ScoreValue") as Label;
 		}
 
+		/// <summary>
+		/// Finds the indicated player's budget value label
+		/// </summary>
+		/// <param name="playerIdP">The player identifier.</param>
+		/// <returns>the budget value label of the player</returns>
 		private Label FindPlayerBudgetLabel(Int32 playerIdP) {
 			return FindName($"P{playerIdP}BudgetValue") as Label;
 		}
 
-
+		/// <summary>
+		/// Finds the indicated player's funds value label
+		/// </summary>
+		/// <param name="playerIdp">The player id</param>
+		/// <returns>the funds value label of the player</returns>
 		private Label FindPlayerFundsLabel(Int32 playerIdp) {
 			return FindName($"P{playerIdp}FundsValue") as Label;
 		}
@@ -238,7 +247,7 @@ namespace ScrumageEngine.Windows {
 		/// <summary>
 		/// Updates the player's information display.
 		/// </summary>
-		/// <param name="playerIdP">The player identifier</param>
+		/// <param name="playerIdP">The player identifier.</param>
 		private void UpdatePlayerInformation(Int32 playerIdP) {
 
 			// Update inventory display

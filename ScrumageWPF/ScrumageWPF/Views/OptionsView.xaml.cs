@@ -121,7 +121,7 @@ namespace ScrumageEngine.Views
         /// <summary>
         /// Builds the playerList from <list type="string">List</list>
         /// </summary>
-        /// <param name="list"></param>
+        /// <param name="list">the list of names of the players</param>
         private void BuildPlayerBoxes(List<string> list)
         {
             // clear any previous
@@ -141,7 +141,9 @@ namespace ScrumageEngine.Views
         /// <summary>
         /// Checks for any invalid textboxes
         /// </summary>
-        /// <returns>true valid, false invalid.</returns>
+        /// <returns>
+        ///     <c>true</c> if valid input in the player textboxes;otherwise <c>false</c>
+        /// </returns>
         private bool Validate()
         {
             var children = playerButtons.Children;
