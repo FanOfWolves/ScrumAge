@@ -31,9 +31,14 @@ namespace ScrumageEngine.BoardSpace {
 		private Node Reassignment = new ReassignmentNode(8, "Reassignment Node");
 		private Card TestCard1 = new Card("artifact", "Test Artifact", new []{4,3,2,1});
 		private Card TestCard2 = new Card("agility", "Test Agility", new []{1,2,3,4});
+
+
+		/// <summary>
+		/// Initializes the board, if board has not been created, adds nodes to board.
+		/// </summary>
 		public Board() {
 			if (Nodes.Count == 0) {
-				InitMap(Nodes);
+				InitBoard(Nodes);
 			}
 		}
 
@@ -41,7 +46,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// Adds all nodes to the list of nodes.
 		/// </summary>
 		/// <param name="nodesOnMap"></param>
-		public void InitMap(List<Node> nodesOnMap) {// To add nodes to the map, create the node in vars
+		public void InitBoard(List<Node> nodesOnMap) {// To add nodes to the map, create the node in vars
 													// then add it to the passed list, nodeName(2digID)
 			nodesOnMap.Add(Resource1);
 			nodesOnMap.Add(Resource2);
