@@ -20,18 +20,15 @@ namespace ScrumageEngine.Windows {
 		/// </summary>
 		Game game;
 
-
 		/// <summary>
 		/// The ID of the current player controlling the board.
 		/// </summary>
 		private Int32 currentPlayerID;
 
-
 		/// <summary>
 		/// A list of the pawns that are currently selected in the player's pawn box.
 		/// </summary>
 		private List<String> SelectedPawns = new List<String>();
-
 
 		/// <summary>
 		/// returns the combobox choice in the Placement Phase panel
@@ -39,7 +36,6 @@ namespace ScrumageEngine.Windows {
 		private String PawnboxForPlacementNode {
 			get { return NodeComboBox.SelectedItem.ToString(); }
 		}
-
 
 		/// <summary>
 		/// returns the combobox choice in the Action Phase panel
@@ -272,7 +268,7 @@ namespace ScrumageEngine.Windows {
 		/// <summary>
 		/// Updates the player's information display.
 		/// </summary>
-		/// <param name="playerIdP">The player identifier</param>
+		/// <param name="playerIdP">The player identifier.</param>
 		private void UpdatePlayerInformation(Int32 playerIdP) {
 
 			// Update inventory display

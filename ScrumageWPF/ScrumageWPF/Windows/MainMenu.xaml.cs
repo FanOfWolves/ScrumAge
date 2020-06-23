@@ -51,10 +51,10 @@ namespace ScrumageEngine.Windows {
 
 
 		/// <summary>
-		/// Call <Global>Help Menu</Global>
+		/// Calls and displays the global help-menu item
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
 		private void btnHelp_Click(object sender, RoutedEventArgs e) {
 			new HelpView().Show();
 		}

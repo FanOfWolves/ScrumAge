@@ -18,12 +18,20 @@ namespace ScrumageEngine.Views
     /// </summary>
     public partial class OptionsView : Page
     {
-
+        #region Fields        
+        /// <summary>
+        /// The list of player names
+        /// </summary>
         private List<string> _nameList;
-
+        /// <summary>
+        /// The maximum players allowed
+        /// </summary>
         private int MAX_PLAYERS = 4;
+        /// <summary>
+        /// The current number players for the game
+        /// </summary>
         private int CURRENT_PLAYERS = 2;
-
+        #endregion
         /// <summary>
         /// Creates a new instance of OptionsViews
         /// </summary>
@@ -50,7 +58,6 @@ namespace ScrumageEngine.Views
         /// Creates a new options view, with namesList
         /// </summary>
         /// <param name="namesList"></param>
-
         public OptionsView(ref List<string> namesList)
         {
             InitializeComponent();
@@ -78,7 +85,11 @@ namespace ScrumageEngine.Views
             }
         }
 
-
+        /// <summary>
+        /// Handles the ValueChanged event of the cbPlayerList control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbPlayerList_ValueChanged(object sender, EventArgs e)
         {
             BuildPlayerBoxes(Convert.ToInt16(cbPlayerList.SelectedValue));
@@ -108,9 +119,9 @@ namespace ScrumageEngine.Views
 
 
         /// <summary>
-        /// Builds the playerlist from <list type="string">List</list>
+        /// Builds the playerList from <list type="string">List</list>
         /// </summary>
-        /// <param name="list"></param>
+        /// <param name="list">the list of names of the players</param>
         private void BuildPlayerBoxes(List<string> list)
         {
             // clear any previous
@@ -130,7 +141,9 @@ namespace ScrumageEngine.Views
         /// <summary>
         /// Checks for any invalid textboxes
         /// </summary>
-        /// <returns>true valid, false invalid.</returns>
+        /// <returns>
+        ///     <c>true</c> if valid input in the player textboxes;otherwise <c>false</c>
+        /// </returns>
         private bool Validate()
         {
             var children = playerButtons.Children;
@@ -150,7 +163,11 @@ namespace ScrumageEngine.Views
             return true;
         }
 
-
+        /// <summary>
+        /// Handles the Click event of the btnConfirm control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
             if (Validate())
