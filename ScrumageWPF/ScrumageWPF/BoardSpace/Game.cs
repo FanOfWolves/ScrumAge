@@ -213,13 +213,31 @@ namespace ScrumageEngine.BoardSpace {
 			}
 		}
 
+		/// <summary>
+		/// Cycles through players, forcing them to pay for the sprint costs.
+		/// Note: All players have one round in this phase.
+		/// </summary>
+		/// <returns>
+		///		<c>true</c> if all players have finished and sets game state; Otherwise, <c>false</c>.
+		/// </returns>
+		private Boolean PhaseThree() {
+            if (AllPlayersPaid()) {
+                this.phase = 1;//TODO: Perhaps go to an intermediate phase where we check if we are done with game?
+                this.currentPlayerIndex = 0;
+				ResetPlayers();
+                return true;
+            }
+            return false;
+        }
 
 		/// <summary>
-		/// No implemented currently
+		/// Checks if all players have paid their sprint costs.
 		/// </summary>
-		/// <returns></returns>
-		private Boolean PhaseThree() {
-			return true;
+		/// <returns>
+		///		<c>true</c> if all players have finished this phase; otherwise <c>false</c>.
+		/// </returns>
+		private Boolean AllPlayersPaid() {
+			return this.Players.TrueForAll(_player => _player.FinishedPhase = true);
 		}
 
 
