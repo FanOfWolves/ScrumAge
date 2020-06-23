@@ -113,6 +113,17 @@ namespace ScrumageEngine.Objects.Player {
             return retPawn;
         }
 
+        //TODO: Test if this removes a random pawn
+        //TODO: Test on empty list of pawns
+        //TODO: Check if _returnedPawn -> Pawns[_pawnIndex] or is a new copy
+        public Pawn TakePawn() {
+            Random _rand = new Random();
+            Int32 _pawnIndex = _rand.Next(0, this.Pawns.Count);
+            Pawn _returnedPawn = this.Pawns[_pawnIndex];
+            this.Pawns.RemoveAt(_pawnIndex);
+            return _returnedPawn;
+        }
+
         /// <summary>
         /// Determines if a player has a pawn of a specified level then returns that pawn. If pawn of that level is not found, returns default "none" pawn.
         /// </summary>

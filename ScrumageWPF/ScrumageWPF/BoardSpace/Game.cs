@@ -249,7 +249,7 @@ namespace ScrumageEngine.BoardSpace {
 		//TODO: Test out-of-pawns
         private Boolean FirePawns(Int32 remainingCostP, Int32 playerIdP) {
             while (remainingCostP > 0) {
-				Players[playerIdP].
+				
             }
         }
 
