@@ -17,18 +17,34 @@ namespace ScrumageEngine.Objects.Player {
 		/// </summary>
 		public Int32 PlayerID { get; set; }
 
-
         /// <summary>
         /// The entered name for the player.
         /// </summary>
 		public String PlayerName { get; }
 
-
         /// <summary>
         /// A tracker for if the player has finished the current phase
         /// </summary>
 		public Boolean FinishedPhase { get; set; }
+
+        /// <summary>
+        /// Gets the player's sprint cost.
+        /// </summary>
+        /// <value>
+        /// The player sprint cost.
+        /// </value>
+        public Int32 PlayerSprintCost {
+            get {
+                Int32 _totalCost = 0;
+                foreach (Pawn _pawn in this.Pawns) {
+                    _totalCost += _pawn.PawnCost;
+                }
+                return _totalCost;
+            }
+        }
+
 		#endregion
+
 
 		#region Constructor
 		/// <summary>
@@ -268,6 +284,8 @@ namespace ScrumageEngine.Objects.Player {
             this.Funds = 0;
             return _fundsToTake;
         }
+
+
 
         #endregion
 

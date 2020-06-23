@@ -234,33 +234,49 @@ namespace ScrumageEngine.BoardSpace {
         }
 
 		//TODO: Test edge cases
-        public void AttemptSprintPawnPayment() {
+        public Boolean AttemptSprintPawnPayment(Int32 playerIdP) {
             const Int32 PENALTY = 10;
-            Int32 _totalCosts = GetCurrentPlayerTotalCosts();
-            Int32 _remainingCosts = PaySprintCostForPlayer(_totalCosts, this.currentPlayerIndex);
+            Int32 _totalCosts = Players[playerIdP].PlayerSprintCost;
+            Int32 _remainingCosts = PaySprintCostForPlayer(_totalCosts, playerIdP);
 
-            if (_remainingCosts > 0) {
-                Boolean _canAffordCost = FirePawns(_totalCosts, this.currentPlayerIndex);
-                if(!_canAffordCost) {
-                    Players[this.currentPlayerIndex].FeaturePoints -= PENALTY; //penalize
-                }
-			}
-
+            if (_remainingCosts <= 0) return true;
+            Boolean _canAffordCost = FirePawns(_totalCosts, playerIdP);
+            if (_canAffordCost) return true;
+            Players[this.currentPlayerIndex].FeaturePoints -= PENALTY; //penalize
+            return false;
         }
 
-        private Int32 PaySprintCostForPlayer(Int32 costP, Int32 playerIdP) {
+		/// <summary>
+		/// Pays the sprint cost for player.
+		/// </summary>
+		/// <param name="costP">The cost p.</param>
+		/// <param name="playerIdP">The player identifier p.</param>
+		/// <returns></returns>
+		private Int32 PaySprintCostForPlayer(Int32 costP, Int32 playerIdP) {
             Int32 _remainingCost = PaySprintCostThroughFunds(costP,playerIdP);
             if (_remainingCost > 0) _remainingCost = PaySprintCostThroughBudget(costP, playerIdP);
             return _remainingCost;
         }
 
-        private Int32 PaySprintCostThroughBudget(Int32 costP, Int32 playerIdP) {
+		/// <summary>
+		/// Pays the sprint cost through player's budget.
+		/// </summary>
+		/// <param name="costP">The cost.</param>
+		/// <param name="playerIdP">The player identifier.</param>
+		/// <returns>the remaining cost</returns>
+		private Int32 PaySprintCostThroughBudget(Int32 costP, Int32 playerIdP) {
             Int32 _funds = Players[playerIdP].Budget;
             if (_funds >= costP) return 0;
             else return costP - _funds;
         }
 
-        private Int32 PaySprintCostThroughFunds(Int32 costP, Int32 playerIdP) {
+		/// <summary>
+		/// Pays the sprint cost through the player's funds.
+		/// </summary>
+		/// <param name="costP">The cost.</param>
+		/// <param name="playerIdP">The player identifier.</param>
+		/// <returns>the remaining cost</returns>
+		private Int32 PaySprintCostThroughFunds(Int32 costP, Int32 playerIdP) {
             Int32 _playerFunds = Players[playerIdP].TakeFunds();
 
             if (_playerFunds >= costP) {	// If player has enough funds
@@ -293,22 +309,8 @@ namespace ScrumageEngine.BoardSpace {
             return true;
         }
 
-        private Int32 GetCurrentPlayerTotalFunds() {
-            Int32 _initialFunds = Players[this.currentPlayerIndex].Funds;
-            Int32 _totalFunds = _initialFunds + Players[this.currentPlayerIndex].Budget;
-            return _totalFunds;
-        }
 
-        private Int32 GetCurrentPlayerTotalCosts() {
-            Int32 _totalCost = 0;
-            foreach (Pawn pawn in Players[this.currentPlayerIndex].Pawns) {
-                _totalCost += pawn.PawnCost;
-            }
-            return _totalCost;
-        }
-
-
-		/// <summary>
+        /// <summary>
 		/// Checks if all players have paid their sprint costs.
 		/// </summary>
 		/// <returns>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ScrumageEngine.InputLogic;
 using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Player;
 using static ScrumageEngine.InputLogic.InputHandler;
@@ -177,11 +178,10 @@ namespace ScrumageEngine.Windows {
 			LogInput();
 		}
 
-
+		//TODO: Update GUI
         private void PlayerPaymentBtn_Click(Object sender, RoutedEventArgs e) {
-            this.game.GetCurrentPlayerTotalFunds();
-            this.game.GetCurrentPlayerTotalCosts();
-
+            Boolean _costPaid = InputHandler.PaySprintCost(this.game, this.game.currentPlayerIndex);
+			
         }
 
 		/// <summary>
