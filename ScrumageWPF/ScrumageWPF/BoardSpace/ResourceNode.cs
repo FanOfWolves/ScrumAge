@@ -11,9 +11,20 @@ namespace ScrumageEngine.BoardSpace {
     /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
     public class ResourceNode : Node
     {
-        #region Fields
+        #region Fields        
+        /// <summary>
+        /// The resource of this <see cref="ResourceNode"/>.
+        /// </summary>
         private readonly Resource nodeResource = null;
+
+        /// <summary>
+        /// The base success rate of acquiring a resource from this node.
+        /// </summary>
         private const Int32 RESOURCE_BASE_CHANCE = 20;
+
+        /// <summary>
+        /// The resource chance calculator. Created by the constructor
+        /// </summary>
         private readonly Random resourceChanceCalculator;
         #endregion
 
@@ -29,7 +40,6 @@ namespace ScrumageEngine.BoardSpace {
             this.resourceChanceCalculator = new Random();
         }
         #endregion
-
 
         /// <summary>
         /// Gathers the player pawns from this node.

@@ -41,7 +41,6 @@ namespace ScrumageEngine.BoardSpace
            
             for(Int32 i = 0; i < base.Pawns.Count; i++) {
                 
-                //!!TODO: Reformat these conditionals
                 if(base.Pawns[i].PawnID != _playerID) {
                     continue;
                 }
