@@ -9,6 +9,7 @@ using ScrumageEngine.Objects.Items.Cards;
 namespace ScrumageEngine.BoardSpace {
 	public class Game {
 
+		#region Properties
 		/// <summary>
 		/// The players in this Game
 		/// </summary>
@@ -17,31 +18,38 @@ namespace ScrumageEngine.BoardSpace {
 		/// </value>
 		private List<Player> Players { get; }
 
+
 		/// <summary>
 		/// The game board
 		/// </summary>
 		private Board board = new Board();
 
+
 		/// <summary>
 		/// The types of acceptable <see cref="Pawn"/>s
 		/// </summary>
-		private String[] PawnTypes = {"Front End", "Back End", "Full Stack"};
+		private String[] PawnTypes = { "Front End", "Back End", "Full Stack" };
+
 
 		/// <summary>
 		/// The current phase. 1 = Placement, 2 = Action, 3 = Payment
 		/// </summary>
-		private Int32 phase = 1;
+		public Int32 phase = 1;
+
 
 		/// <summary>
 		/// The <see cref="Random"/> object for all <see cref="Game"/>s
 		/// </summary>
 		private static Random Rand = new Random();
 
+
 		/// <summary>
 		/// The current <see cref="Player"/>'s <see cref="Player.PlayerID"/>
 		/// </summary>
 		public Int32 currentPlayerIndex = 0;
+		#endregion
 
+		#region Constructor and initializer
 		/// <summary>
 		/// Game constructor
 		/// </summary>
@@ -50,6 +58,7 @@ namespace ScrumageEngine.BoardSpace {
 			Players = InitPlayers(playerNames);
 		}
 
+
 		/// <summary>
 		/// Initializes players and returns them as a list.
 		/// </summary>
@@ -57,7 +66,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// <returns>A list of the players.</returns>
 		private List<Player> InitPlayers(List<String> playerNames) {
 			List<Player> retPlayers = new List<Player>();
-			for (Int32 i = 0; i < playerNames.Count; i++) {
+			for(Int32 i = 0; i < playerNames.Count; i++) {
 				retPlayers.Add(new Player(i + 1, playerNames[i]));
 				// Whatever else needs to be done when players are created goes here.
 				retPlayers[i].GivePawn("Front End");
@@ -66,10 +75,12 @@ namespace ScrumageEngine.BoardSpace {
 				retPlayers[i].GivePawn("Back End");
 				retPlayers[i].GivePawn("Back End");
 			}
-
 			return retPlayers;
 		}
+		#endregion
 
+		#region Getters
+		#region Nodes
 		/// <summary>
 		/// Returns a given node by name.
 		/// </summary>
@@ -88,6 +99,34 @@ namespace ScrumageEngine.BoardSpace {
 		public Node GetNodeByID(Int32 nodeIDP) {
 			return board.GetNodeByID(nodeIDP);
 		}
+
+
+		/// <summary>
+		/// Get names of all <see cref="Node"/>s in game instance's <see cref="Board"/>.
+		/// See also <seealso cref="Node.NodeName"/>.
+		/// </summary>
+		/// <returns>List of node names</returns>
+		public List<String> GetNodeNames() {
+			List<String> nodeNames = new List<String>();
+			board.GetAllNodes().ForEach(node =>
+			{
+				nodeNames.Add(node.NodeName);
+			});
+			return nodeNames;
+		}
+
+
+		/// <summary>
+		/// Get list of <see cref="Pawn"/>s at current <see cref="Node"/> by Node's name.
+		/// See also <seealso cref="Node.NodeName"/>.
+		/// </summary>
+		/// <param name="nodeNameP">the name of the node we want.</param>
+		/// <returns>list of Pawns at indicated Node</returns>
+		public List<String> GetNodePawns(String nodeNameP) {
+			return board.ListNodePawns(nodeNameP);
+		}
+		#endregion
+		#region Players
 		/// <summary>
 		/// Retrieve Player ID
 		/// </summary>
@@ -96,6 +135,8 @@ namespace ScrumageEngine.BoardSpace {
 		public Player GetPlayerByID(Int32 playerIDP) {
 			return Players.Find(player => player.PlayerID == playerIDP);
 		}
+
+
 		/// <summary>
 		/// Get all current player objects
 		/// </summary>
@@ -104,19 +145,28 @@ namespace ScrumageEngine.BoardSpace {
 			return Players;
 		}
 
+
 		/// <summary>
-		/// Checks and returns the completion state of the current game phase.
+		/// Get <see cref="Player"/> name attribute by player ID.
+		/// <seealso cref="Player.PlayerName"/>
 		/// </summary>
-		/// <param name="phase">The phase to check.</param>
-		/// <returns>
-		///		<c>true</c> if indicate phase is complete; otherwise <c>false</c>.
-		/// </returns>
-		private Boolean CheckPhase(Int32 phase) {
-			if (phase == 1) return PhaseOne();
-			else if (phase == 2) return PhaseTwo();
-			else if (phase == 3) return PhaseThree();
-			return false;
+		/// <param name="playerIDP">the id of the player whose name we want</param>
+		/// <returns>Player name in string</returns>
+		public String GetPlayerNameByID(Int32 playerIDP) {
+			return GetPlayerByID(playerIDP).PlayerName;
 		}
+		#endregion
+
+		/// <summary>
+		/// Get the specified <seealso cref="Pawn.PawnType"/>.
+		/// See also <seealso cref="Game.PawnTypes"/>.
+		/// </summary>
+		/// <param name="indexP">indexer index.</param>
+		/// <returns>string - a pawn type</returns>
+		public String GetPawnType(Int32 indexP) {
+			return PawnTypes[indexP];
+		}
+		#endregion
 
 		#region Phase Functions
 		/// <summary>
@@ -144,7 +194,6 @@ namespace ScrumageEngine.BoardSpace {
 		}
 
 
-
 		/// <summary>
 		/// Cycles through players allowing them to activate nodes one node at a time until all players have done all possible activations
 		/// </summary>
@@ -162,8 +211,6 @@ namespace ScrumageEngine.BoardSpace {
 				}
 				return false;
 			}
-			
-
 		}
 
 
@@ -251,97 +298,38 @@ namespace ScrumageEngine.BoardSpace {
 
 		#endregion
 
-		/// <summary>
-        /// Uses a global random to roll a specified number of dice.
-        /// </summary>
-        /// <param name="diceCount">The number of dice wish to be rolled.</param>
-        /// <param name="rand">A global random.</param>
-        internal void RollDice(Int32 diceCount) {
-            board.ClearDice();
-            board.RollDice(diceCount, Rand);
-        }
-
-        /// <summary>
-        /// Show graphical representatiion of die faces
-        /// </summary>
-        /// <returns>list of strings representing die faces</returns>
-        public List<String> ShowDice() {
-            return board.ShowDice();
-        }
-
-        // Move this to Board and call that
-        /// <summary>
-        /// Represents current dice values in a single string for the log.
-        /// </summary>
-        /// <returns>String of current dice values.</returns>
-        internal String DiceValues() {
-            String retString = "";
-            foreach(Die d in board.GetDice()) {
-                retString += d.Value + " ";
-            }
-
-            return retString;
-        }
-        #endregion
+		#region Dice Methods
 
 
 		/// <summary>
-		/// Get the specified <seealso cref="Pawn.PawnType"/>.
-		/// See also <seealso cref="Game.PawnTypes"/>.
+		/// Uses a global random to roll a specified number of dice.
 		/// </summary>
-		/// <param name="indexP">indexer index.</param>
-		/// <returns>string - a pawn type</returns>
-		public String GetPawnType(Int32 indexP) {
-			return PawnTypes[indexP];
+		/// <param name="diceCount">The number of dice wish to be rolled.</param>
+		/// <param name="rand">A global random.</param>
+		internal void RollDice(Int32 diceCount) {
+			board.ClearDice();
+			board.RollDice(diceCount, Rand);
+		}
+
+		/// <summary>
+		/// Show graphical representatiion of die faces
+		/// </summary>
+		/// <returns>list of strings representing die faces</returns>
+		public List<String> ShowDice() {
+			return board.ShowDice();
 		}
 
 
 		/// <summary>
-		/// Get names of all <see cref="Node"/>s in game instance's <see cref="Board"/>.
-		/// See also <seealso cref="Node.NodeName"/>.
+		/// Represents current dice values in a single string for the log.
 		/// </summary>
-		/// <returns>List of node names</returns>
-		public List<String> GetNodeNames() {
-			List<String> nodeNames = new List<String>();
-			board.GetAllNodes().ForEach(node =>
-			{
-				nodeNames.Add(node.NodeName);
-			});
-			return nodeNames;
+		/// <returns>String of current dice values.</returns>
+		internal String DiceValues() {
+			return board.DiceValues();
 		}
+		#endregion
 
-
-		/// <summary>
-		/// Get current player pawns by ID
-		/// </summary>
-		/// <param name="playerIDP"></param>
-		/// <returns>List of pawns</returns>
-		public List<String> GetPlayerPawns(Int32 playerIDP) {
-			return GetPlayerByID(playerIDP).ListPawns();
-		}
-
-
-		/// <summary>
-		/// Get list of <see cref="Pawn"/>s at current <see cref="Node"/> by Node's name.
-		/// See also <seealso cref="Node.NodeName"/>.
-		/// </summary>
-		/// <param name="nodeNameP">the name of the node we want.</param>
-		/// <returns>list of Pawns at indicated Node</returns>
-		public List<String> GetNodePawns(String nodeNameP) {
-			return board.ListNodePawns(nodeNameP);
-		}
-
-
-		/// <summary>
-		/// Get <see cref="Player"/> name attribute by player ID.
-		/// <seealso cref="Player.PlayerName"/>
-		/// </summary>
-		/// <param name="playerIDP">the id of the player whose name we want</param>
-		/// <returns>Player name in string</returns>
-		public String GetPlayerNameByID(Int32 playerIDP) {
-			return GetPlayerByID(playerIDP).PlayerName;
-		}
-
+		#region Actions
 
 		/// <summary>
 		/// Creates a <see cref="Pawn"/> for a <see cref="Player"/>, adding it to their inventory.
@@ -353,13 +341,13 @@ namespace ScrumageEngine.BoardSpace {
 			String[] inputArr = pawnTypeP.Split(' ');
 			Player player = GetPlayerByID(playerIDP);
 			String pawnType = "";
-			if (inputArr[0] == "") {
+			if(inputArr[0] == "") {
 				pawnType = GetPawnType(Rand.Next(2));
 				player.GivePawn(pawnType);
-			} else if (inputArr.Length == 1) {
+			} else if(inputArr.Length == 1) {
 				pawnType = GetPawnType(Int32.Parse(inputArr[0]));
 				player.GivePawn(pawnType);
-			} else if (inputArr.Length == 2) {
+			} else if(inputArr.Length == 2) {
 				pawnType = $"{inputArr[0]} {inputArr[1]}";
 				player.GivePawn(pawnType);
 			}
@@ -398,15 +386,20 @@ namespace ScrumageEngine.BoardSpace {
 			CheckPhase(phase);
 			return GetNodeByName(nodeNameP).DoAction(GetPlayerByID(playerIDP));
 		}
-		#region Player Tracking		
-        /// <summary>
-        /// Get specified <see cref="Player"/>'s pawns by their player id
-        /// </summary>
-        /// <param name="playerIDP">the ID of the player to be returned.</param>
-        /// <returns>List of pawns currently used by the player</returns>
-        public List<String> GetPlayerPawns(Int32 playerIDP) {
-            return GetPlayerByID(playerIDP).ListPawns();
-        }
+		#endregion
+
+		#region Player Tracking	
+
+
+		/// <summary>
+		/// Get specified <see cref="Player"/>'s pawns by their player id
+		/// </summary>
+		/// <param name="playerIDP">the ID of the player to be returned.</param>
+		/// <returns>List of pawns currently used by the player</returns>
+		public List<String> GetPlayerPawns(Int32 playerIDP) {
+			return GetPlayerByID(playerIDP).ListPawns();
+		}
+
 
 		/// <summary>
 		/// Gets the player agility cards.
@@ -414,8 +407,9 @@ namespace ScrumageEngine.BoardSpace {
 		/// <param name="playerId">The player identifier.</param>
 		/// <returns>a list of the player's cards</returns>
 		public List<Card> GetPlayerAgilityCards(Int32 playerId) {
-            return this.Players.Find(_player => _player.PlayerID == playerId).Agility;
-        }
+			return this.Players.Find(_player => _player.PlayerID == playerId).Agility;
+		}
+
 
 		/// <summary>
 		/// Gets the player artifact cards.
@@ -426,15 +420,16 @@ namespace ScrumageEngine.BoardSpace {
 			return this.Players.Find(_player => _player.PlayerID == playerId).Artifacts;
 		}
 
+
 		/// <summary>
 		/// Gets the player resources.
 		/// </summary>
 		/// <param name="playerIdP">The player identifier.</param>
 		/// <returns>the player's resources</returns>
 		public ResourceContainer GetPlayerResources(Int32 playerIdP) {
-            return GetPlayerByID(playerIdP).GetPlayerResources();
-        }
-        #endregion
+			return GetPlayerByID(playerIdP).GetPlayerResources();
+		}
+		#endregion
 
 	}
 }

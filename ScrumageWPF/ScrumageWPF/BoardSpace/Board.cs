@@ -47,15 +47,15 @@ namespace ScrumageEngine.BoardSpace {
 		private Node BudgetIncrease = new BudgetNode(6, "Budget Increase");
 		private Node Interview = new HiringNode(7, "Interview Node");
 		private Node Reassignment = new ReassignmentNode(8, "Reassignment Node");
-		private Card TestCard1 = new Card("artifact", "Test Artifact", new []{4,3,2,1});
-		private Card TestCard2 = new Card("agility", "Test Agility", new []{1,2,3,4});
+		private Card TestCard1 = new Card("artifact", "Test Artifact", new[] { 4, 3, 2, 1 });
+		private Card TestCard2 = new Card("agility", "Test Agility", new[] { 1, 2, 3, 4 });
 
 
 		/// <summary>
 		/// Initializes the board, if board has not been created, adds nodes to board.
 		/// </summary>
 		public Board() {
-			if (Nodes.Count == 0) {
+			if(Nodes.Count == 0) {
 				InitBoard(Nodes);
 			}
 		}
@@ -65,7 +65,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// </summary>
 		/// <param name="nodesOnMap"></param>
 		public void InitBoard(List<Node> nodesOnMap) {// To add nodes to the map, create the node in vars
-													// then add it to the passed list, nodeName(2digID)
+													  // then add it to the passed list, nodeName(2digID)
 			nodesOnMap.Add(Resource1);
 			nodesOnMap.Add(Resource2);
 			nodesOnMap.Add(Resource3);
@@ -139,8 +139,8 @@ namespace ScrumageEngine.BoardSpace {
 		/// <returns>The node if node exists, default node if it does not.</returns>
 		public Node GetNodeByID(Int32 nodeID) {
 			Node retNode = null;
-			foreach (Node node in Nodes) {
-				if (node.NodeID == nodeID) {
+			foreach(Node node in Nodes) {
+				if(node.NodeID == nodeID) {
 					retNode = node;
 				}
 			}
@@ -209,6 +209,18 @@ namespace ScrumageEngine.BoardSpace {
 		public int GetPawnCountInNode(String nodeNameP) {
 			return GetNodeByName(nodeNameP).NumberOfPawns;
 		}
-	}
 
+
+		/// <summary>
+		/// Represents current dice values in a single string for the log.
+		/// </summary>
+		/// <returns>String of current dice values.</returns>
+		internal String DiceValues() {
+			String retString = "";
+			foreach(Die d in GetDice()) {
+				retString += d.Value + " ";
+			}
+			return retString;
+		}
+	}
 }
