@@ -440,7 +440,24 @@
 
 						</StackPanel>
 					</TabItem>
-				</TabControl>
+                    <TabItem Header="PayTab" Background="#FFE5E5E5" BorderBrush="#FFACACAC">
+                        <StackPanel Background="#FFE5E5E5">
+                            <Label Content="Current Phase" HorizontalAlignment="Center" FontSize="24"/>
+                            <Label Content="Phase Label" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                            <StackPanel>
+                                <Separator/>
+                            </StackPanel>
+                            <Label Content="Location:" FontSize="32" HorizontalAlignment="Center"/>
+
+                            <!-- Sprint Log -->
+
+                            <!-- Resource / Trade Btn -->
+                            <ComboBox x:Name="PaymentTradeItemComboBox" FontSize="40" Margin="5, 20, 5, 0" SelectedIndex="0"/>
+                            <Button x:Name="PlayerPaymentBtn" Content="Trade for funds" FontSize="40" Margin="5, 20, 5, 10" Click="PlayerPaymentBtn_Click"/>
+
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
 
 			</ScrollViewer>
 			<ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0, 50, 0, 0">

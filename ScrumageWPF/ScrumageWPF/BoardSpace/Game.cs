@@ -227,8 +227,46 @@ namespace ScrumageEngine.BoardSpace {
 				ResetPlayers();
                 return true;
             }
+            else {
+                
+            }
             return false;
         }
+
+		//TODO: Test edge cases
+        public void AttemptPaymentThroughFunds() {
+            Int32 _totalFunds = GetCurrentPlayerTotalFunds();
+            Int32 _totalCosts = GetCurrentPlayerTotalCosts();
+            _totalCosts -= _totalFunds;
+            if (_totalCosts > 0) {
+                Boolean _underBudget = FirePawns(_totalCosts, this.currentPlayerIndex); {}
+            }
+
+        }
+
+		//TODO: Test if deleting pawns here deletes them from the player
+		//TODO: Test random nature
+		//TODO: Test out-of-pawns
+        private Boolean FirePawns(Int32 remainingCostP, Int32 playerIdP) {
+            while (remainingCostP > 0) {
+				Players[playerIdP].
+            }
+        }
+
+        private Int32 GetCurrentPlayerTotalFunds() {
+            Int32 _initialFunds = Players[this.currentPlayerIndex].Funds;
+            Int32 _totalFunds = _initialFunds + Players[this.currentPlayerIndex].Budget;
+            return _totalFunds;
+        }
+
+        private Int32 GetCurrentPlayerTotalCosts() {
+            Int32 _totalCost = 0;
+            foreach (Pawn pawn in Players[this.currentPlayerIndex].Pawns) {
+                _totalCost += pawn.PawnCost;
+            }
+            return _totalCost;
+        }
+
 
 		/// <summary>
 		/// Checks if all players have paid their sprint costs.

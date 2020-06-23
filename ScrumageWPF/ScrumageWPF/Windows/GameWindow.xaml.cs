@@ -178,6 +178,12 @@ namespace ScrumageEngine.Windows {
 		}
 
 
+        private void PlayerPaymentBtn_Click(Object sender, RoutedEventArgs e) {
+            this.game.GetCurrentPlayerTotalFunds();
+            this.game.GetCurrentPlayerTotalCosts();
+
+        }
+
 		/// <summary>
 		/// Displays information on the card in the relative location.
 		/// </summary>
