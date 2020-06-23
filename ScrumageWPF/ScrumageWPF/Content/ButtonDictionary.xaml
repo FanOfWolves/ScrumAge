@@ -20,7 +20,7 @@
                             <Setter Property="FontSize" Value ="22"></Setter>
                         </Trigger>
                         <EventTrigger RoutedEvent="PreviewMouseDown">
-                            <SoundPlayerAction Source="/Sounds/ButtonClick.wav"  />
+                            <SoundPlayerAction Source="../Content/Sounds/ButtonClick.wav"  />
                         </EventTrigger>
 
                     </ControlTemplate.Triggers>

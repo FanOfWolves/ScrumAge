@@ -86,12 +86,12 @@
 							<DockPanel Grid.Column="0" Grid.Row="1" Margin="5, 0, 5, 0">
 								<Button x:Name="P1LeftArtifactsBtn" DockPanel.Dock="Left" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+										<ImageBrush ImageSource="../Content/Images/LeftArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Button x:Name="P1RightArtifactsBtn" DockPanel.Dock="Right" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+										<ImageBrush ImageSource="../Content/Images/RightArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Label Content="Artifacts" FontSize="20" HorizontalAlignment="Center"/>
@@ -99,12 +99,12 @@
 							<DockPanel Grid.Column="2" Grid.Row="1" Margin="5, 0, 5, 0">
 								<Button x:Name="P1LeftAgilityBtn" DockPanel.Dock="Left" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+										<ImageBrush ImageSource="../Content/Images/LeftArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Button x:Name="P1RightAgilityBtn" DockPanel.Dock="Right" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+										<ImageBrush ImageSource="../Content/Images/RightArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Label Content="Agility" FontSize="20" HorizontalAlignment="Center"/>
@@ -180,12 +180,12 @@
 							<DockPanel Grid.Column="0" Grid.Row="1" Margin="5, 0, 5, 0">
 								<Button x:Name="P2LeftArtifactsBtn" DockPanel.Dock="Left" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+										<ImageBrush ImageSource="../Content/Images/LeftArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Button x:Name="P2RightArtifactsBtn" DockPanel.Dock="Right" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+										<ImageBrush ImageSource="../Content/Images/RightArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Label Content="Artifacts" FontSize="20" HorizontalAlignment="Center"/>
@@ -193,12 +193,12 @@
 							<DockPanel Grid.Column="2" Grid.Row="1" Margin="5, 0, 5, 0">
 								<Button x:Name="P2LeftAgilityBtn" DockPanel.Dock="Left" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+										<ImageBrush ImageSource="../Content/Images/LeftArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Button x:Name="P2RightAgilityBtn" DockPanel.Dock="Right" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+										<ImageBrush ImageSource="../Content/Images/RightArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Label Content="Agility" FontSize="20" HorizontalAlignment="Center"/>
@@ -274,12 +274,12 @@
 							<DockPanel Grid.Column="0" Grid.Row="1" Margin="5, 0, 5, 0">
 								<Button x:Name="P3LeftArtifactsBtn" DockPanel.Dock="Left" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+										<ImageBrush ImageSource="../Content/Images/LeftArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Button x:Name="P3RightArtifactsBtn" DockPanel.Dock="Right" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+										<ImageBrush ImageSource="../Content/Images/RightArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Label Content="Artifacts" FontSize="20" HorizontalAlignment="Center"/>
@@ -287,12 +287,12 @@
 							<DockPanel Grid.Column="2" Grid.Row="1" Margin="5, 0, 5, 0">
 								<Button x:Name="P3LeftAgilityBtn" DockPanel.Dock="Left" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+										<ImageBrush ImageSource="../Content/Images/LeftArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Button x:Name="P3RightAgilityBtn" DockPanel.Dock="Right" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+										<ImageBrush ImageSource="../Content/Images/RightArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Label Content="Agility" FontSize="20" HorizontalAlignment="Center"/>
@@ -368,12 +368,12 @@
 							<DockPanel Grid.Column="0" Grid.Row="1" Margin="5, 0, 5, 0">
 								<Button x:Name="P4LeftArtifactsBtn" DockPanel.Dock="Left" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+										<ImageBrush ImageSource="../Content/Images/LeftArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Button x:Name="P4RightArtifactsBtn" DockPanel.Dock="Right" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+                                        <ImageBrush ImageSource="../Content/Images/RightArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Label Content="Artifacts" FontSize="20" HorizontalAlignment="Center"/>
@@ -381,12 +381,12 @@
 							<DockPanel Grid.Column="2" Grid.Row="1" Margin="5, 0, 5, 0">
 								<Button x:Name="P4LeftAgilityBtn" DockPanel.Dock="Left" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/LeftArrow.jpg"/>
+                                        <ImageBrush ImageSource="../Content/Images/LeftArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Button x:Name="P4RightAgilityBtn" DockPanel.Dock="Right" Width="26">
 									<Button.Background>
-										<ImageBrush ImageSource="../Images/RightArrow.jpg"/>
+                                        <ImageBrush ImageSource="../Content/Images/RightArrow.jpg"/>
 									</Button.Background>
 								</Button>
 								<Label Content="Agility" FontSize="20" HorizontalAlignment="Center"/>
@@ -614,9 +614,15 @@
 					<Button x:Name="TestDiceBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Top" Click="TestDiceBtn_Click" Content="Roll Dice"/>
 				</DockPanel>
 				<!-- Test Button -->
-				<DockPanel Grid.Column="1" Grid.Row="5"/>
-				<DockPanel Grid.Column="0" Grid.Row="5">
-					<ComboBox x:Name="DiceCountCombo" HorizontalAlignment="Left" Margin="128,0,0,0" Grid.Row="5" VerticalAlignment="Center" Width="42" SelectedIndex="0" RenderTransformOrigin="3.214,0.477">
+				<DockPanel Grid.Column="1" Grid.Row="5">
+					<Button x:Name="TestBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Top" Click="TestBtn_Click" Content="Test Button"/>
+				</DockPanel>
+                <!-- Help Button -->
+                <DockPanel Grid.Column="0" Grid.Row="5">
+                    <Button x:Name="HelpBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Top" Click="HelpBtn_OnClick_Click" Content="Help"/>
+                </DockPanel>
+                <DockPanel Grid.Column="0" Grid.Row="4">
+					<ComboBox x:Name="DiceCountCombo" HorizontalAlignment="Left" Margin="0,0,0,65" Grid.Row="5" VerticalAlignment="Center" Width="42" SelectedIndex="0" RenderTransformOrigin="0.667,0.546">
 						<System:String>1</System:String>
 						<System:String>2</System:String>
 						<System:String>3</System:String>
@@ -626,7 +632,7 @@
 						<System:String>7</System:String>
 					</ComboBox>
 				</DockPanel>
-				<DockPanel Grid.Column="0" Grid.Row="5">
+				<DockPanel Grid.Column="0" Grid.Row="4">
 					<Label DockPanel.Dock="Left" Width="50">
 						<Label x:Name="CurrentPlayerIDLabel" Content="Label"/>
 					</Label>
