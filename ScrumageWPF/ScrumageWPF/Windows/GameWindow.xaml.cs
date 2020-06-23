@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ScrumageEngine.Views;
 using static ScrumageEngine.InputLogic.InputHandler;
 
 namespace ScrumageEngine.Windows{
@@ -223,6 +224,14 @@ namespace ScrumageEngine.Windows{
 			LogInput();
 		}
 
-
-	}
+        /// <summary>
+        /// Creates the HelpWindow
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HelpBtn_OnClick_Click(object sender, RoutedEventArgs e)
+        {
+            new HelpView().Show();
+        }
+    }
 }
