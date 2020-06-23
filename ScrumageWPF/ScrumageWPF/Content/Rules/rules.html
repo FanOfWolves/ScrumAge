@@ -5,8 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
+    <link rel="stylesheet" href="style.css">
     <title></title>
 </head>
 <body>
@@ -20,11 +19,66 @@
 <p><b>Player Order:</b> player order is simple, we start at 1 and end at 4. </p>
 
 
-<p>-
+<p>
     Sprints (Rounds): During these rounds called sprints players place pawns strategically at various locations to gain resources, gain additional funds, train their developers, trade resources for artifacts or agility cards, etc.
 </p>
+<hr />
 
+<h2>Starting the Game</h2>
+<p>Select number of players 2-4 from drop down and enter the players names. Once finished press Start!</p>
+<hr />
 
+<h2>Initial Setup</h2>
+<p>All the players start with <b>5</b> developers, <b>2</b> frontend, and <b>3</b> backend. Using these developers allow a player to gain resources to purchase artifact and agility cards.
+    
+<hr />
+<h2>Placement Phase</h2>
+<p>During this phase the player may choose to allocate their developers to several different places. Once a player has placed one/more developers at a single location the next player may place developers continuing until all developers have been placed for all players. Players may choose to place their developers at one of the following places:</p>
 
+<p><b>Technical Hut:</b> (1 player allowed per turn) Trains a developer to become a full stack developer.</p>
+<p><b>Budget Increase:</b> (1 player allowed per turn) Increase budget by 1</p>
+<p><b>Interview:</b> (2 players allowed from same person only) Add another front/back end developer.</p>
+<p><b>Artifact Cards:</b> (1 player per card) Allows a user to gain points at the cost of resources.</p>
+<p><b>Agility Cards:</b> (1 per player card) Pay # of resources by slot. (Agility 2 requires 2 resources) for various benefits.</p>
+<p><b>Random Chance Locations:</b>Depending on how many developers are allocated to these locations you can roll that many dice.</p>
+<ul>
+    <li><b>Reassignment:</b> Allows players to gain additional funds to pay developers each round.</li>
+    <li><b>Resources:</b>7 developers allowed per resource</li>
+    <li><b>Requirements:</b> Divide the die result by 3</li>
+    <li><b>Design:</b> Divide the die result by 4</li>
+    <li><b>Implementation:</b> Divide the die result by 5</li>
+    <li><b>Testing:</b> Divide the die result by 6</li>
+</ul>  
+
+<p><b>To place a developer:</b>Click on the developer/s you wish to place at a single location under the pawn list. Next, select the location from the drop down menu and click Move Pawn. This will place all selected pawns at the location selected. </p>
+
+<hr/>
+
+<h2>Acton Phase</h2>
+<p>Once all developers have been placed by all players move onto the action phase in which they resolve their developer’s placement locations in an order in which they choose. </p>
+<p>Players are able to start by selecting the location where their pawn is placed and this will resolve depending on the location automatically. Players will continue to resolve developer locations until they are finished with all locations in which they have developers.</p>
+<p>***When resolving artifact or agility cards, if a player does not want to pay for the card they may choose to abandon the card without penalty.</p>
+
+<b>Instructions: TBD</b> 
+    
+<hr/>
+<h2>Payment Phase</h2>
+<p>During this phase player automatically pay their developers from their funds, back/front end developers =1, full stack developers = 2. Funds are gained at by going to reassignment or by increasing your budget.</p>
+<p>If a player does not have enough funds to meet the cost of developers, they can choose to lose 1 resource per missing amount, or randomly lose 1 developer.</p>
+<p>If a player has extra funds for that turn, 1 extra = gain a random developer, 2 extra = gain choice of developer. (this does not cost extra for the current turn)</p>
+
+<hr/>
+<h2>Scoring Phase</h2>
+<p>After four sprints we proceed to the scoring phase of the game. During this game it is automatically calculated additional bonuses based off of what was gathered.</p>
+
+<p><b>Bonuses:</b></p>
+<ul>
+    <li>Multiply # of players by UI designers</li>
+    <li>Multiply # times increased budget by Financial Advisors</li>
+    <li>Multiply # of artifacts by HR </li>
+    <li># of agility cards</li>
+    <li># of agility cards</li>
+    <li>Total # of leftover resources (1 per resource)</li>
+</ul>
 </body>
 </html>

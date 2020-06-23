@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Loaded="HelpView_Loaded"
+        WindowStyle="ToolWindow"
         Title="" Height="450" Width="800">
     <Grid>
         <WebBrowser x:Name="webRules"></WebBrowser>
