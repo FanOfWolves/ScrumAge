@@ -139,7 +139,7 @@
 						</StackPanel>
 						<StackPanel Orientation="Horizontal">
 							<Label HorizontalAlignment="Left" Content="Funds:" FontSize="26"/>
-							<Label HorizontalAlignment="Left" x:Name="P2FundValue" Content="$0.00" FontSize="26"/>
+							<Label HorizontalAlignment="Left" x:Name="P2FundsValue" Content="$0.00" FontSize="26"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal">
 							<Label HorizontalAlignment="Left" Content="Sprint Cost:" FontSize="26"/>
@@ -233,7 +233,7 @@
 						</StackPanel>
 						<StackPanel Orientation="Horizontal">
 							<Label HorizontalAlignment="Left" Content="Funds:" FontSize="26"/>
-							<Label HorizontalAlignment="Left" x:Name="P3FundValue" Content="$0.00" FontSize="26"/>
+							<Label HorizontalAlignment="Left" x:Name="P3FundsValue" Content="$0.00" FontSize="26"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal">
 							<Label HorizontalAlignment="Left" Content="Sprint Cost:" FontSize="26"/>
@@ -327,7 +327,7 @@
 						</StackPanel>
 						<StackPanel Orientation="Horizontal">
 							<Label HorizontalAlignment="Left" Content="Funds:" FontSize="26"/>
-							<Label HorizontalAlignment="Left" x:Name="P4FundValue" Content="$0.00" FontSize="26"/>
+							<Label HorizontalAlignment="Left" x:Name="P4FundsValue" Content="$0.00" FontSize="26"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal">
 							<Label HorizontalAlignment="Left" Content="Sprint Cost:" FontSize="26"/>
@@ -404,7 +404,7 @@
 		<!-- Phase Column -->
 		<DockPanel Grid.Column="1" Margin="5, 0, 0, 0">
 			<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Top">
-				<TabControl Height="334">
+				<TabControl x:Name="PhaseTabControl" Height="334">
 					<TabItem Header="TabItem" Background="#FFE5E5E5" BorderBrush="#FFACACAC">
 						<!-- Phase Labels -->
 						<StackPanel Background="#FFE5E5E5">

@@ -114,6 +114,29 @@ namespace ScrumageEngine.BoardSpace {
 			return hasPawn;
 		}
 
+
+		/// <summary>
+		/// Determines of a pawn exists within the node.
+		/// </summary>
+		/// <param name="PawnType">The level of the pawn to be found</param>
+		/// <param name="pawnID">The player's ID to be paired with the pawn.</param>
+		/// <returns>True/false depending on if the Node has the pawn</returns>
+		public Boolean HasPawn(Int32 pawnID) {
+			Boolean hasPawn = false;
+			foreach(Pawn pawn in Pawns) {
+				if(pawn.PawnID == pawnID) {
+					hasPawn = true;
+					break;
+				} else if(pawn.PawnID == pawnID) {
+					hasPawn = true;
+					break;
+				} else {
+					continue;
+				}
+			}
+			return hasPawn;
+		}
+
 		/// <summary>
 		/// Removes a pawn from the node's inventory.
 		/// </summary>
