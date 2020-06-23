@@ -391,17 +391,41 @@ namespace ScrumageEngine.Windows {
 			currentPhaseIndex = game.phase - 1;
 			PhaseTabControl.SelectedIndex = currentPhaseIndex;
 		}
-		#endregion
-	}
+        #endregion
 
         /// <summary>
         /// Creates the HelpWindow
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void HelpBtn_OnClick_Click(object sender, RoutedEventArgs e)
+        private void HelpBtn_Click(object sender, RoutedEventArgs e)
         {
             new HelpView().Show();
         }
+
+        private void TestBtn_Click(Object sender, RoutedEventArgs e)
+        {
+            // Test for adding a pawn
+            /*GivePlayerPawn(game, currentPlayerID); // Gives random pawn
+			GivePlayerPawn(game, currentPlayerID, "0"); // 0 = FE, 1 = BE, 2 = FS
+			GivePlayerPawn(game, currentPlayerID, "Full Stack"); // Just enter the name of the pawn
+			UpdatePawnBox(GetPlayerPawnBoxByID(currentPlayerID), game.GetPlayerPawns(currentPlayerID));*/
+
+            // Test for card(probably a better way of getting the TextBox)
+            /*GivePlayerCard("artifact", game.Players[currentPlayerID]);
+			GivePlayerCard("agility", game.Players[currentPlayerID]);
+			UpdateCardBox((PlayerTabControl.Items[currentPlayerID] as TabItem).FindName($"P{currentPlayerID + 1}ArtifactBox") as TextBox, game.Players[currentPlayerID].FeatureCards[0]);
+			UpdateCardBox((PlayerTabControl.Items[currentPlayerID] as TabItem).FindName($"P{currentPlayerID + 1}AgilityBox") as TextBox, game.Players[currentPlayerID].UserStories[0]);*/
+
+            //currentPlayerID++;
+            //if(currentPlayerID > PlayerCount - 1) currentPlayerID = 0;
+
+            IncrementPlayer();
+            //PlayerTabControl.SelectedIndex = currentPlayerID-1;
+
+
+            LogInput();
+        }
     }
+
 }

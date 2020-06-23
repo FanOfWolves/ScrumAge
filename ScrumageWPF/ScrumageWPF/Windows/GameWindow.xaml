@@ -619,7 +619,7 @@
 				</DockPanel>
                 <!-- Help Button -->
                 <DockPanel Grid.Column="0" Grid.Row="5">
-                    <Button x:Name="HelpBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Top" Click="HelpBtn_OnClick_Click" Content="Help"/>
+                    <Button x:Name="HelpBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Top" Click="HelpBtn_Click" Content="Help"/>
                 </DockPanel>
                 <DockPanel Grid.Column="0" Grid.Row="4">
 					<ComboBox x:Name="DiceCountCombo" HorizontalAlignment="Left" Margin="0,0,0,65" Grid.Row="5" VerticalAlignment="Center" Width="42" SelectedIndex="0" RenderTransformOrigin="0.667,0.546">
