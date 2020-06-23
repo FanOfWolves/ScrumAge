@@ -234,23 +234,63 @@ namespace ScrumageEngine.BoardSpace {
         }
 
 		//TODO: Test edge cases
-        public void AttemptPaymentThroughFunds() {
-            Int32 _totalFunds = GetCurrentPlayerTotalFunds();
+        public void AttemptSprintPawnPayment() {
+            const Int32 PENALTY = 10;
             Int32 _totalCosts = GetCurrentPlayerTotalCosts();
-            _totalCosts -= _totalFunds;
-            if (_totalCosts > 0) {
-                Boolean _underBudget = FirePawns(_totalCosts, this.currentPlayerIndex); {}
-            }
+            Int32 _remainingCosts = PaySprintCostForPlayer(_totalCosts, this.currentPlayerIndex);
 
+            if (_remainingCosts > 0) {
+                Boolean _canAffordCost = FirePawns(_totalCosts, this.currentPlayerIndex);
+                if(!_canAffordCost) {
+                    Players[this.currentPlayerIndex].FeaturePoints -= PENALTY; //penalize
+                }
+			}
+
+        }
+
+        private Int32 PaySprintCostForPlayer(Int32 costP, Int32 playerIdP) {
+            Int32 _remainingCost = PaySprintCostThroughFunds(costP,playerIdP);
+            if (_remainingCost > 0) _remainingCost = PaySprintCostThroughBudget(costP, playerIdP);
+            return _remainingCost;
+        }
+
+        private Int32 PaySprintCostThroughBudget(Int32 costP, Int32 playerIdP) {
+            Int32 _funds = Players[playerIdP].Budget;
+            if (_funds >= costP) return 0;
+            else return costP - _funds;
+        }
+
+        private Int32 PaySprintCostThroughFunds(Int32 costP, Int32 playerIdP) {
+            Int32 _playerFunds = Players[playerIdP].TakeFunds();
+
+            if (_playerFunds >= costP) {	// If player has enough funds
+                Int32 _remainingFunds = _playerFunds - costP;
+				Players[playerIdP].GiveFunds(_remainingFunds);
+                return 0;
+            }
+            else {
+                return costP - _playerFunds;
+            }
         }
 
 		//TODO: Test if deleting pawns here deletes them from the player
 		//TODO: Test random nature
-		//TODO: Test out-of-pawns
-        private Boolean FirePawns(Int32 remainingCostP, Int32 playerIdP) {
+		//TODO: Test out-of-pawns		
+		/// <summary>
+		/// Repeatedly removes pawns from a player until (1) they have 2 pawns or (2) they can afford their sprint cost.
+		/// </summary>
+		/// <param name="remainingCostP">The remaining cost.</param>
+		/// <param name="playerIdP">The player identifier.</param>
+		/// <returns>
+		///		<c>true</c> player can afford new cost;otherwise <c>false</c> and player has 2 pawns.
+		/// </returns>
+		private Boolean FirePawns(Int32 remainingCostP, Int32 playerIdP) {
             while (remainingCostP > 0) {
-				
+                if (this.Players[playerIdP].Pawns.Count == 2) return false; //leave player with minimum number of pawns
+                    Pawn _takenPawn = this.Players[playerIdP].TakePawn();   //remove a random pawn
+                remainingCostP -= _takenPawn.PawnCost;
             }
+            return true;
         }
 
         private Int32 GetCurrentPlayerTotalFunds() {

@@ -259,6 +259,16 @@ namespace ScrumageEngine.Objects.Player {
             this.Funds += fundsToGiveP;
         }
 
+        /// <summary>
+        /// Gets and removes the funds from the <see cref="Player"/> instance.
+        /// </summary>
+        /// <returns>the funds from this player</returns>
+        public Int32 TakeFunds() {
+            Int32 _fundsToTake = this.Funds;
+            this.Funds = 0;
+            return _fundsToTake;
+        }
+
         #endregion
 
 
