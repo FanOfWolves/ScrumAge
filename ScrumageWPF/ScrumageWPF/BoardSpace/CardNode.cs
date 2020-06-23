@@ -12,9 +12,15 @@ namespace ScrumageEngine.BoardSpace {
     /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
     class CardNode : Node {
 
-        #region Fields
+        #region Fields        
+        /// <summary>
+        /// The <see cref="Stack{T}"/> of <see cref="Card"/>s in this CardNode
+        /// </summary>
         private Stack<Card> nodeCards = new Stack<Card>();
 
+        /// <summary>
+        /// The general level of cards in this CardNode.
+        /// </summary>
         private readonly Int32 cardLevel;
         #endregion
 

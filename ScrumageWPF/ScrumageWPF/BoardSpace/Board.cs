@@ -16,10 +16,28 @@ namespace ScrumageEngine.BoardSpace {
 		// This class is the content of the game, adding nodes, items, surroundings, creatures, etc here puts them into the game. Unless something is being done to the engine specifically, anything
 		//      added needs to only be in this class to avoid functionality problems with the engine. Nothing in this class in concrete, and can/will be changed based on the design of the game. Current
 		//      objects are only for example and testing. If you wish to add functionality to the engine, feel free to do so but BE CAREFUL!!!!!!! Ask Michael for help if need be.
+
+		/// <summary>
+		/// The list of <see cref="Node"/> objects on this board
+		/// </summary>
 		private List<Node> Nodes = new List<Node>();
+
+		/// <summary>
+		/// The list of <see cref="Die"/> objects on this board
+		/// </summary>
+		/// TODO Edit XML Comment Template for dice
 		private List<Die> dice = new List<Die>();
+
+		/// <summary>
+		/// The stack of <see cref="ArtifactCard"/> objects on this board
+		/// </summary>
 		private Stack<Card> Artifacts = new Stack<Card>();
+
+		/// <summary>
+		/// The stack of <see cref="AgilityCard"/> objects on this board
+		/// </summary>
 		private Stack<Card> Agility = new Stack<Card>();
+
 
 		private Node Resource1 = new ResourceNode(1, "Requirements", new Requirements());
 		private Node Resource2 = new ResourceNode(2, "Design", new Design());
@@ -29,15 +47,15 @@ namespace ScrumageEngine.BoardSpace {
 		private Node BudgetIncrease = new BudgetNode(6, "Budget Increase");
 		private Node Interview = new HiringNode(7, "Interview Node");
 		private Node Reassignment = new ReassignmentNode(8, "Reassignment Node");
-		private Card TestCard1 = new Card("artifact", "Test Artifact", new []{4,3,2,1});
-		private Card TestCard2 = new Card("agility", "Test Agility", new []{1,2,3,4});
+		private Card TestCard1 = new Card("artifact", "Test Artifact", new[] { 4, 3, 2, 1 });
+		private Card TestCard2 = new Card("agility", "Test Agility", new[] { 1, 2, 3, 4 });
 
 
 		/// <summary>
 		/// Initializes the board, if board has not been created, adds nodes to board.
 		/// </summary>
 		public Board() {
-			if (Nodes.Count == 0) {
+			if(Nodes.Count == 0) {
 				InitBoard(Nodes);
 			}
 		}
@@ -47,7 +65,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// </summary>
 		/// <param name="nodesOnMap"></param>
 		public void InitBoard(List<Node> nodesOnMap) {// To add nodes to the map, create the node in vars
-													// then add it to the passed list, nodeName(2digID)
+													  // then add it to the passed list, nodeName(2digID)
 			nodesOnMap.Add(Resource1);
 			nodesOnMap.Add(Resource2);
 			nodesOnMap.Add(Resource3);
@@ -59,6 +77,7 @@ namespace ScrumageEngine.BoardSpace {
 			Artifacts.Push(TestCard1);
 			Agility.Push(TestCard2);
 		}
+
 		/// <summary>
 		/// Obtains a node based on the node's name.
 		/// </summary>
@@ -72,13 +91,15 @@ namespace ScrumageEngine.BoardSpace {
 			}
 			return null;
 		}
+
 		/// <summary>
-		/// Retrive list of all nodes
+		/// Retrieve list of all nodes
 		/// </summary>
 		/// <returns>List of node objects</returns>
 		public List<Node> GetAllNodes() {
 			return Nodes;
 		}
+
 		/// <summary>
 		/// Get artifact card deck
 		/// </summary>
@@ -86,6 +107,7 @@ namespace ScrumageEngine.BoardSpace {
 		public Stack<Card> GetArtifacts() {
 			return Artifacts;
 		}
+
 		/// <summary>
 		/// Get agility card stack
 		/// </summary>
@@ -93,6 +115,7 @@ namespace ScrumageEngine.BoardSpace {
 		public Stack<Card> GetAgility() {
 			return Agility;
 		}
+
 		/// <summary>
 		/// Pull top artifact card from deck
 		/// </summary>
@@ -100,6 +123,7 @@ namespace ScrumageEngine.BoardSpace {
 		public Card GetTopArtifact() {
 			return Artifacts.Pop();
 		}
+
 		/// <summary>
 		/// Pull top agility card from deck
 		/// </summary>
@@ -115,13 +139,14 @@ namespace ScrumageEngine.BoardSpace {
 		/// <returns>The node if node exists, default node if it does not.</returns>
 		public Node GetNodeByID(Int32 nodeID) {
 			Node retNode = null;
-			foreach (Node node in Nodes) {
-				if (node.NodeID == nodeID) {
+			foreach(Node node in Nodes) {
+				if(node.NodeID == nodeID) {
 					retNode = node;
 				}
 			}
 			return retNode;
 		}
+
 		/// <summary>
 		/// Get dice currently in list
 		/// </summary>
@@ -129,12 +154,14 @@ namespace ScrumageEngine.BoardSpace {
 		public List<Die> GetDice() {
 			return dice;
 		}
+
 		/// <summary>
 		/// Clears dice object
 		/// </summary>
 		public void ClearDice() {
 			dice.Clear();
 		}
+
 		/// <summary>
 		/// Rolls number of dice
 		/// </summary>
@@ -145,6 +172,7 @@ namespace ScrumageEngine.BoardSpace {
 				dice.Add(new Die(rand.Next(6) + 1));
 			}
 		}
+
 		/// <summary>
 		/// Shows a GUI representation of the die face
 		/// </summary>
@@ -154,6 +182,7 @@ namespace ScrumageEngine.BoardSpace {
 			dice.ForEach(die => retList.Add(die.DrawDie()));
 			return retList;
 		}
+
 		/// <summary>
 		/// List current nodes
 		/// </summary>
@@ -162,6 +191,7 @@ namespace ScrumageEngine.BoardSpace {
 		public List<String> ListNodePawns(String nodeNameP) {
 			return GetNodeByName(nodeNameP).ListPawns();
 		}
+
 		/// <summary>
 		/// Returns number of pawns in node
 		/// </summary>
@@ -170,6 +200,7 @@ namespace ScrumageEngine.BoardSpace {
 		public int GetMaxPawnsInNode(String nodeNameP) {
 			return GetNodeByName(nodeNameP).MaxPawnLimit;
 		}
+
 		/// <summary>
 		/// REturns current pawn count in node
 		/// </summary>
@@ -178,6 +209,18 @@ namespace ScrumageEngine.BoardSpace {
 		public int GetPawnCountInNode(String nodeNameP) {
 			return GetNodeByName(nodeNameP).NumberOfPawns;
 		}
-	}
 
+
+		/// <summary>
+		/// Represents current dice values in a single string for the log.
+		/// </summary>
+		/// <returns>String of current dice values.</returns>
+		internal String DiceValues() {
+			String retString = "";
+			foreach(Die d in GetDice()) {
+				retString += d.Value + " ";
+			}
+			return retString;
+		}
+	}
 }

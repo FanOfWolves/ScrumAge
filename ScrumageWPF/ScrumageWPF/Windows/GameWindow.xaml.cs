@@ -20,18 +20,15 @@ namespace ScrumageEngine.Windows {
 		/// </summary>
 		Game game;
 
-
 		/// <summary>
 		/// The ID of the current player controlling the board.
 		/// </summary>
 		private Int32 currentPlayerID;
 
-
 		/// <summary>
 		/// A list of the pawns that are currently selected in the player's pawn box.
 		/// </summary>
 		private List<String> SelectedPawns = new List<String>();
-
 
 		/// <summary>
 		/// returns the combobox choice in the Placement Phase panel
@@ -40,13 +37,17 @@ namespace ScrumageEngine.Windows {
 			get { return NodeComboBox.SelectedItem.ToString(); }
 		}
 
-
 		/// <summary>
 		/// returns the combobox choice in the Action Phase panel
 		/// </summary>
 		private String PawnboxForActionNode {
 			get { return this.NodeComboBox2.SelectionBoxItem.ToString(); }
 		}
+
+		/// <summary>
+		/// Tracks the current phase from the Game class and updates GUI when needed
+		/// </summary>
+		private int currentPhaseIndex;
 		#endregion
 
 		#region Constructor
@@ -61,6 +62,7 @@ namespace ScrumageEngine.Windows {
 			InitComboBox(NodeComboBox, game.GetNodeNames());
 			InitComboBox(NodeComboBox2, game.GetNodeNames());
 			currentPlayerID = game.currentPlayerIndex+1;
+			currentPhaseIndex = game.phase - 1;
 		}
 		#endregion
 
@@ -133,7 +135,12 @@ namespace ScrumageEngine.Windows {
 				MessageBox.Show(_exception.Message);
 			}
 
-			if(phaseEnd) MessageBox.Show("Phase 1 has completed!");
+			if(phaseEnd) { 
+				MessageBox.Show("Phase 1 has completed!");
+				IncrementPhase();
+				ClearInputs();
+				ClearLog();
+			}
 			LogInput();
 		}
 
@@ -157,9 +164,16 @@ namespace ScrumageEngine.Windows {
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
 		private void NodeActionBtn_Click(Object sender, RoutedEventArgs e) {
-			ActivateNode(game, currentPlayerID, PawnboxForActionNode);
+			Boolean phaseDone = ActivateNode(game, currentPlayerID, PawnboxForActionNode);
 			UpdatePawnBox(FindNodePawnBoxPhase2(), game.GetNodePawns(PawnboxForActionNode));
 			UpdatePlayerInformation(this.currentPlayerID);
+			IncrementPlayer();
+			if(phaseDone) { 
+				MessageBox.Show("Phase 2 Done");
+				//IncrementPhase(); When phase 3 is ready
+				ClearInputs();
+				ClearLog();
+			}
 			LogInput();
 		}
 
@@ -220,15 +234,31 @@ namespace ScrumageEngine.Windows {
 		}
 
 
+		/// <summary>
+		/// Gets the Player Score Label for a player given the player ID.
+		/// </summary>
+		/// <param name="playerIdP">The player ID</param>
+		/// <returns>The Score Label belonging to that player</returns>
 		private Label FindPlayerScoreLabel(Int32 playerIdP) {
 			return FindName($"P{playerIdP}ScoreValue") as Label;
 		}
 
+
+		/// <summary>
+		/// Gets the Player Budget Label for a player given the player ID.
+		/// </summary>
+		/// <param name="playerIdP">The player ID</param>
+		/// <returns>The Budget Label belonging to that player</returns>
 		private Label FindPlayerBudgetLabel(Int32 playerIdP) {
 			return FindName($"P{playerIdP}BudgetValue") as Label;
 		}
 
 
+		/// <summary>
+		/// Gets the Player Funds Label for a player given the player ID.
+		/// </summary>
+		/// <param name="playerIdP">The player ID</param>
+		/// <returns>The Funds Label belonging to that player</returns>
 		private Label FindPlayerFundsLabel(Int32 playerIdp) {
 			return FindName($"P{playerIdp}FundsValue") as Label;
 		}
@@ -238,7 +268,7 @@ namespace ScrumageEngine.Windows {
 		/// <summary>
 		/// Updates the player's information display.
 		/// </summary>
-		/// <param name="playerIdP">The player identifier</param>
+		/// <param name="playerIdP">The player identifier.</param>
 		private void UpdatePlayerInformation(Int32 playerIdP) {
 
 			// Update inventory display
@@ -350,6 +380,15 @@ namespace ScrumageEngine.Windows {
 		private void IncrementPlayer() {
 			currentPlayerID = game.currentPlayerIndex + 1;
 			PlayerTabControl.SelectedIndex = game.currentPlayerIndex;
+		}
+
+
+		/// <summary>
+		/// Updates the current phase tab to the correct phase
+		/// </summary>
+		private void IncrementPhase() {
+			currentPhaseIndex = game.phase - 1;
+			PhaseTabControl.SelectedIndex = currentPhaseIndex;
 		}
 		#endregion
 	}
