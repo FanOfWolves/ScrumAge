@@ -1,19 +1,18 @@
 ﻿using System;
-using ScrumageEngine.Objects.Player;
+//using ScrumageEngine.Objects.Player;
 
 namespace ScrumageEngine.Objects.Items.Cards {
     /// <summary>
     /// Abstract class representing cards
     /// </summary>
-    public class Card {
+    public abstract class Card {
 
         #region Fields
 
         private ResourceContainer cardRequirements;
-        private String cardDesc;
-        private String cardName;
-        private String cardFormat;
-        private Int32 cardEndGameBonus;//TODO: Replace with CardBonus class?
+        protected String cardName;
+        protected String cardFormat;
+        protected Int32 cardEndGameBonus;//TODO: Replace with CardBonus class?
 
         #endregion
 
@@ -21,27 +20,28 @@ namespace ScrumageEngine.Objects.Items.Cards {
         /// <summary>
         /// Initializes a new instance of the <see cref="Card"/> class.
         /// </summary>
-        public Card(String nameP, String descriptionP, Int32[] resourcesCosts) {
+        public Card(String nameP, Int32[] resourcesCosts) {
 	        this.cardName = nameP;
-	        this.cardDesc = descriptionP;
             this.cardRequirements = new ResourceContainer(resourcesCosts);
+        }
+		#endregion
+
+		#region Display
+		/// <summary>
+		/// Not yet implemented
+		/// </summary>
+		/// <returns></returns>
+		public abstract String Display();
+        /// <summary>
+        /// Not yet implemented
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() {
+            return $"{this.GetType().Name}: {cardName}\n----------------------\n{this.GetCardRequirements().ShowRequirements()}";
         }
         #endregion
 
-        /// <summary>
-        /// Not yet implemented
-        /// </summary>
-        /// <returns></returns>
-        public String Display() {
-	        return "Will be abstract";
-        }
-        /// <summary>
-        /// Not yet implemented
-        /// </summary>
-        /// <returns></returns>
-        public override String ToString() {
-	        return "Will be abstract";
-        }
+        #region Getters
         /// <summary>
         /// Not yet implemented
         /// </summary>
@@ -49,5 +49,8 @@ namespace ScrumageEngine.Objects.Items.Cards {
         public ResourceContainer GetCardRequirements() {
             return this.cardRequirements;//TODO: Shallow reference?
         }
-    }
+
+		internal abstract string CardType();
+		#endregion
+	}
 }

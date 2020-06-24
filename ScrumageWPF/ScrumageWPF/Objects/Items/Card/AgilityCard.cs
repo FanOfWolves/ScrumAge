@@ -8,10 +8,6 @@ namespace ScrumageEngine.Objects.Items.Cards {
     class AgilityCard : Card {
 
         #region Fields        
-        /// <summary>
-        /// The card level. Determines resource costs and benefits.
-        /// </summary>
-        private Int32 cardLevel = 0;
 
         /// <summary>
         /// The immediate bonus for obtaining this card
@@ -26,10 +22,17 @@ namespace ScrumageEngine.Objects.Items.Cards {
         /// <param name="nameP">The card name.</param>
         /// <param name="descP">The card description.</param>
         /// <param name="costs">The resource costs of this card.</param>
-        public AgilityCard(String nameP, String descP, Int32[] costs) : base(nameP, descP, costs) {
-            this.cardLevel = 1;
+        public AgilityCard(String nameP, Int32[] costs) : base(nameP, costs) {
             this.ImmediateBonus = 0;
         }
         #endregion
-    }
+
+        public override string Display() {
+            throw new NotImplementedException();
+        }
+
+		internal override String CardType() {
+            return "Agility";
+		}
+	}
 }

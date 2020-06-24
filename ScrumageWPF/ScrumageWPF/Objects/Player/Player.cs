@@ -209,7 +209,7 @@ namespace ScrumageEngine.Objects.Player {
         /// <summary>
         /// The player resources. <see cref="ResourceContainer"/>.
         /// </summary>
-        private ResourceContainer playerResources;
+        public ResourceContainer playerResources;
 
         /// <summary>
         /// Adds the resource to the player's ResourceContainer

@@ -1,0 +1,7 @@
+﻿Artifact:Customer Meeting Design:2,1,0,0
+Artifact:System Test Plan:0,1,1,1
+Artifact:Class Diagram:2,3,4,5
+Agility:New Code Standards:1,1,1,1
+Agility:New Law Passed:1,1,1,1
+Agility:Temporary Budget Reduction:1,1,1,1
+Agility:Update To A New Framework:1,1,1,1
