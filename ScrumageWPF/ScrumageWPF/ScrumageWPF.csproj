@@ -14,26 +14,34 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Images\LeftArrow.jpg" />
-    <None Remove="Images\RightArrow.jpg" />
-    <None Remove="Resources\b.wav" />
+    <None Remove="Content\Images\LeftArrow.jpg" />
+    <None Remove="Content\Images\RightArrow.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Sounds\ButtonClick.wav" />
+    <Resource Include="Content\Sounds\ButtonClick.wav" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\LeftArrow.jpg">
+    <Resource Include="Content\Images\LeftArrow.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\RightArrow.jpg">
+    <Resource Include="Content\Images\RightArrow.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 
   <ItemGroup>
     <Page Include="App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Content\Rules\rules.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Rules\style.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
