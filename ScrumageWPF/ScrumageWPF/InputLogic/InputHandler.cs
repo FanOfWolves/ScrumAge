@@ -137,9 +137,9 @@ namespace ScrumageEngine.InputLogic {
 		/// <param name="player">The player that selected the node.</param>
 		/// <param name="node">The node that was selected in the GUI.</param>
 		public static Boolean ActivateNode(Game gameP, int playerIDP, String nodeNameP) {
-			String nodeLog = gameP.DoAction(nodeNameP, playerIDP);
+			Boolean phaseFinished = gameP.DoAction(nodeNameP, playerIDP, out String nodeLog);
 			RecordInputs(nodeLog);
-			return gameP.CheckPlayerActions();
+			return phaseFinished;
 		}
 
 
