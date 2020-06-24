@@ -47,6 +47,18 @@ namespace ScrumageEngine.BoardSpace {
             return new Pawn(playerIDP, "Full Stack");         // 91 - 100: Full Stack
         }
 
+
+        /// <summary>
+        /// Gathers the player pawns from this node.
+        /// </summary>
+        /// <param name="playerId">The player identifier.</param>
+        /// <returns>the player's pawns from this node</returns>
+        private List<Pawn> GatherPlayerPawns(Int32 playerId) {
+            List<Pawn> _playerPawns = Pawns.FindAll(_playerPawn => _playerPawn.PawnID == playerId);
+            Pawns.RemoveAll(_playerPawn => _playerPawn.PawnID == playerId);
+            return _playerPawns;
+        }
+
         /// <summary>
         /// Randomly assigns the current Player a Pawn if they have allocated a Pawn to this Node.
         /// Inherited from <seealso cref = "Node"/>.
@@ -55,16 +67,18 @@ namespace ScrumageEngine.BoardSpace {
         /// <returns>a message log denoting the Pawn that was hired and the Player that hired it</returns>
         public override String DoAction(Player playerP) {
             Int32 _playerID = playerP.PlayerID;
+            List<Pawn> _playerPawns = GatherPlayerPawns(_playerID);
+            
+            if (_playerPawns.Count == 0) {
+                return $"{playerP.PlayerName} failed to hire more developers. Reason: No Pawns";
+            }
 
-            Int32 _pawnIndex = Pawns.FindIndex(_playerPawn => _playerPawn.PawnID == _playerID);
-            if(_pawnIndex == -1)
-                return null;//!!TODO: Throw NoPlayerPawnException()
-
-            playerP.GivePawn(base.Pawns[_pawnIndex]);
-            base.Pawns.RemoveAt(_pawnIndex);
-
-            Pawn _hiredPawn = HirePawn(_playerID);
-            playerP.GivePawn(_hiredPawn);
+            Pawn _hiredPawn = null;
+            foreach (Pawn _pawn in _playerPawns) {
+                _hiredPawn = HirePawn(_playerID);
+                playerP.GivePawn(_hiredPawn);
+                playerP.GivePawn(_pawn);
+            }
 
             return $"{playerP.PlayerName} has hired a {_hiredPawn.PawnType} developer!";
         }
