@@ -172,7 +172,7 @@ namespace ScrumageEngine.Windows {
 			IncrementPlayer();
 			if(phaseDone) { 
 				MessageBox.Show("Phase 2 Done");
-				//IncrementPhase(); When phase 3 is ready
+				IncrementPhase();
 				ClearInputs();
 				ClearLog();
 			}
@@ -181,8 +181,15 @@ namespace ScrumageEngine.Windows {
 
 		//TODO: Update GUI
         private void PlayerPaymentBtn_Click(Object sender, RoutedEventArgs e) {
-            Boolean _costPaid = InputHandler.PaySprintCost(this.game, this.game.currentPlayerIndex);
-			
+            Boolean phaseDone = InputHandler.PaySprintCost(this.game);
+			UpdatePlayerInformation(this.currentPlayerID);
+			IncrementPlayer();
+			if(phaseDone) {
+				MessageBox.Show("Phase 3 Done");
+				ClearInputs();
+				ClearLog();
+			}
+			LogInput();
         }
 
 		/// <summary>

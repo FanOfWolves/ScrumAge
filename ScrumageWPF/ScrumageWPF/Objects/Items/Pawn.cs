@@ -18,15 +18,16 @@ namespace ScrumageEngine.Objects.Items {
 		public Int32 PawnID { get; set; }
 
 
-		/// <summary>
-		/// The level of the pawn used to determine if a pawn can do a specific task
-		/// </summary>
+        /// <summary>
+        /// The level of the pawn used to determine if a pawn can do a specific task
+        /// </summary>
+        private String pawnType;
 		public String PawnType {
             get {
-                return PawnType;
+                return pawnType;
             }
             set {
-                this.PawnType = value;
+                this.pawnType = value;
                 PawnCost = CalcCost(value);
             }
         }
@@ -75,7 +76,7 @@ namespace ScrumageEngine.Objects.Items {
 				case "Front End":
                     return 1;
 				default:
-                    throw new ArgumentException("Invalid pawn type specified.");
+                    return 0;
             }
 		}
 

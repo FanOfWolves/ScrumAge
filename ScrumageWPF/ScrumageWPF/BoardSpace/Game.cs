@@ -227,90 +227,21 @@ namespace ScrumageEngine.BoardSpace {
 				ResetPlayers();
                 return true;
             }
-            else {
-                
-            }
+
             return false;
         }
 
-		//TODO: Test edge cases
-        public Boolean AttemptSprintPawnPayment(Int32 playerIdP) {
-            const Int32 PENALTY = 10;
-            Int32 _totalCosts = Players[playerIdP].PlayerSprintCost;
-            Int32 _remainingCosts = PaySprintCostForPlayer(_totalCosts, playerIdP);
+        public String PayPawns() {
+            Boolean _paidCost = Players[this.currentPlayerIndex].PayPawns();
+            if (_paidCost) return $"{Players[this.currentPlayerIndex].PlayerName} paid off their costs.";
+            return $"{Players[this.currentPlayerIndex].PlayerName} could not pay off their cost! -10 points";
+        }
 
-            if (_remainingCosts <= 0) return true;
-            Boolean _canAffordCost = FirePawns(_totalCosts, playerIdP);
-            if (_canAffordCost) return true;
-            Players[this.currentPlayerIndex].FeaturePoints -= PENALTY; //penalize
-            return false;
+        internal Boolean CheckPlayerPaymentStatuses() {
+            return AllPlayersPaid();
         }
 
 		/// <summary>
-		/// Pays the sprint cost for player.
-		/// </summary>
-		/// <param name="costP">The cost p.</param>
-		/// <param name="playerIdP">The player identifier p.</param>
-		/// <returns></returns>
-		private Int32 PaySprintCostForPlayer(Int32 costP, Int32 playerIdP) {
-            Int32 _remainingCost = PaySprintCostThroughFunds(costP,playerIdP);
-            if (_remainingCost > 0) _remainingCost = PaySprintCostThroughBudget(costP, playerIdP);
-            return _remainingCost;
-        }
-
-		/// <summary>
-		/// Pays the sprint cost through player's budget.
-		/// </summary>
-		/// <param name="costP">The cost.</param>
-		/// <param name="playerIdP">The player identifier.</param>
-		/// <returns>the remaining cost</returns>
-		private Int32 PaySprintCostThroughBudget(Int32 costP, Int32 playerIdP) {
-            Int32 _funds = Players[playerIdP].Budget;
-            if (_funds >= costP) return 0;
-            else return costP - _funds;
-        }
-
-		/// <summary>
-		/// Pays the sprint cost through the player's funds.
-		/// </summary>
-		/// <param name="costP">The cost.</param>
-		/// <param name="playerIdP">The player identifier.</param>
-		/// <returns>the remaining cost</returns>
-		private Int32 PaySprintCostThroughFunds(Int32 costP, Int32 playerIdP) {
-            Int32 _playerFunds = Players[playerIdP].TakeFunds();
-
-            if (_playerFunds >= costP) {	// If player has enough funds
-                Int32 _remainingFunds = _playerFunds - costP;
-				Players[playerIdP].GiveFunds(_remainingFunds);
-                return 0;
-            }
-            else {
-                return costP - _playerFunds;
-            }
-        }
-
-		//TODO: Test if deleting pawns here deletes them from the player
-		//TODO: Test random nature
-		//TODO: Test out-of-pawns		
-		/// <summary>
-		/// Repeatedly removes pawns from a player until (1) they have 2 pawns or (2) they can afford their sprint cost.
-		/// </summary>
-		/// <param name="remainingCostP">The remaining cost.</param>
-		/// <param name="playerIdP">The player identifier.</param>
-		/// <returns>
-		///		<c>true</c> player can afford new cost;otherwise <c>false</c> and player has 2 pawns.
-		/// </returns>
-		private Boolean FirePawns(Int32 remainingCostP, Int32 playerIdP) {
-            while (remainingCostP > 0) {
-                if (this.Players[playerIdP].Pawns.Count == 2) return false; //leave player with minimum number of pawns
-                    Pawn _takenPawn = this.Players[playerIdP].TakePawn();   //remove a random pawn
-                remainingCostP -= _takenPawn.PawnCost;
-            }
-            return true;
-        }
-
-
-        /// <summary>
 		/// Checks if all players have paid their sprint costs.
 		/// </summary>
 		/// <returns>
@@ -319,7 +250,6 @@ namespace ScrumageEngine.BoardSpace {
 		private Boolean AllPlayersPaid() {
 			return this.Players.TrueForAll(_player => _player.FinishedPhase = true);
 		}
-
 
 		/// <summary>
 		/// Checks current game phase and returns phase method
@@ -333,8 +263,7 @@ namespace ScrumageEngine.BoardSpace {
 			return false;
 		}
 
-
-		/// <summary>
+        /// <summary>
 		/// Rests all of the players' FinishedPhase 
 		/// </summary>
 		private void ResetPlayers() {
@@ -393,6 +322,8 @@ namespace ScrumageEngine.BoardSpace {
 		internal Boolean CheckPlayerActions() {
 			return AllPlayersDone();
 		}
+
+
 
 		#endregion
 

@@ -285,7 +285,30 @@ namespace ScrumageEngine.Objects.Player {
             return _fundsToTake;
         }
 
+        private void AddBudgetToFunds() {
+            this.Funds += this.Budget;
+        }
 
+        public Boolean PayPawns() {
+            AddBudgetToFunds();
+            this.FinishedPhase = true;
+            for (Int32 i = this.Pawns.Count-1; i > 0; i--) {
+                if (this.Funds <= 0) {
+                    this.Pawns.RemoveAt(i);
+                    continue;
+                }
+
+                if (this.Pawns.Count <= 2) {
+                    this.FeaturePoints -= 10;
+                    this.Funds = 0; //reset funds
+                    return false;
+                }
+                this.Funds -= this.Pawns[i].PawnCost;
+            }
+            
+            return true;
+
+        }
 
         #endregion
 

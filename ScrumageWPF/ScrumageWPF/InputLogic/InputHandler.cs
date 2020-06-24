@@ -143,8 +143,10 @@ namespace ScrumageEngine.InputLogic {
 		}
 
 
-        public static Boolean PaySprintCost(Game gameP, Int32 playerIdP) {
-            return gameP.AttemptSprintPawnPayment(playerIdP);
+        public static Boolean PaySprintCost(Game gameP) {
+            String _payLog = gameP.PayPawns();
+            RecordInputs(_payLog);
+            return gameP.CheckPlayerPaymentStatuses();
         }
 		
 
