@@ -86,7 +86,7 @@ namespace ScrumageEngine.BoardSpace {
         public override String DoAction(Player playerP) {
 
             // Preliminary checks
-            if(deck.Count == 0) return $"There are no cards left in {NodeName}";
+            if(deck.Count == 0) return $"There are no cards left in {NodeName}.";
             if(Pawns.Count < 1) return $"{playerP.PlayerName} had no pawns in {NodeName} to claim a card.";
             Pawn _pawn = Pawns[0];
             if(_pawn.PawnID != playerP.PlayerID) return $"{playerP.PlayerName} had no pawns in {NodeName} to claim a card.";
