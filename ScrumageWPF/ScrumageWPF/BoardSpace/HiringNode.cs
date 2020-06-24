@@ -48,27 +48,7 @@ namespace ScrumageEngine.BoardSpace {
         }
 
 
-        /// <summary>
-        /// Gathers the player pawns from this node.
-        /// </summary>
-        /// <param name="playerId">The player identifier.</param>
-        /// <returns>the player's pawns from this node</returns>
-        private List<Pawn> GatherPlayerPawns(Int32 playerId) {
-            List<Pawn> _playerPawns = Pawns.FindAll(_playerPawn => _playerPawn.PawnID == playerId);
-            Pawns.RemoveAll(_playerPawn => _playerPawn.PawnID == playerId);
-            return _playerPawns;
-        }
 
-        /// <summary>
-        /// Returns the pawns (if any) to player.
-        /// </summary>
-        /// <param name="pawnsToReturnP">The pawns to return.</param>
-        /// <param name="playerP">The player.</param>
-        private void ReturnPawnsToPlayer(List<Pawn> pawnsToReturnP, Player playerP) {
-            foreach (Pawn _pawn in pawnsToReturnP) {
-                playerP.GivePawn(_pawn);
-            }
-        }
 
         /// <summary>
         /// Randomly assigns the current Player a Pawn if they have allocated a Pawn to this Node.
@@ -78,15 +58,14 @@ namespace ScrumageEngine.BoardSpace {
         /// <returns>a message log denoting the Pawn that was hired and the Player that hired it</returns>
         public override String DoAction(Player playerP) {
             Int32 _playerID = playerP.PlayerID;
-            List<Pawn> _playerPawns = GatherPlayerPawns(_playerID);
+            List<Pawn> _playerPawns = base.GatherPlayerPawns(_playerID);
             if (_playerPawns.Count < 2) {
-                // Return pawns to player
-                ReturnPawnsToPlayer(_playerPawns, playerP);
+                base.ReturnPawnsToPlayer(_playerPawns, playerP);
                 return $"{playerP.PlayerName} failed to hire more developers. Reason: Need at least 2 Pawns.";
             }
             else {
                 Pawn _hiredPawn = HirePawn(_playerID);
-                ReturnPawnsToPlayer(_playerPawns, playerP);
+                base.ReturnPawnsToPlayer(_playerPawns, playerP);
                 playerP.GivePawn(_hiredPawn);
                 return $"{playerP.PlayerName} has hired a {_hiredPawn.PawnType} developer!";
             }
