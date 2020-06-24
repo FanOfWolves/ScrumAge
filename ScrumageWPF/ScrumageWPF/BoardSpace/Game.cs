@@ -222,23 +222,29 @@ namespace ScrumageEngine.BoardSpace {
 		/// </returns>
 		private Boolean PhaseThree() {
             if (AllPlayersPaid()) {
-                this.phase = 1;//TODO: Perhaps go to an intermediate phase where we check if we are done with game?
+                this.phase = 1; //TODO: Perhaps go to an intermediate phase where we check if we are done with game?
                 this.currentPlayerIndex = 0;
-				ResetPlayers();
+                ResetPlayers();
                 return true;
             }
-
+            this.currentPlayerIndex++;
             return false;
         }
 
-        public String PayPawns() {
-            Boolean _paidCost = Players[this.currentPlayerIndex].PayPawns();
-            if (_paidCost) return $"{Players[this.currentPlayerIndex].PlayerName} paid off their costs.";
-            return $"{Players[this.currentPlayerIndex].PlayerName} could not pay off their cost! -10 points";
-        }
-
-        internal Boolean CheckPlayerPaymentStatuses() {
-            return AllPlayersPaid();
+		/// <summary>
+		/// Pays the pawns for the current player.
+		/// </summary>
+		/// <param name="paymentLog">The payment log, detailing the payment.</param>
+		/// <returns>
+		///		<c>true</c> if payment successful; otherwise, <c>false</c>.
+		/// </returns>
+		public Boolean PayPawns(out String paymentLog) {
+            Boolean paidCost = Players[this.currentPlayerIndex].PayPawns();
+            if (paidCost) {
+                paymentLog = $"{Players[this.currentPlayerIndex].PlayerName} paid off their costs.";
+			}
+            else paymentLog = $"{Players[this.currentPlayerIndex].PlayerName} could not pay off their cost! -10 points";
+            return CheckPhase(this.phase);
         }
 
 		/// <summary>
@@ -248,7 +254,7 @@ namespace ScrumageEngine.BoardSpace {
 		///		<c>true</c> if all players have finished this phase; otherwise <c>false</c>.
 		/// </returns>
 		private Boolean AllPlayersPaid() {
-			return this.Players.TrueForAll(_player => _player.FinishedPhase = true);
+			return this.Players.TrueForAll(player => player.FinishedPhase == true);
 		}
 
 		/// <summary>
@@ -264,7 +270,7 @@ namespace ScrumageEngine.BoardSpace {
 		}
 
         /// <summary>
-		/// Rests all of the players' FinishedPhase 
+		/// Resets all of the players' FinishedPhase 
 		/// </summary>
 		private void ResetPlayers() {
 			foreach(Player p in Players) {

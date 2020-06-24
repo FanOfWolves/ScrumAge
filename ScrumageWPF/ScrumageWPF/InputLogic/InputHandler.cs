@@ -142,11 +142,17 @@ namespace ScrumageEngine.InputLogic {
 			return phaseFinished;
 		}
 
-
-        public static Boolean PaySprintCost(Game gameP) {
-            String _payLog = gameP.PayPawns();
-            RecordInputs(_payLog);
-            return gameP.CheckPlayerPaymentStatuses();
+		/// <summary>
+		/// Pays the sprint cost for the current player.
+		/// </summary>
+		/// <param name="gameP">The game.</param>
+		/// <returns>
+		///		<c>true</c> if payment phase finished; otherwise <c>false</c>.
+		/// </returns>
+		public static Boolean PaySprintCost(Game gameP) {
+            Boolean phaseFinished = gameP.PayPawns(out String payLog);
+            RecordInputs(payLog);
+            return phaseFinished;
         }
 		
 
