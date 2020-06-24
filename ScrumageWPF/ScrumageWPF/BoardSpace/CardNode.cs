@@ -16,12 +16,10 @@ namespace ScrumageEngine.BoardSpace {
         /// <summary>
         /// The <see cref="Stack{T}"/> of <see cref="Card"/>s in this CardNode
         /// </summary>
-        private Stack<Card> nodeCards = new Stack<Card>();
+        private Deck deck;
 
-        /// <summary>
-        /// The general level of cards in this CardNode.
-        /// </summary>
-        private readonly Int32 cardLevel;
+
+        public override Int32 MaxPawnLimit { get { return 1; } }
         #endregion
 
         #region Constructors        
@@ -32,11 +30,8 @@ namespace ScrumageEngine.BoardSpace {
         /// <param name="nodeName">Name of the node.</param>
         /// <param name="cardLevel">The level of the cards in this node</param>
         /// <param name="cards">The cards for this node</param>
-        public CardNode(Int32 nodeId, String nodeName, Int32 cardLevel, IEnumerable<Card> cards) : base(nodeId, nodeName) {
-            this.cardLevel = cardLevel;
-            foreach(Card card in cards) {
-                this.nodeCards.Push(card);
-            }
+        public CardNode(Int32 nodeId, String nodeName, Deck deck) : base(nodeId, nodeName) {
+            this.deck = deck;
         }
         #endregion
 
@@ -48,7 +43,7 @@ namespace ScrumageEngine.BoardSpace {
         ///     <c>true</c> if node is out of cards; Otherwise, <c>false</c>
         /// </returns>
         public Boolean OutOfCards() {
-            return this.nodeCards.Count == 0;
+            return deck.Count == 0;
         }
 
         /// <summary>
@@ -59,7 +54,7 @@ namespace ScrumageEngine.BoardSpace {
         ///     <c>true</c> if player has enough to pay for card; otherwise, <c>false</c>
         /// </returns>
         private Boolean CheckCardCost(Player playerP) {
-            return (playerP.GetPlayerResources() >= this.nodeCards.Peek().GetCardRequirements());
+            return (playerP.GetPlayerResources() >= deck.Peek().GetCardRequirements());
         }
 
         /// <summary>
@@ -79,13 +74,19 @@ namespace ScrumageEngine.BoardSpace {
         /// <param name="playerP">The player to give the card to</param>
         /// <returns>the card from the top of the stack</returns>
         private Card TakeCard(Player playerP) {
-            Card _theCard = this.nodeCards.Pop();
+            Card _theCard = deck.Draw();
             Resource[] _givenTypes = _theCard.GetCardRequirements().GetResourceTypes();
-            foreach(Resource _resource in _givenTypes) {
+            /*foreach(Resource _resource in _givenTypes) {
                 playerP.TakeResource(_resource, _theCard.GetCardRequirements()[_resource]);
-            }
+            }*/
+            playerP.playerResources -= _theCard.GetCardRequirements();
             return _theCard;
         }
+
+        public Card TopCard() {
+            return deck.Peek();
+		}
+
 
         #region Inherited: Node Methods
         /// <summary>
@@ -94,18 +95,28 @@ namespace ScrumageEngine.BoardSpace {
         /// <param name="playerP">the acting player</param>
         /// <returns>a string log denoting the acting player and the result</returns>
         public override String DoAction(Player playerP) {
-            List<Pawn> _playerPawns = GatherPlayerPawns(playerP.PlayerID);
-            foreach(Pawn _pawn in _playerPawns) {
-                playerP.GivePawn(_pawn);
-            }
 
+            // Preliminary checks
+            if(deck.Count == 0) return $"There are no cards left in {NodeName}";
+            if(Pawns.Count < 1) return $"{playerP.PlayerName} had no pawns in {NodeName} to claim a card.";
+            Pawn _pawn = Pawns[0];
+            if(_pawn.PawnID != playerP.PlayerID) return $"{playerP.PlayerName} had no pawns in {NodeName} to claim a card.";
+
+
+            // return pawn
+            playerP.GivePawn(_pawn);
+            Pawns.Remove(_pawn);
+            // Check required resources
             Boolean _gainCard = CheckCardCost(playerP);
             if(!_gainCard) {
-                return $"{playerP.PlayerName} failed to obtain a card.";
+                return $"{playerP.PlayerName} failed to obtain a card due to lack of resources.";
             }
 
+            // Give card
+            String cardType = "";
+            cardType = deck.Peek().CardType();
             playerP.AddToCards(TakeCard(playerP));
-            return $"{playerP.PlayerName} obtained a new card!";
+            return $"{playerP.PlayerName} obtained a new {cardType} Card!";
         }
         #endregion
     }
