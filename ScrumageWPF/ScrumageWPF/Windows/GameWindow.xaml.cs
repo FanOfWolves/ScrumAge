@@ -190,6 +190,7 @@ namespace ScrumageEngine.Windows {
 			IncrementPlayer();
 			if(phaseDone) {
 				MessageBox.Show("Phase 3 Done");
+				IncrementPhase();
 				ClearInputs();
 				ClearLog();
 			}
