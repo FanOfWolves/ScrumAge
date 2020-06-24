@@ -382,9 +382,9 @@ namespace ScrumageEngine.BoardSpace {
 		/// <param name="nodeNameP">the name of the Node whose action we are using.</param>
 		/// <param name="playerIDP">the id of the acting player</param>
 		/// <returns>string for console log of what has changed</returns>
-		public String DoAction(String nodeNameP, Int32 playerIDP) {
-			CheckPhase(phase);
-			return GetNodeByName(nodeNameP).DoAction(GetPlayerByID(playerIDP));
+		public Boolean DoAction(String nodeNameP, Int32 playerIDP, out String nodeLog) {
+			nodeLog = GetNodeByName(nodeNameP).DoAction(GetPlayerByID(playerIDP));
+			return CheckPhase(phase);
 		}
 		#endregion
 
