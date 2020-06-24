@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Collections;
 using System.Linq;
 
-namespace ScrumageEngine.Objects.Player {
+namespace ScrumageEngine.Objects.Items {
     /// <summary>
     /// Handles the player's resources
     /// </summary>
@@ -123,14 +123,22 @@ namespace ScrumageEngine.Objects.Player {
 				throw new IndexOutOfRangeException();
 			}
 			set {
-				if(i == 0)
+				if(i == 0) {
 					this[new Requirements()] = value;
-				if(i == 1)
+					return;
+				}
+				if(i == 1) {
 					this[new Design()] = value;
-				if(i == 2)
+					return;
+				}
+				if(i == 2) {
 					this[new Implementation()] = value;
-				if(i == 3)
-					this[new Testing()]= value;
+					return;
+				}
+				if(i == 3) {
+					this[new Testing()] = value;
+					return;
+				}
 				throw new IndexOutOfRangeException();
 			}
         }
@@ -208,6 +216,28 @@ namespace ScrumageEngine.Objects.Player {
 				if(playerResP[r] >= reqsP[r]) isLess = false;
 			}
 			return isLess;
+		}
+
+		public static ResourceContainer operator -(ResourceContainer playerResP, ResourceContainer reqsP) {
+			for(int i = 0; i < reqsP.resourceDictionary.Count; i++) {
+				playerResP[i] -= reqsP[i];
+			}
+			return playerResP;
+		}
+
+		public static ResourceContainer operator +(ResourceContainer playerResP, ResourceContainer otherP) {
+			for(int i = 0; i < otherP.resourceDictionary.Count; i++) {
+				playerResP[i] += otherP[i];
+			}
+			return playerResP;
+		}
+
+
+		public String ShowRequirements() {
+			return $"Requirements:{this[0]}\n" +
+				   $"Design:{this[1]}\n" +
+				   $"Implementation:{this[2]}\n" +
+				   $"Testing:{this[3]}\n";
 		}
     }
 }
