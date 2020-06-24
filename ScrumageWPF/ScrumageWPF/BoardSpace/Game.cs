@@ -431,5 +431,17 @@ namespace ScrumageEngine.BoardSpace {
 		}
 		#endregion
 
+		#region Node Tracking
+		public Int32[] GetResourceNodeSpots() {
+			Int32[] retArr = new Int32[4];
+			retArr[0] = GetNodeByID(1).MaxPawnLimit - GetNodeByID(1).NumberOfPawns;
+			retArr[1] = GetNodeByID(2).MaxPawnLimit - GetNodeByID(2).NumberOfPawns;
+			retArr[2] = GetNodeByID(3).MaxPawnLimit - GetNodeByID(3).NumberOfPawns;
+			retArr[3] = GetNodeByID(4).MaxPawnLimit - GetNodeByID(4).NumberOfPawns;
+
+			return retArr;
+		}
+		#endregion
+
 	}
 }

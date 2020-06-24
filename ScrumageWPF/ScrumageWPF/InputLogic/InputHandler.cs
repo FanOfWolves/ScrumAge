@@ -61,10 +61,10 @@ namespace ScrumageEngine.InputLogic {
 		/// </summary>
 		/// <param name="mostRecentInput">The input that needs to be recorded.</param>
 		public static void RecordInputs(String mostRecentInput) {
-			if(recentInputs.Count < 20) {                            // This number is the max that is to be recorded
+			if(recentInputs.Count < 30) {                            // This number is the max that is to be recorded
 				recentInputs.Insert(0, mostRecentInput);
 			} else {                                                // If the input list is already full
-				recentInputs.RemoveAt(19);                           // Remove the last input(total number -1)
+				recentInputs.RemoveAt(29);                           // Remove the last input(total number -1)
 				recentInputs.Insert(0, mostRecentInput);            // Then put the new input at the top
 			}
 		}

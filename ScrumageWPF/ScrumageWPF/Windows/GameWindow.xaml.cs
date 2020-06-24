@@ -62,6 +62,7 @@ namespace ScrumageEngine.Windows {
 			InitPlayerTab(playerNames);
 			InitComboBox(NodeComboBox, game.GetNodeNames());
 			InitComboBox(NodeComboBox2, game.GetNodeNames());
+			UpdateResourceLabels();
 			currentPlayerID = game.currentPlayerIndex+1;
 			currentPhaseIndex = game.phase - 1;
 		}
@@ -131,6 +132,7 @@ namespace ScrumageEngine.Windows {
 
 				UpdatePawnBox(FindNodePawnBoxPhase1(), game.GetNodePawns(PawnboxForPlacementNode));
 				UpdatePawnBox(FindPlayerPawnBox(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
+				UpdateResourceLabels();
 				IncrementPlayer();
 			} catch(MovePawnException _exception) {
 				MessageBox.Show(_exception.Message);
@@ -168,6 +170,7 @@ namespace ScrumageEngine.Windows {
 			Boolean phaseDone = ActivateNode(game, currentPlayerID, PawnboxForActionNode);
 			UpdatePawnBox(FindNodePawnBoxPhase2(), game.GetNodePawns(PawnboxForActionNode));
 			UpdatePlayerInformation(this.currentPlayerID);
+			UpdateResourceLabels();
 			IncrementPlayer();
 			if(phaseDone) { 
 				MessageBox.Show("Phase 2 Done");
@@ -403,6 +406,18 @@ namespace ScrumageEngine.Windows {
         {
             new HelpView().Show();
         }
+
+
+		/// <summary>
+		/// Updates the 4 resource node remaining spots labels as nodes enter or leave
+		/// </summary>
+		private void UpdateResourceLabels() {
+			Int32[] spots = game.GetResourceNodeSpots();
+			R1SpotValueLabel.Content = spots[0];
+			R2SpotValueLabel.Content = spots[1];
+			R3SpotValueLabel.Content = spots[2];
+			R4SpotValueLabel.Content = spots[3];
+		}
 
         private void TestBtn_Click(Object sender, RoutedEventArgs e)
         {
