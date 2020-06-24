@@ -27,22 +27,6 @@ namespace ScrumageEngine.Objects.Player {
         /// </summary>
 		public Boolean FinishedPhase { get; set; }
 
-        /// <summary>
-        /// Gets the player's sprint cost.
-        /// </summary>
-        /// <value>
-        /// The player sprint cost.
-        /// </value>
-        public Int32 PlayerSprintCost {
-            get {
-                Int32 _totalCost = 0;
-                foreach (Pawn _pawn in this.Pawns) {
-                    _totalCost += _pawn.PawnCost;
-                }
-                return _totalCost;
-            }
-        }
-
 		#endregion
 
 
