@@ -58,17 +58,6 @@ namespace ScrumageEngine.BoardSpace {
         }
 
         /// <summary>
-        /// Gathers the player pawns from this node.
-        /// </summary>
-        /// <param name="playerId">The player identifier.</param>
-        /// <returns>the player's pawns from this node</returns>
-        private List<Pawn> GatherPlayerPawns(Int32 playerId) {
-            List<Pawn> _playerPawns = Pawns.FindAll(_playerPawn => _playerPawn.PawnID == playerId);
-            Pawns.RemoveAll(_playerPawn => _playerPawn.PawnID == playerId);
-            return _playerPawns;
-        }
-
-        /// <summary>
         /// Takes the top card from this node.
         /// </summary>
         /// <param name="playerP">The player to give the card to</param>
