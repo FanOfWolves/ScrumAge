@@ -107,8 +107,8 @@ namespace ScrumageEngine.InputLogic {
 				RecordInputs($"{player.PlayerName} moved {ListPawns(pawnsP)} to {nodeNameP}");
 				return gameP.MovePawn(pawnsP, playerIDP, nodeNameP);
 			}else if(pawnsP.Count == 0) {
-				RecordInputs($"{player.PlayerName} tried to move pawns that weren't theirs!");
-				throw new MovePawnException("You cannot move another player's pawns.");
+				RecordInputs($"{player.PlayerName} did not select any pawns before attempting to move.");
+				throw new MovePawnException("You must select pawns prior to trying to move them.");
 			}else if(_nodeFull) {
 				RecordInputs($"{player.PlayerName} tried to move too many pawns to {nodeNameP}");
 				throw new MovePawnException($"You are moving too many pawns to {nodeNameP}");
