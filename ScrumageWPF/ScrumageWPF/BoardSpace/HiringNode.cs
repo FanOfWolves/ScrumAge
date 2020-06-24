@@ -60,6 +60,17 @@ namespace ScrumageEngine.BoardSpace {
         }
 
         /// <summary>
+        /// Returns the pawns (if any) to player.
+        /// </summary>
+        /// <param name="pawnsToReturnP">The pawns to return.</param>
+        /// <param name="playerP">The player.</param>
+        private void ReturnPawnsToPlayer(List<Pawn> pawnsToReturnP, Player playerP) {
+            foreach (Pawn _pawn in pawnsToReturnP) {
+                playerP.GivePawn(_pawn);
+            }
+        }
+
+        /// <summary>
         /// Randomly assigns the current Player a Pawn if they have allocated a Pawn to this Node.
         /// Inherited from <seealso cref = "Node"/>.
         /// </summary>
@@ -68,19 +79,17 @@ namespace ScrumageEngine.BoardSpace {
         public override String DoAction(Player playerP) {
             Int32 _playerID = playerP.PlayerID;
             List<Pawn> _playerPawns = GatherPlayerPawns(_playerID);
-            
-            if (_playerPawns.Count == 0) {
-                return $"{playerP.PlayerName} failed to hire more developers. Reason: No Pawns";
+            if (_playerPawns.Count < 2) {
+                // Return pawns to player
+                ReturnPawnsToPlayer(_playerPawns, playerP);
+                return $"{playerP.PlayerName} failed to hire more developers. Reason: Need at least 2 Pawns.";
             }
-
-            Pawn _hiredPawn = null;
-            foreach (Pawn _pawn in _playerPawns) {
-                _hiredPawn = HirePawn(_playerID);
+            else {
+                Pawn _hiredPawn = HirePawn(_playerID);
+                ReturnPawnsToPlayer(_playerPawns, playerP);
                 playerP.GivePawn(_hiredPawn);
-                playerP.GivePawn(_pawn);
+                return $"{playerP.PlayerName} has hired a {_hiredPawn.PawnType} developer!";
             }
-
-            return $"{playerP.PlayerName} has hired a {_hiredPawn.PawnType} developer!";
         }
     }
 }
