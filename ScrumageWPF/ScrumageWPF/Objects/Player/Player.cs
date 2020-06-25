@@ -277,6 +277,7 @@ namespace ScrumageEngine.Objects.Player {
                 }
                 this.Funds -= this.Pawns[i].PawnCost;
             }
+            
             return true;
         }
 

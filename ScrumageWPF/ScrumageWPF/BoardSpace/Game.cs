@@ -227,6 +227,10 @@ namespace ScrumageEngine.BoardSpace {
                 ResetPlayers();
                 return true;
             }
+
+            if (Players[this.currentPlayerIndex].Funds < 0) 
+                Players[this.currentPlayerIndex].Funds = 0;
+
             this.currentPlayerIndex++;
             return false;
         }
