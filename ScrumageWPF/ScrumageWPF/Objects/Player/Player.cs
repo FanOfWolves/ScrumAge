@@ -155,10 +155,10 @@ namespace ScrumageEngine.Objects.Player {
 		/// </summary>
 		/// <param name="card">The card to be added</param>
 		public void AddToCards(Card card) {
-            if(card.GetType() == typeof(AgilityCard)) {
+            if(card.GetType() == typeof(AgilityCard))
                 this.Agility.Add(card);
-            }
-            this.Artifacts.Add(card);
+            else if(card.GetType() == typeof(ArtifactCard))
+                this.Artifacts.Add(card);
         }
 
         /// <summary>

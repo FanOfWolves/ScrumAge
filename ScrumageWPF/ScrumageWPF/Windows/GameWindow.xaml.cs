@@ -9,6 +9,7 @@ using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Views;
 using static ScrumageEngine.InputLogic.InputHandler;
+using ScrumageEngine.Objects.Items.Cards;
 
 namespace ScrumageEngine.Windows {
 	/// <summary>
@@ -422,9 +423,20 @@ namespace ScrumageEngine.Windows {
         private void TestBtn_Click(Object sender, RoutedEventArgs e)
         {
             foreach(Player p in game.GetAllPlayers()) {
-				p.playerResources += new ResourceContainer(new int[] { 1000, 1000, 1000, 1000 });
+				p.AddToCards(new ArtifactCard("Test Artifact 1", new Int32[] { 0,0,0,0}));
+				p.AddToCards(new ArtifactCard("Test Artifact 2", new Int32[] { 0,0,0,0}));
+				p.AddToCards(new ArtifactCard("Test Artifact 3", new Int32[] { 0,0,0,0}));
+				p.AddToCards(new ArtifactCard("Test Artifact 4", new Int32[] { 0,0,0,0}));
+				p.AddToCards(new ArtifactCard("Test Artifact 5", new Int32[] { 0,0,0,0}));
+				p.AddToCards(new ArtifactCard("Test Artifact 6", new Int32[] { 0,0,0,0}));
+
+				p.AddToCards(new ArtifactCard("Test Agility 1", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new ArtifactCard("Test Agility 2", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new ArtifactCard("Test Agility 3", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new ArtifactCard("Test Agility 4", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new ArtifactCard("Test Agility 5", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new ArtifactCard("Test Agility 6", new Int32[] { 0, 0, 0, 0 }));
 			}
-            LogInput();
         }
 	}
 
