@@ -6,7 +6,7 @@ namespace ScrumageEngine.Objects.Items {
 	/// <summary>
 	/// Requirement Resource
 	/// </summary>
-	class Requirements : Resource {
+	public class Requirements : Resource {
 
         #region Fields
         private const String RESOURCE_NAME = "Requirements";
