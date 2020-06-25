@@ -71,8 +71,7 @@ namespace ScrumageEngine.Objects.Items {
         /// <returns>True of object is equal</returns>
         public override Boolean Equals(Object obj) {
             if (obj is null) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == this.GetType() && Equals((Resource) obj);
+            return Equals(obj as Resource);
         }
 
 
