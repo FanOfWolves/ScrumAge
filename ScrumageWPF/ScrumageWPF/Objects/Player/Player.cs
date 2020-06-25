@@ -40,7 +40,7 @@ namespace ScrumageEngine.Objects.Player {
             PlayerID = playerID;
             PlayerName = playerNameP;
             FeaturePoints = 0;
-            Budget = 1;
+            Budget = 12;
             Funds = Budget;
             this.playerResources = new ResourceContainer(new Int32[] { 0, 0, 0, 0 });
             FinishedPhase = false;
