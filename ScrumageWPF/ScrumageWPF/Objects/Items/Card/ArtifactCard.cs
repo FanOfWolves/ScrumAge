@@ -14,9 +14,23 @@ namespace ScrumageEngine.Objects.Items.Cards {
         /// <param name="nameP">The name of this card</param>
         /// <param name="descP">The description of this card</param>
         /// <param name="costs">The resource costs of this card</param>
-        public ArtifactCard(String nameP, String descP, Int32[] costs) : base(nameP, descP, costs) {
+        public ArtifactCard(String nameP, Int32[] costs) : base(nameP, costs) {
 
         }
+
+
         #endregion
-    }
+
+        public override String Display() {
+            throw new NotImplementedException();
+        }
+
+		internal override String CardType() {
+            return "Artifact";
+		}
+
+		/*        public override string ToString() {
+					throw new NotImplementedException();
+				}*/
+	}
 }

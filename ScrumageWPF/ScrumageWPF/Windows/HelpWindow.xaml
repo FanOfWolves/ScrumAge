@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScrumageEngine.Views"
         mc:Ignorable="d"
-        Title="HelpView" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Loaded="HelpView_Loaded"
+        WindowStyle="ToolWindow"
+        Topmost="True"
+        Title="" Height="450" Width="800">
     <Grid>
-        <Label>Help!</Label>
+        <WebBrowser x:Name="webRules"></WebBrowser>
     </Grid>
 </Window>

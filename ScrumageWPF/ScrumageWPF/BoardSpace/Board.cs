@@ -5,6 +5,7 @@ using System.Text;
 using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Items.Cards;
+using static ScrumageEngine.Objects.Items.Cards.DeckCreator;
 
 namespace ScrumageEngine.BoardSpace {
 	public class Board {
@@ -28,15 +29,6 @@ namespace ScrumageEngine.BoardSpace {
 		/// TODO Edit XML Comment Template for dice
 		private List<Die> dice = new List<Die>();
 
-		/// <summary>
-		/// The stack of <see cref="ArtifactCard"/> objects on this board
-		/// </summary>
-		private Stack<Card> Artifacts = new Stack<Card>();
-
-		/// <summary>
-		/// The stack of <see cref="AgilityCard"/> objects on this board
-		/// </summary>
-		private Stack<Card> Agility = new Stack<Card>();
 
 
 		private Node Resource1 = new ResourceNode(1, "Requirements", new Requirements());
@@ -47,8 +39,14 @@ namespace ScrumageEngine.BoardSpace {
 		private Node BudgetIncrease = new BudgetNode(6, "Budget Increase");
 		private Node Interview = new HiringNode(7, "Interview Node");
 		private Node Reassignment = new ReassignmentNode(8, "Reassignment Node");
-		private Card TestCard1 = new Card("artifact", "Test Artifact", new[] { 4, 3, 2, 1 });
-		private Card TestCard2 = new Card("agility", "Test Agility", new[] { 1, 2, 3, 4 });
+		private Node AgilityNode1 = new CardNode(9, "Agility 1", new Deck("Agility", 10));
+		private Node AgilityNode2 = new CardNode(10, "Agility 2", new Deck("Agility", 10));
+		private Node AgilityNode3 = new CardNode(10, "Agility 3", new Deck("Agility", 10));
+		private Node AgilityNode4 = new CardNode(10, "Agility 4", new Deck("Agility", 10));
+		private Node ArtifactNode1 = new CardNode(11, "Artifact 1", new Deck("Artifact", 10));
+		private Node ArtifactNode2 = new CardNode(12, "Artifact 2", new Deck("Artifact", 10));
+		private Node ArtifactNode3 = new CardNode(12, "Artifact 3", new Deck("Artifact", 10));
+		private Node ArtifactNode4 = new CardNode(12, "Artifact 4", new Deck("Artifact", 10));
 
 
 		/// <summary>
@@ -74,8 +72,14 @@ namespace ScrumageEngine.BoardSpace {
 			nodesOnMap.Add(BudgetIncrease);
 			nodesOnMap.Add(Interview);
 			nodesOnMap.Add(Reassignment);
-			Artifacts.Push(TestCard1);
-			Agility.Push(TestCard2);
+			nodesOnMap.Add(AgilityNode1);
+			nodesOnMap.Add(AgilityNode2);
+			nodesOnMap.Add(AgilityNode3);
+			nodesOnMap.Add(AgilityNode4);
+			nodesOnMap.Add(ArtifactNode1);
+			nodesOnMap.Add(ArtifactNode2);
+			nodesOnMap.Add(ArtifactNode3);
+			nodesOnMap.Add(ArtifactNode4);
 		}
 
 		/// <summary>
@@ -100,37 +104,6 @@ namespace ScrumageEngine.BoardSpace {
 			return Nodes;
 		}
 
-		/// <summary>
-		/// Get artifact card deck
-		/// </summary>
-		/// <returns>Stack of Artifact card objects</returns>
-		public Stack<Card> GetArtifacts() {
-			return Artifacts;
-		}
-
-		/// <summary>
-		/// Get agility card stack
-		/// </summary>
-		/// <returns>Stack of Agility card objects</returns>
-		public Stack<Card> GetAgility() {
-			return Agility;
-		}
-
-		/// <summary>
-		/// Pull top artifact card from deck
-		/// </summary>
-		/// <returns>Card object from top of artifact stack</returns>
-		public Card GetTopArtifact() {
-			return Artifacts.Pop();
-		}
-
-		/// <summary>
-		/// Pull top agility card from deck
-		/// </summary>
-		/// <returns>Card object from top of stack</returns>
-		public Card GetTopAgility() {
-			return Agility.Pop();
-		}
 
 		/// <summary>
 		/// Obtains a node based on ID, can be used to easily get a node.

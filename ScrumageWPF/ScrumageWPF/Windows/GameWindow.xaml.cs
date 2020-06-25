@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Player;
+using ScrumageEngine.Views;
 using static ScrumageEngine.InputLogic.InputHandler;
 
 namespace ScrumageEngine.Windows {
@@ -184,7 +185,8 @@ namespace ScrumageEngine.Windows {
 		/// <param name="sender">The label prompt.</param>
 		/// <param name="e">Prompt being clicked.</param>
 		private void Label_MouseDoubleClick(Object sender, MouseButtonEventArgs e) {
-			MessageBox.Show("Make GUI to display card requirements");
+			var pickedNode = (CardNode)game.GetNodeByName((String)(sender as Label).Tag);
+			MessageBox.Show(pickedNode.TopCard().ToString());
 		}
 
 
@@ -390,6 +392,25 @@ namespace ScrumageEngine.Windows {
 			currentPhaseIndex = game.phase - 1;
 			PhaseTabControl.SelectedIndex = currentPhaseIndex;
 		}
-		#endregion
+        #endregion
+
+        /// <summary>
+        /// Creates the HelpWindow
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HelpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new HelpView().Show();
+        }
+
+        private void TestBtn_Click(Object sender, RoutedEventArgs e)
+        {
+            foreach(Player p in game.GetAllPlayers()) {
+				p.playerResources += new ResourceContainer(new int[] { 1000, 1000, 1000, 1000 });
+			}
+            LogInput();
+        }
 	}
+
 }
