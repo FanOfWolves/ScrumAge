@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ScrumageEngine.Objects.Items;
+using ScrumageEngine.Objects.Items.Cards;
 using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Views;
 using static ScrumageEngine.InputLogic.InputHandler;
@@ -280,16 +281,59 @@ namespace ScrumageEngine.Windows {
 			// Update inventory display
 			UpdatePlayerResourceDisplay(FindResourceBox(playerIdP), this.game.GetPlayerResources(playerIdP));
 			UpdatePawnBox(FindPlayerPawnBox(playerIdP), this.game.GetPlayerPawns(playerIdP));
-			//TODO: Update Cards
 
-			// Update Stats
-			//	update budget
-			UpdatePlayerBudgetDisplay(FindPlayerBudgetLabel(playerIdP), this.game.GetPlayerByID(playerIdP).Budget);
+            var currentPlayer = this.game.GetPlayerByID(playerIdP);
+
+            // Update Cards
+            UpdatePlayerCardsDisplay(playerIdP, currentPlayer.Agility, currentPlayer.Artifacts);
+            //	update budget
+			UpdatePlayerBudgetDisplay(FindPlayerBudgetLabel(playerIdP), currentPlayer.Budget);
 			//	update score
-			UpdatePlayerScoreDisplay(FindPlayerScoreLabel(playerIdP), this.game.GetPlayerByID(playerIdP).FeaturePoints);
+			UpdatePlayerScoreDisplay(FindPlayerScoreLabel(playerIdP), currentPlayer.FeaturePoints);
 			//	update funds
-			UpdatePlayerFundsDisplay(FindPlayerFundsLabel(playerIdP), this.game.GetPlayerByID(playerIdP).Funds);
+			UpdatePlayerFundsDisplay(FindPlayerFundsLabel(playerIdP), currentPlayer.Funds);
 		}
+
+        /// <summary>
+        /// Updates all the card boxes, as well as the labels for the player.
+        /// </summary>
+        private void UpdatePlayerCardsDisplay(Int32 playerId, List<Card> agilityCards, List<Card> artifactCards)
+        {
+            var artifactLabel = FindName($"P{playerId}ArtifactsCountLabel") as Label;
+
+            if (artifactLabel != null)
+            {
+                artifactLabel.Content = artifactCards.Count;
+            }
+
+            var agilityLabel = FindName($"P{playerId}AgilityCountLabel") as Label;
+            if (agilityLabel != null)
+            {
+                agilityLabel.Content = agilityCards.Count;
+            }
+
+            var artifactBox = FindName($"P{playerId}") as ListBox;
+
+            if (artifactBox != null)
+            {
+                artifactBox.Items.Clear();
+                foreach (var card in artifactCards)
+                {
+                    artifactBox.Items.Add(card.ToString());
+                }
+            }
+
+            var agilityBox = FindName($"P{playerId}") as ListBox;
+            if (agilityBox != null)
+            {
+                agilityBox.Items.Clear();
+                foreach(var card in agilityCards)
+                {
+                    agilityBox.Items.Add(card.ToString());
+                }
+            }
+
+        }
 
 
 		/// <summary>
@@ -438,6 +482,7 @@ namespace ScrumageEngine.Windows {
 				p.AddToCards(new ArtifactCard("Test Agility 6", new Int32[] { 0, 0, 0, 0 }));
 			}
         }
-	}
+
+    }
 
 }
