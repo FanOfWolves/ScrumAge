@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ScrumageEngine.InputLogic;
 using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Views;
@@ -49,6 +50,9 @@ namespace ScrumageEngine.Windows {
 		/// Tracks the current phase from the Game class and updates GUI when needed
 		/// </summary>
 		private int currentPhaseIndex;
+
+
+		private int playerCount;
 		#endregion
 
 		#region Constructor
@@ -86,12 +90,14 @@ namespace ScrumageEngine.Windows {
 		/// <param name="playerNames">The names of the players collected in the first GUI.</param>
 		void InitPlayerTab(List<String> playerNames) {
 			TabItem temp = null;
+			playerCount = playerNames.Count;
 			for(Int32 i = 0; i < playerNames.Count; i++) {
 				temp = PlayerTabControl.Items[i] as TabItem;
 				temp.IsEnabled = true;
 				temp.Header = playerNames[i];
 				(temp.FindName($"P{i + 1}NameValue") as Label).Content = playerNames[i];
 				UpdatePawnBox(FindPlayerPawnBox(i + 1), game.GetPlayerPawns(i + 1));
+				UpdatePlayerInformation(i + 1);
 				// Whatever else needs to be initialized at the start of the game for players goes here.
 			}
 		}
@@ -137,14 +143,13 @@ namespace ScrumageEngine.Windows {
 			} catch(MovePawnException _exception) {
 				MessageBox.Show(_exception.Message);
 			}
-
+			LogInput();
 			if(phaseEnd) { 
 				MessageBox.Show("Phase 1 has completed!");
 				IncrementPhase();
 				ClearInputs();
 				ClearLog();
 			}
-			LogInput();
 		}
 
 
@@ -172,15 +177,32 @@ namespace ScrumageEngine.Windows {
 			UpdatePlayerInformation(this.currentPlayerID);
 			UpdateResourceLabels();
 			IncrementPlayer();
+			LogInput();
 			if(phaseDone) { 
 				MessageBox.Show("Phase 2 Done");
-				//IncrementPhase(); When phase 3 is ready
+				IncrementPhase();
 				ClearInputs();
 				ClearLog();
 			}
-			LogInput();
 		}
 
+        /// <summary>
+		/// Handles the Click event of the PlayerPaymentBtn control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+		private void PlayerPaymentBtn_Click(Object sender, RoutedEventArgs e) {
+            Boolean phaseDone = InputHandler.PaySprintCost(this.game);
+            UpdatePlayerInformation(this.currentPlayerID);
+			IncrementPlayer();
+			LogInput();
+			if(phaseDone) {
+				MessageBox.Show("Phase 3 Done");
+				IncrementPhase();
+				ClearInputs();
+				ClearLog();
+			}
+        }
 
 		/// <summary>
 		/// Displays information on the card in the relative location.
@@ -270,6 +292,13 @@ namespace ScrumageEngine.Windows {
 		#endregion
 
 		#region Update Player Display
+
+		private void UpdateAllPlayers() {
+			for(Int32 i = 1; i <= playerCount; i++) {
+				UpdatePlayerInformation(i);
+			}
+		}
+
 		/// <summary>
 		/// Updates the player's information display.
 		/// </summary>
@@ -423,8 +452,12 @@ namespace ScrumageEngine.Windows {
         {
             foreach(Player p in game.GetAllPlayers()) {
 				p.playerResources += new ResourceContainer(new int[] { 1000, 1000, 1000, 1000 });
+				p.GivePawn("Full Stack");
+				p.GivePawn("Full Stack");
+				p.GivePawn("Full Stack");
 			}
             LogInput();
+			UpdateAllPlayers();
         }
 	}
 

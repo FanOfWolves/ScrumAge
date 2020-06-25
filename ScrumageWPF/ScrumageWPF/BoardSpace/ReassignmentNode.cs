@@ -11,9 +11,7 @@ namespace ScrumageEngine.BoardSpace {
     /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
     class ReassignmentNode : Node {
 
-        public override Int32 MaxPawnLimit {
-            get { return Int32.MaxValue; }
-        }
+        public override Int32 MaxPawnLimit { get { return 500; } }
 
 
         /// <summary>
