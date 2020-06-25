@@ -143,14 +143,13 @@ namespace ScrumageEngine.Windows {
 			} catch(MovePawnException _exception) {
 				MessageBox.Show(_exception.Message);
 			}
-
+			LogInput();
 			if(phaseEnd) { 
 				MessageBox.Show("Phase 1 has completed!");
 				IncrementPhase();
 				ClearInputs();
 				ClearLog();
 			}
-			LogInput();
 		}
 
 
@@ -178,13 +177,13 @@ namespace ScrumageEngine.Windows {
 			UpdatePlayerInformation(this.currentPlayerID);
 			UpdateResourceLabels();
 			IncrementPlayer();
+			LogInput();
 			if(phaseDone) { 
 				MessageBox.Show("Phase 2 Done");
 				IncrementPhase();
 				ClearInputs();
 				ClearLog();
 			}
-			LogInput();
 		}
 
         /// <summary>
@@ -196,13 +195,13 @@ namespace ScrumageEngine.Windows {
             Boolean phaseDone = InputHandler.PaySprintCost(this.game);
             UpdatePlayerInformation(this.currentPlayerID);
 			IncrementPlayer();
+			LogInput();
 			if(phaseDone) {
 				MessageBox.Show("Phase 3 Done");
 				IncrementPhase();
 				ClearInputs();
 				ClearLog();
 			}
-			LogInput();
         }
 
 		/// <summary>
@@ -453,8 +452,12 @@ namespace ScrumageEngine.Windows {
         {
             foreach(Player p in game.GetAllPlayers()) {
 				p.playerResources += new ResourceContainer(new int[] { 1000, 1000, 1000, 1000 });
+				p.GivePawn("Full Stack");
+				p.GivePawn("Full Stack");
+				p.GivePawn("Full Stack");
 			}
             LogInput();
+			UpdateAllPlayers();
         }
 	}
 
