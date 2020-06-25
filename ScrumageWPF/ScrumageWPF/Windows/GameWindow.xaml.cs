@@ -50,6 +50,9 @@ namespace ScrumageEngine.Windows {
 		/// Tracks the current phase from the Game class and updates GUI when needed
 		/// </summary>
 		private int currentPhaseIndex;
+
+
+		private int playerCount;
 		#endregion
 
 		#region Constructor
@@ -87,12 +90,14 @@ namespace ScrumageEngine.Windows {
 		/// <param name="playerNames">The names of the players collected in the first GUI.</param>
 		void InitPlayerTab(List<String> playerNames) {
 			TabItem temp = null;
+			playerCount = playerNames.Count;
 			for(Int32 i = 0; i < playerNames.Count; i++) {
 				temp = PlayerTabControl.Items[i] as TabItem;
 				temp.IsEnabled = true;
 				temp.Header = playerNames[i];
 				(temp.FindName($"P{i + 1}NameValue") as Label).Content = playerNames[i];
 				UpdatePawnBox(FindPlayerPawnBox(i + 1), game.GetPlayerPawns(i + 1));
+				UpdatePlayerInformation(i + 1);
 				// Whatever else needs to be initialized at the start of the game for players goes here.
 			}
 		}
@@ -288,6 +293,13 @@ namespace ScrumageEngine.Windows {
 		#endregion
 
 		#region Update Player Display
+
+		private void UpdateAllPlayers() {
+			for(Int32 i = 1; i <= playerCount; i++) {
+				UpdatePlayerInformation(i);
+			}
+		}
+
 		/// <summary>
 		/// Updates the player's information display.
 		/// </summary>
