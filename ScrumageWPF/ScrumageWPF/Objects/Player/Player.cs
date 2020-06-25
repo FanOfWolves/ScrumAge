@@ -11,7 +11,10 @@ namespace ScrumageEngine.Objects.Player {
 	/// Player class used to represent and retain information about a player
 	/// </summary>
 	public class Player {
-		#region Properties
+        #region Properties
+
+        private const Int32 PLAYER_STARTING_BUDGET = 12;
+
 		/// <summary>
 		/// An ID to be used for the player for easier identification than their name
 		/// </summary>
@@ -40,8 +43,8 @@ namespace ScrumageEngine.Objects.Player {
             PlayerID = playerID;
             PlayerName = playerNameP;
             FeaturePoints = 0;
-            Budget = 12;
-            Funds = 0;
+            Budget = PLAYER_STARTING_BUDGET;
+            Funds = Budget;
             this.playerResources = new ResourceContainer(new Int32[] { 0, 0, 0, 0 });
             FinishedPhase = false;
         }
@@ -264,7 +267,6 @@ namespace ScrumageEngine.Objects.Player {
         ///     <c>true</c> if player was able to pay their pawns; otherwise <c>false</c>.
         /// </returns>
         public Boolean PayPawns() {
-            AddBudgetToFunds();
             this.FinishedPhase = true;
             for (Int32 i = this.Pawns.Count-1; i > 0; i--) {
                 if (this.Funds <= 0) {
@@ -277,8 +279,8 @@ namespace ScrumageEngine.Objects.Player {
                 }
                 this.Funds -= this.Pawns[i].PawnCost;
             }
-
             if (this.Funds < 0) this.Funds = 0;
+            AddBudgetToFunds();
             return true;
         }
 
