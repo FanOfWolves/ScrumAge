@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ScrumageWPF.TEst {
+namespace ScrumageWPF.Test {
     public class Class1 {
     }
 }
