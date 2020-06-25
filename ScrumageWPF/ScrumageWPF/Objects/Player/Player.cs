@@ -268,7 +268,7 @@ namespace ScrumageEngine.Objects.Player {
         /// </returns>
         public Boolean PayPawns() {
             this.FinishedPhase = true;
-            for (Int32 i = this.Pawns.Count-1; i > 0; i--) {
+            for (Int32 i = this.Pawns.Count-1; i >= 0; i--) {
                 if (this.Funds <= 0) {
                     this.Pawns.RemoveAt(i);
                 }
