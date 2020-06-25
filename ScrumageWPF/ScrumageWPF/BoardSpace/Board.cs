@@ -37,8 +37,8 @@ namespace ScrumageEngine.BoardSpace {
 		private Node Resource4 = new ResourceNode(4, "Testing", new Testing());
 		private Node TechnicalHut = new UpgradeNode(5, "Technical Hut");
 		private Node BudgetIncrease = new BudgetNode(6, "Budget Increase");
-		private Node Interview = new HiringNode(7, "Interview Node");
-		private Node Reassignment = new ReassignmentNode(8, "Reassignment Node");
+		private Node Interview = new HiringNode(7, "Interview");
+		private Node Reassignment = new ReassignmentNode(8, "Reassignment");
 		private Node AgilityNode1 = new CardNode(9, "Agility 1", new Deck("Agility", 10));
 		private Node AgilityNode2 = new CardNode(10, "Agility 2", new Deck("Agility", 10));
 		private Node AgilityNode3 = new CardNode(10, "Agility 3", new Deck("Agility", 10));
