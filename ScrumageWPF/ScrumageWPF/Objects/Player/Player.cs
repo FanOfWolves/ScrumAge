@@ -13,7 +13,7 @@ namespace ScrumageEngine.Objects.Player {
 	public class Player {
         #region Properties
 
-        private const Int32 PLAYER_STARTING_BUDGET = 12;
+        private const Int32 PLAYER_STARTING_BUDGET = 1;
 
 		/// <summary>
 		/// An ID to be used for the player for easier identification than their name
@@ -44,7 +44,7 @@ namespace ScrumageEngine.Objects.Player {
             PlayerName = playerNameP;
             FeaturePoints = 0;
             Budget = PLAYER_STARTING_BUDGET;
-            Funds = Budget;
+            Funds = 12;
             this.playerResources = new ResourceContainer(new Int32[] { 0, 0, 0, 0 });
             FinishedPhase = false;
         }
