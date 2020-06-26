@@ -21,8 +21,8 @@ namespace ScrumageWPF.Test {
         #region Category: Instantiation
         [Test]
         [Category("Instantiation")]
-        public void ResourceContainer_Instantiates() {
-
+        public void ResourceContainer_InstantiatesCorrectly() {
+            
         }
         #endregion
 
