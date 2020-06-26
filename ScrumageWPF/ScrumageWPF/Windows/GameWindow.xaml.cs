@@ -2,6 +2,7 @@
 using ScrumageEngine.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,7 +11,6 @@ using ScrumageEngine.Objects.Items.Cards;
 using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Views;
 using static ScrumageEngine.InputLogic.InputHandler;
-using ScrumageEngine.Objects.Items.Cards;
 
 namespace ScrumageEngine.Windows {
 	/// <summary>
@@ -282,11 +282,11 @@ namespace ScrumageEngine.Windows {
 			UpdatePlayerResourceDisplay(FindResourceBox(playerIdP), this.game.GetPlayerResources(playerIdP));
 			UpdatePawnBox(FindPlayerPawnBox(playerIdP), this.game.GetPlayerPawns(playerIdP));
 
-            var currentPlayer = this.game.GetPlayerByID(playerIdP);
+			var currentPlayer = this.game.GetPlayerByID(playerIdP);
 
-            // Update Cards
-            UpdatePlayerCardsDisplay(playerIdP, currentPlayer.Agility, currentPlayer.Artifacts);
-            //	update budget
+			// Update Cards
+			UpdatePlayerCardsDisplay(playerIdP, currentPlayer.Agility, currentPlayer.Artifacts);
+			//	update budget
 			UpdatePlayerBudgetDisplay(FindPlayerBudgetLabel(playerIdP), currentPlayer.Budget);
 			//	update score
 			UpdatePlayerScoreDisplay(FindPlayerScoreLabel(playerIdP), currentPlayer.FeaturePoints);
@@ -294,46 +294,46 @@ namespace ScrumageEngine.Windows {
 			UpdatePlayerFundsDisplay(FindPlayerFundsLabel(playerIdP), currentPlayer.Funds);
 		}
 
-        /// <summary>
-        /// Updates all the card boxes, as well as the labels for the player.
-        /// </summary>
-        private void UpdatePlayerCardsDisplay(Int32 playerId, List<Card> agilityCards, List<Card> artifactCards)
-        {
-            var artifactLabel = FindName($"P{playerId}ArtifactsCountLabel") as Label;
+		/// <summary>
+		/// Updates all the card boxes, as well as the labels for the player.
+		/// </summary>
+		private void UpdatePlayerCardsDisplay(Int32 playerId, List<Card> agilityCards, List<Card> artifactCards)
+		{
+			var artifactLabel = FindName($"P{playerId}ArtifactsCountLabel") as Label;
 
-            if (artifactLabel != null)
-            {
-                artifactLabel.Content = artifactCards.Count;
-            }
+			if (artifactLabel != null)
+			{
+				artifactLabel.Content = artifactCards.Count;
+			}
 
-            var agilityLabel = FindName($"P{playerId}AgilityCountLabel") as Label;
-            if (agilityLabel != null)
-            {
-                agilityLabel.Content = agilityCards.Count;
-            }
+			var agilityLabel = FindName($"P{playerId}AgilityCountLabel") as Label;
+			if (agilityLabel != null)
+			{
+				agilityLabel.Content = agilityCards.Count;
+			}
 
-            var artifactBox = FindName($"P{playerId}") as ListBox;
+			var artifactBox = FindName($"P{playerId}ArtifactBox") as ListBox;
 
-            if (artifactBox != null)
-            {
-                artifactBox.Items.Clear();
-                foreach (var card in artifactCards)
-                {
-                    artifactBox.Items.Add(card.ToString());
-                }
-            }
+			if (artifactBox != null)
+			{
+				artifactBox.Items.Clear();
+				foreach (var card in artifactCards)
+				{
+					artifactBox.Items.Add(card.GetName());
+				}
+			}
 
-            var agilityBox = FindName($"P{playerId}") as ListBox;
-            if (agilityBox != null)
-            {
-                agilityBox.Items.Clear();
-                foreach(var card in agilityCards)
-                {
-                    agilityBox.Items.Add(card.ToString());
-                }
-            }
+			var agilityBox = FindName($"P{playerId}AgilityBox") as ListBox;
+			if (agilityBox != null)
+			{
+				agilityBox.Items.Clear();
+				foreach(var card in agilityCards)
+				{
+					agilityBox.Items.Add(card.GetName());
+				}
+			}
 
-        }
+		}
 
 
 		/// <summary>
@@ -440,17 +440,17 @@ namespace ScrumageEngine.Windows {
 			currentPhaseIndex = game.phase - 1;
 			PhaseTabControl.SelectedIndex = currentPhaseIndex;
 		}
-        #endregion
+		#endregion
 
-        /// <summary>
-        /// Creates the HelpWindow
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void HelpBtn_Click(object sender, RoutedEventArgs e)
-        {
-            new HelpView().Show();
-        }
+		/// <summary>
+		/// Creates the HelpWindow
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void HelpBtn_Click(object sender, RoutedEventArgs e)
+		{
+			new HelpView().Show();
+		}
 
 
 		/// <summary>
@@ -464,8 +464,8 @@ namespace ScrumageEngine.Windows {
 			R4SpotValueLabel.Content = spots[3];
 		}
 
-        private void TestBtn_Click(Object sender, RoutedEventArgs e)
-        {
+		private void TestBtn_Click(Object sender, RoutedEventArgs e)
+		{
             foreach(Player p in game.GetAllPlayers()) {
 				p.AddToCards(new ArtifactCard("Test Artifact 1", new Int32[] { 0,0,0,0}));
 				p.AddToCards(new ArtifactCard("Test Artifact 2", new Int32[] { 0,0,0,0}));
@@ -474,15 +474,31 @@ namespace ScrumageEngine.Windows {
 				p.AddToCards(new ArtifactCard("Test Artifact 5", new Int32[] { 0,0,0,0}));
 				p.AddToCards(new ArtifactCard("Test Artifact 6", new Int32[] { 0,0,0,0}));
 
-				p.AddToCards(new ArtifactCard("Test Agility 1", new Int32[] { 0, 0, 0, 0 }));
-				p.AddToCards(new ArtifactCard("Test Agility 2", new Int32[] { 0, 0, 0, 0 }));
-				p.AddToCards(new ArtifactCard("Test Agility 3", new Int32[] { 0, 0, 0, 0 }));
-				p.AddToCards(new ArtifactCard("Test Agility 4", new Int32[] { 0, 0, 0, 0 }));
-				p.AddToCards(new ArtifactCard("Test Agility 5", new Int32[] { 0, 0, 0, 0 }));
-				p.AddToCards(new ArtifactCard("Test Agility 6", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 1", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 2", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 3", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 4", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 5", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 6", new Int32[] { 0, 0, 0, 0 }));
+				UpdatePlayerInformation(p.PlayerID);
+				Debug.WriteLine($"Finished giving test cards to {p.PlayerID}");
+
 			}
+		}
+
+		private void OpenCardWindow_Click(Object sender, RoutedEventArgs e)
+		{
+			if (sender == null)
+				return;
+
+
+			var item = (sender as ListBox).SelectedItem;
+
+            var cardWindow = new CardWindow();
+            cardWindow.Show();
+
         }
 
-    }
+	}
 
 }
