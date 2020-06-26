@@ -183,6 +183,23 @@ namespace ScrumageEngine.Windows {
 			LogInput();
 		}
 
+		/// <summary>
+		/// Handles the Click event of the PlayerPaymentBtn control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+		private void PlayerPaymentBtn_Click(Object sender, RoutedEventArgs e) {
+			Boolean phaseDone = InputHandler.PaySprintCost(this.game);
+			UpdatePlayerInformation(this.currentPlayerID);
+			IncrementPlayer();
+			LogInput();
+			if(phaseDone) {
+				MessageBox.Show("Phase 3 Done");
+				IncrementPhase();
+				ClearInputs();
+				ClearLog();
+			}
+		}
 
 		/// <summary>
 		/// Displays information on the card in the relative location.
