@@ -44,6 +44,8 @@ namespace ScrumageWPF.Test {
         #endregion
 
         #region Category: Operators
+
+        #region ResourceContainer_ComparisonOperatorsStateIfContainerHasEnoughResources
         [Test]
         [Category("Operators")]
         [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 0, 0, 0, 0 })]
@@ -58,7 +60,9 @@ namespace ScrumageWPF.Test {
 
             Assert.That(payment >= toPay);
         }
+        #endregion
 
+        #region ResourceContainer_ComparisonOperatorsStateIfContainerDoesNotHaveEnoughResources
         [Test]
         [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 1, 1, 0, 0 })]
         [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 1, 1, 1, 1 })]
@@ -70,8 +74,9 @@ namespace ScrumageWPF.Test {
 
             Assert.That(payment <= toPay);
         }
+        #endregion
 
-
+        #region ResourceContainer_ComparisonOperatorsDoNotAlterState
         [Test]
         [Category("Operators")]
         [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 0, 0, 0, 0 })]
@@ -95,13 +100,19 @@ namespace ScrumageWPF.Test {
             Assert.That(toPay[new Implementation()] == cost[2]);
             Assert.That(toPay[new Testing()] == cost[3]);
         }
+        #endregion
 
+        #region ResourceContainer_MinusOperatorRemovesFromThisResourceContainer
         [Test]
         [Category("Operators")]
+        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 1, 0, 1, 2 })]
+        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 0, 0, 0, 0 })]
         public void ResourceContainer_MinusOperatorRemovesFromThisResourceContainer() {
 
         }
+        #endregion
 
+        #region ResourceContainer_AdditionOperatorAddsToThisResourceContainer
         [Test]
         [Category("Operators")]
         public void ResourceContainer_AdditionOperatorAddsToThisResourceContainer() {
@@ -109,19 +120,27 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
+        #endregion
+
         #region Category: Dictionary Handling
+
+        #region ResourceContainer_AddsToExisting
         [Test]
         [Category("Dictionary Handling")]
         public void ResourceContainer_AddsToExisting() {
 
         }
+        #endregion
 
+        #region ResourceContainer_DoesNotRemoveResourceClass
         [Test]
         [Category("Dictionary Handling")]
         public void ResourceContainer_DoesNotRemoveResourceClass() {
 
         }
+        #endregion
 
+        #region ResourceContainer_IntegerIndexerRetrievesResourceAmount
         [Test]
         [Category("Dictionary Handling")]
         public void ResourceContainer_IntegerIndexerRetrievesResourceAmount() {
@@ -129,7 +148,11 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
+        #endregion
+
         #region Category: IEnumerable<T> Interface
+
+        #region ResourceContainer_IsIEnumerable
         [Test]
         [Category("IEnumerable<T> Interface")]
         public void ResourceContainer_IsIEnumerable() {
@@ -137,12 +160,18 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
+        #endregion
+
         #region Category: Referencing and Equality
+
+        #region ResourceContainer_ReturnsDeepCopyNotOriginalResource
         [Test]
         [Category("Referencing and Equality")]
         public void ResourceContainer_ReturnsDeepCopyNotOriginalResource() {
 
-        }
+        } 
+        #endregion
+
         #endregion
 
         #region Category: Other
