@@ -11,24 +11,27 @@ namespace ScrumageEngine.Objects.Player {
 	/// Player class used to represent and retain information about a player
 	/// </summary>
 	public class Player {
-		#region Properties
+        #region Properties
+
+        private const Int32 PLAYER_STARTING_BUDGET = 1;
+
 		/// <summary>
 		/// An ID to be used for the player for easier identification than their name
 		/// </summary>
 		public Int32 PlayerID { get; set; }
-
 
         /// <summary>
         /// The entered name for the player.
         /// </summary>
 		public String PlayerName { get; }
 
-
         /// <summary>
         /// A tracker for if the player has finished the current phase
         /// </summary>
 		public Boolean FinishedPhase { get; set; }
+
 		#endregion
+
 
 		#region Constructor
 		/// <summary>
@@ -40,8 +43,8 @@ namespace ScrumageEngine.Objects.Player {
             PlayerID = playerID;
             PlayerName = playerNameP;
             FeaturePoints = 0;
-            Budget = 1;
-            Funds = Budget;
+            Budget = PLAYER_STARTING_BUDGET;
+            Funds = 12;
             this.playerResources = new ResourceContainer(new Int32[] { 0, 0, 0, 0 });
             FinishedPhase = false;
         }
@@ -113,6 +116,7 @@ namespace ScrumageEngine.Objects.Player {
             return retPawn;
         }
 
+
         /// <summary>
         /// Determines if a player has a pawn of a specified level then returns that pawn. If pawn of that level is not found, returns default "none" pawn.
         /// </summary>
@@ -155,10 +159,10 @@ namespace ScrumageEngine.Objects.Player {
 		/// </summary>
 		/// <param name="card">The card to be added</param>
 		public void AddToCards(Card card) {
-            if(card.GetType() == typeof(AgilityCard)) {
+            if(card.GetType() == typeof(AgilityCard))
                 this.Agility.Add(card);
-            }
-            this.Artifacts.Add(card);
+            else if(card.GetType() == typeof(ArtifactCard))
+                this.Artifacts.Add(card);
         }
 
         /// <summary>
@@ -246,6 +250,38 @@ namespace ScrumageEngine.Objects.Player {
         /// <param name="fundsToGiveP">The funds to give</param>
         public void GiveFunds(Int32 fundsToGiveP) {
             this.Funds += fundsToGiveP;
+        }
+
+        
+        /// <summary>
+        /// Adds the budget to funds.
+        /// </summary>
+        private void AddBudgetToFunds() {
+            this.Funds += this.Budget;
+        }
+
+        /// <summary>
+        /// Pays the pawns.
+        /// </summary>
+        /// <returns>
+        ///     <c>true</c> if player was able to pay their pawns; otherwise <c>false</c>.
+        /// </returns>
+        public Boolean PayPawns() {
+            this.FinishedPhase = true;
+            for (Int32 i = this.Pawns.Count-1; i >= 0; i--) {
+                if (this.Funds <= 0) {
+                    this.Pawns.RemoveAt(i);
+                }
+                else if (this.Pawns.Count <= 2) {
+                    this.FeaturePoints -= 10;
+                    this.Funds = 0; //reset funds
+                    return false;
+                }
+                this.Funds -= this.Pawns[i].PawnCost;
+            }
+            if (this.Funds < 0) this.Funds = 0;
+            AddBudgetToFunds();
+            return true;
         }
 
         #endregion

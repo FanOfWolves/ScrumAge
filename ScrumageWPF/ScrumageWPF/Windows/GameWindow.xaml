@@ -109,9 +109,14 @@
 								</Button>
 								<Label Content="Agility" FontSize="20" HorizontalAlignment="Center"/>
 							</DockPanel>
+                            <!-- Artifact Card Box -->
+                            <ListBox x:Name="P1ArtifactBox" Grid.Column="0" Grid.Row="2" Margin="5" MinHeight="165" MaxHeight="200" MouseDoubleClick="OpenCardWindow_Click" PreviewMouseLeftButtonUp="OpenCardWindow_Click">
 
-                            <ListBox x:Name="P1ArtifactBox" Grid.Column="0" Grid.Row="3" Margin="5" MinHeight="165" MaxHeight="200"/>
-                            <ListBox x:Name="P1AgilityBox" Grid.Column="2" Grid.Row="3" Margin="5" MinHeight="165" MaxHeight="200"/>
+                            </ListBox>
+                            <!-- Agility Card Box -->
+                            <ListBox x:Name="P1AgilityBox" Grid.Column="2" Grid.Row="2" Margin="5" MinHeight="165" MaxHeight="200" MouseDoubleClick="OpenCardWindow_Click" PreviewMouseLeftButtonUp="OpenCardWindow_Click">
+
+                            </ListBox>
 
                         </Grid>
 
@@ -405,7 +410,7 @@
 		<DockPanel Grid.Column="1" Margin="5, 0, 0, 0">
 			<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Top">
 				<TabControl x:Name="PhaseTabControl" Height="334">
-					<TabItem Header="TabItem" Background="#FFE5E5E5" BorderBrush="#FFACACAC">
+					<TabItem Header="TabItem" Background="#FFE5E5E5" BorderBrush="#FFACACAC" Visibility="Hidden">
 						<!-- Phase Labels -->
 						<StackPanel Background="#FFE5E5E5">
 							<Label Content="Current Phase" HorizontalAlignment="Center" FontSize="24"/>
@@ -423,7 +428,7 @@
 
 						</StackPanel>
 					</TabItem>
-					<TabItem Header="TestTab" Background="#FFE5E5E5" BorderBrush="#FFACACAC">
+					<TabItem Header="TestTab" Background="#FFE5E5E5" BorderBrush="#FFACACAC" Visibility="Hidden">
 						<StackPanel Background="#FFE5E5E5">
 							<Label Content="Current Phase" HorizontalAlignment="Center" FontSize="24"/>
 							<Label Content="Phase Label" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
@@ -440,7 +445,22 @@
 
 						</StackPanel>
 					</TabItem>
-				</TabControl>
+                    <TabItem Header="PayTab" Background="#FFE5E5E5" BorderBrush="#FFACACAC" Visibility="Hidden">
+                        <StackPanel Background="#FFE5E5E5">
+                            <Label Content="Current Phase" HorizontalAlignment="Center" FontSize="24"/>
+                            <Label Content="Phase Label" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                            <StackPanel>
+                                <Separator/>
+                            </StackPanel>
+
+							<!-- Sprint Log -->
+
+                            <!-- Resource / Trade Btn -->
+							<Button x:Name="PlayerPaymentBtn" Content="Trade for funds" FontSize="36" Margin="5, 20, 5, 10" Click="PlayerPaymentBtn_Click" Height="53" Width="250"/>
+
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
 
 			</ScrollViewer>
 			<ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0, 50, 0, 0">
@@ -475,7 +495,7 @@
 					<Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center" Content="Dev Requirement"/>
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Open Spots:"/>
-                        <Label x:Name="lblR1SpotValue" DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="0"/>
+                        <Label x:Name="R1SpotValueLabel" DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="0"/>
                     </StackPanel>
                     <ListBox DockPanel.Dock="Top" x:Name="RequirementsBox"/>
 
@@ -486,7 +506,7 @@
 					<Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center" Content="Dev Requirement"/>
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Open Spots:"/>
-                        <Label x:Name="lblR2SpotValue" DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="0"/>
+                        <Label x:Name="R2SpotValueLabel" DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="0"/>
                     </StackPanel>
                     <ListBox DockPanel.Dock="Top" x:Name="DesignBox"/>
 				</DockPanel>
@@ -496,7 +516,7 @@
 					<Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center" Content="Dev Requirement"/>
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Open Spots:"/>
-                        <Label x:Name="lblR3SpotValue" DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="0"/>
+                        <Label x:Name="R3SpotValueLabel" DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="0"/>
                     </StackPanel>
                     <ListBox DockPanel.Dock="Top" x:Name="ImplementationBox"/>
 				</DockPanel>
@@ -506,7 +526,7 @@
 					<Label DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center" Content="Dev Requirement"/>
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Open Spots:"/>
-                        <Label x:Name="lblR4SpotValue" DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="0"/>
+                        <Label x:Name="R4SpotValueLabel" DockPanel.Dock="Top" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Content="0"/>
                     </StackPanel>
                     <ListBox DockPanel.Dock="Top" x:Name="TestingBox"/>
 				</DockPanel>
