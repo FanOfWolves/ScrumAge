@@ -65,27 +65,42 @@ namespace ScrumageEngine.BoardSpace {
         }
 
         /// <summary>
+        /// Accumulates the resource chances.
+        /// </summary>
+        /// <param name="playerPawnsP">The player pawns.</param>
+        /// <returns>the resource roll chance.</returns>
+        private Int32 AccumulateResourceChances(IEnumerable<Pawn> playerPawnsP) {
+            Int32 _resourceAcquireChance = RESOURCE_BASE_CHANCE;
+            foreach(Pawn _pawn in playerPawnsP) {
+                _resourceAcquireChance += this.nodeResource.GetChance(_pawn);
+            }
+            return _resourceAcquireChance;
+        }
+        
+        /// <summary>
         /// Attempt to gain a resource from this node
         /// </summary>
-        /// <param name="player">the player attempting to obtain the resource</param>
+        /// <param name="playerP">the player attempting to obtain the resource.</param>
         /// <returns>a log indicating if the player acquired the resource or not</returns>
-        public override String DoAction(Player player) {
-            List<Pawn> _playerPawns = GatherPlayerPawns(player.PlayerID);
+        public override String DoAction(Player playerP) {
+            
+            List<Pawn> _playerPawns = GatherPlayerPawns(playerP.PlayerID);
 
-            Int32 _resourceAcquireChance = RESOURCE_BASE_CHANCE;
-            foreach (Pawn _pawn in _playerPawns) {
-                _resourceAcquireChance += this.nodeResource.GetChance(_pawn);
-                player.GivePawn(_pawn);
+            if (_playerPawns.Count < 1) {
+                return $"{playerP.PlayerName} has failed to obtain a {this.nodeResource.Name}. Reason: No Pawns.";
             }
 
+            Int32 _resourceAcquireChance = AccumulateResourceChances(_playerPawns);
             Boolean _getResource = RollForResource(_resourceAcquireChance);
-            if (_getResource == true) {
-                player.AddResource(this.nodeResource.DeepCopy());
-                return $"{player.PlayerName} has acquired a {this.nodeResource.Name}!";
+
+            ReturnPawnsToPlayer(_playerPawns, playerP);
+
+            if (_getResource) {
+                playerP.AddResource(this.nodeResource.DeepCopy());
+                return $"{playerP.PlayerName} has acquired a {this.nodeResource.Name}!";
             }
-            else {
-                return $"{player.PlayerName} has failed to obtain a {this.nodeResource.Name}";
-            }
-		}
+            
+            return $"{playerP.PlayerName} has failed to obtain a {this.nodeResource.Name}";
+        }
 	}
 }
