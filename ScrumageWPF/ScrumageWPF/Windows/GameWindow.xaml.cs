@@ -2,11 +2,12 @@
 using ScrumageEngine.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ScrumageEngine.InputLogic;
 using ScrumageEngine.Objects.Items;
+using ScrumageEngine.Objects.Items.Cards;
 using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Views;
 using static ScrumageEngine.InputLogic.InputHandler;
@@ -50,9 +51,6 @@ namespace ScrumageEngine.Windows {
 		/// Tracks the current phase from the Game class and updates GUI when needed
 		/// </summary>
 		private int currentPhaseIndex;
-
-
-		private int playerCount;
 		#endregion
 
 		#region Constructor
@@ -90,14 +88,12 @@ namespace ScrumageEngine.Windows {
 		/// <param name="playerNames">The names of the players collected in the first GUI.</param>
 		void InitPlayerTab(List<String> playerNames) {
 			TabItem temp = null;
-			playerCount = playerNames.Count;
 			for(Int32 i = 0; i < playerNames.Count; i++) {
 				temp = PlayerTabControl.Items[i] as TabItem;
 				temp.IsEnabled = true;
 				temp.Header = playerNames[i];
 				(temp.FindName($"P{i + 1}NameValue") as Label).Content = playerNames[i];
 				UpdatePawnBox(FindPlayerPawnBox(i + 1), game.GetPlayerPawns(i + 1));
-				UpdatePlayerInformation(i + 1);
 				// Whatever else needs to be initialized at the start of the game for players goes here.
 			}
 		}
@@ -143,13 +139,14 @@ namespace ScrumageEngine.Windows {
 			} catch(MovePawnException _exception) {
 				MessageBox.Show(_exception.Message);
 			}
-			LogInput();
+
 			if(phaseEnd) { 
 				MessageBox.Show("Phase 1 has completed!");
 				IncrementPhase();
 				ClearInputs();
 				ClearLog();
 			}
+			LogInput();
 		}
 
 
@@ -177,32 +174,15 @@ namespace ScrumageEngine.Windows {
 			UpdatePlayerInformation(this.currentPlayerID);
 			UpdateResourceLabels();
 			IncrementPlayer();
-			LogInput();
 			if(phaseDone) { 
 				MessageBox.Show("Phase 2 Done");
-				IncrementPhase();
+				//IncrementPhase(); When phase 3 is ready
 				ClearInputs();
 				ClearLog();
 			}
+			LogInput();
 		}
 
-        /// <summary>
-		/// Handles the Click event of the PlayerPaymentBtn control.
-		/// </summary>
-		/// <param name="sender">The source of the event.</param>
-		/// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-		private void PlayerPaymentBtn_Click(Object sender, RoutedEventArgs e) {
-            Boolean phaseDone = InputHandler.PaySprintCost(this.game);
-            UpdatePlayerInformation(this.currentPlayerID);
-			IncrementPlayer();
-			LogInput();
-			if(phaseDone) {
-				MessageBox.Show("Phase 3 Done");
-				IncrementPhase();
-				ClearInputs();
-				ClearLog();
-			}
-        }
 
 		/// <summary>
 		/// Displays information on the card in the relative location.
@@ -292,13 +272,6 @@ namespace ScrumageEngine.Windows {
 		#endregion
 
 		#region Update Player Display
-
-		private void UpdateAllPlayers() {
-			for(Int32 i = 1; i <= playerCount; i++) {
-				UpdatePlayerInformation(i);
-			}
-		}
-
 		/// <summary>
 		/// Updates the player's information display.
 		/// </summary>
@@ -308,15 +281,58 @@ namespace ScrumageEngine.Windows {
 			// Update inventory display
 			UpdatePlayerResourceDisplay(FindResourceBox(playerIdP), this.game.GetPlayerResources(playerIdP));
 			UpdatePawnBox(FindPlayerPawnBox(playerIdP), this.game.GetPlayerPawns(playerIdP));
-			//TODO: Update Cards
 
-			// Update Stats
+			var currentPlayer = this.game.GetPlayerByID(playerIdP);
+
+			// Update Cards
+			UpdatePlayerCardsDisplay(playerIdP, currentPlayer.Agility, currentPlayer.Artifacts);
 			//	update budget
-			UpdatePlayerBudgetDisplay(FindPlayerBudgetLabel(playerIdP), this.game.GetPlayerByID(playerIdP).Budget);
+			UpdatePlayerBudgetDisplay(FindPlayerBudgetLabel(playerIdP), currentPlayer.Budget);
 			//	update score
-			UpdatePlayerScoreDisplay(FindPlayerScoreLabel(playerIdP), this.game.GetPlayerByID(playerIdP).FeaturePoints);
+			UpdatePlayerScoreDisplay(FindPlayerScoreLabel(playerIdP), currentPlayer.FeaturePoints);
 			//	update funds
-			UpdatePlayerFundsDisplay(FindPlayerFundsLabel(playerIdP), this.game.GetPlayerByID(playerIdP).Funds);
+			UpdatePlayerFundsDisplay(FindPlayerFundsLabel(playerIdP), currentPlayer.Funds);
+		}
+
+		/// <summary>
+		/// Updates all the card boxes, as well as the labels for the player.
+		/// </summary>
+		private void UpdatePlayerCardsDisplay(Int32 playerId, List<Card> agilityCards, List<Card> artifactCards)
+		{
+			var artifactLabel = FindName($"P{playerId}ArtifactsCountLabel") as Label;
+
+			if (artifactLabel != null)
+			{
+				artifactLabel.Content = artifactCards.Count;
+			}
+
+			var agilityLabel = FindName($"P{playerId}AgilityCountLabel") as Label;
+			if (agilityLabel != null)
+			{
+				agilityLabel.Content = agilityCards.Count;
+			}
+
+			var artifactBox = FindName($"P{playerId}ArtifactBox") as ListBox;
+
+			if (artifactBox != null)
+			{
+				artifactBox.Items.Clear();
+				foreach (var card in artifactCards)
+				{
+					artifactBox.Items.Add(card.GetName());
+				}
+			}
+
+			var agilityBox = FindName($"P{playerId}AgilityBox") as ListBox;
+			if (agilityBox != null)
+			{
+				agilityBox.Items.Clear();
+				foreach(var card in agilityCards)
+				{
+					agilityBox.Items.Add(card.GetName());
+				}
+			}
+
 		}
 
 
@@ -424,17 +440,17 @@ namespace ScrumageEngine.Windows {
 			currentPhaseIndex = game.phase - 1;
 			PhaseTabControl.SelectedIndex = currentPhaseIndex;
 		}
-        #endregion
+		#endregion
 
-        /// <summary>
-        /// Creates the HelpWindow
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void HelpBtn_Click(object sender, RoutedEventArgs e)
-        {
-            new HelpView().Show();
-        }
+		/// <summary>
+		/// Creates the HelpWindow
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void HelpBtn_Click(object sender, RoutedEventArgs e)
+		{
+			new HelpView().Show();
+		}
 
 
 		/// <summary>
@@ -448,17 +464,41 @@ namespace ScrumageEngine.Windows {
 			R4SpotValueLabel.Content = spots[3];
 		}
 
-        private void TestBtn_Click(Object sender, RoutedEventArgs e)
-        {
+		private void TestBtn_Click(Object sender, RoutedEventArgs e)
+		{
             foreach(Player p in game.GetAllPlayers()) {
-				p.playerResources += new ResourceContainer(new int[] { 1000, 1000, 1000, 1000 });
-				p.GivePawn("Full Stack");
-				p.GivePawn("Full Stack");
-				p.GivePawn("Full Stack");
+				p.AddToCards(new ArtifactCard("Test Artifact 1", new Int32[] { 0,0,0,0}));
+				p.AddToCards(new ArtifactCard("Test Artifact 2", new Int32[] { 0,0,0,0}));
+				p.AddToCards(new ArtifactCard("Test Artifact 3", new Int32[] { 0,0,0,0}));
+				p.AddToCards(new ArtifactCard("Test Artifact 4", new Int32[] { 0,0,0,0}));
+				p.AddToCards(new ArtifactCard("Test Artifact 5", new Int32[] { 0,0,0,0}));
+				p.AddToCards(new ArtifactCard("Test Artifact 6", new Int32[] { 0,0,0,0}));
+
+				p.AddToCards(new AgilityCard("Test Agility 1", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 2", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 3", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 4", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 5", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 6", new Int32[] { 0, 0, 0, 0 }));
+				UpdatePlayerInformation(p.PlayerID);
+				Debug.WriteLine($"Finished giving test cards to {p.PlayerID}");
+
 			}
-            LogInput();
-			UpdateAllPlayers();
+		}
+
+		private void OpenCardWindow_Click(Object sender, RoutedEventArgs e)
+		{
+			if (sender == null)
+				return;
+
+
+			var item = (sender as ListBox).SelectedItem;
+
+            var cardWindow = new CardWindow();
+            cardWindow.Show();
+
         }
+
 	}
 
 }
