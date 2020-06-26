@@ -16,13 +16,16 @@ namespace ScrumageWPF.Test {
     /// </summary>
     [TestFixture]
     class ResourceContainer_Test {
-
-        
+    
         #region Category: Instantiation
         [Test]
         [Category("Instantiation")]
-        public void ResourceContainer_InstantiatesCorrectly() {
-            
+        public void ResourceContainer_DefaultInstantiatesCorrectly() {
+            ResourceContainer con1 = new ResourceContainer();
+            Assert.That(con1[new Requirements()] == 0);
+            Assert.That(con1[new Design()] == 0);
+            Assert.That(con1[new Implementation()] == 0);
+            Assert.That(con1[new Testing()] == 0);
         }
         #endregion
 
