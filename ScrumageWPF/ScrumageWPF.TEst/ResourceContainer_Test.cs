@@ -107,16 +107,87 @@ namespace ScrumageWPF.Test {
         [Category("Operators")]
         [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 1, 0, 1, 2 })]
         [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 0, 0, 0, 0 })]
-        public void ResourceContainer_MinusOperatorRemovesFromThisResourceContainer() {
+        public void ResourceContainer_MinusOperatorRemovesFromThisResourceContainer(Int32[] inventory, Int32[] cost) {
+            Int32[] result = new Int32[4];
+            for(Int32 i = 0; i < 4; i++) {
+                result[i] = inventory[i] - cost[i];
+            }
+            
+            ResourceContainer weHave = new ResourceContainer(inventory);
+            ResourceContainer toPay = new ResourceContainer(cost);
 
+            weHave -= toPay;
+
+            Assert.That(weHave[new Requirements()] == result[0]);
+            Assert.That(weHave[new Design()] == result[1]);
+            Assert.That(weHave[new Implementation()] == result[2]);
+            Assert.That(weHave[new Testing()] == result[3]);
         }
+        #endregion
+
+        #region ResourceContainer_MinusOperatorDoesNotRemoveFromOtherResourceContainer
+        [Test]
+        [Category("Operators")]
+        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 1, 0, 1, 2 })]
+        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 0, 0, 0, 0 })]
+        public void ResourceContainer_MinusOperatorDoesNotRemoveFromOtherResourceContainer(Int32[] inventory, Int32[] cost) {
+            Int32[] result = new Int32[4];
+            for(Int32 i = 0; i < 4; i++) {
+                result[i] = inventory[i] - cost[i];
+            }
+
+            ResourceContainer weHave = new ResourceContainer(inventory);
+            ResourceContainer toPay = new ResourceContainer(cost);
+
+            weHave -= toPay;
+
+            Assert.That(toPay[new Requirements()] == cost[0]);
+            Assert.That(toPay[new Design()] == cost[1]);
+            Assert.That(toPay[new Implementation()] == cost[2]);
+            Assert.That(toPay[new Testing()] == cost[3]);
+        }
+
         #endregion
 
         #region ResourceContainer_AdditionOperatorAddsToThisResourceContainer
         [Test]
         [Category("Operators")]
-        public void ResourceContainer_AdditionOperatorAddsToThisResourceContainer() {
+        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 1, 0, 1, 2 })]
+        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 0, 0, 0, 0 })]
+        public void ResourceContainer_AdditionOperatorAddsToThisResourceContainer(Int32[] inventory, Int32[] added) {
+            Int32[] result = new Int32[4];
+            for(Int32 i = 0; i < 4; i++) {
+                result[i] = inventory[i] + added[i];
+            }
 
+            ResourceContainer weHave = new ResourceContainer(inventory);
+            ResourceContainer weGet = new ResourceContainer(added);
+
+            weHave += weGet;
+
+            Assert.That(weHave[new Requirements()] == result[0]);
+            Assert.That(weHave[new Design()] == result[1]);
+            Assert.That(weHave[new Implementation()] == result[2]);
+            Assert.That(weHave[new Testing()] == result[3]);
+        }
+        #endregion
+
+        #region ResourceContainer_AdditionOperatorDoesNotAddToOtherResourceContainer
+        [Test]
+        [Category("Operators")]
+        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 1, 0, 1, 2 })]
+        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 0, 0, 0, 0 })]
+        public void ResourceContainer_AdditionOperatorDoesNotAddToOtherResourceContainer(Int32[] inventory, Int32[] added) {
+
+            ResourceContainer weHave = new ResourceContainer(inventory);
+            ResourceContainer weGet = new ResourceContainer(added);
+
+            weHave += weGet;
+
+            Assert.That(weGet[new Requirements()] == added[0]);
+            Assert.That(weGet[new Design()] == added[1]);
+            Assert.That(weGet[new Implementation()] == added[2]);
+            Assert.That(weGet[new Testing()] == added[3]);
         }
         #endregion
 
@@ -124,29 +195,6 @@ namespace ScrumageWPF.Test {
 
         #region Category: Dictionary Handling
 
-        #region ResourceContainer_AddsToExisting
-        [Test]
-        [Category("Dictionary Handling")]
-        public void ResourceContainer_AddsToExisting() {
-
-        }
-        #endregion
-
-        #region ResourceContainer_DoesNotRemoveResourceClass
-        [Test]
-        [Category("Dictionary Handling")]
-        public void ResourceContainer_DoesNotRemoveResourceClass() {
-
-        }
-        #endregion
-
-        #region ResourceContainer_IntegerIndexerRetrievesResourceAmount
-        [Test]
-        [Category("Dictionary Handling")]
-        public void ResourceContainer_IntegerIndexerRetrievesResourceAmount() {
-
-        }
-        #endregion
 
         #endregion
 
