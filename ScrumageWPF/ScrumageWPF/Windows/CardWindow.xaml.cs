@@ -27,7 +27,7 @@ namespace ScrumageEngine.Views
         {
             InitializeComponent();
 
-            txtBlockCardInfo.Text = card.ToString();
+            txtBlockCardInfo.Text = card.ToString() ?? "Invalid Card";
         }
     }
 }
