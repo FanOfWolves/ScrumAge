@@ -5,7 +5,7 @@ using System.Text;
 
 
 namespace ScrumageEngine.Objects.Items.Cards {
-	class Deck {
+	public class Deck {
 		private Stack<Card> Cards;
 		public Int32 Count { get { return Cards.Count; } }
 		public Deck(String type, Int32 count) {
@@ -27,7 +27,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
 		}
 
 
-		private Card MakeCard(String cardInfo) {
+		public Card MakeCard(String cardInfo) {
 			String[] cardArray = cardInfo.Split(":");
 			Int32[] cardReqs = ParseReqs(cardArray[2]);
 			if(cardArray[0] == "Artifact") return new ArtifactCard(cardArray[1], cardReqs);
@@ -35,7 +35,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
 			else return new AgilityCard("Error card", new Int32[] { 0, 0, 0, 0 });					// Maybe throw exception?
 		}
 
-		private Int32[] ParseReqs(String reqs) {
+		public Int32[] ParseReqs(String reqs) {
 			String[] reqsStrArray = reqs.Split(",");
 			Int32[] reqsIntArray = new Int32[reqsStrArray.Length];
 			for(Int32 i = 0; i < reqsStrArray.Length; i++) {
