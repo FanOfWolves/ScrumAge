@@ -3,6 +3,7 @@ using ScrumageEngine.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -496,13 +497,22 @@ namespace ScrumageEngine.Windows {
 			if (sender == null)
 				return;
 
+            var listBox = sender as ListBox;
+
+            if (listBox == null || listBox.Items.Count == 0)
+                return;
+
             // get selected index
-            var item = (sender as ListBox).SelectedIndex;
+            var item = listBox.SelectedIndex;
 
-            // get player's card by index of SelectedItem -> Item
+            var currentPlayer = game.GetPlayerByID(currentPlayerID);
 
-            var cardWindow = new CardWindow(game.GetPlayerByID(currentPlayerID).Artifacts[item]);
-            cardWindow.Show();
+            if (currentPlayer.Artifacts[item] != null)
+            {
+                // get player's card by index of SelectedItem -> Item
+                var cardWindow = new CardWindow(currentPlayer.Artifacts[item]);
+                cardWindow.Show();
+            }
 
         }
 
@@ -517,13 +527,25 @@ namespace ScrumageEngine.Windows {
             if (sender == null)
                 return;
 
+            var listBox = sender as ListBox;
+
+            if (listBox == null || listBox.Items.Count == 0)
+                return;
+
             // get selected index
-            var item = (sender as ListBox).SelectedIndex;
+            var item = listBox.SelectedIndex;
 
 
-            // get player's card by index of SelectedItem -> Item
-            var cardWindow = new CardWindow(game.GetPlayerByID(currentPlayerID).Agility[item]);
-            cardWindow.Show();
+            var currentPlayer = game.GetPlayerByID(currentPlayerID);
+
+            if (currentPlayer.Agility[item] != null)
+            {
+                // get player's card by index of SelectedItem -> Item
+                var cardWindow = new CardWindow(currentPlayer.Agility[item]);
+                cardWindow.Show();
+            }
+
+
 
         }
 
