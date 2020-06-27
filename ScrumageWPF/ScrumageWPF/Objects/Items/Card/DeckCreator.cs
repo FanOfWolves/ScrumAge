@@ -18,7 +18,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
 			} //TODO: DirectoryNotFoundException
 		}
 
-		public static List<String> PopulateArtifactsInfo() {
+		private static List<String> PopulateArtifactsInfo() {
 			List<String> retList = new List<String>();
 			String cardType = "";
 			foreach(String card in cardsInfo) {
@@ -28,7 +28,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
 			return retList;
 		}
 
-		public static List<String> PopulateAgilityInfo() {
+		private static List<String> PopulateAgilityInfo() {
 			List<String> retList = new List<String>();
 			String cardType = "";
 			foreach(String card in cardsInfo) {
