@@ -11,7 +11,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
 		private static Random r = new Random();
 		public static List<String> ReadCards() {
 			try {
-				String[] cardInfo = System.IO.File.ReadAllText("../../../../ScrumageWPF/Objects/Items/Card/CardData.txt").Split("\n");
+				String[] cardInfo = System.IO.File.ReadAllText("../../../../ScrumageWPF/Objects/Items/Card/CardData.txt").Split("\r\n");
 				return new List<String>(cardInfo);
 			} catch(FileNotFoundException) {
 				return new List<String>();
