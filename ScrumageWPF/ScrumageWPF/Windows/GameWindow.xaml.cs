@@ -486,34 +486,43 @@ namespace ScrumageEngine.Windows {
 			}
 		}
 
+        /// <summary>
+        /// Creates a new CardWindow Artifacts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 		private void OpenCardWindow_Artifacts_Click(Object sender, RoutedEventArgs e)
 		{
 			if (sender == null)
 				return;
 
-
+            // get selected index
             var item = (sender as ListBox).SelectedIndex;
 
-            Debug.Write(item);
-
+            // get player's card by index of SelectedItem -> Item
 
             var cardWindow = new CardWindow(game.GetPlayerByID(currentPlayerID).Artifacts[item]);
             cardWindow.Show();
 
         }
 
+        /// <summary>
+        /// Opens a new CardWindow Agility
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void OpenCardWindow_Agility_Click(Object sender, RoutedEventArgs e)
         {
             if (sender == null)
                 return;
 
-
+            // get selected index
             var item = (sender as ListBox).SelectedIndex;
 
-            Debug.Write(item);
 
-
-            var cardWindow = new CardWindow(game.GetPlayerByID(currentPlayerID).Artifacts[item]);
+            // get player's card by index of SelectedItem -> Item
+            var cardWindow = new CardWindow(game.GetPlayerByID(currentPlayerID).Agility[item]);
             cardWindow.Show();
 
         }
