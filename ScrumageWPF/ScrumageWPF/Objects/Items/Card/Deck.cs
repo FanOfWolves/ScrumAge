@@ -12,7 +12,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
 			Cards = CreateStack(type, count);
 		}
 
-		private Stack<Card> CreateStack(String type, Int32 count) {
+		public Stack<Card> CreateStack(String type, Int32 count) {
 			Stack<Card> retStack = new Stack<Card>();
 			if(type == "Agility") {
 				foreach(String cardInfo in CreateAgilitysDeck(count)) {
