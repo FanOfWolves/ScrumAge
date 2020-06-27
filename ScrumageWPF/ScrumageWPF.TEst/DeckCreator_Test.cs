@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using NUnit.Framework;
 using ScrumageEngine.Objects.Items.Cards;
@@ -15,6 +16,7 @@ namespace ScrumageWPF.Test {
         private List<String> testAgilityInfoList = new List<String>(4);
         private List<String> testArtifactInfoList = new List<String>(3);
 
+
         #region TestFields
         private String cardInfoArtifact1 = "Artifact:Customer Meeting Design:2,1,0,0";
         private String cardInfoArtifact2 = "Artifact:System Test Plan:0,1,1,1";
@@ -28,6 +30,7 @@ namespace ScrumageWPF.Test {
         #region Setup and Teardown
         [OneTimeSetUp]
         public void Class_SetUp() {
+
             #region Fill testCardInfoList
             testCardInfoList.Add(cardInfoArtifact1);
             testCardInfoList.Add(cardInfoArtifact2);
@@ -53,18 +56,20 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
-
         [Test]
         public void DeckCreator_ReadCards_ReturnsExpectedOutput() {
             List<String> outputList = DeckCreator.ReadCards();
             Assert.That(testCardInfoList, Is.EquivalentTo(outputList));
         }
 
+        #region Category: Public Deck Creation
 
+        #region DeckCreator_CreateAgilitysDeck_ReturnsAllPossibleCardInfo
         /// <summary>
-        /// Checks that the deck creation methods can return all possible appropriate card info.
+        /// Checks that the agility deck creation method can return all possible agility card info.
         /// </summary>
         [Test]
+        [Category("Public Deck Creation")]
         public void DeckCreator_CreateAgilitysDeck_ReturnsAllPossibleCardInfo() {
             const Int32 TOTAL_CARDS = 100;
             List<String> returnedCards = DeckCreator.CreateAgilitysDeck(TOTAL_CARDS);
@@ -72,7 +77,24 @@ namespace ScrumageWPF.Test {
             Assert.That(returnedCards, Has.Some.EqualTo(testAgilityInfoList[1]));
             Assert.That(returnedCards, Has.Some.EqualTo(testAgilityInfoList[2]));
             Assert.That(returnedCards, Has.Some.EqualTo(testAgilityInfoList[3]));
-        }
+        } 
+        #endregion
 
+        #region DeckCreator_CreateArtifactsDeck_ReturnAllPossibleCardInfo
+        /// <summary>
+        /// Checks that the artifact deck creation method can return all possible artifact card info.
+        /// </summary>
+        [Test]
+        [Category("Public Deck Creation")]
+        public void DeckCreator_CreateArtifactsDeck_ReturnAllPossibleCardInfo() {
+            const Int32 TOTAL_CARDS = 100;
+            List<String> returnedCards = DeckCreator.CreateArtifactsDeck(TOTAL_CARDS);
+            Assert.That(returnedCards, Has.Some.EqualTo(testArtifactInfoList[0]));
+            Assert.That(returnedCards, Has.Some.EqualTo(testArtifactInfoList[1]));
+            Assert.That(returnedCards, Has.Some.EqualTo(testArtifactInfoList[2]));
+        }
+        #endregion
+
+        #endregion
     }
 }
