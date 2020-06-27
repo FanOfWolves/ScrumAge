@@ -11,7 +11,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
 		private static Random r = new Random();
 		private static List<String> ReadCards() {
 			try {
-				String[] cardInfo = System.IO.File.ReadAllText("../../../Objects/Items/Card/CardData.txt").Split("\n");
+				String[] cardInfo = System.IO.File.ReadAllText("../../../../ScrumageWPF/Objects/Items/Card/CardData.txt").Split("\r\n");
 				return new List<String>(cardInfo);
 			} catch(FileNotFoundException) {
 				return new List<String>();
@@ -41,7 +41,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
 		public static List<String> CreateArtifactsDeck(Int32 numOfCards) {
 			List<String> retString = new List<String>();
 			for(Int32 i = 0; i < numOfCards; i++) {
-				retString.Add(artifactsInfo[r.Next(artifactsInfo.Count - 1)]);
+				retString.Add(artifactsInfo[r.Next(artifactsInfo.Count)]);
 			}
 			return retString;
 		}
@@ -49,7 +49,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
 		public static List<String> CreateAgilitysDeck(Int32 numOfCards) {
 			List<String> retString = new List<String>();
 			for(Int32 i = 0; i < numOfCards; i++) {
-				retString.Add(agilitysInfo[r.Next(agilitysInfo.Count - 1)]);
+				retString.Add(agilitysInfo[r.Next(agilitysInfo.Count)]);
 			}
 			return retString;
 		}
