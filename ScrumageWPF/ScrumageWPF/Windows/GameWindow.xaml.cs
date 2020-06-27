@@ -2,11 +2,14 @@
 using ScrumageEngine.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ScrumageEngine.InputLogic;
 using ScrumageEngine.Objects.Items;
+using ScrumageEngine.Objects.Items.Cards;
 using ScrumageEngine.Objects.Player;
 using ScrumageEngine.Views;
 using static ScrumageEngine.InputLogic.InputHandler;
@@ -308,15 +311,58 @@ namespace ScrumageEngine.Windows {
 			// Update inventory display
 			UpdatePlayerResourceDisplay(FindResourceBox(playerIdP), this.game.GetPlayerResources(playerIdP));
 			UpdatePawnBox(FindPlayerPawnBox(playerIdP), this.game.GetPlayerPawns(playerIdP));
-			//TODO: Update Cards
 
-			// Update Stats
+			var currentPlayer = this.game.GetPlayerByID(playerIdP);
+
+			// Update Cards
+			UpdatePlayerCardsDisplay(playerIdP, currentPlayer.Agility, currentPlayer.Artifacts);
 			//	update budget
-			UpdatePlayerBudgetDisplay(FindPlayerBudgetLabel(playerIdP), this.game.GetPlayerByID(playerIdP).Budget);
+			UpdatePlayerBudgetDisplay(FindPlayerBudgetLabel(playerIdP), currentPlayer.Budget);
 			//	update score
-			UpdatePlayerScoreDisplay(FindPlayerScoreLabel(playerIdP), this.game.GetPlayerByID(playerIdP).FeaturePoints);
+			UpdatePlayerScoreDisplay(FindPlayerScoreLabel(playerIdP), currentPlayer.FeaturePoints);
 			//	update funds
-			UpdatePlayerFundsDisplay(FindPlayerFundsLabel(playerIdP), this.game.GetPlayerByID(playerIdP).Funds);
+			UpdatePlayerFundsDisplay(FindPlayerFundsLabel(playerIdP), currentPlayer.Funds);
+		}
+
+		/// <summary>
+		/// Updates all the card boxes, as well as the labels for the player.
+		/// </summary>
+		private void UpdatePlayerCardsDisplay(Int32 playerId, List<Card> agilityCards, List<Card> artifactCards)
+		{
+			var artifactLabel = FindName($"P{playerId}ArtifactsCountLabel") as Label;
+
+			if (artifactLabel != null)
+			{
+				artifactLabel.Content = artifactCards.Count;
+			}
+
+			var agilityLabel = FindName($"P{playerId}AgilityCountLabel") as Label;
+			if (agilityLabel != null)
+			{
+				agilityLabel.Content = agilityCards.Count;
+			}
+
+			var artifactBox = FindName($"P{playerId}ArtifactBox") as ListBox;
+
+			if (artifactBox != null)
+			{
+				artifactBox.Items.Clear();
+				foreach (var card in artifactCards)
+                {
+                    artifactBox.Items.Add(card.GetName());
+				}
+			}
+
+			var agilityBox = FindName($"P{playerId}AgilityBox") as ListBox;
+			if (agilityBox != null)
+			{
+				agilityBox.Items.Clear();
+				foreach(var card in agilityCards)
+				{
+					agilityBox.Items.Add(card.GetName());
+				}
+			}
+
 		}
 
 
@@ -424,17 +470,17 @@ namespace ScrumageEngine.Windows {
 			currentPhaseIndex = game.phase - 1;
 			PhaseTabControl.SelectedIndex = currentPhaseIndex;
 		}
-        #endregion
+		#endregion
 
-        /// <summary>
-        /// Creates the HelpWindow
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void HelpBtn_Click(object sender, RoutedEventArgs e)
-        {
-            new HelpView().Show();
-        }
+		/// <summary>
+		/// Creates the HelpWindow
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void HelpBtn_Click(object sender, RoutedEventArgs e)
+		{
+			new HelpView().Show();
+		}
 
 
 		/// <summary>
@@ -448,17 +494,90 @@ namespace ScrumageEngine.Windows {
 			R4SpotValueLabel.Content = spots[3];
 		}
 
-        private void TestBtn_Click(Object sender, RoutedEventArgs e)
-        {
+		private void TestBtn_Click(Object sender, RoutedEventArgs e)
+		{
             foreach(Player p in game.GetAllPlayers()) {
-				p.playerResources += new ResourceContainer(new int[] { 1000, 1000, 1000, 1000 });
-				p.GivePawn("Full Stack");
-				p.GivePawn("Full Stack");
-				p.GivePawn("Full Stack");
+				p.AddToCards(new ArtifactCard("Test Artifact 1", new Int32[] { 0,0,0,0}));
+				p.AddToCards(new ArtifactCard("Test Artifact 2", new Int32[] { 0,0,0,0}));
+				p.AddToCards(new ArtifactCard("Test Artifact 3", new Int32[] { 0,0,0,0}));
+				p.AddToCards(new ArtifactCard("Test Artifact 4", new Int32[] { 0,0,0,0}));
+				p.AddToCards(new ArtifactCard("Test Artifact 5", new Int32[] { 0,0,0,0}));
+				p.AddToCards(new ArtifactCard("Test Artifact 6", new Int32[] { 0,0,0,0}));
+
+				p.AddToCards(new AgilityCard("Test Agility 1", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 2", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 3", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 4", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 5", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 6", new Int32[] { 0, 0, 0, 0 }));
+				UpdatePlayerInformation(p.PlayerID);
+				Debug.WriteLine($"Finished giving test cards to {p.PlayerID}");
+
 			}
-            LogInput();
-			UpdateAllPlayers();
+		}
+
+        /// <summary>
+        /// Creates a new CardWindow Artifacts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+		private void OpenCardWindow_Artifacts_Click(Object sender, RoutedEventArgs e)
+		{
+			if (sender == null)
+				return;
+
+            var listBox = sender as ListBox;
+
+            if (listBox == null || listBox.Items.Count == 0)
+                return;
+
+            // get selected index
+            var item = listBox.SelectedIndex;
+
+            var currentPlayer = game.GetPlayerByID(currentPlayerID);
+
+            if (currentPlayer.Artifacts[item] != null)
+            {
+                // get player's card by index of SelectedItem -> Item
+                var cardWindow = new CardWindow(currentPlayer.Artifacts[item]);
+                cardWindow.Show();
+            }
+
         }
-	}
+
+        /// <summary>
+        /// Opens a new CardWindow Agility
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void OpenCardWindow_Agility_Click(Object sender, RoutedEventArgs e)
+        {
+            if (sender == null)
+                return;
+
+            var listBox = sender as ListBox;
+
+            if (listBox == null || listBox.Items.Count == 0)
+                return;
+
+            // get selected index
+            var item = listBox.SelectedIndex;
+
+
+            var currentPlayer = game.GetPlayerByID(currentPlayerID);
+
+            if (currentPlayer.Agility[item] != null)
+            {
+                // get player's card by index of SelectedItem -> Item
+                var cardWindow = new CardWindow(currentPlayer.Agility[item]);
+                cardWindow.Show();
+            }
+
+
+
+        }
+
+    }
 
 }

@@ -39,6 +39,15 @@ namespace ScrumageEngine.Objects.Items.Cards {
         public override string ToString() {
             return $"{this.GetType().Name}: {cardName}\n----------------------\n{this.GetCardRequirements().ShowRequirements()}";
         }
+
+        /// <summary>
+        /// Returns the Card's Name
+        /// </summary>
+        /// <returns></returns>
+        public string GetName()
+        {
+            return this.cardName;
+        }
         #endregion
 
         #region Getters
