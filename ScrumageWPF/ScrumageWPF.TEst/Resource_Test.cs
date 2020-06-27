@@ -56,6 +56,7 @@ namespace ScrumageWPF.Test {
             
         }
 
+    
         #region Category: IEquatable<T> Interface
         [Test]
         [Category("IEquatable<T> Interface")]
