@@ -41,7 +41,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
 		public static List<String> CreateArtifactsDeck(Int32 numOfCards) {
 			List<String> retString = new List<String>();
 			for(Int32 i = 0; i < numOfCards; i++) {
-				retString.Add(artifactsInfo[r.Next(artifactsInfo.Count - 1)]);
+				retString.Add(artifactsInfo[r.Next(artifactsInfo.Count)]);
 			}
 			return retString;
 		}
@@ -49,7 +49,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
 		public static List<String> CreateAgilitysDeck(Int32 numOfCards) {
 			List<String> retString = new List<String>();
 			for(Int32 i = 0; i < numOfCards; i++) {
-				retString.Add(agilitysInfo[r.Next(agilitysInfo.Count - 1)]);
+				retString.Add(agilitysInfo[r.Next(agilitysInfo.Count)]);
 			}
 			return retString;
 		}
