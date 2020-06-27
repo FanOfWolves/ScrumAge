@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ScrumageEngine.Objects.Items.Cards;
 
 namespace ScrumageEngine.Views
 {
@@ -20,6 +21,13 @@ namespace ScrumageEngine.Views
         public CardWindow()
         {
             InitializeComponent();
+        }
+
+        public CardWindow(Card card)
+        {
+            InitializeComponent();
+
+            txtBlockCardInfo.Text = card.ToString();
         }
     }
 }

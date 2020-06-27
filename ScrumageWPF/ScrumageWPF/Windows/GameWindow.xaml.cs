@@ -318,8 +318,8 @@ namespace ScrumageEngine.Windows {
 			{
 				artifactBox.Items.Clear();
 				foreach (var card in artifactCards)
-				{
-					artifactBox.Items.Add(card.GetName());
+                {
+                    artifactBox.Items.Add(card.GetName());
 				}
 			}
 
@@ -486,19 +486,38 @@ namespace ScrumageEngine.Windows {
 			}
 		}
 
-		private void OpenCardWindow_Click(Object sender, RoutedEventArgs e)
+		private void OpenCardWindow_Artifacts_Click(Object sender, RoutedEventArgs e)
 		{
 			if (sender == null)
 				return;
 
 
-			var item = (sender as ListBox).SelectedItem;
+            var item = (sender as ListBox).SelectedIndex;
 
-            var cardWindow = new CardWindow();
+            Debug.Write(item);
+
+
+            var cardWindow = new CardWindow(game.GetPlayerByID(currentPlayerID).Artifacts[item]);
             cardWindow.Show();
 
         }
 
-	}
+        private void OpenCardWindow_Agility_Click(Object sender, RoutedEventArgs e)
+        {
+            if (sender == null)
+                return;
+
+
+            var item = (sender as ListBox).SelectedIndex;
+
+            Debug.Write(item);
+
+
+            var cardWindow = new CardWindow(game.GetPlayerByID(currentPlayerID).Artifacts[item]);
+            cardWindow.Show();
+
+        }
+
+    }
 
 }
