@@ -9,16 +9,16 @@ namespace ScrumageEngine.Objects.Items.Cards {
 		private static List<String> artifactsInfo = PopulateArtifactsInfo();
 		private static List<String> agilitysInfo = PopulateAgilityInfo();
 		private static Random r = new Random();
-		private static List<String> ReadCards() {
+		public static List<String> ReadCards() {
 			try {
-				String[] cardInfo = System.IO.File.ReadAllText("../../../Objects/Items/Card/CardData.txt").Split("\n");
+				String[] cardInfo = System.IO.File.ReadAllText("../../../../ScrumageWPF/Objects/Items/Card/CardData.txt").Split("\n");
 				return new List<String>(cardInfo);
 			} catch(FileNotFoundException) {
 				return new List<String>();
-			}
+			} //TODO: DirectoryNotFoundException
 		}
 
-		private static List<String> PopulateArtifactsInfo() {
+		public static List<String> PopulateArtifactsInfo() {
 			List<String> retList = new List<String>();
 			String cardType = "";
 			foreach(String card in cardsInfo) {
@@ -28,7 +28,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
 			return retList;
 		}
 
-		private static List<String> PopulateAgilityInfo() {
+		public static List<String> PopulateAgilityInfo() {
 			List<String> retList = new List<String>();
 			String cardType = "";
 			foreach(String card in cardsInfo) {
