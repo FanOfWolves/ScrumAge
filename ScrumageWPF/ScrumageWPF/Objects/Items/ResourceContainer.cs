@@ -56,7 +56,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// Adds a resource to this container.
 		/// </summary>
 		/// <param name="newResource">The new resource to add</param>
-		public void AddResource(Resource newResource, Int32 amount) {
+		public void AddResource(Resource newResource, Int32 amount = 1) {
 	        this[newResource]+= amount;
         }
 
