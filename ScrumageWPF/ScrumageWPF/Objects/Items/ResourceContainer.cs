@@ -80,31 +80,6 @@ namespace ScrumageEngine.Objects.Items {
 	        return resourceDictionary.Keys.ToArray();
         }
 
-        /// <summary>
-        /// Determines the amount of the specified resource in this container
-        /// </summary>
-        /// <param name="neededResource">The needed resource.</param>
-        /// <returns>the amount of that resource in this container</returns>
-        public Int32 GetResourceAmount(Resource neededResource) {
-	        return this[neededResource];
-        }
-
-        /// <summary>
-        /// Subtracts the amount of the specified resource in this container.
-        /// </summary>
-        /// <param name="neededResource">The needed resource.</param>
-        /// <param name="neededAmount">The needed amount.</param>
-        /// <returns>
-        ///     <c>true</c> if resource payment successful; otherwise, <c>false</c>.
-        /// </returns>
-        public Boolean TakeResources(Resource neededResource, Int32 neededAmount) {
-	        if (this[neededResource] < neededAmount)
-                return false;
-	        this[neededResource] -= neededAmount;
-            return true;
-        }
-
-
 		/// <summary>
 		/// Indexer to allow a resource amount to be selected by an int value.
 		/// </summary>
