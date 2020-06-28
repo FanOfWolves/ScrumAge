@@ -41,16 +41,6 @@ namespace ScrumageEngine.BoardSpace {
         }
         #endregion
 
-        /// <summary>
-        /// Gathers the player pawns from this node.
-        /// </summary>
-        /// <param name="playerId">The player identifier.</param>
-        /// <returns>the player's pawns from this node</returns>
-        private List<Pawn> GatherPlayerPawns(Int32 playerId) {
-            List<Pawn> _playerPawns = Pawns.FindAll(_playerPawn => _playerPawn.PawnID == playerId);
-            Pawns.RemoveAll(_playerPawn => _playerPawn.PawnID == playerId);
-            return _playerPawns;
-        }
 
         /// <summary>
         /// Rolls for resource.
@@ -84,7 +74,7 @@ namespace ScrumageEngine.BoardSpace {
         /// <returns>a log indicating if the player acquired the resource or not</returns>
         public override String DoAction(Player playerP) {
             
-            List<Pawn> _playerPawns = GatherPlayerPawns(playerP.PlayerID);
+            List<Pawn> _playerPawns = base.GatherPlayerPawns(playerP.PlayerID);
 
             if (_playerPawns.Count < 1) {
                 return $"{playerP.PlayerName} has failed to obtain a {this.nodeResource.Name}. Reason: No Pawns.";

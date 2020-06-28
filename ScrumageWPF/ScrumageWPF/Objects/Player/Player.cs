@@ -192,20 +192,23 @@ namespace ScrumageEngine.Objects.Player {
         /// Adds the resource to the player's ResourceContainer
         /// </summary>
         /// <param name="resource">The resource to be added</param>
-        public void AddResource(Resource resource) {
-            this.playerResources.AddResource(resource);
+        public void AddResource(Resource resource, Int32 amount = 1) {
+            this.playerResources.AddResource(resource, amount);
         }
 
         /// <summary>
         /// Pays resource from the player's resources.
         /// </summary>
-        /// <param name="resource">The resource to be paid.</param>
-        /// <param name="resourceAmount">The amount to be paid.</param>
+        /// <param name="toPay">Amount to pay.</param>
         /// <returns>
         ///		<c>true</c> if player had enough resources; otherwise <c>false</c>
         /// </returns>
-        public Boolean TakeResource(Resource resource, Int32 resourceAmount) {
-            return this.playerResources.TakeResources(resource, resourceAmount);
+        public Boolean TakeResources(ResourceContainer toPay) {
+            if(this.playerResources >= toPay) {
+                this.playerResources -= toPay;
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
