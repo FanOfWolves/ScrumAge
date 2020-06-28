@@ -60,17 +60,6 @@ namespace ScrumageEngine.Objects.Items {
 	        this[newResource]+= amount;
         }
 
-        /// <summary>
-        /// Determines whether this container has the indicated amount of resources.
-        /// </summary>
-        /// <param name="neededResource">The needed resource.</param>
-        /// <param name="neededAmount">The needed amount of this resource.</param>
-        /// <returns>
-        ///   <c>true</c> if it has enough of the specified resource; otherwise, <c>false</c>.
-        /// </returns>
-        public Boolean HasResourceAmount(Resource neededResource, Int32 neededAmount) {
-	        return this[neededResource] >= neededAmount;
-        }
 
         /// <summary>
         /// Gets the resource types.
