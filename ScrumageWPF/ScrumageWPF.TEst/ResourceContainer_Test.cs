@@ -17,6 +17,13 @@ namespace ScrumageWPF.Test {
     [TestFixture]
     class ResourceContainer_Test {
 
+        #region Fields
+
+
+
+        #endregion
+
+
         #region Category: Instantiation
         [Test]
         [Category("Instantiation")]
@@ -112,7 +119,7 @@ namespace ScrumageWPF.Test {
             for(Int32 i = 0; i < 4; i++) {
                 result[i] = inventory[i] - cost[i];
             }
-            
+
             ResourceContainer weHave = new ResourceContainer(inventory);
             ResourceContainer toPay = new ResourceContainer(cost);
 
@@ -217,13 +224,49 @@ namespace ScrumageWPF.Test {
         [Category("Referencing and Equality")]
         public void ResourceContainer_ReturnsDeepCopyNotOriginalResource() {
 
-        } 
+        }
         #endregion
 
         #endregion
 
-        #region Category: Other
+        #region Category: Display        
+        /// <summary>
+        /// Asserts that <see cref="ResourceContainer.ShowRequirements"/> correctly displays its contents.
+        /// Uses parameterized constructor.
+        /// </summary>
+        /// <param name="resourceAmounts">The resource amounts to initialize the container.</param>
+        [Test]
+        [Category("Display")]
+        [TestCase(new Int32[] { 1, 3, 4, 0 })]      // Normal check
+        [TestCase(new Int32[] { 10, 10, 10, 10 })]  // Checking how it handles double digit numbers
+        [TestCase(new Int32[] { 0, 0, 0, 0 })]      // All zero
+        public void ResourceContainer_ShowRequirements_Paramterized(Int32[] resourceAmounts) {
+            String expectedOutput = $"Requirements:{resourceAmounts[0]}\n" +
+				                    $"Design:{resourceAmounts[1]}\n" +
+				                    $"Implementation:{resourceAmounts[2]}\n" +
+				                    $"Testing:{resourceAmounts[3]}\n";
 
+            ResourceContainer testContainer = new ResourceContainer(resourceAmounts);
+
+            Assert.That(expectedOutput, Is.EqualTo(testContainer.ShowRequirements()));
+        }
+
+        /// <summary>
+        /// Asserts that <see cref="ResourceContainer.ShowRequirements"/> correctly displays its contents.
+        /// Uses default constructor.
+        /// </summary>
+        [Test]
+        [Category("Display")]
+        public void ResourceContainer_ShowRequirements_Default() {
+            String expectedOutput = $"Requirements:0\n" +
+                                    $"Design:0\n" +
+                                    $"Implementation:0\n" +
+                                    $"Testing:0\n";
+
+            ResourceContainer testContainer = new ResourceContainer();
+
+            Assert.That(expectedOutput, Is.EqualTo(testContainer.ShowRequirements()));
+        }
         #endregion
     }
 }
