@@ -53,157 +53,256 @@ namespace ScrumageWPF.Test {
         #region Category: Operators
 
         #region ResourceContainer_GreaterThanOrEqualToComparesCorrectly
+        /// <summary>
+        /// Assert that ">=" operator behaves correctly.
+        /// </summary>
+        /// <param name="res1Contents">The contents of the left-side container.</param>
+        /// <param name="res2Contents">The contents of the right-side container.</param>
+        /// <param name="ExpectedResult">The expected boolean result for the assert statement.</param>
         [Test]
         [Category("Operators")]
+        #region Test-Cases
         [TestCase(new Int32[] { 1, 1, 1, 1 }, new Int32[] { 0, 0, 0, 0 }, true)]     // Greater-than
         [TestCase(new Int32[] { 2, 3, 2, 2 }, new Int32[] { 2, 2, 2, 2 }, true)]     // Greater-than and equal-to
         [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 0, 0, 0, 0 }, true)]     // Equal-to, all zero
         [TestCase(new Int32[] { 2, 3, 6, 9 }, new Int32[] { 2, 3, 6, 9 }, true)]     // Equal-to
         [TestCase(new Int32[] { 1, 2, 3, 4 }, new Int32[] { 4, 3, 2, 1 }, false)]    // Ensure order matters
-        [TestCase(new Int32[] { 3, 5, 2, 1 }, new Int32[] { 2, 4, 2, 2 }, false)]    // Less-than and equal-to
+        [TestCase(new Int32[] { 2, 4, 1, 1 }, new Int32[] { 2, 4, 2, 2 }, false)]    // Less-than and equal-to
         [TestCase(new Int32[] { 3, 5, 2, 1 }, new Int32[] { 4, 6, 3, 2 }, false)]    // All less-than
-
-
-        public void ResourceContainer_GreaterThanOrEqualToComparesCorrectly(Int32[] inventory, Int32[] cost, Boolean ExpectedResult) {
-            ResourceContainer payment = new ResourceContainer(inventory);
-            ResourceContainer toPay = new ResourceContainer(cost);
+        #endregion
+        public void ResourceContainer_GreaterThanOrEqualToComparesCorrectly(Int32[] res1Contents, Int32[] res2Contents, Boolean ExpectedResult) {
+            ResourceContainer res1 = new ResourceContainer(res1Contents);
+            ResourceContainer res2 = new ResourceContainer(res2Contents);
             
-            Assert.That(payment >= toPay, Is.EqualTo(ExpectedResult));
+            Assert.That(res1 >= res2, Is.EqualTo(ExpectedResult));
         }
 
         #endregion
 
-        #region ResourceContainer_GreaterThanOrEqualToComparesCorrectly
+        #region ResourceContainer_LessThanOrEqualToComparesCorrectly        
+        /// <summary>
+        /// Assert that "<=" operator behaves correctly.
+        /// </summary>
+        /// <param name="res1Contents">The contents of the left-side container.</param>
+        /// <param name="res2Contents">The contents of the right-side container.</param>
+        /// <param name="ExpectedResult">The expected boolean result for the assert statement.</param>
         [Test]
         [Category("Operators")]
+        #region Test-Cases
         [TestCase(new Int32[] { 1, 1, 1, 1 }, new Int32[] { 0, 0, 0, 0 }, false)]   // Greater-than
         [TestCase(new Int32[] { 2, 3, 2, 2 }, new Int32[] { 2, 2, 2, 2 }, false)]   // Greater-than and equal-to
-        [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 0, 0, 0, 0 }, true)]   // Equal-to, all zero
+        [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 0, 0, 0, 0 }, true)]    // Equal-to, all zero
         [TestCase(new Int32[] { 2, 3, 6, 9 }, new Int32[] { 2, 3, 6, 9 }, true)]    // Equal-to
-        [TestCase(new Int32[] { 1, 2, 3, 4 }, new Int32[] { 4, 3, 2, 1 }, true)]    // Ensure order matters
-        [TestCase(new Int32[] { 3, 5, 2, 1 }, new Int32[] { 2, 4, 2, 2 }, true)]    // Less-than and equal-to
-        [TestCase(new Int32[] { 3, 5, 2, 1 }, new Int32[] { 4, 6, 3, 2 }, true)]    // All less-than
-        public void ResourceContainer_LessThanOrEqualToComparesCorrectly(Int32[] inventory, Int32[] cost, Boolean ExpectedResult) {
-            ResourceContainer payment = new ResourceContainer(inventory);
-            ResourceContainer toPay = new ResourceContainer(cost);
+        [TestCase(new Int32[] { 1, 2, 3, 4 }, new Int32[] { 4, 3, 2, 1 }, false)]   // Ensure order matters
+        [TestCase(new Int32[] { 2, 4, 1, 1 }, new Int32[] { 2, 4, 2, 2 }, true)]    // Less-than and equal-to
+        [TestCase(new Int32[] { 3, 5, 2, 1 }, new Int32[] { 4, 6, 3, 2 }, true)]    // All less-than 
+        #endregion
+        public void ResourceContainer_LessThanOrEqualToComparesCorrectly(Int32[] res1Contents, Int32[] res2Contents, Boolean ExpectedResult) {
+            ResourceContainer res1 = new ResourceContainer(res1Contents);
+            ResourceContainer res2 = new ResourceContainer(res2Contents);
 
-            Assert.That(payment <= toPay, Is.EqualTo(ExpectedResult));
+            Assert.That(res1 <= res2, Is.EqualTo(ExpectedResult));
         }
+
 
         #endregion
 
-        #region ResourceContainer_ComparisonOperatorsDoNotAlterState
+        #region ResourceContainer_GreaterThanComparesCorrectly
+        /// <summary>
+        /// Assert that ">" operator behaves correctly.
+        /// </summary>
+        /// <param name="res1Contents">The contents of the left-side container.</param>
+        /// <param name="res2Contents">The contents of the right-side container.</param>
+        /// <param name="ExpectedResult">The expected boolean result for the assert statement.</param>
         [Test]
         [Category("Operators")]
-        [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 0, 0, 0, 0 })]
-        [TestCase(new Int32[] { 1, 1, 1, 1 }, new Int32[] { 0, 0, 0, 1 })]
-        [TestCase(new Int32[] { 2, 3, 2, 2 }, new Int32[] { 2, 2, 2, 2 })]
-        [TestCase(new Int32[] { 2, 3, 2, 2 }, new Int32[] { 2, 4, 2, 2 })]
-        [TestCase(new Int32[] { 3, 5, 3, 3 }, new Int32[] { 2, 4, 2, 2 })]
-        [TestCase(new Int32[] { 1, 1, 1, 1 }, new Int32[] { 1, 1, 1, 2 })]
-        public void ResourceContainer_ComparisonOperatorsDoNotAlterState(Int32[] inventory, Int32[] cost) {
-            ResourceContainer payment = new ResourceContainer(inventory);
-            ResourceContainer toPay = new ResourceContainer(cost);
-            if(payment >= toPay)
-                ;
+        #region Test-Cases
+        [TestCase(new Int32[] { 1, 1, 1, 1 }, new Int32[] { 0, 0, 0, 0 }, true)]     // Greater-than
+        [TestCase(new Int32[] { 2, 3, 2, 2 }, new Int32[] { 2, 2, 2, 2 }, false)]     // Greater-than and equal-to
+        [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 0, 0, 0, 0 }, false)]    // Equal-to, all zero
+        [TestCase(new Int32[] { 2, 3, 6, 9 }, new Int32[] { 2, 3, 6, 9 }, false)]    // Equal-to
+        [TestCase(new Int32[] { 1, 2, 3, 4 }, new Int32[] { 4, 3, 2, 1 }, false)]    // Ensure order matters
+        [TestCase(new Int32[] { 2, 4, 1, 1 }, new Int32[] { 2, 4, 2, 2 }, false)]    // Less-than and equal-to
+        [TestCase(new Int32[] { 3, 5, 2, 1 }, new Int32[] { 4, 6, 3, 2 }, false)]    // All less-than 
+        #endregion
+        public void ResourceContainer_GreaterThanComparesCorrectly(Int32[] res1Contents, Int32[] res2Contents, Boolean ExpectedResult) {
+            ResourceContainer res1 = new ResourceContainer(res1Contents);
+            ResourceContainer res2 = new ResourceContainer(res2Contents);
 
-            Assert.That(payment[new Requirements()] == inventory[0]);
-            Assert.That(payment[new Design()] == inventory[1]);
-            Assert.That(payment[new Implementation()] == inventory[2]);
-            Assert.That(payment[new Testing()] == inventory[3]);
-            Assert.That(toPay[new Requirements()] == cost[0]);
-            Assert.That(toPay[new Design()] == cost[1]);
-            Assert.That(toPay[new Implementation()] == cost[2]);
-            Assert.That(toPay[new Testing()] == cost[3]);
+            Assert.That(res1 > res2, Is.EqualTo(ExpectedResult));
         }
         #endregion
 
-        #region ResourceContainer_MinusOperatorRemovesFromThisResourceContainer
+        #region ResourceContainer_LessThanComparesCorrectly        
+        /// <summary>
+        /// Assert that "<" operator behaves correctly.
+        /// </summary>
+        /// <param name="res1Contents">The contents of the left-side container.</param>
+        /// <param name="res2Contents">The contents of the right-side container.</param>
+        /// <param name="ExpectedResult">The expected boolean result for the assert statement.</param>
         [Test]
         [Category("Operators")]
+        #region Test-Cases
+        [TestCase(new Int32[] { 1, 1, 1, 1 }, new Int32[] { 0, 0, 0, 0 }, false)]   // Greater-than
+        [TestCase(new Int32[] { 2, 3, 2, 2 }, new Int32[] { 2, 2, 2, 2 }, false)]   // Greater-than and equal-to
+        [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 0, 0, 0, 0 }, false)]   // Equal-to, all zero
+        [TestCase(new Int32[] { 2, 3, 6, 9 }, new Int32[] { 2, 3, 6, 9 }, false)]   // Equal-to
+        [TestCase(new Int32[] { 1, 2, 3, 4 }, new Int32[] { 4, 3, 2, 1 }, false)]   // Ensure order matters
+        [TestCase(new Int32[] { 2, 4, 1, 1 }, new Int32[] { 2, 4, 2, 2 }, false)]   // Less-than and equal-to
+        [TestCase(new Int32[] { 3, 5, 2, 1 }, new Int32[] { 4, 6, 3, 2 }, true)]    // All less-than 
+        #endregion
+        public void ResourceContainer_LessThanComparesCorrectly(Int32[] res1Contents, Int32[] res2Contents, Boolean ExpectedResult) {
+            ResourceContainer res1 = new ResourceContainer(res1Contents);
+            ResourceContainer res2 = new ResourceContainer(res2Contents);
+
+            Assert.That(res1 < res2, Is.EqualTo(ExpectedResult));
+        }
+        #endregion
+
+        #region ResourceContainer_ComparisonOperatorsDoNotAlterState        
+        /// <summary>
+        /// Assert that comparison operators do not alter the contents of the compared containers.
+        /// </summary>
+        /// <param name="res1Contents">The contents of the left-side container.</param>
+        /// <param name="res2Contents">The contents of the right-side container.</param>
+        [Test]
+        [Category("Operators")]
+        #region Test-Cases
+        [TestCase(new Int32[] { 1, 1, 1, 1 }, new Int32[] { 0, 0, 0, 0 })]
+        [TestCase(new Int32[] { 2, 3, 2, 2 }, new Int32[] { 2, 2, 2, 2 })]   
+        [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 0, 0, 0, 0 })]    
+        #endregion
+        public void ResourceContainer_ComparisonOperatorsDoNotAlterState(Int32[] res1Contents, Int32[] res2Contents) {
+            ResourceContainer res1 = new ResourceContainer(res1Contents);
+            ResourceContainer res2 = new ResourceContainer(res2Contents);
+            if(res1 >= res2 || res1 > res2 || res1 <= res2 || res1 < res2)
+                ;// Intentionally left blank
+
+            Assert.That(res1[new Requirements()] == res1Contents[0]);
+            Assert.That(res1[new Design()] == res1Contents[1]);
+            Assert.That(res1[new Implementation()] == res1Contents[2]);
+            Assert.That(res1[new Testing()] == res1Contents[3]);
+            Assert.That(res2[new Requirements()] == res2Contents[0]);
+            Assert.That(res2[new Design()] == res2Contents[1]);
+            Assert.That(res2[new Implementation()] == res2Contents[2]);
+            Assert.That(res2[new Testing()] == res2Contents[3]);
+        }
+        #endregion
+
+        #region ResourceContainer_MinusOperatorRemovesFromThisResourceContainer        
+        /// <summary>
+        /// Assert that "-" operator removes resources from left-side container.
+        /// </summary>
+        /// <param name="res1Contents">The contents of the left-side container.</param>
+        /// <param name="res2Contents">The contents of the right-side container.</param>
+        [Test]
+        [Category("Operators")]
+        #region Test-Cases
         [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 1, 0, 1, 2 })]
-        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 0, 0, 0, 0 })]
-        public void ResourceContainer_MinusOperatorRemovesFromThisResourceContainer(Int32[] inventory, Int32[] cost) {
+        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 0, 0, 0, 0 })] 
+        #endregion
+        public void ResourceContainer_MinusOperatorRemovesFromThisResourceContainer(Int32[] res1Contents, Int32[] res2Contents) {
             Int32[] result = new Int32[4];
             for(Int32 i = 0; i < 4; i++) {
-                result[i] = inventory[i] - cost[i];
+                result[i] = res1Contents[i] - res2Contents[i];
             }
 
-            ResourceContainer weHave = new ResourceContainer(inventory);
-            ResourceContainer toPay = new ResourceContainer(cost);
+            ResourceContainer res1 = new ResourceContainer(res1Contents);
+            ResourceContainer res2 = new ResourceContainer(res2Contents);
 
-            weHave -= toPay;
+            res1 -= res2;
 
-            Assert.That(weHave[new Requirements()] == result[0]);
-            Assert.That(weHave[new Design()] == result[1]);
-            Assert.That(weHave[new Implementation()] == result[2]);
-            Assert.That(weHave[new Testing()] == result[3]);
+            Assert.That(res1[new Requirements()] == result[0]);
+            Assert.That(res1[new Design()] == result[1]);
+            Assert.That(res1[new Implementation()] == result[2]);
+            Assert.That(res1[new Testing()] == result[3]);
         }
         #endregion
 
-        #region ResourceContainer_MinusOperatorDoesNotRemoveFromOtherResourceContainer
+        #region ResourceContainer_MinusOperatorDoesNotRemoveFromOtherResourceContainer        
+        /// <summary>
+        /// Asserts that "-" operator does not remove from right-side resource container.
+        /// </summary>
+        /// <param name="res1Contents">The contents of the left-side container.</param>
+        /// <param name="res2Contents">The contents of the right-side container.</param>
         [Test]
         [Category("Operators")]
+        #region Test-Cases
         [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 1, 0, 1, 2 })]
-        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 0, 0, 0, 0 })]
-        public void ResourceContainer_MinusOperatorDoesNotRemoveFromOtherResourceContainer(Int32[] inventory, Int32[] cost) {
+        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 0, 0, 0, 0 })] 
+        #endregion
+        public void ResourceContainer_MinusOperatorDoesNotRemoveFromOtherResourceContainer(Int32[] res1Contents, Int32[] res2Contents) {
             Int32[] result = new Int32[4];
             for(Int32 i = 0; i < 4; i++) {
-                result[i] = inventory[i] - cost[i];
+                result[i] = res1Contents[i] - res2Contents[i];
             }
 
-            ResourceContainer weHave = new ResourceContainer(inventory);
-            ResourceContainer toPay = new ResourceContainer(cost);
+            ResourceContainer res1 = new ResourceContainer(res1Contents);
+            ResourceContainer res2 = new ResourceContainer(res2Contents);
 
-            weHave -= toPay;
+            res1 -= res2;
 
-            Assert.That(toPay[new Requirements()] == cost[0]);
-            Assert.That(toPay[new Design()] == cost[1]);
-            Assert.That(toPay[new Implementation()] == cost[2]);
-            Assert.That(toPay[new Testing()] == cost[3]);
+            Assert.That(res2[new Requirements()] == res2Contents[0]);
+            Assert.That(res2[new Design()] == res2Contents[1]);
+            Assert.That(res2[new Implementation()] == res2Contents[2]);
+            Assert.That(res2[new Testing()] == res2Contents[3]);
         }
 
         #endregion
 
-        #region ResourceContainer_AdditionOperatorAddsToThisResourceContainer
+        #region ResourceContainer_AdditionOperatorAddsToThisResourceContainer        
+        /// <summary>
+        /// Asserts that "+" operator adds content to the left-side resource container.
+        /// </summary>
+        /// <param name="res1Contents">The contents of the left-side container.</param>
+        /// <param name="res2Contents">The contents of the right-side container.</param>
         [Test]
         [Category("Operators")]
+        #region Test-Cases
         [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 1, 0, 1, 2 })]
-        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 0, 0, 0, 0 })]
-        public void ResourceContainer_AdditionOperatorAddsToThisResourceContainer(Int32[] inventory, Int32[] added) {
+        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 0, 0, 0, 0 })] 
+        #endregion
+        public void ResourceContainer_AdditionOperatorAddsToThisResourceContainer(Int32[] res1Contents, Int32[] res2Contents) {
             Int32[] result = new Int32[4];
             for(Int32 i = 0; i < 4; i++) {
-                result[i] = inventory[i] + added[i];
+                result[i] = res1Contents[i] + res2Contents[i];
             }
 
-            ResourceContainer weHave = new ResourceContainer(inventory);
-            ResourceContainer weGet = new ResourceContainer(added);
+            ResourceContainer res1 = new ResourceContainer(res1Contents);
+            ResourceContainer res2 = new ResourceContainer(res2Contents);
 
-            weHave += weGet;
+            res1 += res2;
 
-            Assert.That(weHave[new Requirements()] == result[0]);
-            Assert.That(weHave[new Design()] == result[1]);
-            Assert.That(weHave[new Implementation()] == result[2]);
-            Assert.That(weHave[new Testing()] == result[3]);
+            Assert.That(res1[new Requirements()] == result[0]);
+            Assert.That(res1[new Design()] == result[1]);
+            Assert.That(res1[new Implementation()] == result[2]);
+            Assert.That(res1[new Testing()] == result[3]);
         }
         #endregion
 
-        #region ResourceContainer_AdditionOperatorDoesNotAddToOtherResourceContainer
+        #region ResourceContainer_AdditionOperatorDoesNotAddToOtherResourceContainer        
+        /// <summary>
+        /// Asserts that "+" operator does not alter the right-side resource container.
+        /// </summary>
+        /// <param name="res1Contents">The contents of the left-side container.</param>
+        /// <param name="res2Contents">The contents of the right-side container.</param>
         [Test]
         [Category("Operators")]
+        #region Test-Cases
         [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 1, 0, 1, 2 })]
-        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 0, 0, 0, 0 })]
-        public void ResourceContainer_AdditionOperatorDoesNotAddToOtherResourceContainer(Int32[] inventory, Int32[] added) {
+        [TestCase(new Int32[] { 1, 3, 1, 4 }, new Int32[] { 0, 0, 0, 0 })] 
+        #endregion
+        public void ResourceContainer_AdditionOperatorDoesNotAddToOtherResourceContainer(Int32[] res1Contents, Int32[] res2Contents) {
 
-            ResourceContainer weHave = new ResourceContainer(inventory);
-            ResourceContainer weGet = new ResourceContainer(added);
+            ResourceContainer res1 = new ResourceContainer(res1Contents);
+            ResourceContainer res2 = new ResourceContainer(res2Contents);
 
-            weHave += weGet;
+            res1 += res2;
 
-            Assert.That(weGet[new Requirements()] == added[0]);
-            Assert.That(weGet[new Design()] == added[1]);
-            Assert.That(weGet[new Implementation()] == added[2]);
-            Assert.That(weGet[new Testing()] == added[3]);
+            Assert.That(res2[new Requirements()] == res2Contents[0]);
+            Assert.That(res2[new Design()] == res2Contents[1]);
+            Assert.That(res2[new Implementation()] == res2Contents[2]);
+            Assert.That(res2[new Testing()] == res2Contents[3]);
         }
         #endregion
 
