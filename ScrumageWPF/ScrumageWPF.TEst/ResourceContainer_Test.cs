@@ -308,20 +308,60 @@ namespace ScrumageWPF.Test {
 
         #endregion
 
-        #region Category: Verification        
+        #region Category: Other  
+        
+        #region ResourceContainer_GetResourceTypesReturnsCorrectTypes
         /// <summary>
         /// Asserts that <see cref="ResourceContainer.GetResourceTypes"/> returns correct list of resources.
         /// </summary>
         [Test]
-        [Category("Verification")]
+        [Category("Other")]
         public void ResourceContainer_GetResourceTypesReturnsCorrectTypes() {
-            Resource[] expected = { new Requirements(), new Design(), new Implementation(), new Testing()};
+            Resource[] expected = { new Requirements(), new Design(), new Implementation(), new Testing() };
             ResourceContainer testContainer = new ResourceContainer();
             ResourceContainer testContainer2 = new ResourceContainer(new Int32[] { 5, 4, 3, 2 });
             Assert.That(testContainer.GetResourceTypes(), Is.EquivalentTo(expected));
             Assert.That(testContainer2.GetResourceTypes(), Is.EquivalentTo(expected));
         }
         #endregion
+
+        #region ResourceContainer_AddResourceCorrectlyAddsToCollection
+        [Test]
+        [Category("Other")]
+        #region Test-Cases
+        [TestCase(0, 1)]
+        [TestCase(0, 0)]
+        [TestCase(1, 2)]
+        [TestCase(1, 0)]
+        [TestCase(2, 1)]
+        [TestCase(2, 6)]
+        [TestCase(3, 0)]
+        [TestCase(3, 4)] 
+        #endregion
+        public void ResourceContainer_AddResourceCorrectlyAddsToCollection(Int32 resourceType, Int32 amountToAdd) {
+            Resource whatToAdd = null;
+            if(resourceType == 0)
+                whatToAdd = new Requirements();
+            else if(resourceType == 1)
+                whatToAdd = new Design();
+            else if(resourceType == 2)
+                whatToAdd = new Implementation();
+            else if(resourceType == 3)
+                whatToAdd = new Testing();
+            else
+                throw new NotImplementedException("Invalid test case.");
+
+            Int32[] originalContents = { 3, 2, 1, 0 };
+            ResourceContainer testContainer = new ResourceContainer(originalContents);
+
+            testContainer.AddResource(whatToAdd, amountToAdd);
+            Assert.That(testContainer[whatToAdd], Is.EqualTo(amountToAdd + originalContents[resourceType]));
+        } 
+        #endregion
+
+        #endregion
+
+
 
         #region Category: Display        
 
