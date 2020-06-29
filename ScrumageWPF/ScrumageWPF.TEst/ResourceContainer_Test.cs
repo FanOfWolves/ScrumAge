@@ -200,22 +200,6 @@ namespace ScrumageWPF.Test {
 
         #endregion
 
-        #region Category: Dictionary Handling
-
-
-        #endregion
-
-        #region Category: IEnumerable<T> Interface
-
-        #region ResourceContainer_IsIEnumerable
-        [Test]
-        [Category("IEnumerable<T> Interface")]
-        public void ResourceContainer_IsIEnumerable() {
-
-        }
-        #endregion
-
-        #endregion
 
         #region Category: Referencing and Equality
 
@@ -230,6 +214,8 @@ namespace ScrumageWPF.Test {
         #endregion
 
         #region Category: Display        
+
+        #region ResourceContainer_ShowRequirements_Parameterized
         /// <summary>
         /// Asserts that <see cref="ResourceContainer.ShowRequirements"/> correctly displays its contents.
         /// Uses parameterized constructor.
@@ -240,17 +226,19 @@ namespace ScrumageWPF.Test {
         [TestCase(new Int32[] { 1, 3, 4, 0 })]      // Normal check
         [TestCase(new Int32[] { 10, 10, 10, 10 })]  // Checking how it handles double digit numbers
         [TestCase(new Int32[] { 0, 0, 0, 0 })]      // All zero
-        public void ResourceContainer_ShowRequirements_Paramterized(Int32[] resourceAmounts) {
+        public void ResourceContainer_ShowRequirements_Parameterized(Int32[] resourceAmounts) {
             String expectedOutput = $"Requirements:{resourceAmounts[0]}\n" +
-				                    $"Design:{resourceAmounts[1]}\n" +
-				                    $"Implementation:{resourceAmounts[2]}\n" +
-				                    $"Testing:{resourceAmounts[3]}\n";
+                                    $"Design:{resourceAmounts[1]}\n" +
+                                    $"Implementation:{resourceAmounts[2]}\n" +
+                                    $"Testing:{resourceAmounts[3]}\n";
 
             ResourceContainer testContainer = new ResourceContainer(resourceAmounts);
 
             Assert.That(expectedOutput, Is.EqualTo(testContainer.ShowRequirements()));
         }
+        #endregion
 
+        #region ResourceContainer_ShowRequirements_Default
         /// <summary>
         /// Asserts that <see cref="ResourceContainer.ShowRequirements"/> correctly displays its contents.
         /// Uses default constructor.
@@ -266,7 +254,9 @@ namespace ScrumageWPF.Test {
             ResourceContainer testContainer = new ResourceContainer();
 
             Assert.That(expectedOutput, Is.EqualTo(testContainer.ShowRequirements()));
-        }
+        } 
+        #endregion
+
         #endregion
     }
 }
