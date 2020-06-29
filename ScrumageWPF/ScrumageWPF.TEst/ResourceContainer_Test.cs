@@ -52,35 +52,44 @@ namespace ScrumageWPF.Test {
 
         #region Category: Operators
 
-        #region ResourceContainer_ComparisonOperatorsStateIfContainerHasEnoughResources
+        #region ResourceContainer_GreaterThanOrEqualToComparesCorrectly
         [Test]
         [Category("Operators")]
-        [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 0, 0, 0, 0 })]
-        [TestCase(new Int32[] { 1, 1, 1, 1 }, new Int32[] { 0, 0, 0, 1 })]
-        [TestCase(new Int32[] { 2, 3, 2, 2 }, new Int32[] { 2, 2, 2, 2 })]
+        [TestCase(new Int32[] { 1, 1, 1, 1 }, new Int32[] { 0, 0, 0, 0 }, true)]     // Greater-than
+        [TestCase(new Int32[] { 2, 3, 2, 2 }, new Int32[] { 2, 2, 2, 2 }, true)]     // Greater-than and equal-to
+        [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 0, 0, 0, 0 }, true)]     // Equal-to, all zero
+        [TestCase(new Int32[] { 2, 3, 6, 9 }, new Int32[] { 2, 3, 6, 9 }, true)]     // Equal-to
+        [TestCase(new Int32[] { 1, 2, 3, 4 }, new Int32[] { 4, 3, 2, 1 }, false)]    // Ensure order matters
+        [TestCase(new Int32[] { 3, 5, 2, 1 }, new Int32[] { 2, 4, 2, 2 }, false)]    // Less-than and equal-to
+        [TestCase(new Int32[] { 3, 5, 2, 1 }, new Int32[] { 4, 6, 3, 2 }, false)]    // All less-than
 
-        [TestCase(new Int32[] { 3, 5, 3, 3 }, new Int32[] { 2, 4, 2, 2 })]
 
-        public void ResourceContainer_ComparisonOperatorsStateIfContainerHasEnoughResources(Int32[] inventory, Int32[] cost) {
+        public void ResourceContainer_GreaterThanOrEqualToComparesCorrectly(Int32[] inventory, Int32[] cost, Boolean ExpectedResult) {
             ResourceContainer payment = new ResourceContainer(inventory);
             ResourceContainer toPay = new ResourceContainer(cost);
-
-            Assert.That(payment >= toPay);
+            
+            Assert.That(payment >= toPay, Is.EqualTo(ExpectedResult));
         }
+
         #endregion
 
-        #region ResourceContainer_ComparisonOperatorsStateIfContainerDoesNotHaveEnoughResources
+        #region ResourceContainer_GreaterThanOrEqualToComparesCorrectly
         [Test]
-        [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 1, 1, 0, 0 })]
-        [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 1, 1, 1, 1 })]
-        [TestCase(new Int32[] { 1, 1, 1, 1 }, new Int32[] { 1, 1, 1, 2 })]
-        [TestCase(new Int32[] { 2, 3, 2, 2 }, new Int32[] { 2, 4, 2, 2 })]
-        public void ResourceContainer_ComparisonOperatorsStateIfContainerDoesNotHaveEnoughResources(Int32[] inventory, Int32[] cost) {
+        [Category("Operators")]
+        [TestCase(new Int32[] { 1, 1, 1, 1 }, new Int32[] { 0, 0, 0, 0 }, false)]   // Greater-than
+        [TestCase(new Int32[] { 2, 3, 2, 2 }, new Int32[] { 2, 2, 2, 2 }, false)]   // Greater-than and equal-to
+        [TestCase(new Int32[] { 0, 0, 0, 0 }, new Int32[] { 0, 0, 0, 0 }, true)]   // Equal-to, all zero
+        [TestCase(new Int32[] { 2, 3, 6, 9 }, new Int32[] { 2, 3, 6, 9 }, true)]    // Equal-to
+        [TestCase(new Int32[] { 1, 2, 3, 4 }, new Int32[] { 4, 3, 2, 1 }, true)]    // Ensure order matters
+        [TestCase(new Int32[] { 3, 5, 2, 1 }, new Int32[] { 2, 4, 2, 2 }, true)]    // Less-than and equal-to
+        [TestCase(new Int32[] { 3, 5, 2, 1 }, new Int32[] { 4, 6, 3, 2 }, true)]    // All less-than
+        public void ResourceContainer_LessThanOrEqualToComparesCorrectly(Int32[] inventory, Int32[] cost, Boolean ExpectedResult) {
             ResourceContainer payment = new ResourceContainer(inventory);
             ResourceContainer toPay = new ResourceContainer(cost);
 
-            Assert.That(payment <= toPay);
+            Assert.That(payment <= toPay, Is.EqualTo(ExpectedResult));
         }
+
         #endregion
 
         #region ResourceContainer_ComparisonOperatorsDoNotAlterState
