@@ -15,7 +15,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// <summary>
 		/// The pawn's ID will be the same as the owning player's ID, used to determine if a pawn is a players upon a move.
 		/// </summary>
-		public Int32 PawnID { get; set; }
+		public Int32 PawnID { get; }
 
 
         /// <summary>

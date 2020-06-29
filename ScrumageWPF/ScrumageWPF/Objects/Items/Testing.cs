@@ -8,7 +8,7 @@ namespace ScrumageEngine.Objects.Items {
     /// </summary>
     /// <seealso cref="ScrumageEngine.Objects.Items.Resource" />
     class Testing : Resource {
-        private const String RESOURCE_NAME = "Testing";
+        public const String RESOURCE_NAME = "Testing";
         private const Int32 FULL_STACK_CHANCE = 25;
         private const Int32 FRONT_END_CHANCE = 5;
         private const Int32 BACK_END_CHANCE = 5;
