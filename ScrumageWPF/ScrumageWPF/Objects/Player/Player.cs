@@ -30,16 +30,60 @@ namespace ScrumageEngine.Objects.Player {
         /// </summary>
 		public Boolean FinishedPhase { get; set; }
 
-		#endregion
+        /// <summary>
+        /// A list of the player's (currently held) pawn
+        /// </summary>
+        public List<Pawn> Pawns = new List<Pawn>();
+
+        /// <summary>
+        /// Gets the current pawns in this player's inventory
+        /// </summary>
+        /// <value>
+        /// The current pawns.
+        /// </value>
+        public Int32 CurrentPawns {
+            get { return this.Pawns.Count; }
+        }
+
+        /// <summary>
+        /// A list of the player's User Story cards to hold obtained cards
+        /// </summary>
+        public List<Card> Artifacts = new List<Card>();
+
+        /// <summary>
+        /// A list of the player's Feature cards to hold obtained cards
+        /// </summary>
+        public List<Card> Agility = new List<Card>();
+
+        /// <summary>
+        /// The player resources. <see cref="ResourceContainer"/>.
+        /// </summary>
+        public ResourceContainer playerResources;
+
+        /// <summary>
+        /// The amount of budget the player receives every turn
+        /// </summary>
+        public Int32 Budget { get; set; }
+
+        /// <summary>
+        /// The amount of funds that the player currently has to be used to deploy pawns
+        /// </summary>
+        public Int32 Funds { get; set; }
+
+        /// <summary>
+        /// The feature points represent the overall score for the player
+        /// </summary>
+        public Int32 FeaturePoints { get; set; } // Still need to determine how to calculate these
+        #endregion
 
 
-		#region Constructor
-		/// <summary>
-		/// Player overloaded constructor
-		/// </summary>
-		/// <param name="playerID">The player's ID.</param>
-		/// <param name="playerNameP">The player's name.</param>
-		public Player(Int32 playerID, String playerNameP) {
+        #region Constructor
+        /// <summary>
+        /// Player overloaded constructor
+        /// </summary>
+        /// <param name="playerID">The player's ID.</param>
+        /// <param name="playerNameP">The player's name.</param>
+        public Player(Int32 playerID, String playerNameP) {
             PlayerID = playerID;
             PlayerName = playerNameP;
             FeaturePoints = 0;
@@ -53,28 +97,6 @@ namespace ScrumageEngine.Objects.Player {
 		#region Inventory
 
 		#region Pawns
-		/// <summary>
-		/// A list of the player's (currently held) pawn
-		/// </summary>
-		public List<Pawn> Pawns = new List<Pawn>();
-
-		/// <summary>
-		/// Gets or sets the total pawns the player owns (including those not currently with them).
-		/// </summary>
-		/// <value>
-		/// The total pawns.
-		/// </value>
-		public Int32 TotalPawns { get; private set; }
-
-		/// <summary>
-		/// Gets the current pawns in this player's inventory
-		/// </summary>
-		/// <value>
-		/// The current pawns.
-		/// </value>
-		public Int32 CurrentPawns {
-            get { return this.Pawns.Count;}
-        }
 
         /// <summary>
         /// Creates a List Of Strings representation of the pawns in the player's inventory.
@@ -144,15 +166,6 @@ namespace ScrumageEngine.Objects.Player {
         #endregion
 
         #region Cards
-        /// <summary>
-        /// A list of the player's User Story cards to hold obtained cards
-        /// </summary>
-        public List<Card> Artifacts = new List<Card>();
-
-		/// <summary>
-		/// A list of the player's Feature cards to hold obtained cards
-		/// </summary>
-		public List<Card> Agility = new List<Card>();
 
 		/// <summary>
 		/// Adds to player's cards
@@ -183,10 +196,6 @@ namespace ScrumageEngine.Objects.Player {
         #endregion
 
         #region Resources        
-        /// <summary>
-        /// The player resources. <see cref="ResourceContainer"/>.
-        /// </summary>
-        public ResourceContainer playerResources;
 
         /// <summary>
         /// Adds the resource to the player's ResourceContainer
@@ -224,20 +233,6 @@ namespace ScrumageEngine.Objects.Player {
         #endregion
 
         #region Stats
-        /// <summary>
-        /// The amount of budget the player receives every turn
-        /// </summary>
-        public Int32 Budget { get; set; }
-
-        /// <summary>
-        /// The amount of funds that the player currently has to be used to deploy pawns
-        /// </summary>
-        public Int32 Funds { get; set; }
-
-        /// <summary>
-        /// The feature points represent the overall score for the player
-        /// </summary>
-        public Int32 FeaturePoints { get; set; } // Still need to determine how to calculate these
 
         /// <summary>
         /// Increases the budget of this Player instance
