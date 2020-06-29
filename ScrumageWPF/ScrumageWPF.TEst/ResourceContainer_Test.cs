@@ -309,6 +309,7 @@ namespace ScrumageWPF.Test {
         #endregion
 
         #region Category: Collection Manipulation
+
         #region ResourceContainer_TakeResources_RemovesSpecifiedResourceByAmount
         /// <summary>
         /// Asserts that <see cref="ResourceContainer.TakeResources(Resource, Int32)"/> performs as expected.
@@ -359,12 +360,15 @@ namespace ScrumageWPF.Test {
                 Assert.That(testContainer[new Implementation()], Is.EqualTo(originalContents[2]));
                 Assert.That(testContainer[new Testing()], Is.EqualTo(originalContents[3]));
             }
-        } 
+        }
         #endregion
 
 
         #endregion
 
+        #region Category: Verification
+
+        #endregion
 
         #region Category: Referencing and Equality
 
