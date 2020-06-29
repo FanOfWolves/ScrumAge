@@ -17,20 +17,6 @@ namespace ScrumageEngine.Objects.Items.Cards {
         public ArtifactCard(String nameP, Int32[] costs) : base(nameP, costs) {
 
         }
-
-
         #endregion
-
-        public override String Display() {
-            throw new NotImplementedException();
-        }
-
-		internal override String CardType() {
-            return "Artifact";
-		}
-
-		/*        public override string ToString() {
-					throw new NotImplementedException();
-				}*/
 	}
 }

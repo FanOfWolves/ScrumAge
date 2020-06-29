@@ -53,15 +53,5 @@ namespace ScrumageEngine.Objects.Items.Cards {
 			}
 			return retString;
 		}
-
-		public static void TestPrint() {
-			foreach(String card in artifactsInfo) {
-				Console.WriteLine(card);
-			}
-			Console.WriteLine("-----------------------");
-			foreach(String card in agilitysInfo) {
-				Console.WriteLine(card);
-			}
-		}
 	}
 }

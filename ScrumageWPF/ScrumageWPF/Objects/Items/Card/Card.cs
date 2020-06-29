@@ -1,5 +1,4 @@
 ﻿using System;
-//using ScrumageEngine.Objects.Player;
 
 namespace ScrumageEngine.Objects.Items.Cards {
     /// <summary>
@@ -9,10 +8,10 @@ namespace ScrumageEngine.Objects.Items.Cards {
 
         #region Fields
 
-        private ResourceContainer cardRequirements;
-        protected String cardName;
-        protected String cardFormat;
-        protected Int32 cardEndGameBonus;//TODO: Replace with CardBonus class?
+        public ResourceContainer CardRequirements { get; set; }
+        public String CardName { get; set; }
+        public String CardFormat { get; set; }
+        public Int32 CardEndGameBonus { get; set; }//TODO: Replace with CardBonus class?
 
         #endregion
 
@@ -21,45 +20,25 @@ namespace ScrumageEngine.Objects.Items.Cards {
         /// Initializes a new instance of the <see cref="Card"/> class.
         /// </summary>
         public Card(String nameP, Int32[] resourcesCosts) {
-	        this.cardName = nameP;
-            this.cardRequirements = new ResourceContainer(resourcesCosts);
+	        this.CardName = nameP;
+            this.CardRequirements = new ResourceContainer(resourcesCosts);
         }
 		#endregion
 
 		#region Display
-		/// <summary>
-		/// Not yet implemented
-		/// </summary>
-		/// <returns></returns>
-		public abstract String Display();
         /// <summary>
         /// Not yet implemented
         /// </summary>
         /// <returns></returns>
         public override string ToString() {
-            return $"{this.GetType().Name}: {cardName}\n----------------------\n{this.GetCardRequirements().ShowRequirements()}";
-        }
-
-        /// <summary>
-        /// Returns the Card's Name
-        /// </summary>
-        /// <returns></returns>
-        public string GetName()
-        {
-            return this.cardName;
+            return $"{this.GetType().Name}: {CardName}\n----------------------\n{CardRequirements.ShowRequirements()}";
         }
         #endregion
 
         #region Getters
-        /// <summary>
-        /// Not yet implemented
-        /// </summary>
-        /// <returns></returns>
-        public ResourceContainer GetCardRequirements() {
-            return this.cardRequirements;//TODO: Shallow reference?
+        internal String CardType() {
+            return this.GetType().Name;
         }
-
-		internal abstract string CardType();
 		#endregion
 	}
 }

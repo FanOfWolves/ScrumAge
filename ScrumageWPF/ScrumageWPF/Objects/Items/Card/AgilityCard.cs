@@ -12,7 +12,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
         /// <summary>
         /// The immediate bonus for obtaining this card
         /// </summary>
-        private Int32 ImmediateBonus = 0;//TODO: Replace with ImmediateBonus class?
+        public Int32 ImmediateBonus { get; set; } = 0;//TODO: Replace with ImmediateBonus class?
         #endregion
 
         #region Constructors
@@ -26,13 +26,5 @@ namespace ScrumageEngine.Objects.Items.Cards {
             this.ImmediateBonus = 0;
         }
         #endregion
-
-        public override string Display() {
-            throw new NotImplementedException();
-        }
-
-		internal override String CardType() {
-            return "Agility";
-		}
 	}
 }
