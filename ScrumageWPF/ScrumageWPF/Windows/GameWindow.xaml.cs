@@ -496,7 +496,7 @@ namespace ScrumageEngine.Windows {
 
 		private void TestBtn_Click(Object sender, RoutedEventArgs e)
 		{
-            foreach(Player p in game.GetAllPlayers()) {
+            foreach(Player p in game.Players) {
 				p.playerResources += new ResourceContainer(new Int32[] { 1000, 1000, 1000, 1000 });
 				p.AddToCards(new ArtifactCard("Test Artifact 1", new Int32[] { 0, 0, 0, 0 }));
 				p.AddToCards(new ArtifactCard("Test Artifact 2", new Int32[] { 0, 0, 0, 0 }));

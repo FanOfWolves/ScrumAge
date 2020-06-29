@@ -32,7 +32,7 @@ namespace ScrumageEngine.InputLogic {
 		/// <summary>
 		/// A list of inputs handled, length specified in RecordInputs function
 		/// </summary>
-		public static List<String> RecentInputs { get ;}
+		public static List<String> RecentInputs { get; } = new List<String>();
 
 
 		/// <summary>

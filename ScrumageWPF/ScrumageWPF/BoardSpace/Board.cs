@@ -21,13 +21,13 @@ namespace ScrumageEngine.BoardSpace {
 		/// <summary>
 		/// The list of <see cref="Node"/> objects on this board
 		/// </summary>
-		private List<Node> Nodes = new List<Node>();
+		public List<Node> Nodes = new List<Node>();
 
 		/// <summary>
 		/// The list of <see cref="Die"/> objects on this board
 		/// </summary>
 		/// TODO Edit XML Comment Template for dice
-		private List<Die> dice = new List<Die>();
+		public List<Die> Dice = new List<Die>();
 
 
 
@@ -96,14 +96,6 @@ namespace ScrumageEngine.BoardSpace {
 			return null;
 		}
 
-		/// <summary>
-		/// Retrieve list of all nodes
-		/// </summary>
-		/// <returns>List of node objects</returns>
-		public List<Node> GetAllNodes() {
-			return Nodes;
-		}
-
 
 		/// <summary>
 		/// Obtains a node based on ID, can be used to easily get a node.
@@ -120,19 +112,12 @@ namespace ScrumageEngine.BoardSpace {
 			return retNode;
 		}
 
-		/// <summary>
-		/// Get dice currently in list
-		/// </summary>
-		/// <returns>list of dice objects</returns>
-		public List<Die> GetDice() {
-			return dice;
-		}
 
 		/// <summary>
 		/// Clears dice object
 		/// </summary>
 		public void ClearDice() {
-			dice.Clear();
+			Dice.Clear();
 		}
 
 		/// <summary>
@@ -142,7 +127,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// <param name="rand">Random object for dice roll</param>
 		public void RollDice(int diceCount, Random rand) {
 			for(Int32 i = 0; i < diceCount; i++) {
-				dice.Add(new Die(rand.Next(6) + 1));
+				Dice.Add(new Die(rand.Next(6) + 1));
 			}
 		}
 
@@ -152,7 +137,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// <returns>List of die graphics for display on GUI</returns>
 		public List<String> ShowDice() {
 			List<String> retList = new List<String>();
-			dice.ForEach(die => retList.Add(die.DrawDie()));
+			Dice.ForEach(die => retList.Add(die.DrawDie()));
 			return retList;
 		}
 
@@ -190,7 +175,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// <returns>String of current dice values.</returns>
 		internal String DiceValues() {
 			String retString = "";
-			foreach(Die d in GetDice()) {
+			foreach(Die d in Dice) {
 				retString += d.Value + " ";
 			}
 			return retString;
