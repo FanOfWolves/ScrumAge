@@ -17,14 +17,12 @@ namespace ScrumageWPF.Test {
     [TestFixture]
     class ResourceContainer_Test {
 
-        #region Fields
-
-
-
-        #endregion
-
-
-        #region Category: Instantiation
+        #region Category: Instantiation      
+        
+        #region ResourceContainer_DefaultInstantiatesCorrectly
+        /// <summary>
+        /// Asserts that default constructor for <see cref="ResourceContainer"/> performs correctly.
+        /// </summary>
         [Test]
         [Category("Instantiation")]
         public void ResourceContainer_DefaultInstantiatesCorrectly() {
@@ -34,19 +32,31 @@ namespace ScrumageWPF.Test {
             Assert.That(con1[new Implementation()] == 0);
             Assert.That(con1[new Testing()] == 0);
         }
+        #endregion
 
+        #region ResourceContainer_ParameterInstantiatesCorrectly        
+        /// <summary>
+        /// Asserts that <see cref="ResourceContainer.ResourceContainer(Int32[])"/> instantiates correctly.
+        /// </summary>
+        /// <param name="req">The starting <see cref="Requirements"/>.</param>
+        /// <param name="des">The starting <see cref="Design"/>.</param>
+        /// <param name="imp">The starting <see cref="Implementation"/>.</param>
+        /// <param name="tes">The starting <see cref="Testing"/>.</param>
         [Test]
         [Category("Instantiation")]
+        #region Test-Cases
         [TestCase(0, 0, 0, 0)]
         [TestCase(1, 0, 0, 0)]
         [TestCase(9, 4, 5, 6)]
+        #endregion
         public void ResourceContainer_ParameterInstantiatesCorrectly(Int32 req, Int32 des, Int32 imp, Int32 tes) {
             ResourceContainer container = new ResourceContainer(new Int32[] { req, des, imp, tes });
             Assert.That(container[new Requirements()] == req);
             Assert.That(container[new Design()] == des);
             Assert.That(container[new Implementation()] == imp);
             Assert.That(container[new Testing()] == tes);
-        }
+        } 
+        #endregion
 
         #endregion
 
@@ -325,7 +335,13 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
-        #region ResourceContainer_AddResourceCorrectlyAddsToCollection
+        #region ResourceContainer_AddResourceCorrectlyAddsToCollection        
+        /// <summary>
+        /// Asserts that <see cref="ResourceContainer.AddResource(Resource, Int32)"/> performs correctly.
+        /// </summary>
+        /// <param name="resourceType">Type of the resource.</param>
+        /// <param name="amountToAdd">The amount to add.</param>
+        /// <exception cref="NotImplementedException">Invalid test case.</exception>
         [Test]
         [Category("Other")]
         #region Test-Cases
@@ -360,8 +376,6 @@ namespace ScrumageWPF.Test {
         #endregion
 
         #endregion
-
-
 
         #region Category: Display        
 
