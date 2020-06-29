@@ -55,8 +55,28 @@ namespace ScrumageWPF.Test {
             Assert.That(container[new Design()] == des);
             Assert.That(container[new Implementation()] == imp);
             Assert.That(container[new Testing()] == tes);
+        }
+        #endregion
+
+        #endregion
+
+        #region Category: Indexers
+
+        #region ResourceContainer_ResourceIndexerReturnsCorrectAmount
+        /// <summary>
+        /// Asserts that <see cref="ResourceContainer[Resource]"/> returns correct values.
+        /// </summary>
+        [Test]
+        public void ResourceContainer_ResourceIndexerReturnsCorrectAmount() {
+            Int32[] originalContents = { 3, 4, 10, 9 };
+            ResourceContainer testContainer = new ResourceContainer(originalContents);
+            Assert.That(testContainer[new Requirements()], Is.EqualTo(originalContents[0]));
+            Assert.That(testContainer[new Design()], Is.EqualTo(originalContents[1]));
+            Assert.That(testContainer[new Implementation()], Is.EqualTo(originalContents[2]));
+            Assert.That(testContainer[new Testing()], Is.EqualTo(originalContents[3]));
         } 
         #endregion
+
 
         #endregion
 
