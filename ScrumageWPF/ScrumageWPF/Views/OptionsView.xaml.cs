@@ -26,11 +26,11 @@ namespace ScrumageEngine.Views
         /// <summary>
         /// The maximum players allowed
         /// </summary>
-        private int MAX_PLAYERS = 4;
+        private Int32 MAX_PLAYERS = 4;
         /// <summary>
         /// The current number players for the game
         /// </summary>
-        private int CURRENT_PLAYERS = 2;
+        private Int32 CURRENT_PLAYERS = 2;
         #endregion
         /// <summary>
         /// Creates a new instance of OptionsViews
@@ -79,7 +79,7 @@ namespace ScrumageEngine.Views
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             // Build player options
-            for (int i = 2; i <= MAX_PLAYERS; i++)
+            for (Int32 i = 2; i <= MAX_PLAYERS; i++)
             {
                 cbPlayerList.Items.Add(i);
             }
@@ -99,14 +99,14 @@ namespace ScrumageEngine.Views
         /// <summary>
         /// Builds the player name boxes
         /// </summary>
-        private void BuildPlayerBoxes(int amount = 2)
+        private void BuildPlayerBoxes(Int32 amount = 2)
         {
             // clear any previous
             playerButtons.Children.Clear();
 
             CURRENT_PLAYERS = amount;
 
-            for (int i = 0; i < CURRENT_PLAYERS; i++)
+            for (Int32 i = 0; i < CURRENT_PLAYERS; i++)
             {
                 TextBox txtBox = new TextBox();
                 txtBox.FontSize = 16;

@@ -183,14 +183,14 @@ namespace ScrumageEngine.Objects.Items {
 		}
 
 		public static ResourceContainer operator -(ResourceContainer playerResP, ResourceContainer reqsP) {
-			for(int i = 0; i < reqsP.ResourceDictionary.Count; i++) {
+			for(Int32 i = 0; i < reqsP.ResourceDictionary.Count; i++) {
 				playerResP[i] -= reqsP[i];
 			}
 			return playerResP;
 		}
 
 		public static ResourceContainer operator +(ResourceContainer playerResP, ResourceContainer otherP) {
-			for(int i = 0; i < otherP.ResourceDictionary.Count; i++) {
+			for(Int32 i = 0; i < otherP.ResourceDictionary.Count; i++) {
 				playerResP[i] += otherP[i];
 			}
 			return playerResP;

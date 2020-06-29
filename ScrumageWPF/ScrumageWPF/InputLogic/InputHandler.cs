@@ -75,7 +75,7 @@ namespace ScrumageEngine.InputLogic {
 		/// <param name="player">The player requesting the pawn.</param>
 		/// <param name="game">Current State of the game.</param>
 		/// <param name="input">The type of pawn if specification is needed.</param>
-		public static void GivePlayerPawn(Game gameP, int playerIDP, String inputP = "") {
+		public static void GivePlayerPawn(Game gameP, Int32 playerIDP, String inputP = "") {
 			String logString = gameP.GivePlayerPawn(playerIDP, inputP);
 			RecordInputs(logString);
 
@@ -136,7 +136,7 @@ namespace ScrumageEngine.InputLogic {
 		/// </summary>
 		/// <param name="player">The player that selected the node.</param>
 		/// <param name="node">The node that was selected in the GUI.</param>
-		public static Boolean ActivateNode(Game gameP, int playerIDP, String nodeNameP) {
+		public static Boolean ActivateNode(Game gameP, Int32 playerIDP, String nodeNameP) {
 			Boolean phaseFinished = gameP.DoAction(nodeNameP, playerIDP, out String nodeLog);
 			RecordInputs(nodeLog);
 			return phaseFinished;

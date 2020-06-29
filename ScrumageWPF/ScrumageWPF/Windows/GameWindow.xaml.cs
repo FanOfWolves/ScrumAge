@@ -52,10 +52,10 @@ namespace ScrumageEngine.Windows {
 		/// <summary>
 		/// Tracks the current phase from the Game class and updates GUI when needed
 		/// </summary>
-		private int currentPhaseIndex;
+		private Int32 currentPhaseIndex;
 
 
-		private int playerCount;
+		private Int32 playerCount;
 		#endregion
 
 		#region Constructor
@@ -574,9 +574,6 @@ namespace ScrumageEngine.Windows {
                 var cardWindow = new CardWindow(currentPlayer.Agility[item]);
                 cardWindow.Show();
             }
-
-
-
         }
 
     }

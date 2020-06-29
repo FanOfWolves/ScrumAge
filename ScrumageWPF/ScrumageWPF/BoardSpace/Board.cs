@@ -125,7 +125,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// </summary>
 		/// <param name="diceCount">Num dice to be rolled</param>
 		/// <param name="rand">Random object for dice roll</param>
-		public void RollDice(int diceCount, Random rand) {
+		public void RollDice(Int32 diceCount, Random rand) {
 			for(Int32 i = 0; i < diceCount; i++) {
 				Dice.Add(new Die(rand.Next(6) + 1));
 			}
@@ -155,7 +155,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// </summary>
 		/// <param name="nodeNameP">Current node</param>
 		/// <returns>Number of pawns</returns>
-		public int GetMaxPawnsInNode(String nodeNameP) {
+		public Int32 GetMaxPawnsInNode(String nodeNameP) {
 			return GetNodeByName(nodeNameP).MaxPawnLimit;
 		}
 
@@ -164,7 +164,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// </summary>
 		/// <param name="nodeNameP">name of node</param>
 		/// <returns>Number of pawns currently at Node</returns>
-		public int GetPawnCountInNode(String nodeNameP) {
+		public Int32 GetPawnCountInNode(String nodeNameP) {
 			return GetNodeByName(nodeNameP).NumberOfPawns;
 		}
 
