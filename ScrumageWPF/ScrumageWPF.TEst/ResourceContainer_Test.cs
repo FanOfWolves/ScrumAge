@@ -308,6 +308,63 @@ namespace ScrumageWPF.Test {
 
         #endregion
 
+        #region Category: Collection Manipulation
+        #region ResourceContainer_TakeResources_RemovesSpecifiedResourceByAmount
+        /// <summary>
+        /// Asserts that <see cref="ResourceContainer.TakeResources(Resource, Int32)"/> performs as expected.
+        /// </summary>
+        /// <param name="resourceType">Type of the resource.</param>
+        /// <param name="amountToTake">The amount to take.</param>
+        /// <param name="expectedBoolean">Expected TakeResource return boolean.</param>
+        /// <exception cref="NotImplementedException">Invalid test case.</exception>
+        [Test]
+        [Category("Collection Manipulation")]
+        #region Test-Cases
+        [TestCase(0, 0, true)]
+        [TestCase(0, 2, true)]
+        [TestCase(0, 3, true)]
+        [TestCase(0, 4, false)]
+        [TestCase(1, 2, true)]
+        [TestCase(1, 3, false)]
+        [TestCase(2, 0, true)]
+        [TestCase(2, 1, true)]
+        [TestCase(2, 2, false)]
+        [TestCase(3, 4, false)]
+        [TestCase(3, 0, true)]
+        #endregion
+        public void ResourceContainer_TakeResources_RemovesSpecifiedResourceByAmount(Int32 resourceType, Int32 amountToTake, Boolean expectedBoolean) {
+            Resource whatToTake = null;
+            if(resourceType == 0)
+                whatToTake = new Requirements();
+            else if(resourceType == 1)
+                whatToTake = new Design();
+            else if(resourceType == 2)
+                whatToTake = new Implementation();
+            else if(resourceType == 3)
+                whatToTake = new Testing();
+            else
+                throw new NotImplementedException("Invalid test case.");
+
+            Int32[] originalContents = { 3, 2, 1, 0 };
+            ResourceContainer testContainer = new ResourceContainer(originalContents);
+
+            Boolean didTake = testContainer.TakeResources(whatToTake, amountToTake);
+
+            Assert.That(didTake, Is.EqualTo(expectedBoolean));
+            if(expectedBoolean == true)
+                Assert.That(testContainer[whatToTake], Is.EqualTo(originalContents[resourceType] - amountToTake));
+            else {
+                Assert.That(testContainer[new Requirements()], Is.EqualTo(originalContents[0]));
+                Assert.That(testContainer[new Design()], Is.EqualTo(originalContents[1]));
+                Assert.That(testContainer[new Implementation()], Is.EqualTo(originalContents[2]));
+                Assert.That(testContainer[new Testing()], Is.EqualTo(originalContents[3]));
+            }
+        } 
+        #endregion
+
+
+        #endregion
+
 
         #region Category: Referencing and Equality
 
