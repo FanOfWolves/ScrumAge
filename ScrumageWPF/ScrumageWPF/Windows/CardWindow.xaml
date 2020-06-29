@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScrumageEngine.Views"
         mc:Ignorable="d"
-        Title="CardWindow" Height="450" Width="800">
+        WindowStyle="ToolWindow"
+        Topmost="True"
+        Title="" Height="350" Width="280">
     <Grid>
-        
+        <TextBlock x:Name="txtBlockCardInfo" FontSize="20" Margin="5">
+            
+        </TextBlock>
     </Grid>
 </Window>

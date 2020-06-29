@@ -3,6 +3,7 @@ using ScrumageEngine.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -335,8 +336,8 @@ namespace ScrumageEngine.Windows {
 			{
 				artifactBox.Items.Clear();
 				foreach (var card in artifactCards)
-				{
-					artifactBox.Items.Add(card.GetName());
+                {
+                    artifactBox.Items.Add(card.GetName());
 				}
 			}
 
@@ -503,19 +504,68 @@ namespace ScrumageEngine.Windows {
 			}
 		}
 
-		private void OpenCardWindow_Click(Object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Creates a new CardWindow Artifacts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+		private void OpenCardWindow_Artifacts_Click(Object sender, RoutedEventArgs e)
 		{
 			if (sender == null)
 				return;
 
+            var listBox = sender as ListBox;
 
-			var item = (sender as ListBox).SelectedItem;
+            if (listBox == null || listBox.Items.Count == 0)
+                return;
 
-            var cardWindow = new CardWindow();
-            cardWindow.Show();
+            // get selected index
+            var item = listBox.SelectedIndex;
+
+            var currentPlayer = game.GetPlayerByID(currentPlayerID);
+
+            if (currentPlayer.Artifacts[item] != null)
+            {
+                // get player's card by index of SelectedItem -> Item
+                var cardWindow = new CardWindow(currentPlayer.Artifacts[item]);
+                cardWindow.Show();
+            }
 
         }
 
-	}
+        /// <summary>
+        /// Opens a new CardWindow Agility
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void OpenCardWindow_Agility_Click(Object sender, RoutedEventArgs e)
+        {
+            if (sender == null)
+                return;
+
+            var listBox = sender as ListBox;
+
+            if (listBox == null || listBox.Items.Count == 0)
+                return;
+
+            // get selected index
+            var item = listBox.SelectedIndex;
+
+
+            var currentPlayer = game.GetPlayerByID(currentPlayerID);
+
+            if (currentPlayer.Agility[item] != null)
+            {
+                // get player's card by index of SelectedItem -> Item
+                var cardWindow = new CardWindow(currentPlayer.Agility[item]);
+                cardWindow.Show();
+            }
+
+
+
+        }
+
+    }
 
 }
