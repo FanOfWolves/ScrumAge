@@ -196,6 +196,7 @@ namespace ScrumageEngine.Objects.Items {
 			return playerResP;
 		}
 
+
 		public String ShowRequirements() {
 			return $"Requirements:{this[0]}\n" +
 				   $"Design:{this[1]}\n" +

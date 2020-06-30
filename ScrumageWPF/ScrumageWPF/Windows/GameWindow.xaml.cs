@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ScrumageEngine.InputLogic;
 using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Items.Cards;
 using ScrumageEngine.Objects.Player;
@@ -92,12 +93,14 @@ namespace ScrumageEngine.Windows {
 		/// <param name="playerNames">The names of the players collected in the first GUI.</param>
 		void InitPlayerTab(List<String> playerNames) {
 			TabItem temp = null;
+			playerCount = playerNames.Count;
 			for(Int32 i = 0; i < playerNames.Count; i++) {
 				temp = PlayerTabControl.Items[i] as TabItem;
 				temp.IsEnabled = true;
 				temp.Header = playerNames[i];
 				(temp.FindName($"P{i + 1}NameValue") as Label).Content = playerNames[i];
 				UpdatePawnBox(FindPlayerPawnBox(i + 1), game.GetPlayerPawns(i + 1));
+				UpdatePlayerInformation(i + 1);
 				// Whatever else needs to be initialized at the start of the game for players goes here.
 			}
 		}
@@ -143,14 +146,13 @@ namespace ScrumageEngine.Windows {
 			} catch(MovePawnException _exception) {
 				MessageBox.Show(_exception.Message);
 			}
-
+			LogInput();
 			if(phaseEnd) { 
 				MessageBox.Show("Phase 1 has completed!");
 				IncrementPhase();
 				ClearInputs();
 				ClearLog();
 			}
-			LogInput();
 		}
 
 
@@ -178,23 +180,23 @@ namespace ScrumageEngine.Windows {
 			UpdatePlayerInformation(this.currentPlayerID);
 			UpdateResourceLabels();
 			IncrementPlayer();
+			LogInput();
 			if(phaseDone) { 
 				MessageBox.Show("Phase 2 Done");
-				//IncrementPhase(); When phase 3 is ready
+				IncrementPhase();
 				ClearInputs();
 				ClearLog();
 			}
-			LogInput();
 		}
 
-		/// <summary>
+        /// <summary>
 		/// Handles the Click event of the PlayerPaymentBtn control.
 		/// </summary>
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
 		private void PlayerPaymentBtn_Click(Object sender, RoutedEventArgs e) {
-			Boolean phaseDone = PaySprintCost(this.game);
-			UpdatePlayerInformation(this.currentPlayerID);
+            Boolean phaseDone = InputHandler.PaySprintCost(this.game);
+            UpdatePlayerInformation(this.currentPlayerID);
 			IncrementPlayer();
 			LogInput();
 			if(phaseDone) {
@@ -203,7 +205,7 @@ namespace ScrumageEngine.Windows {
 				ClearInputs();
 				ClearLog();
 			}
-		}
+        }
 
 		/// <summary>
 		/// Displays information on the card in the relative location.
@@ -293,6 +295,13 @@ namespace ScrumageEngine.Windows {
 		#endregion
 
 		#region Update Player Display
+
+		private void UpdateAllPlayers() {
+			for(Int32 i = 1; i <= playerCount; i++) {
+				UpdatePlayerInformation(i);
+			}
+		}
+
 		/// <summary>
 		/// Updates the player's information display.
 		/// </summary>
