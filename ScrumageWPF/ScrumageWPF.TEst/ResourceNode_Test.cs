@@ -10,5 +10,15 @@ namespace ScrumageWPF.Test {
     /// Testing class for <see cref="ResourceNode"/>
     /// </summary>
     class ResourceNode_Test {
+
+
+        #region Category: Instantiation
+
+
+        #endregion
+
+
+
+
     }
 }
