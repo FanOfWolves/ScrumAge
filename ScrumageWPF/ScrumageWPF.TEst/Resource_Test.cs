@@ -14,14 +14,13 @@ namespace ScrumageWPF.Test {
     [TestFixture]
     public class Resource_Test {
         private List<Resource> resList = new List<Resource>(6);
-
+        private Int32[] hashList = new Int32[4];
         #region resList Indexors
         private const Int32 REQ = 0;
         private const Int32 DES = 1;
         private const Int32 IMP = 2;
         private const Int32 TES = 3;
         private const Int32 REQ2 = 4;
-        private const Int32 DES2 = 5;
         #endregion
 
         #region Resource Success Chances
@@ -56,6 +55,11 @@ namespace ScrumageWPF.Test {
             this.resList.Add(tes);
             this.resList.Add(req);
             this.resList.Add(req2);
+
+            hashList[0] = req.GetHashCode();
+            hashList[1] = des.GetHashCode();
+            hashList[2] = imp.GetHashCode();
+            hashList[3] = tes.GetHashCode();
         }
 
         #region Category: Instantiation 
@@ -177,6 +181,31 @@ namespace ScrumageWPF.Test {
             Object res1 = new Requirements();
             Object res2 = null;
             Assert.That(res1.Equals(res2), Is.False);
+        }
+        #endregion
+
+        #region Resource_HashCodeBasedOnTypeAlone
+        /// <summary>
+        /// Asserts that <see cref="Resource.GetHashCode"/> returns same hashcode for same resource types.
+        /// </summary>
+        [Test]
+        [Category("IEquatable<T> Interface")]
+        public void Resource_HashCodeBasedOnTypeAlone() {
+            Assert.That(this.resList[REQ].GetHashCode(), Is.EqualTo(this.resList[REQ2].GetHashCode()));
+            Assert.That(this.resList[DES].GetHashCode(), Is.EqualTo(new Design().GetHashCode()));
+            Assert.That(this.resList[IMP].GetHashCode(), Is.EqualTo(new Implementation().GetHashCode()));
+            Assert.That(this.resList[TES].GetHashCode(), Is.EqualTo(new Testing().GetHashCode()));
+        }
+        #endregion
+
+        #region Resource_HashCodeOfDifferentTypesDoNotEqual
+        /// <summary>
+        /// Asserts that <see cref="Resource.GetHashCode"/> returns different hashcodes for different resource types.
+        /// </summary>
+        [Test]
+        [Category("IEquatable<T> Interface")]
+        public void Resource_HashCodeOfDifferentTypesDoNotEqual() {
+            Assert.That(this.hashList[REQ] != this.hashList[DES]);
         }
         #endregion
 
