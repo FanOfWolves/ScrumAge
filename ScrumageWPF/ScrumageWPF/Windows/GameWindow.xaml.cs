@@ -52,10 +52,10 @@ namespace ScrumageEngine.Windows {
 		/// <summary>
 		/// Tracks the current phase from the Game class and updates GUI when needed
 		/// </summary>
-		private int currentPhaseIndex;
+		private Int32 currentPhaseIndex;
 
 
-		private int playerCount;
+		private Int32 playerCount;
 		#endregion
 
 		#region Constructor
@@ -349,7 +349,7 @@ namespace ScrumageEngine.Windows {
 				artifactBox.Items.Clear();
 				foreach (var card in artifactCards)
                 {
-                    artifactBox.Items.Add(card.GetName());
+                    artifactBox.Items.Add(card.CardName);
 				}
 			}
 
@@ -359,7 +359,7 @@ namespace ScrumageEngine.Windows {
 				agilityBox.Items.Clear();
 				foreach(var card in agilityCards)
 				{
-					agilityBox.Items.Add(card.GetName());
+					agilityBox.Items.Add(card.CardName);
 				}
 			}
 
@@ -496,13 +496,14 @@ namespace ScrumageEngine.Windows {
 
 		private void TestBtn_Click(Object sender, RoutedEventArgs e)
 		{
-            foreach(Player p in game.GetAllPlayers()) {
-				p.AddToCards(new ArtifactCard("Test Artifact 1", new Int32[] { 0,0,0,0}));
-				p.AddToCards(new ArtifactCard("Test Artifact 2", new Int32[] { 0,0,0,0}));
-				p.AddToCards(new ArtifactCard("Test Artifact 3", new Int32[] { 0,0,0,0}));
-				p.AddToCards(new ArtifactCard("Test Artifact 4", new Int32[] { 0,0,0,0}));
-				p.AddToCards(new ArtifactCard("Test Artifact 5", new Int32[] { 0,0,0,0}));
-				p.AddToCards(new ArtifactCard("Test Artifact 6", new Int32[] { 0,0,0,0}));
+            foreach(Player p in game.Players) {
+				p.playerResources += new ResourceContainer(new Int32[] { 1000, 1000, 1000, 1000 });
+				p.AddToCards(new ArtifactCard("Test Artifact 1", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new ArtifactCard("Test Artifact 2", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new ArtifactCard("Test Artifact 3", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new ArtifactCard("Test Artifact 4", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new ArtifactCard("Test Artifact 5", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new ArtifactCard("Test Artifact 6", new Int32[] { 0, 0, 0, 0 }));
 
 				p.AddToCards(new AgilityCard("Test Agility 1", new Int32[] { 0, 0, 0, 0 }));
 				p.AddToCards(new AgilityCard("Test Agility 2", new Int32[] { 0, 0, 0, 0 }));
@@ -573,9 +574,6 @@ namespace ScrumageEngine.Windows {
                 var cardWindow = new CardWindow(currentPlayer.Agility[item]);
                 cardWindow.Show();
             }
-
-
-
         }
 
     }

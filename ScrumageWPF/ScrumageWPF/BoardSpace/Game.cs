@@ -16,7 +16,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// <value>
 		/// The players.
 		/// </value>
-		private List<Player> Players { get; }
+		public List<Player> Players { get; }
 
 
 		/// <summary>
@@ -108,7 +108,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// <returns>List of node names</returns>
 		public List<String> GetNodeNames() {
 			List<String> nodeNames = new List<String>();
-			board.GetAllNodes().ForEach(node =>
+			board.Nodes.ForEach(node =>
 			{
 				nodeNames.Add(node.NodeName);
 			});
@@ -134,26 +134,6 @@ namespace ScrumageEngine.BoardSpace {
 		/// <returns>Player object</returns>
 		public Player GetPlayerByID(Int32 playerIDP) {
 			return Players.Find(player => player.PlayerID == playerIDP);
-		}
-
-
-		/// <summary>
-		/// Get all current player objects
-		/// </summary>
-		/// <returns>List of player objects</returns>
-		public List<Player> GetAllPlayers() {
-			return Players;
-		}
-
-
-		/// <summary>
-		/// Get <see cref="Player"/> name attribute by player ID.
-		/// <seealso cref="Player.PlayerName"/>
-		/// </summary>
-		/// <param name="playerIDP">the id of the player whose name we want</param>
-		/// <returns>Player name in string</returns>
-		public String GetPlayerNameByID(Int32 playerIDP) {
-			return GetPlayerByID(playerIDP).PlayerName;
 		}
 		#endregion
 
@@ -302,7 +282,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// <param name="playerP">The current player.</param>
 		/// <returns>True if player is finished, false if not.</returns>
 		private Boolean PlayerDoneWithActions(Player playerP) {
-			foreach(Node node in board.GetAllNodes()) {
+			foreach(Node node in board.Nodes) {
 				if(node.HasPawn(playerP.PlayerID)) return false;
 			}
 			playerP.FinishedPhase = true;
@@ -478,6 +458,5 @@ namespace ScrumageEngine.BoardSpace {
 			return retArr;
 		}
 		#endregion
-
 	}
 }

@@ -26,13 +26,13 @@ namespace ScrumageEngine.InputLogic {
 		/// <summary>
 		/// The most recent input that is handled
 		/// </summary>
-		private static String mostRecentInput;
+		public static String MostRecentInput { get; private set; }
 
 
 		/// <summary>
 		/// A list of inputs handled, length specified in RecordInputs function
 		/// </summary>
-		private static List<String> recentInputs = new List<String>();
+		public static List<String> RecentInputs { get; } = new List<String>();
 
 
 		/// <summary>
@@ -40,7 +40,7 @@ namespace ScrumageEngine.InputLogic {
 		/// </summary>
 		/// <returns>A list of the recent inputs</returns>
 		public static List<String> GetRecentInputs() {
-			return recentInputs;
+			return RecentInputs;
 		}
 
 
@@ -49,9 +49,9 @@ namespace ScrumageEngine.InputLogic {
 		/// </summary>
 		/// <returns>The input after recording</returns>
 		public static String PlayerInput() {
-			mostRecentInput = ReadLine();
-			RecordInputs(mostRecentInput);
-			return mostRecentInput;
+			MostRecentInput = ReadLine();
+			RecordInputs(MostRecentInput);
+			return MostRecentInput;
 		}
 
 
@@ -61,11 +61,11 @@ namespace ScrumageEngine.InputLogic {
 		/// </summary>
 		/// <param name="mostRecentInput">The input that needs to be recorded.</param>
 		public static void RecordInputs(String mostRecentInput) {
-			if(recentInputs.Count < 30) {                            // This number is the max that is to be recorded
-				recentInputs.Insert(0, mostRecentInput);
+			if(RecentInputs.Count < 30) {                            // This number is the max that is to be recorded
+				RecentInputs.Insert(0, mostRecentInput);
 			} else {                                                // If the input list is already full
-				recentInputs.RemoveAt(29);                           // Remove the last input(total number -1)
-				recentInputs.Insert(0, mostRecentInput);            // Then put the new input at the top
+				RecentInputs.RemoveAt(29);                           // Remove the last input(total number -1)
+				RecentInputs.Insert(0, mostRecentInput);            // Then put the new input at the top
 			}
 		}
 
@@ -75,7 +75,7 @@ namespace ScrumageEngine.InputLogic {
 		/// <param name="player">The player requesting the pawn.</param>
 		/// <param name="game">Current State of the game.</param>
 		/// <param name="input">The type of pawn if specification is needed.</param>
-		public static void GivePlayerPawn(Game gameP, int playerIDP, String inputP = "") {
+		public static void GivePlayerPawn(Game gameP, Int32 playerIDP, String inputP = "") {
 			String logString = gameP.GivePlayerPawn(playerIDP, inputP);
 			RecordInputs(logString);
 
@@ -136,7 +136,7 @@ namespace ScrumageEngine.InputLogic {
 		/// </summary>
 		/// <param name="player">The player that selected the node.</param>
 		/// <param name="node">The node that was selected in the GUI.</param>
-		public static Boolean ActivateNode(Game gameP, int playerIDP, String nodeNameP) {
+		public static Boolean ActivateNode(Game gameP, Int32 playerIDP, String nodeNameP) {
 			Boolean phaseFinished = gameP.DoAction(nodeNameP, playerIDP, out String nodeLog);
 			RecordInputs(nodeLog);
 			return phaseFinished;
@@ -160,7 +160,7 @@ namespace ScrumageEngine.InputLogic {
 		/// Clears the inputs list
 		/// </summary>
 		public static void ClearInputs() {
-			recentInputs.Clear();
+			RecentInputs.Clear();
 		}
 	}
 }
