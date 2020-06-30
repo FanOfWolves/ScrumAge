@@ -77,7 +77,6 @@ namespace ScrumageWPF.Test {
         } 
         #endregion
 
-
         #endregion
 
         #region Category: Operators
