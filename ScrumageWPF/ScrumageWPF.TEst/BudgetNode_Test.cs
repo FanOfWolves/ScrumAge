@@ -7,7 +7,15 @@ namespace ScrumageWPF.Test {
 
     [TestFixture]
     class BudgetNode_Test {
-
+        private const Int32 BUDGET_NODE_PAWN_LIMIT = 1;
+        private Node testNode;
+        /// <summary>
+        /// One-time setup for this testing class.
+        /// </summary>
+        [OneTimeSetUp]
+        public void ClassSetUp() {
+            testNode = new BudgetNode(0, "testBudgetNode");
+        }
 
         #region BudgetNode_InstantiatesCorrectly        
         /// <summary>
@@ -25,8 +33,17 @@ namespace ScrumageWPF.Test {
             Node node = new BudgetNode(id, name);
             Assert.That(node.NodeName == name);
             Assert.That(node.NodeID == id);
-        } 
+        }
         #endregion
 
+        #region BudgetNode_GetMaxPawnLimitReturnsCorrectNumber        
+        /// <summary>
+        /// Asserts that <see cref="BudgetNode.MaxPawnLimit"/> returns the current number.
+        /// </summary>
+        [Test]
+        public void BudgetNode_GetMaxPawnLimitReturnsCorrectNumber() {
+            Assert.That(testNode.MaxPawnLimit, Is.EqualTo(BUDGET_NODE_PAWN_LIMIT));
+        }
+        #endregion
     }
 }
