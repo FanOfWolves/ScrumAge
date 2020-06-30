@@ -8,17 +8,17 @@ namespace ScrumageWPF.Test {
 	[TestFixture]
 	class Pawn_Test {
 
-		private Pawn testPawn1;
-		private Pawn testPawn2;
-		private Pawn testPawn3;
-		private Pawn testPawn4;
-		private Pawn testPawn5;
-		private Pawn testPawn6;
-		private Pawn testPawn7;
-		private Pawn testPawn8;
-		private Pawn testPawn9;
-		private Pawn testPawn10;
-		private Pawn testPawn11;
+		private static Pawn testPawn1;
+		private static Pawn testPawn2;
+		private static Pawn testPawn3;
+		private static Pawn testPawn4;
+		private static Pawn testPawn5;
+		private static Pawn testPawn6;
+		private static Pawn testPawn7;
+		private static Pawn testPawn8;
+		private static Pawn testPawn9;
+		private static Pawn testPawn10;
+		private static Pawn testPawn11;
 
 		#region test player IDs
 		private const Int32 PLAYER_ID_0 = 0;
@@ -60,7 +60,44 @@ namespace ScrumageWPF.Test {
 		[Category("Constructors")]
 		public void Test_Constructors() {
 			Pawn constructorTestPawn = new Pawn(1, "Full Stack");
+			Pawn constructorTestPawnDefault = new Pawn();
 			Assert.That(constructorTestPawn, Is.EqualTo(new Pawn(1, "Full Stack")));
+			Assert.That(constructorTestPawnDefault, Is.EqualTo(new Pawn()));
+		}
+
+		[Test]
+		[Category("Cost Calculation")]
+		//"Full Stack";
+		[TestCase(PAWN_NAME_0, 2)]
+		//"Front End";
+		[TestCase(PAWN_NAME_1, 1)]
+		//"Back End";
+		[TestCase(PAWN_NAME_2, 1)]
+		//"full stack";
+		[TestCase(PAWN_NAME_3, 0)]
+		//"front end";
+		[TestCase(PAWN_NAME_4, 0)]
+		//"back end";
+		[TestCase(PAWN_NAME_5, 0)]
+		//"                full stack";
+		[TestCase(PAWN_NAME_6, 0)]
+		//"FullStack";
+		[TestCase(PAWN_NAME_7, 0)]
+		//"fullstack";
+		[TestCase(PAWN_NAME_8, 0)]
+		//"whatever";
+		[TestCase(PAWN_NAME_9, 0)]
+		public void Test_CostCalculation(String pawnLevel, Int32 expected) {
+			Pawn testPawn = new Pawn(1, pawnLevel);
+			Assert.That(testPawn.PawnCost == expected);
+		}
+
+		[Test]
+		[Category("Equals")]
+		public void Test_Equals() {
+			Pawn equalsTestPawn = new Pawn(1, "Full Stack");
+			Assert.That(equalsTestPawn, Is.EqualTo(new Pawn(1, "Full Stack")));
+			Assert.That(equalsTestPawn, Is.Not.EqualTo(new Pawn(1, "Back End")));
 		}
 
 	}
