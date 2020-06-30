@@ -15,17 +15,17 @@ namespace ScrumageEngine.BoardSpace {
         /// <summary>
         /// The resource of this <see cref="ResourceNode"/>.
         /// </summary>
-        private readonly Resource nodeResource = null;
+        public readonly Resource nodeResource = null;
 
         /// <summary>
         /// The base success rate of acquiring a resource from this node.
         /// </summary>
-        private const Int32 RESOURCE_BASE_CHANCE = 20;
+        public const Int32 RESOURCE_BASE_CHANCE = 20;
 
         /// <summary>
         /// The resource chance calculator. Created by the constructor
         /// </summary>
-        private readonly Random resourceChanceCalculator;
+        public readonly Random resourceChanceCalculator;
         #endregion
 
         #region Constructors

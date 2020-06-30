@@ -17,6 +17,7 @@ namespace ScrumageWPF.Test {
         private const Int32 DES = 1;
         private const Int32 IMP = 2;
         private const Int32 TES = 3;
+        private const Int32 NUL = 4;
 
 
         private Resource CreateResource(Int32 type) {
@@ -26,26 +27,40 @@ namespace ScrumageWPF.Test {
                 return new Design();
             else if(type == IMP)
                 return new Implementation();
-            return new Testing();
+            else if(type == TES)
+                return new Testing();
+            return null;
         }
 
 
         #region Category: Instantiation
-        
-        
+
+
         [Test]
         #region Test-Cases
-        [TestCase(0, "Node1", typeof(Implementation))]
-        [TestCase(6, "Albert", typeof(Implementation))]
-        [TestCase(888, "Node943", typeof(Implementation))]
-        [TestCase(1, "null", ]
+        [TestCase(0, "Node1", REQ)]
+        [TestCase(6, "Albert", DES)]
+        [TestCase(888, "Node943", DES)]
+        [TestCase(1, "null", IMP)]
         #endregion
-        public void ResourceNode_ConstructorInstantiatesCorrectly(Int32 id, String name, Resource theResource) {
-            Node testNode = new ResourceNode(id, name, theResource);
-            Assert.That(theResource, Is.EqualTo(new Implementation()));
+        public void ResourceNode_ConstructorInstantiatesCorrectly(Int32 id, String name, Int32 resourceType) {
+            Resource? theResource = CreateResource(resourceType);
+
+            ResourceNode testNode = new ResourceNode(id, name, theResource);
+            Assert.That(testNode.NodeID, Is.EqualTo(id));
+            Assert.That(testNode.NodeName, Is.EqualTo(name));
+            Assert.That(testNode.nodeResource, Is.EqualTo(theResource));
         }
-        
-            
+
+        [Test]
+        [TestCase(0, null, NUL)]
+        [TestCase(0, "Albert", NUL)]
+        [TestCase(0, null, DES)]
+        public void ResourceNode_ConstructorCorrectlyHandlesNull(Int32 id, String name, Int32 resourceType) {
+            Resource? theResource = CreateResource(resourceType);
+
+            Assert.That(new ResourceNode(id, name, theResource), Throws.InstanceOf(typeof(ArgumentNullException)));
+        }
 
 
         #endregion
