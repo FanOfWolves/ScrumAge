@@ -16,7 +16,7 @@ namespace ScrumageEngine.BoardSpace {
         /// <summary>
         /// The <see cref="Stack{T}"/> of <see cref="Card"/>s in this CardNode
         /// </summary>
-        private Deck deck;
+        public Deck Deck { get; set; }
 
 
         public override Int32 MaxPawnLimit { get { return 1; } }
@@ -31,7 +31,7 @@ namespace ScrumageEngine.BoardSpace {
         /// <param name="cardLevel">The level of the cards in this node</param>
         /// <param name="cards">The cards for this node</param>
         public CardNode(Int32 nodeId, String nodeName, Deck deck) : base(nodeId, nodeName) {
-            this.deck = deck;
+            this.Deck = deck;
         }
         #endregion
 
@@ -43,7 +43,7 @@ namespace ScrumageEngine.BoardSpace {
         ///     <c>true</c> if node is out of cards; Otherwise, <c>false</c>
         /// </returns>
         public Boolean OutOfCards() {
-            return deck.Count == 0;
+            return Deck.Count == 0;
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace ScrumageEngine.BoardSpace {
         ///     <c>true</c> if player has enough to pay for card; otherwise, <c>false</c>
         /// </returns>
         private Boolean CheckCardCost(Player playerP) {
-            return (playerP.GetPlayerResources() >= deck.Peek().GetCardRequirements());
+            return (playerP.GetPlayerResources() >= Deck.Peek().CardRequirements);
         }
 
         /// <summary>
@@ -63,17 +63,14 @@ namespace ScrumageEngine.BoardSpace {
         /// <param name="playerP">The player to give the card to</param>
         /// <returns>the card from the top of the stack</returns>
         private Card TakeCard(Player playerP) {
-            Card _theCard = deck.Draw();
-            Resource[] _givenTypes = _theCard.GetCardRequirements().GetResourceTypes();
-            /*foreach(Resource _resource in _givenTypes) {
-                playerP.TakeResource(_resource, _theCard.GetCardRequirements()[_resource]);
-            }*/
-            playerP.playerResources -= _theCard.GetCardRequirements();
+            Card _theCard = Deck.Draw();
+            Resource[] _givenTypes = _theCard.CardRequirements.GetResourceTypes();
+            playerP.playerResources -= _theCard.CardRequirements;
             return _theCard;
         }
 
         public Card TopCard() {
-            return deck.Peek();
+            return Deck.Peek();
 		}
 
 
@@ -86,7 +83,7 @@ namespace ScrumageEngine.BoardSpace {
         public override String DoAction(Player playerP) {
 
             // Preliminary checks
-            if(deck.Count == 0) return $"There are no cards left in {NodeName}.";
+            if(Deck.Count == 0) return $"There are no cards left in {NodeName}.";
             if(Pawns.Count < 1) return $"{playerP.PlayerName} had no pawns in {NodeName} to claim a card.";
             Pawn _pawn = Pawns[0];
             if(_pawn.PawnID != playerP.PlayerID) return $"{playerP.PlayerName} had no pawns in {NodeName} to claim a card.";
@@ -103,7 +100,7 @@ namespace ScrumageEngine.BoardSpace {
 
             // Give card
             String cardType = "";
-            cardType = deck.Peek().CardType();
+            cardType = Deck.Peek().CardType();
             playerP.AddToCards(TakeCard(playerP));
             return $"{playerP.PlayerName} obtained a new {cardType} Card!";
         }

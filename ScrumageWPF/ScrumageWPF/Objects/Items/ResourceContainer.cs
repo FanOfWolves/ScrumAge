@@ -14,7 +14,7 @@ namespace ScrumageEngine.Objects.Items {
 
         #region Fields
 
-        private Dictionary<Resource, Int32> resourceDictionary;
+        public Dictionary<Resource, Int32> ResourceDictionary { get; set; }
 
         #endregion
 
@@ -22,7 +22,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// Initializes a new instance of the <see cref="ResourceContainer"/> class.
 		/// </summary>
 		public ResourceContainer() {
-			resourceDictionary = InitDictionary(new Int32[]{0, 0, 0, 0});
+			ResourceDictionary = InitDictionary(new Int32[]{0, 0, 0, 0});
 
 		}
 
@@ -32,7 +32,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// </summary>
 		/// <param name="reqs">An array of ints that represents values to initialize the container with.</param>
 		public ResourceContainer(Int32[] reqs) {
-			resourceDictionary = InitDictionary(reqs);
+			ResourceDictionary = InitDictionary(reqs);
         }
 
 
@@ -66,7 +66,7 @@ namespace ScrumageEngine.Objects.Items {
         /// </summary>
         /// <returns>an array of all resource types in this container</returns>
         public Resource[] GetResourceTypes() {
-	        return resourceDictionary.Keys.ToArray();
+	        return ResourceDictionary.Keys.ToArray();
         }
 
 		/// <summary>
@@ -115,10 +115,10 @@ namespace ScrumageEngine.Objects.Items {
 		/// <returns>The selected resource's amount</returns>
 		public Int32 this[Resource r] {
 			get {
-				return this.resourceDictionary[r];
+				return this.ResourceDictionary[r];
 			}
 			set {
-				this.resourceDictionary[r] = value;
+				this.ResourceDictionary[r] = value;
 			}
 		}
 
@@ -132,7 +132,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// <returns>True if all resource types in the player inventory are greater than or equal that of the second container.</returns>
         public static Boolean operator >=(ResourceContainer playerResP, ResourceContainer reqsP) {
 			Boolean isGreaterEqual = true;
-			foreach (Resource r in playerResP.resourceDictionary.Keys) {
+			foreach (Resource r in playerResP.ResourceDictionary.Keys) {
 				if (playerResP[r] < reqsP[r]) isGreaterEqual = false;
 			}
 			return isGreaterEqual;
@@ -176,25 +176,26 @@ namespace ScrumageEngine.Objects.Items {
 		/// <returns>True if all player resources are lower value than comparison container.</returns>
 		public static Boolean operator <(ResourceContainer playerResP, ResourceContainer reqsP) {
 			Boolean isLess = true;
-			foreach(Resource r in playerResP.resourceDictionary.Keys) {
+			foreach(Resource r in playerResP.ResourceDictionary.Keys) {
 				if(playerResP[r] >= reqsP[r]) isLess = false;
 			}
 			return isLess;
 		}
 
 		public static ResourceContainer operator -(ResourceContainer playerResP, ResourceContainer reqsP) {
-			for(int i = 0; i < reqsP.resourceDictionary.Count; i++) {
+			for(Int32 i = 0; i < reqsP.ResourceDictionary.Count; i++) {
 				playerResP[i] -= reqsP[i];
 			}
 			return playerResP;
 		}
 
 		public static ResourceContainer operator +(ResourceContainer playerResP, ResourceContainer otherP) {
-			for(int i = 0; i < otherP.resourceDictionary.Count; i++) {
+			for(Int32 i = 0; i < otherP.ResourceDictionary.Count; i++) {
 				playerResP[i] += otherP[i];
 			}
 			return playerResP;
 		}
+
 
 		public String ShowRequirements() {
 			return $"Requirements:{this[0]}\n" +
