@@ -7,7 +7,7 @@ using System.Text;
 namespace ScrumageWPF.Test {
 	[TestFixture]
 	class Pawn_Test {
-
+		#region Test Pawns
 		private static Pawn testPawn1;
 		private static Pawn testPawn2;
 		private static Pawn testPawn3;
@@ -19,6 +19,7 @@ namespace ScrumageWPF.Test {
 		private static Pawn testPawn9;
 		private static Pawn testPawn10;
 		private static Pawn testPawn11;
+		#endregion
 
 		#region test player IDs
 		private const Int32 PLAYER_ID_0 = 0;
@@ -41,6 +42,10 @@ namespace ScrumageWPF.Test {
 		private const String PAWN_NAME_9 = "whatever";
 		#endregion
 
+		#region Setup
+		/// <summary>
+		/// Set up test pawn fields.
+		/// </summary>
 		[OneTimeSetUp]
 		public void Pawn_Setup() {
 			testPawn1 = new Pawn(PLAYER_ID_0, PAWN_NAME_0);
@@ -55,7 +60,11 @@ namespace ScrumageWPF.Test {
 			testPawn10 = new Pawn(PLAYER_ID_0, PAWN_NAME_9);
 			testPawn11 = new Pawn();
 		}
+		#endregion
 
+		/// <summary>
+		/// Test constructors
+		/// </summary>
 		[Test]
 		[Category("Constructors")]
 		public void Test_Constructors() {
@@ -65,6 +74,12 @@ namespace ScrumageWPF.Test {
 			Assert.That(constructorTestPawnDefault, Is.EqualTo(new Pawn()));
 		}
 
+
+		/// <summary>
+		/// Test cost calculation
+		/// </summary>
+		/// <param name="pawnLevel">The pawn level</param>
+		/// <param name="expected">The expected cost for that pawn</param>
 		[Test]
 		[Category("Cost Calculation")]
 		//"Full Stack";
@@ -92,6 +107,9 @@ namespace ScrumageWPF.Test {
 			Assert.That(testPawn.PawnCost == expected);
 		}
 
+		/// <summary>
+		/// Test equals
+		/// </summary>
 		[Test]
 		[Category("Equals")]
 		public void Test_Equals() {
