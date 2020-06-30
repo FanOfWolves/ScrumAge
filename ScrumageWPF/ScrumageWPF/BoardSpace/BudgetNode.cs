@@ -10,7 +10,7 @@ namespace ScrumageEngine.BoardSpace {
     /// Provides budget to players that place their pawns here
     /// </summary>
     /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
-    class BudgetNode : Node {
+    public class BudgetNode : Node {
 
         /// <summary>
         /// Gets the maximum pawn limit for this Node.
