@@ -53,42 +53,118 @@ namespace ScrumageWPF.Test {
             this.resList.Add(tes);
             this.resList.Add(req);
             this.resList.Add(req2);
-            
         }
 
-    
+
         #region Category: IEquatable<T> Interface
-        [Test]
-        [Category("IEquatable<T> Interface")]
-        public void Resource_EqualsAnotherBasedOnTypeAlone() {
-            // Equality should be based on type, no memory location.
-            Assert.That(this.resList[REQ], Is.EqualTo(this.resList[REQ2]));
-        }
 
+        #region Resource_EqualsAnotherBasedOnTypeAloneViaResource        
+        /// <summary>
+        /// Asserts that <see cref="Resource.Equals(Resource)"/> correctly identifies same resource types.
+        /// </summary>
         [Test]
         [Category("IEquatable<T> Interface")]
-        public void Resource_TwoDifferentResourceTypesShouldNotEqual() {
+        public void Resource_EqualsAnotherBasedOnTypeAloneViaResource() {
+            // Equality should be based on type, not memory location.
+            Assert.That(this.resList[REQ], Is.EqualTo(this.resList[REQ2]));
+        } 
+        #endregion
+
+        #region Resource_TwoDifferentResourceTypesShouldNotEqual        
+        /// <summary>
+        /// Asserts that <see cref="Resource.Equals(Resource)"/> correctly identifies different resource types.
+        /// </summary>
+        [Test]
+        [Category("IEquatable<T> Interface")]
+        public void Resource_TwoDifferentResourceTypesShouldNotEqualViaResource() {
             Resource res1 = new Requirements();
             Resource res2 = new Design();
-            
+
             Assert.That(res1, Is.Not.EqualTo(res2));
             Assert.That(res1, Is.Not.SameAs(res2));
+        }
+        #endregion
+
+        #region Resource_ResourceEqualsHandlesNulls
+        /// <summary>
+        /// Asserts that <see cref="Resource.Equals(Resource)"/> correctly handles null input.
+        /// </summary>
+        [Test]
+        [Category("IEquatable<T> Interface")]
+        public void Resource_ResourceEqualsHandlesNulls() {
+            Resource res1 = new Requirements();
+            Resource res2 = null;
+            Assert.That(res1.Equals(res2), Is.False);
+        }
+        #endregion
+
+        #region Resource_TwoDifferentResourceTypesShouldNotEqualViaObject        
+        /// <summary>
+        /// Asserts that <see cref="Resource.Equals(Object)"/> correctly identifies resources of different types.
+        /// </summary>
+        [Test]
+        [Category("IEquatable<T> Interface")]
+        public void Resource_TwoDifferentResourceTypesShouldNotEqualViaObject() {
+            Object res1 = new Requirements();
+            Object res2 = null;
+            Assert.That(res1.Equals(res2), Is.False);
+        }
+        #endregion
+
+        #region Resource_EqualsAnotherBasedOnTypeAloneViaObject        
+        /// <summary>
+        /// Asserts that <see cref="Resource.Equals(Object)"/> correctly identifies resources of same type.
+        /// </summary>
+        [Test]
+        [Category("IEquatable<T> Interface")]
+        public void Resource_EqualsAnotherBasedOnTypeAloneViaObject() {
+            // Equality should be based on type, not memory location.
+            Object res1 = new Requirements();
+            Object res2 = new Requirements();
+            Assert.That(res1.Equals(res2), Is.True);
         }
 
         #endregion
 
+        #region Resource_ObjectEqualsHandlesNulls
+        /// <summary>
+        /// Asserts that <see cref="Resource.Equals(Object)"/> correctly handles null input.
+        /// </summary>
+        [Test]
+        [Category("IEquatable<T> Interface")]
+        public void Resource_ObjectEqualsHandlesNulls() {
+            Object res1 = new Requirements();
+            Object res2 = null;
+            Assert.That(res1.Equals(res2), Is.False);
+        }
+        #endregion
+
+        #endregion
+
         #region Category: Operators
+
+        #region Resource_EqualsAnotherBasedOnNameAloneViaEqualityOperator        
+        /// <summary>
+        /// Asserts that "==" operator compares <see cref="Resource.Name"/> properties correctly.
+        /// </summary>
         [Test]
         [Category("Operators")]
         public void Resource_EqualsAnotherBasedOnNameAloneViaEqualityOperator() {
             Assert.That(this.resList[REQ] == this.resList[REQ2]);
         }
+        #endregion
 
+        #region Resource_DoesNotEqualAnotherBasedOnNameAloneViaInequalityOperator
+        /// <summary>
+        /// Asserts that "!=" operator compares <see cref="Resource.Name"/> properties correctly.
+        /// </summary>
         [Test]
         [Category("Operators")]
         public void Resource_DoesNotEqualAnotherBasedOnNameAloneViaInequalityOperator() {
             Assert.That(this.resList[REQ] != this.resList[DES]);
-        }
+        } 
+        #endregion
+
         #endregion
 
         #region Category: Other
