@@ -39,6 +39,9 @@ namespace ScrumageWPF.Test {
         private const Int32 IMP_BACK_END_CHANCE = 20;
         #endregion
 
+        /// <summary>
+        /// One-time testing class setup
+        /// </summary>
         [OneTimeSetUp]
         public void Resource_Setup() {
             Resource req = new Requirements();
@@ -168,12 +171,15 @@ namespace ScrumageWPF.Test {
             Assert.That(this.resList[REQ] != this.resList[REQ2], Is.False);
             Assert.That(this.resList[REQ] != null, Is.True);
             Assert.That(null != this.resList[REQ], Is.True);
-        } 
+        }
         #endregion
 
         #endregion
 
-        #region Category: Other
+        #region Category: Other        
+        /// <summary>
+        /// Asserts that <see cref="Resource.DeepCopy"/> returns a copy, not the original object.
+        /// </summary>
         [Test]
         [Category("Other")]
         public void Resource_PerformsDeepCopy() {
@@ -185,12 +191,17 @@ namespace ScrumageWPF.Test {
         #endregion
 
         #region Category: Hierarchy
+
+        #region Resource_GetsSubclassResourceRates
+        /// <summary>
+        /// Asserts that <see cref="Resource"/> pawn chance properties return the correct sub-class values.
+        /// </summary>
         [Test]
         [Category("Hierarchy")]
         public void Resource_GetsSubclassResourceRates() {
             Assert.That(this.resList[REQ].BackEndChance == REQ_BACK_END_CHANCE);
             Assert.That(this.resList[REQ].FrontEndChance == REQ_FRONT_END_CHANCE);
-            Assert.That(this.resList[REQ].FullStackChance == REQ_FULL_STACK_CHANCE);            
+            Assert.That(this.resList[REQ].FullStackChance == REQ_FULL_STACK_CHANCE);
             Assert.That(this.resList[DES].BackEndChance == DESIGN_BACK_END_CHANCE);
             Assert.That(this.resList[DES].FrontEndChance == DESIGN_FRONT_END_CHANCE);
             Assert.That(this.resList[DES].FullStackChance == DESIGN_FULL_STACK_CHANCE);
@@ -201,11 +212,16 @@ namespace ScrumageWPF.Test {
             Assert.That(this.resList[IMP].FrontEndChance == IMP_FRONT_END_CHANCE);
             Assert.That(this.resList[IMP].FullStackChance == IMP_FULL_STACK_CHANCE);
         } 
+        #endregion
 
+        #region Resource_GetChanceReturnsCorrectResourceChanceRates
+        /// <summary>
+        /// Asserts that <see cref="Resource.GetChance(Pawn)"/> returns the correct value.
+        /// </summary>
         [Test]
         [Category("Hierarchy")]
         public void Resource_GetChanceReturnsCorrectResourceChanceRates() {
-            Pawn fullPawn = new Pawn(1,"Full Stack");
+            Pawn fullPawn = new Pawn(1, "Full Stack");
             Pawn frontPawn = new Pawn(1, "Front End");
             Pawn backPawn = new Pawn(1, "Back End");
 
@@ -224,7 +240,8 @@ namespace ScrumageWPF.Test {
             Assert.That(this.resList[TES].GetChance(fullPawn), Is.EqualTo(TEST_FULL_STACK_CHANCE));
             Assert.That(this.resList[TES].GetChance(frontPawn), Is.EqualTo(TEST_FRONT_END_CHANCE));
             Assert.That(this.resList[TES].GetChance(backPawn), Is.EqualTo(TEST_BACK_END_CHANCE));
-        }
+        } 
+        #endregion
 
         #endregion
 
