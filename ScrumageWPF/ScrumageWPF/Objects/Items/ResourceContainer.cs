@@ -147,7 +147,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// <returns>True if all resource types in the player inventory are less than or equal that of the second container.</returns>
 		public static Boolean operator <=(ResourceContainer playerResP, ResourceContainer reqsP) {
 			Boolean isLessEqual = true;
-			foreach(Resource r in playerResP.resourceDictionary.Keys) {
+			foreach(Resource r in playerResP.ResourceDictionary.Keys) {
 				if(playerResP[r] > reqsP[r]) isLessEqual = false;
 			}
 			return isLessEqual;
@@ -162,7 +162,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// <returns>True if all player resources are higher value than comparison container.</returns>
 		public static Boolean operator >(ResourceContainer playerResP, ResourceContainer reqsP) {
 			Boolean isGreater = true;
-			foreach(Resource r in playerResP.resourceDictionary.Keys) {
+			foreach(Resource r in playerResP.ResourceDictionary.Keys) {
 				if(playerResP[r] <= reqsP[r]) isGreater = false;
 			}
 			return isGreater;
@@ -195,6 +195,7 @@ namespace ScrumageEngine.Objects.Items {
 			}
 			return playerResP;
 		}
+
 
 		public String ShowRequirements() {
 			return $"Requirements:{this[0]}\n" +
