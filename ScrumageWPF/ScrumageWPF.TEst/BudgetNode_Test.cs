@@ -7,6 +7,9 @@ using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Player;
 namespace ScrumageWPF.Test {
 
+    /// <summary>
+    /// Testing class for <see cref="BudgetNode"/>.
+    /// </summary>
     [TestFixture]
     class BudgetNode_Test {
 
@@ -15,8 +18,8 @@ namespace ScrumageWPF.Test {
         private Player testPlayer1;
         private Player testPlayer2;
 
-        private String failedAction = " Failed to increase their budget. Reason: No Pawns";
-        private String passedAction = " has 1 more budget!";
+        private String failedActionStr = " Failed to increase their budget. Reason: No Pawns";
+        private String passedActionStr = " has 1 more budget!";
 
         /// <summary>
         /// One-time setup for this testing class.
@@ -29,6 +32,9 @@ namespace ScrumageWPF.Test {
             testPlayer2 = new Player(2, "testPlayer2");
         }
 
+        /// <summary>
+        /// This method is called before each test
+        /// </summary>
         [SetUp]
         public void TestSetUp() {
             testPlayer1.Pawns = new List<Pawn>(3);
@@ -46,6 +52,9 @@ namespace ScrumageWPF.Test {
             testPlayer2.Budget = 1;
         }
 
+        /// <summary>
+        /// This method is called after each test
+        /// </summary>
         [TearDown]
         public void TestTearDown() {
             testPlayer1.Pawns = null;
@@ -86,6 +95,7 @@ namespace ScrumageWPF.Test {
         /// Asserts that <see cref="BudgetNode.DoAction(Player)"/> increases budget if player has pawn in the node.
         /// </summary>
         [Test]
+        [Category("DoAction")]
         public void BudgetNode_DoAction_PlayerGivenBudgetIfTheyHavePawnsInNode() {
             this.testNode.AddPawn(testPlayer1.TakePawn("Back End"));
             Int32 originalBudget = testPlayer1.Budget;
@@ -105,6 +115,7 @@ namespace ScrumageWPF.Test {
         /// Asserts that <see cref="BudgetNode.DoAction(Player)"/> does not increase budget if player does not have a pawn in the node.
         /// </summary>
         [Test]
+        [Category("DoAction")]
         public void BudgetNode_DoAction_PlayerNotGivenBudgetIfTheyDoNotHavePawnsInNode() {
             this.testNode.AddPawn(testPlayer1.TakePawn("Back End"));
 
@@ -128,6 +139,7 @@ namespace ScrumageWPF.Test {
         /// Asserts that <see cref="BudgetNode.DoAction(Player)"/> increases player budget by correct amount.
         /// </summary>
         [Test]
+        [Category("DoAction")]
         public void BudgetNode_DoAction_IncreasesPlayerBudgetByCorrectAmount() {
             this.testNode.AddPawn(testPlayer1.TakePawn("Back End"));
 
@@ -144,6 +156,7 @@ namespace ScrumageWPF.Test {
         /// Asserts that the pawn in the node is correctly returned to the player
         /// </summary>
         [Test]
+        [Category("DoAction")]
         public void BudgetNode_DoAction_ReturnsCorrectPawnsToPlayer() {
             Int32 originalPawnCount = testPlayer1.Pawns.Count;
 
@@ -157,14 +170,32 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
-        #region BudgetNode_DoAction_ReturnsCorrectString
+        #region BudgetNode_DoAction_ReturnsCorrectStringOnFailure
+        /// <summary>
+        /// Asserts that <see cref="BudgetNode.DoAction(Player)"/> returns the correct string on action failure.
+        /// </summary>
         [Test]
+        [Category("DoAction")]
         public void BudgetNode_DoAction_ReturnsCorrectStringOnFailure() {
             this.testNode.AddPawn(testPlayer1.TakePawn("Back End"));
 
-
+            String stringOutput = testNode.DoAction(testPlayer2);
+            Assert.That(stringOutput, Is.EqualTo(testPlayer2.PlayerName + this.failedActionStr));
         }
+        #endregion
 
+        #region BudgetNode_DoAction_ReturnsCorrectStringOnSuccess
+        /// <summary>
+        /// Asserts that <see cref="BudgetNode.DoAction(Player)"/> returns the correct string on action success.
+        /// </summary>
+        [Test]
+        [Category("DoAction")]
+        public void BudgetNode_DoAction_ReturnsCorrectStringOnSuccess() {
+            this.testNode.AddPawn(testPlayer1.TakePawn("Back End"));
+
+            String stringOutput = testNode.DoAction(testPlayer1);
+            Assert.That(stringOutput, Is.EqualTo(testPlayer1.PlayerName + this.passedActionStr));
+        }
         #endregion
     }
 }
