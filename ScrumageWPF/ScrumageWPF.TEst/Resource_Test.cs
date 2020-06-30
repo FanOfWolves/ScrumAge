@@ -151,6 +151,9 @@ namespace ScrumageWPF.Test {
         [Category("Operators")]
         public void Resource_EqualsAnotherBasedOnNameAloneViaEqualityOperator() {
             Assert.That(this.resList[REQ] == this.resList[REQ2]);
+            Assert.That(this.resList[REQ] == this.resList[DES], Is.False);
+            Assert.That(this.resList[REQ] == null, Is.False);
+            Assert.That(null == this.resList[REQ], Is.False);
         }
         #endregion
 
@@ -161,7 +164,10 @@ namespace ScrumageWPF.Test {
         [Test]
         [Category("Operators")]
         public void Resource_DoesNotEqualAnotherBasedOnNameAloneViaInequalityOperator() {
-            Assert.That(this.resList[REQ] != this.resList[DES]);
+            Assert.That(this.resList[REQ] != this.resList[DES], Is.True);
+            Assert.That(this.resList[REQ] != this.resList[REQ2], Is.False);
+            Assert.That(this.resList[REQ] != null, Is.True);
+            Assert.That(null != this.resList[REQ], Is.True);
         } 
         #endregion
 
@@ -195,6 +201,31 @@ namespace ScrumageWPF.Test {
             Assert.That(this.resList[IMP].FrontEndChance == IMP_FRONT_END_CHANCE);
             Assert.That(this.resList[IMP].FullStackChance == IMP_FULL_STACK_CHANCE);
         } 
+
+        [Test]
+        [Category("Hierarchy")]
+        public void Resource_GetChanceReturnsCorrectResourceChanceRates() {
+            Pawn fullPawn = new Pawn(1,"Full Stack");
+            Pawn frontPawn = new Pawn(1, "Front End");
+            Pawn backPawn = new Pawn(1, "Back End");
+
+            Assert.That(this.resList[REQ].GetChance(fullPawn), Is.EqualTo(REQ_FULL_STACK_CHANCE));
+            Assert.That(this.resList[REQ].GetChance(frontPawn), Is.EqualTo(REQ_FRONT_END_CHANCE));
+            Assert.That(this.resList[REQ].GetChance(backPawn), Is.EqualTo(REQ_BACK_END_CHANCE));
+
+            Assert.That(this.resList[DES].GetChance(fullPawn), Is.EqualTo(DESIGN_FULL_STACK_CHANCE));
+            Assert.That(this.resList[DES].GetChance(frontPawn), Is.EqualTo(DESIGN_FRONT_END_CHANCE));
+            Assert.That(this.resList[DES].GetChance(backPawn), Is.EqualTo(DESIGN_BACK_END_CHANCE));
+
+            Assert.That(this.resList[IMP].GetChance(fullPawn), Is.EqualTo(IMP_FULL_STACK_CHANCE));
+            Assert.That(this.resList[IMP].GetChance(frontPawn), Is.EqualTo(IMP_FRONT_END_CHANCE));
+            Assert.That(this.resList[IMP].GetChance(backPawn), Is.EqualTo(IMP_BACK_END_CHANCE));
+
+            Assert.That(this.resList[TES].GetChance(fullPawn), Is.EqualTo(TEST_FULL_STACK_CHANCE));
+            Assert.That(this.resList[TES].GetChance(frontPawn), Is.EqualTo(TEST_FRONT_END_CHANCE));
+            Assert.That(this.resList[TES].GetChance(backPawn), Is.EqualTo(TEST_BACK_END_CHANCE));
+        }
+
         #endregion
 
     }
