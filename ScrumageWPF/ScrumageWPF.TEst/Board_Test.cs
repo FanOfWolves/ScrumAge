@@ -75,16 +75,32 @@ namespace ScrumageWPF.Test {
 
         #region Board Tests
 
-        #region Category: Instantiation
+        #region Category: Instantiation        
+        
+        #region Board_ConstructorInstantiatesCorrectly
+        /// <summary>
+        /// Boards the constructor instantiates correctly.
+        /// </summary>
         [Test]
         [Category("Instantiation")]
         public void Board_ConstructorInstantiatesCorrectly() {
             Board _board = new Board();
             Assert.That(testBoard.Nodes, Is.EquivalentTo(GetNeedNodes()).Using(new NodeEqualityComparer()));
-        }
+        } 
         #endregion
 
-		#region Node Getters
+        #endregion
+
+
+        [Test]
+        public void Board_RollDiceWorks() {
+            List<Die> fuck = new List<Die>();
+            fuck.Add(new Die(1));
+
+        }
+
+
+        #region Node Getters
         [Test]
         [Category("Getters")]
         [TestCase("Requirements")]
