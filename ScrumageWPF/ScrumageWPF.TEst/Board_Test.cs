@@ -65,7 +65,8 @@ namespace ScrumageWPF.Test {
         [Test]
         [Category("Instantiation")]
         public void Board_ConstructorInstantiatesCorrectly() {
-
+            Board _board = new Board();
+            Assert.That(testBoard.Nodes, Is.EquivalentTo(GetNeedNodes()));
         }
         #endregion
 
