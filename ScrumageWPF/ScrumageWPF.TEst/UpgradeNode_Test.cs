@@ -86,6 +86,31 @@ namespace ScrumageWPF.Test {
 
         #region Category: Instantiation
 
+        #region UpgradeNode_ConstructorInstantiatesCorrectly        
+        /// <summary>
+        /// Asserts thats <see cref="UpgradeNode.UpgradeNode(Int32, String)"/> instantiates correctly.
+        /// </summary>
+        /// <param name="id">The identifier for the node.</param>
+        /// <param name="name">The name for the node.</param>
+        [Test]
+        [Category("Instantiation")]
+        #region Test-Cases
+        [TestCase(0, "Node1")]
+        [TestCase(6, "Albert")]
+        [TestCase(888, "Node943")]
+        #endregion
+        public void UpgradeNode_ConstructorInstantiatesCorrectly(Int32 id, String name) {
+            Node createdNode1 = new UpgradeNode(id, name);
+            UpgradeNode createdNode2 = new UpgradeNode(id, name);
+            Assert.That(createdNode1, Has.Property("Pawns").Count.EqualTo(0).
+                                      And.Property("NodeID").EqualTo(id).
+                                      And.Property("NodeName").EqualTo(name));
+            Assert.That(createdNode2, Has.Property("Pawns").Count.EqualTo(0).
+                                      And.Property("NodeID").EqualTo(id).
+                                      And.Property("NodeName").EqualTo(name));
+        } 
+        #endregion
+
         #endregion
 
         #region Category: UpgradeNode.DoAction
