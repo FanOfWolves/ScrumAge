@@ -48,6 +48,34 @@ namespace ScrumageWPF.Test {
         public void UpgradeNode_Test_TearDown() {
             testPlayer1 = null;
             testPlayer2 = null;
+            testNode = null;
+        }
+
+        /// <summary>
+        /// A setup performed before each test method.
+        /// </summary>
+        [SetUp]
+        public void Method_SetUp() {
+            testPlayer1.Pawns = new List<Pawn>(3);
+            testPlayer2.Pawns = new List<Pawn>(3);
+
+            testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Back End"));
+            testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Front End"));
+            testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Full Stack"));
+
+            testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Back End"));
+            testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Front End"));
+            testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Full Stack"));
+        }
+
+        /// <summary>
+        /// A cleanup performed after each test method.
+        /// </summary>
+        [TearDown]
+        public void Method_TearDown() {
+            testNode.Pawns.Clear();
+            testPlayer1.Pawns.Clear();
+            testPlayer2.Pawns.Clear();
         }
 
         #endregion
