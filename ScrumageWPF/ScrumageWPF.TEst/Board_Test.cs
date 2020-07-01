@@ -20,12 +20,28 @@ namespace ScrumageWPF.Test {
 
         #region Test Class Helper Methods
 
+        #region SetUp and TearDown
+        [OneTimeSetUp]
+        public void Board_Test_SetUp() {
+            testBoard = new Board();
+        }
+
+        [OneTimeTearDown]
+        public void Board_Test_TearDown() {
+            testBoard = null;
+        }
+        #endregion
+
         #endregion
 
         #region Board Tests
 
         #region Category: Instantiation
+        [Test]
+        [Category("Instantiation")]
+        public void Board_ConstructorInstantiatesCorrectly() {
 
+        }
 
 
         #endregion
