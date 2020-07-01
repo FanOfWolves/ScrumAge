@@ -72,14 +72,20 @@ namespace ScrumageWPF.Test {
             testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Back End"));
             testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Front End"));
             testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Full Stack"));
-            testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Front End"));
-            testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Front End"));
+            testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Full Stack"));
+            testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Full Stack"));
+            testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Full Stack"));
+            testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Full Stack"));
+            testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Full Stack"));
 
             testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Back End"));
             testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Front End"));
             testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Full Stack"));
-            testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Front End"));
-            testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Front End"));
+            testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Full Stack"));
+            testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Full Stack"));
+            testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Full Stack"));
+            testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Full Stack"));
+            testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Full Stack"));
 
             testPlayer1.playerResources = new ResourceContainer();
             testPlayer1.playerResources = new ResourceContainer();
@@ -106,12 +112,12 @@ namespace ScrumageWPF.Test {
         /// <param name="resourceType">Type of the resource.</param>
         [Test]
         #region Test-Cases
-        [TestCase(0, "Node1", REQ)]
-        [TestCase(6, "Albert", DES)]
-        [TestCase(888, "Node943", DES)]
-        [TestCase(1, "null", IMP)]
+        [TestCase(0, "Node1", typeof(Requirements))]
+        [TestCase(6, "Albert", typeof(Design))]
+        [TestCase(888, "Node943", typeof(Implementation))]
+        [TestCase(1, "null", typeof(Testing))]
         #endregion
-        public void ResourceNode_ConstructorInstantiatesCorrectly(Int32 id, String name, Int32 resourceType) {
+        public void ResourceNode_ConstructorInstantiatesCorrectly(Int32 id, String name, Type resourceType) {
             Resource? theResource = CreateResource(resourceType);
 
             ResourceNode testNode = new ResourceNode(id, name, theResource);
@@ -130,11 +136,11 @@ namespace ScrumageWPF.Test {
         /// <param name="resourceType">Type of the resource.</param>
         [Test]
         #region Test-Cases
-        [TestCase(0, null, NUL)]
-        [TestCase(0, "Albert", NUL)]
-        [TestCase(0, null, DES)]
+        [TestCase(0, null, null)]
+        [TestCase(0, "Albert", null)]
+        [TestCase(0, null, typeof(Design))]
         #endregion
-        public void ResourceNode_ConstructorCorrectlyHandlesNull(Int32 id, String name, Int32 resourceType) {
+        public void ResourceNode_ConstructorCorrectlyHandlesNull(Int32 id, String name, Type resourceType) {
             Resource? theResource = CreateResource(resourceType);
 
             Assert.That(new ResourceNode(id, name, theResource), Throws.InstanceOf(typeof(ArgumentNullException)));
@@ -175,18 +181,28 @@ namespace ScrumageWPF.Test {
                 return null;
         }
 
-        private Resource CreateResource(Int32 type) {
-            if(type == REQ)
+        /// <summary>
+        /// Creates a <see cref="Resource"/> based on a given <see cref="System.Type"/>.
+        /// </summary>
+        /// <param name="type">The resource type.</param>
+        /// <returns>a new Resource subclass.</returns>
+        private Resource CreateResource(Type type) {
+            if(type == typeof(Requirements))
                 return new Requirements();
-            else if(type == DES)
+            else if(type == typeof(Design))
                 return new Design();
-            else if(type == IMP)
+            else if(type == typeof(Implementation))
                 return new Implementation();
-            else if(type == TES)
+            else if(type == typeof(Testing))
                 return new Testing();
             return null;
         }
 
+        /// <summary>
+        /// Returns the amount of each resource in a <see cref="ResourceContainer"/> object.
+        /// </summary>
+        /// <param name="player">The player whose Resource Container we want.</param>
+        /// <returns>an array of the values of the resources.</returns>
         private Int32[] GetResourceContainerContents(Player player) {
             Int32[] containerContents = new Int32[4];
             containerContents[0] = player.GetPlayerResources()[new Requirements()];
@@ -196,32 +212,38 @@ namespace ScrumageWPF.Test {
             return containerContents;
         }
 
-        private Int32 GetChance(Pawn pawn, Type type) {
+        /// <summary>
+        /// Gets the success rate for a given <see cref="Pawn.PawnType"/> for a particular <see cref="Resource"/> type.
+        /// </summary>
+        /// <param name="pawn">The pawn to check.</param>
+        /// <param name="type">The resource type.</param>
+        /// <returns>The success rate for the pawn type for a particular resource.</returns>
+        private Int32 GetChance(String pawnType, Type type) {
             if(type == typeof(Requirements)) {
-                if(pawn.PawnType == "Back End")
+                if(pawnType == "Back End")
                     return REQ_BACK_END_CHANCE;
-                else if(pawn.PawnType == "Front End")
+                else if(pawnType == "Front End")
                     return REQ_FRONT_END_CHANCE;
                 return REQ_FULL_STACK_CHANCE;
             }
             else if(type == typeof(Design)) {
-                if(pawn.PawnType == "Back End")
+                if(pawnType == "Back End")
                     return DES_BACK_END_CHANCE;
-                else if(pawn.PawnType == "Front End")
+                else if(pawnType == "Front End")
                     return DES_FRONT_END_CHANCE;
                 return DES_FULL_STACK_CHANCE;
             }
             else if(type == typeof(Implementation)) {
-                if(pawn.PawnType == "Back End")
+                if(pawnType == "Back End")
                     return IMP_BACK_END_CHANCE;
-                else if(pawn.PawnType == "Front End")
+                else if(pawnType == "Front End")
                     return IMP_FRONT_END_CHANCE;
                 return IMP_FULL_STACK_CHANCE;
             }
             else {
-                if(pawn.PawnType == "Back End")
+                if(pawnType == "Back End")
                     return TES_BACK_END_CHANCE;
-                else if(pawn.PawnType == "Front End")
+                else if(pawnType == "Front End")
                     return TES_FRONT_END_CHANCE;
                 return TES_FULL_STACK_CHANCE;
             }
@@ -264,10 +286,9 @@ namespace ScrumageWPF.Test {
         #endregion
         public void ResourceNode_AccumulateResourceChances_ReturnsCorrectValue(String pawnType, Type resourceType) {
             ResourceNode sampleNode = GetTestNode(resourceType);
-            Pawn testPawn = new Pawn(0, pawnType);
-            Int32 expectedChance = 20 + GetChance(testPawn, resourceType);
-            
-            Int32 returnedChance = sampleNode.AccumulateResourceChances(new Pawn[] { testPawn });
+            Int32 expectedChance = 20 + GetChance(pawnType, resourceType);
+
+            Int32 returnedChance = sampleNode.AccumulateResourceChances(new Pawn[] { new Pawn(0, pawnType) } );
 
             Assert.That(returnedChance, Is.EqualTo(expectedChance));
         }
@@ -275,6 +296,7 @@ namespace ScrumageWPF.Test {
 
         #endregion
 
+        #region Category: General DoAction
         #region ResourceNode_DoAction_DoesNotReturnPawnsToIncorrectPlayer        
         /// <summary>
         /// Asserts that <see cref="ResourceNode.DoAction(Player)"/> does not return node pawns to incorrect players.
@@ -286,7 +308,6 @@ namespace ScrumageWPF.Test {
             Int32 originalPawnCount2 = testPlayer2.Pawns.Count;
 
             sampleNode.AddPawn(testPlayer1.TakePawn("Back End"));
-            sampleNode.AddPawn(testPlayer1.TakePawn("Front End"));
             sampleNode.AddPawn(testPlayer1.TakePawn("Front End"));
             sampleNode.AddPawn(testPlayer1.TakePawn("Full Stack"));
 
@@ -312,7 +333,6 @@ namespace ScrumageWPF.Test {
 
             sampleNode.AddPawn(testPlayer1.TakePawn("Back End"));
             sampleNode.AddPawn(testPlayer1.TakePawn("Front End"));
-            sampleNode.AddPawn(testPlayer1.TakePawn("Front End"));
             sampleNode.AddPawn(testPlayer1.TakePawn("Full Stack"));
 
             sampleNode.DoAction(testPlayer1);
@@ -322,26 +342,29 @@ namespace ScrumageWPF.Test {
             Assert.That(newPawnCount, Is.EqualTo(originalPawnCount));
         }
         #endregion
+        #endregion
+
+        #region Category: ResourceNode.DoAction
 
         #region ResourceNode_DoAction_ReturnsCorrectStringOnNoPawnError
         /// <summary>
         /// Asserts that <see cref="ResourceNode.DoAction(Player)"/> returns the correct string on action failure.
         /// </summary>
         [Test]
+        [Category("ResourceNode.DoAction")]
         #region Test-Cases
         [TestCase(typeof(Requirements))]
         [TestCase(typeof(Design))]
         [TestCase(typeof(Implementation))]
         [TestCase(typeof(Testing))]
         #endregion
-        [Category("General DoAction")]
         public void ResourceNode_DoAction_ReturnsCorrectStringOnNoPawnError(Type resourceType) {
             ResourceNode sampleNode = GetTestNode(resourceType);
-            
+
             sampleNode.AddPawn(testPlayer1.TakePawn("Back End"));
 
             String stringOutput = sampleNode.DoAction(testPlayer2);
-            
+
             Assert.That(stringOutput, Is.EqualTo($"{testPlayer2.PlayerName} has failed to obtain a {sampleNode.nodeResource.Name}. Reason: No Pawns."));
         }
         #endregion
@@ -351,13 +374,14 @@ namespace ScrumageWPF.Test {
         /// Asserts that <see cref="ResourceNode.DoAction(Player)"/> returns the correct string on roll success or failure.
         /// </summary>
         [Test]
-        #region ResourceNode_DoAction_ReturnsCorrectStringOnSuccessRollOrFailRoll
+        [Category("ResourceNode.DoAction")]
+        #region Test-Cases
         [TestCase(typeof(Requirements))]
         [TestCase(typeof(Design))]
         [TestCase(typeof(Implementation))]
-        [TestCase(typeof(Testing))] 
+        [TestCase(typeof(Testing))]
         #endregion
-        [Category("General DoAction")]
+
         public void ResourceNode_DoAction_ReturnsCorrectStringOnSuccessRollOrFailRoll(Type resourceType) {
             ResourceNode sampleNode = GetTestNode(resourceType);
 
@@ -372,6 +396,52 @@ namespace ScrumageWPF.Test {
             else
                 Assert.That(stringOutput, Is.EqualTo($"{testPlayer1.PlayerName} has failed to obtain a {sampleNode.nodeResource.Name}"));
         }
+
+        #endregion
+
+        #region ResourceNode_DoAction_AddsCorrectResourceToPlayer
+        [Test]
+        [Category("ResourceNode.DoAction")]
+        #region Test-Cases
+        [TestCase(typeof(Requirements))]
+        [TestCase(typeof(Design))]
+        [TestCase(typeof(Implementation))]
+        [TestCase(typeof(Testing))]
+        #endregion
+        public void ResourceNode_DoAction_AddsCorrectResourceToPlayer(Type resourceType) {
+            ResourceNode sampleNode = GetTestNode(resourceType);
+            Resource expectedResource = CreateResource(resourceType);
+
+            
+
+        }
+        #endregion
+
+        #region ResourceNode_DoAction_ReturnsDeepCopyOfNodeResource      
+        /// <summary>
+        /// Asserts that <see cref="ResourceNode.DoAction(Player)"/> returns a deep copy of <see cref="ResourceNode.nodeResource"/>.\
+        /// See also <seealso cref="Resource.DeepCopy"/>.
+        /// </summary>
+        /// <param name="resourceType">Type of the resource.</param>
+        [Test]
+        [Category("ResourceNode.DoAction")]
+        #region Test-Cases
+        [TestCase(typeof(Requirements))]
+        [TestCase(typeof(Design))]
+        [TestCase(typeof(Implementation))]
+        [TestCase(typeof(Testing))]
+        #endregion
+        public void ResourceNode_DoAction_ReturnsDeepCopyOfNodeResource(Type resourceType) {
+            ResourceNode sampleNode = GetTestNode(resourceType);
+            Resource indexResource = CreateResource(resourceType);
+            for(Int32 i = 0; i < 6; i++) {
+                sampleNode.AddPawn(testPlayer1.TakePawn("Full Stack"));
+            }
+
+            sampleNode.DoAction(testPlayer1);
+            Assert.That(testPlayer1.playerResources.ResourceDictionary[indexResource], Is.Not.SameAs(sampleNode.nodeResource));
+        }
+        #endregion
 
         #endregion
 
