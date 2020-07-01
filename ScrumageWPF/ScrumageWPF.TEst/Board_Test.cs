@@ -5,6 +5,7 @@ using ScrumageEngine.BoardSpace;
 using ScrumageEngine.Objects.Items.Cards;
 using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Player;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ScrumageWPF.Test {
 
@@ -54,6 +55,19 @@ namespace ScrumageWPF.Test {
             neededNodes.Add(new CardNode(16, "Artifact 4", new Deck("Artifact", 10)));
             return neededNodes;
         }
+
+
+        private class NodeEqualityComparer : IEqualityComparer<Node> {
+            public Boolean Equals( Node thisNode, Node thatNode) {
+                return (thisNode.NodeID == thatNode.NodeID && thisNode.NodeName == thatNode.NodeName);
+            }
+
+            public Int32 GetHashCode( Node obj) {
+                return obj.GetHashCode();
+            }
+        }
+
+
         #endregion
 
 
@@ -66,7 +80,7 @@ namespace ScrumageWPF.Test {
         [Category("Instantiation")]
         public void Board_ConstructorInstantiatesCorrectly() {
             Board _board = new Board();
-            Assert.That(testBoard.Nodes, Is.EquivalentTo(GetNeedNodes()));
+            Assert.That(testBoard.Nodes, Is.EquivalentTo(GetNeedNodes()).Using(new NodeEqualityComparer()));
         }
         #endregion
 
