@@ -22,9 +22,7 @@ namespace ScrumageWPF.Test {
 
         private UpgradeNode testNode;
 
-        private const String BE = "Back End";
-        private const String FE = "Front End";
-        private const String FS = "Full Stack";
+        private const Int32 UPGRADE_NODE_PAWN_LIMIT = 1;
 
         #endregion
 
@@ -136,9 +134,10 @@ namespace ScrumageWPF.Test {
             Int32 newNumberOfFullStackPawns = testPlayer1.Pawns.FindAll(_pawn => _pawn.PawnType == "Full Stack").Count;
 
             Assert.That(newNumberOfFullStackPawns, Is.GreaterThan(originalNumberOfFullStackPawns));
-        } 
+        }
         #endregion
 
+        #region UpgradeNode_DoAction_DoesNotGiveAdditionalPawns
         /// <summary>
         /// Asserts that <see cref="UpgradeNode.DoAction(Player)"/> does not give player more pawns.
         /// </summary>
@@ -153,7 +152,8 @@ namespace ScrumageWPF.Test {
             Int32 newPlayerPawnCount = testPlayer1.Pawns.Count;
 
             Assert.That(originalPlayerPawnCount, Is.EqualTo(newPlayerPawnCount));
-        }
+        } 
+        #endregion
 
         #endregion
 
@@ -215,6 +215,20 @@ namespace ScrumageWPF.Test {
         #endregion
 
         #region Category: Other
+
+        #region UpgradeNode_GetMaxPawnLimitReturnsCorrectNumber        
+        /// <summary>
+        /// Asserts that <see cref="UpgradeNode.MaxPawnLimit"/> returns the current number.
+        /// </summary>
+        [Test]
+        [Category("Other")]
+        public void UpgradeNode_GetMaxPawnLimitReturnsCorrectNumber() {
+            Assert.That(testNode.MaxPawnLimit, Is.EqualTo(UPGRADE_NODE_PAWN_LIMIT));
+            
+            Node generic = new UpgradeNode(0, "sample");
+            Assert.That(generic.MaxPawnLimit, Is.EqualTo(UPGRADE_NODE_PAWN_LIMIT));
+        }
+        #endregion
 
         #endregion
 
