@@ -70,9 +70,54 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
+		#region Node Getters
+        [Test]
+        [Category("Getters")]
+        [TestCase("Requirements")]
+        [TestCase("Design")]
+        [TestCase("Implementation")]
+        [TestCase("Testing")]
+        [TestCase("Technical Hut")]
+        [TestCase("Budget Increase")]
+        [TestCase("Interview")]
+        [TestCase("Reassignment")]
+        [TestCase("Agility 1")]
+        [TestCase("Agility 2")]
+        [TestCase("Agility 3")]
+        [TestCase("Agility 4")]
+        [TestCase("Artifact 1")]
+        [TestCase("Artifact 2")]
+        [TestCase("Artifact 3")]
+        [TestCase("Artifact 4")]
+        public void Nodes_By_Name(String nodeName) {
+            Assert.That(nodeName == testBoard.GetNodeByName(nodeName).NodeName);
+		}
 
+        [Test]
+        [Category("Getters")]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        [TestCase(5)]
+        [TestCase(6)]
+        [TestCase(7)]
+        [TestCase(8)]
+        [TestCase(9)]
+        [TestCase(10)]
+        [TestCase(11)]
+        [TestCase(12)]
+        [TestCase(13)]
+        [TestCase(14)]
+        [TestCase(15)]
+        [TestCase(16)]
+        [TestCase(17)]
+        public void Nodes_By_ID(Int32 nodeID) {
+            Assert.That(nodeID == testBoard.GetNodeByID(nodeID).NodeID);
+        }
+		#endregion
 
-        #endregion
+		#endregion
 
-    }
+	}
 }
