@@ -102,7 +102,8 @@ namespace ScrumageWPF.Test {
 
         #region Node Getters
         [Test]
-        [Category("Getters")]
+		#region Name Test Cases
+		[Category("Getters")]
         [TestCase("Requirements")]
         [TestCase("Design")]
         [TestCase("Implementation")]
@@ -119,12 +120,14 @@ namespace ScrumageWPF.Test {
         [TestCase("Artifact 2")]
         [TestCase("Artifact 3")]
         [TestCase("Artifact 4")]
+        #endregion
         public void Nodes_By_Name(String nodeName) {
             Assert.That(nodeName == testBoard.GetNodeByName(nodeName).NodeName);
 		}
 
         [Test]
         [Category("Getters")]
+        #region ID Test Cases
         [TestCase(1)]
         [TestCase(2)]
         [TestCase(3)]
@@ -141,8 +144,8 @@ namespace ScrumageWPF.Test {
         [TestCase(14)]
         [TestCase(15)]
         [TestCase(16)]
-        [TestCase(17)]
-        public void Nodes_By_ID(Int32 nodeID) {
+		#endregion
+		public void Nodes_By_ID(Int32 nodeID) {
             Assert.That(nodeID == testBoard.GetNodeByID(nodeID).NodeID);
         }
 		#endregion
