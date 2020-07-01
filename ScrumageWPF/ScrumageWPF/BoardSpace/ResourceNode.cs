@@ -49,7 +49,7 @@ namespace ScrumageEngine.BoardSpace {
         /// <returns>
         ///     <c>true</c> if player is to gain resource; otherwise, <c>false</c>.
         /// </returns>
-        private Boolean RollForResource(Int32 successChance) {
+        public Boolean RollForResource(Int32 successChance) {
             Int32 _result = this.resourceChanceCalculator.Next(1,101);
             return successChance >= _result;
         }
