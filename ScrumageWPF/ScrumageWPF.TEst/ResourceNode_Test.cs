@@ -5,6 +5,8 @@ using ScrumageEngine.BoardSpace;
 using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Player;
 using NUnit.Framework;
+using System.Linq;
+
 namespace ScrumageWPF.Test {
 
     /// <summary>
@@ -44,7 +46,6 @@ namespace ScrumageWPF.Test {
         private const Int32 TES = 3;
         private const Int32 NUL = 4;
 
-
         [OneTimeSetUp]
         public void ResourceNode_ClassSetUp() {
             reqNode = new ResourceNode(0, "requirementsNode", new Requirements());
@@ -56,46 +57,42 @@ namespace ScrumageWPF.Test {
             testPlayer2 = new Player(2, "testPlayer2");
         }
 
+        [OneTimeTearDown]
+        public void ResourceNode_ClassTearDown() {
+            reqNode = null;
+            desNode = null;
+            impNode = null;
+            tesNode = null;
+            testPlayer1 = null;
+            testPlayer2 = null;
+        }
+
         [SetUp]
         public void ResourceNode_MethodSetUp() {
-            testPlayer1.Pawns = new List<Pawn>(3);
-            testPlayer2.Pawns = new List<Pawn>(3);
-
             testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Back End"));
             testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Front End"));
             testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Full Stack"));
+            testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Front End"));
+            testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Front End"));
 
             testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Back End"));
             testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Front End"));
             testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Full Stack"));
+            testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Front End"));
+            testPlayer2.GivePawn(new Pawn(testPlayer2.PlayerID, "Front End"));
 
             testPlayer1.playerResources = new ResourceContainer();
             testPlayer1.playerResources = new ResourceContainer();
         }
 
-        private ResourceNode GetTestNode(Type type) {
-            if(type == typeof(Requirements))
-                return this.reqNode;
-            else if(type == typeof(Design))
-                return this.desNode;
-            else if(type == typeof(Implementation))
-                return this.impNode;
-            else if(type == typeof(Testing))
-                return this.tesNode;
-            else
-                return null;
-        }
-
-        private Resource CreateResource(Int32 type) {
-            if(type == REQ)
-                return new Requirements();
-            else if(type == DES)
-                return new Design();
-            else if(type == IMP)
-                return new Implementation();
-            else if(type == TES)
-                return new Testing();
-            return null;
+        [TearDown]
+        public void ResourceNode_MethodTearDown() {
+            this.reqNode.Pawns.Clear();
+            this.desNode.Pawns.Clear();
+            this.impNode.Pawns.Clear();
+            this.tesNode.Pawns.Clear();
+            this.testPlayer1.Pawns.Clear();
+            this.testPlayer2.Pawns.Clear();
         }
 
         #region Category: Instantiation
@@ -163,6 +160,33 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
+        #region Private test methods
+
+        private ResourceNode GetTestNode(Type type) {
+            if(type == typeof(Requirements))
+                return this.reqNode;
+            else if(type == typeof(Design))
+                return this.desNode;
+            else if(type == typeof(Implementation))
+                return this.impNode;
+            else if(type == typeof(Testing))
+                return this.tesNode;
+            else
+                return null;
+        }
+
+        private Resource CreateResource(Int32 type) {
+            if(type == REQ)
+                return new Requirements();
+            else if(type == DES)
+                return new Design();
+            else if(type == IMP)
+                return new Implementation();
+            else if(type == TES)
+                return new Testing();
+            return null;
+        }
+
         private Int32[] GetResourceContainerContents(Player player) {
             Int32[] containerContents = new Int32[4];
             containerContents[0] = player.GetPlayerResources()[new Requirements()];
@@ -202,9 +226,10 @@ namespace ScrumageWPF.Test {
                 return TES_FULL_STACK_CHANCE;
             }
         }
+        #endregion
 
         #region Category: Subclass Methods        
-        
+
         #region ResourceNode_RollForResource_SuccessRateMustBeAboveOrEqualToRandomRollToSucceed
         /// <summary>
         /// Asserts that <see cref="ResourceNode.RollForResource(Int32)"/> requires roll to be lower than success rate.
@@ -248,10 +273,32 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
-
         #endregion
 
-     
+        #region ResourceNode_DoAction_DoesNotReturnPawnsToIncorrectPlayer        
+        /// <summary>
+        /// Asserts that <see cref="ResourceNode.DoAction(Player)"/> does not return node pawns to incorrect players.
+        /// </summary>
+        [Test]
+        [Category("General DoAction")]
+        public void ResourceNode_DoAction_DoesNotReturnPawnsToIncorrectPlayer() {
+            ResourceNode sampleNode = reqNode;
+            Int32 originalPawnCount2 = testPlayer2.Pawns.Count;
+
+            sampleNode.AddPawn(testPlayer1.TakePawn("Back End"));
+            sampleNode.AddPawn(testPlayer1.TakePawn("Front End"));
+            sampleNode.AddPawn(testPlayer1.TakePawn("Front End"));
+            sampleNode.AddPawn(testPlayer1.TakePawn("Full Stack"));
+
+            Int32 originalNodePawnCount = sampleNode.Pawns.Count;
+
+            sampleNode.DoAction(testPlayer2);
+
+            // Assert no change in sampleNode or testPlayer2
+            Assert.That(sampleNode.Pawns.Count, Is.EqualTo(originalNodePawnCount));
+            Assert.That(testPlayer2.Pawns.Count, Is.EqualTo(originalPawnCount2));
+        }
+        #endregion
 
         #region ResourceNode_DoAction_ReturnsCorrectPawnsToPlayer
         /// <summary>
@@ -259,37 +306,73 @@ namespace ScrumageWPF.Test {
         /// </summary>
         [Test]
         [Category("General DoAction")]
-        public void ResourceNode_DoAction_ReturnsCorrectPawnsToPlayer() {
-            
+        public void ResourceNode_DoAction_ReturnsCorrectPawnsToCorrectPlayer() {
+            ResourceNode sampleNode = reqNode;
+            Int32 originalPawnCount = testPlayer1.Pawns.Count;
+
+            sampleNode.AddPawn(testPlayer1.TakePawn("Back End"));
+            sampleNode.AddPawn(testPlayer1.TakePawn("Front End"));
+            sampleNode.AddPawn(testPlayer1.TakePawn("Front End"));
+            sampleNode.AddPawn(testPlayer1.TakePawn("Full Stack"));
+
+            sampleNode.DoAction(testPlayer1);
+
+            Int32 newPawnCount = testPlayer1.Pawns.Count;
+
+            Assert.That(newPawnCount, Is.EqualTo(originalPawnCount));
         }
         #endregion
 
-        #region ResourceNode_DoAction_ReturnsCorrectStringOnFailure
+        #region ResourceNode_DoAction_ReturnsCorrectStringOnNoPawnError
         /// <summary>
         /// Asserts that <see cref="ResourceNode.DoAction(Player)"/> returns the correct string on action failure.
         /// </summary>
         [Test]
+        #region Test-Cases
+        [TestCase(typeof(Requirements))]
+        [TestCase(typeof(Design))]
+        [TestCase(typeof(Implementation))]
+        [TestCase(typeof(Testing))]
+        #endregion
         [Category("General DoAction")]
-        public void ResourceNode_DoAction_ReturnsCorrectStringOnFailure() {
-            //this.testNode.AddPawn(testPlayer1.TakePawn("Back End"));
+        public void ResourceNode_DoAction_ReturnsCorrectStringOnNoPawnError(Type resourceType) {
+            ResourceNode sampleNode = GetTestNode(resourceType);
+            
+            sampleNode.AddPawn(testPlayer1.TakePawn("Back End"));
 
-            //String stringOutput = testNode.DoAction(testPlayer2);
-            //Assert.That(stringOutput, Is.EqualTo(testPlayer2.PlayerName + this.failedActionStr));
+            String stringOutput = sampleNode.DoAction(testPlayer2);
+            
+            Assert.That(stringOutput, Is.EqualTo($"{testPlayer2.PlayerName} has failed to obtain a {sampleNode.nodeResource.Name}. Reason: No Pawns."));
         }
         #endregion
 
         #region ResourceNode_DoAction_ReturnsCorrectStringOnSuccess
         /// <summary>
-        /// Asserts that <see cref="ResourceNode.DoAction(Player)"/> returns the correct string on action success.
+        /// Asserts that <see cref="ResourceNode.DoAction(Player)"/> returns the correct string on roll success or failure.
         /// </summary>
         [Test]
+        #region ResourceNode_DoAction_ReturnsCorrectStringOnSuccessRollOrFailRoll
+        [TestCase(typeof(Requirements))]
+        [TestCase(typeof(Design))]
+        [TestCase(typeof(Implementation))]
+        [TestCase(typeof(Testing))] 
+        #endregion
         [Category("General DoAction")]
-        public void ResourceNode_DoAction_ReturnsCorrectStringOnSuccess() {
-            //this.testNode.AddPawn(testPlayer1.TakePawn("Back End"));
+        public void ResourceNode_DoAction_ReturnsCorrectStringOnSuccessRollOrFailRoll(Type resourceType) {
+            ResourceNode sampleNode = GetTestNode(resourceType);
 
-            //String stringOutput = testNode.DoAction(testPlayer1);
-            //Assert.That(stringOutput, Is.EqualTo(testPlayer1.PlayerName + this.passedActionStr));
+            sampleNode.AddPawn(testPlayer1.TakePawn("Back End"));
+
+            String stringOutput = sampleNode.DoAction(testPlayer1);
+
+            Int32[] gainedResources = GetResourceContainerContents(testPlayer1);
+
+            if(gainedResources.Any<Int32>(_val => _val > 0))
+                Assert.That(stringOutput, Is.EqualTo($"{testPlayer1.PlayerName} has acquired a {sampleNode.nodeResource.Name}!"));
+            else
+                Assert.That(stringOutput, Is.EqualTo($"{testPlayer1.PlayerName} has failed to obtain a {sampleNode.nodeResource.Name}"));
         }
+
         #endregion
 
     }
