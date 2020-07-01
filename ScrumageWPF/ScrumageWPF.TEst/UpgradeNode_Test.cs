@@ -116,6 +116,45 @@ namespace ScrumageWPF.Test {
 
         #region Category: UpgradeNode.DoAction
 
+        #region UpgradeNode_DoAction_UpgradesPawns
+        /// <summary>
+        /// Asserts that <see cref="UpgradeNode.DoAction(Player)"/> upgrades and returns the player's pawns.
+        /// </summary>
+        /// <param name="pawnToGive">The pawn type to give to node.</param>
+        [Test]
+        [Category("UpgradeNode.DoAction")]
+        #region Test-Cases
+        [TestCase("Back End")]
+        [TestCase("Front End")]
+        #endregion
+        public void UpgradeNode_DoAction_UpgradesPawns(String pawnToGive) {
+            Int32 originalNumberOfFullStackPawns = testPlayer1.Pawns.FindAll(_pawn => _pawn.PawnType == "Full Stack").Count;
+
+            testNode.AddPawn(testPlayer1.TakePawn(pawnToGive));
+            testNode.DoAction(testPlayer1);
+
+            Int32 newNumberOfFullStackPawns = testPlayer1.Pawns.FindAll(_pawn => _pawn.PawnType == "Full Stack").Count;
+
+            Assert.That(newNumberOfFullStackPawns, Is.GreaterThan(originalNumberOfFullStackPawns));
+        } 
+        #endregion
+
+        /// <summary>
+        /// Asserts that <see cref="UpgradeNode.DoAction(Player)"/> does not give player more pawns.
+        /// </summary>
+        [Test]
+        [Category("UpgradeNode.DoAction")]
+        public void UpgradeNode_DoAction_DoesNotGiveAdditionalPawns() {
+            Int32 originalPlayerPawnCount = testPlayer1.Pawns.Count;
+
+            testNode.AddPawn(testPlayer1.TakePawn("Back End"));
+            testNode.DoAction(testPlayer1);
+
+            Int32 newPlayerPawnCount = testPlayer1.Pawns.Count;
+
+            Assert.That(originalPlayerPawnCount, Is.EqualTo(newPlayerPawnCount));
+        }
+
         #endregion
 
         #region Category: General DoAction
