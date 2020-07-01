@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using ScrumageEngine.BoardSpace;
 using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Player;
@@ -15,15 +14,11 @@ namespace ScrumageWPF.Test {
     [TestFixture]
     class ResourceNode_Test {
 
-        private ResourceNode reqNode;
-        private ResourceNode desNode;
-        private ResourceNode impNode;
-        private ResourceNode tesNode;
-
+        #region Fields
         private Player testPlayer1;
         private Player testPlayer2;
-        
-        private Int32 RESOURCE_NODE_PAWN_LIMIT = 7;
+
+        private const Int32 RESOURCE_NODE_PAWN_LIMIT = 7;
 
         #region Resource Success Chances
         private const Int32 DES_FULL_STACK_CHANCE = 20;
@@ -39,34 +34,32 @@ namespace ScrumageWPF.Test {
         private const Int32 IMP_FRONT_END_CHANCE = 10;
         private const Int32 IMP_BACK_END_CHANCE = 20;
         #endregion
+        #endregion
 
-        private const Int32 REQ = 0;
-        private const Int32 DES = 1;
-        private const Int32 IMP = 2;
-        private const Int32 TES = 3;
-        private const Int32 NUL = 4;
+        #region Testing Suite Helper Methods
 
+        #region Setup and Teardown        
+        /// <summary>
+        /// Setup this testing class.
+        /// </summary>
         [OneTimeSetUp]
         public void ResourceNode_ClassSetUp() {
-            reqNode = new ResourceNode(0, "requirementsNode", new Requirements());
-            desNode = new ResourceNode(1, "designNode", new Design());
-            impNode = new ResourceNode(2, "implementationNode", new Implementation());
-            tesNode = new ResourceNode(3, "testingNode", new Testing());
-
             testPlayer1 = new Player(1, "testPlayer1");
             testPlayer2 = new Player(2, "testPlayer2");
         }
 
+        /// <summary>
+        /// Cleanup this testing class.
+        /// </summary>
         [OneTimeTearDown]
         public void ResourceNode_ClassTearDown() {
-            reqNode = null;
-            desNode = null;
-            impNode = null;
-            tesNode = null;
             testPlayer1 = null;
             testPlayer2 = null;
         }
 
+        /// <summary>
+        /// Setup before each testing method.
+        /// </summary>
         [SetUp]
         public void ResourceNode_MethodSetUp() {
             testPlayer1.GivePawn(new Pawn(testPlayer1.PlayerID, "Back End"));
@@ -91,94 +84,31 @@ namespace ScrumageWPF.Test {
             testPlayer1.playerResources = new ResourceContainer();
         }
 
+        /// <summary>
+        /// Cleanup after each testing method.
+        /// </summary>
         [TearDown]
         public void ResourceNode_MethodTearDown() {
-            this.reqNode.Pawns.Clear();
-            this.desNode.Pawns.Clear();
-            this.impNode.Pawns.Clear();
-            this.tesNode.Pawns.Clear();
             this.testPlayer1.Pawns.Clear();
             this.testPlayer2.Pawns.Clear();
         }
+        #endregion
 
-        #region Category: Instantiation
-
-        #region ResourceNode_ConstructorInstantiatesCorrectly        
+        #region Private test methods        
         /// <summary>
-        /// Asserts that <see cref="ResourceNode.ResourceNode(Int32, String, Resource)"/> instantiates correctly.
+        /// References a private <see cref="ResourceNode"/> object to be used for testing.
         /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="resourceType">Type of the resource.</param>
-        [Test]
-        #region Test-Cases
-        [TestCase(0, "Node1", typeof(Requirements))]
-        [TestCase(6, "Albert", typeof(Design))]
-        [TestCase(888, "Node943", typeof(Implementation))]
-        [TestCase(1, "null", typeof(Testing))]
-        #endregion
-        public void ResourceNode_ConstructorInstantiatesCorrectly(Int32 id, String name, Type resourceType) {
-            Resource? theResource = CreateResource(resourceType);
-
-            ResourceNode testNode = new ResourceNode(id, name, theResource);
-            Assert.That(testNode.NodeID, Is.EqualTo(id));
-            Assert.That(testNode.NodeName, Is.EqualTo(name));
-            Assert.That(testNode.nodeResource, Is.EqualTo(theResource));
-        } 
-        #endregion
-
-        #region ResourceNode_ConstructorCorrectlyHandlesNull        
-        /// <summary>
-        /// Asserts that <see cref="ResourceNode.ResourceNode(Int32, String, Resource)"/> correctly handles null input.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="resourceType">Type of the resource.</param>
-        [Test]
-        #region Test-Cases
-        [TestCase(0, null, null)]
-        [TestCase(0, "Albert", null)]
-        [TestCase(0, null, typeof(Design))]
-        #endregion
-        public void ResourceNode_ConstructorCorrectlyHandlesNull(Int32 id, String name, Type resourceType) {
-            Resource? theResource = CreateResource(resourceType);
-
-            Assert.That(new ResourceNode(id, name, theResource), Throws.InstanceOf(typeof(ArgumentNullException)));
-        }
-        #endregion
-
-        #endregion
-
-        #region ResourceNode_GetMaxPawnLimitReturnsCorrectNumber        
-        /// <summary>
-        /// Asserts that <see cref="ResourceNode.MaxPawnLimit"/> returns the current number.
-        /// </summary>
-        [Test]
-        #region Test-Cases
-        [TestCase(typeof(Requirements))]
-        [TestCase(typeof(Design))]
-        [TestCase(typeof(Implementation))]
-        [TestCase(typeof(Testing))] 
-        #endregion
-        public void ResourceNode_GetMaxPawnLimitReturnsCorrectNumber(Type resourceType) {
-            ResourceNode sampleNode = GetTestNode(resourceType);
-            Assert.That(sampleNode.MaxPawnLimit, Is.EqualTo(RESOURCE_NODE_PAWN_LIMIT));
-        }
-        #endregion
-
-        #region Private test methods
-
-        private ResourceNode GetTestNode(Type type) {
-            if(type == typeof(Requirements))
-                return this.reqNode;
-            else if(type == typeof(Design))
-                return this.desNode;
-            else if(type == typeof(Implementation))
-                return this.impNode;
-            else if(type == typeof(Testing))
-                return this.tesNode;
+        /// <param name="type">The resource type of the needed node.</param>
+        /// <returns></returns>
+        private ResourceNode CreateResourceNode(Type resourceType) {
+            if(resourceType == typeof(Requirements))
+                return new ResourceNode(0, "requirementsNode", new Requirements());
+            else if(resourceType == typeof(Design))
+                return new ResourceNode(1, "designNode", new Design());
+            else if(resourceType == typeof(Implementation))
+                return new ResourceNode(2, "implementationNode", new Implementation());
             else
-                return null;
+                return new ResourceNode(3, "testingNode", new Testing());
         }
 
         /// <summary>
@@ -250,7 +180,61 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
-        #region Category: Subclass Methods        
+        #endregion
+
+        #region ResourceNode Tests
+
+        #region Category: Instantiation
+
+        #region ResourceNode_ConstructorInstantiatesCorrectly        
+        /// <summary>
+        /// Asserts that <see cref="ResourceNode.ResourceNode(Int32, String, Resource)"/> instantiates correctly.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="resourceType">Type of the resource.</param>
+        [Test]
+        [Category("Instantiation")]
+        #region Test-Cases
+        [TestCase(0, "Node1", typeof(Requirements))]
+        [TestCase(6, "Albert", typeof(Design))]
+        [TestCase(888, "Node943", typeof(Implementation))]
+        [TestCase(1, "null", typeof(Testing))]
+        #endregion
+        public void ResourceNode_ConstructorInstantiatesCorrectly(Int32 id, String name, Type resourceType) {
+            Resource? theResource = CreateResource(resourceType);
+
+            ResourceNode testNode = new ResourceNode(id, name, theResource);
+            Assert.That(testNode.NodeID, Is.EqualTo(id));
+            Assert.That(testNode.NodeName, Is.EqualTo(name));
+            Assert.That(testNode.nodeResource, Is.EqualTo(theResource));
+        }
+        #endregion
+
+        #region ResourceNode_ConstructorCorrectlyHandlesNull        
+        /// <summary>
+        /// Asserts that <see cref="ResourceNode.ResourceNode(Int32, String, Resource)"/> correctly handles null input.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="resourceType">Type of the resource.</param>
+        [Test]
+        [Category("Instantiation")]
+        #region Test-Cases
+        [TestCase(0, null, null)]
+        [TestCase(0, "Albert", null)]
+        [TestCase(0, null, typeof(Design))]
+        #endregion
+        public void ResourceNode_ConstructorCorrectlyHandlesNull(Int32 id, String name, Type resourceType) {
+            Resource? theResource = CreateResource(resourceType);
+
+            Assert.That(new ResourceNode(id, name, theResource), Throws.InstanceOf(typeof(ArgumentNullException)));
+        }
+        #endregion
+
+        #endregion
+
+        #region Category: ResourceNode Unique Methods       
 
         #region ResourceNode_RollForResource_SuccessRateMustBeAboveOrEqualToRandomRollToSucceed
         /// <summary>
@@ -259,10 +243,11 @@ namespace ScrumageWPF.Test {
         /// <param name="successRate">The success rate.</param>
         /// <param name="expectedResult">The expected result of roll.</param>
         [Test]
+        [Category("ResourceNode Unique Methods")]
         [TestCase(100, true)] // Always succeed
         [TestCase(0, false)]  // Always fail
         public void ResourceNode_RollForResource_SuccessRateMustBeAboveOrEqualToRandomRollToSucceed(Int32 successRate, Boolean expectedResult) {
-            ResourceNode sampleNode = reqNode;
+            ResourceNode sampleNode = CreateResourceNode(typeof(Requirements));
             Boolean[] distribution = new Boolean[10000];
             for(Int32 i = 0; i < 10000; i++) {
                 distribution[i] = sampleNode.RollForResource(successRate);
@@ -278,17 +263,18 @@ namespace ScrumageWPF.Test {
         /// <param name="pawnType">Type of the pawn.</param>
         /// <param name="resourceType">Type of the resource.</param>
         [Test]
+        [Category("ResourceNode Unique Methods")]
         #region Test-Cases
         [TestCase("Full Stack", typeof(Requirements))]
         [TestCase("Back End", typeof(Requirements))]
         [TestCase("Front End", typeof(Requirements))]
-        [TestCase("Full Stack", typeof(Design))]  
+        [TestCase("Full Stack", typeof(Design))]
         #endregion
         public void ResourceNode_AccumulateResourceChances_ReturnsCorrectValue(String pawnType, Type resourceType) {
-            ResourceNode sampleNode = GetTestNode(resourceType);
+            ResourceNode sampleNode = CreateResourceNode(resourceType);
             Int32 expectedChance = 20 + GetChance(pawnType, resourceType);
 
-            Int32 returnedChance = sampleNode.AccumulateResourceChances(new Pawn[] { new Pawn(0, pawnType) } );
+            Int32 returnedChance = sampleNode.AccumulateResourceChances(new Pawn[] { new Pawn(0, pawnType) });
 
             Assert.That(returnedChance, Is.EqualTo(expectedChance));
         }
@@ -297,6 +283,7 @@ namespace ScrumageWPF.Test {
         #endregion
 
         #region Category: General DoAction
+
         #region ResourceNode_DoAction_DoesNotReturnPawnsToIncorrectPlayer        
         /// <summary>
         /// Asserts that <see cref="ResourceNode.DoAction(Player)"/> does not return node pawns to incorrect players.
@@ -304,7 +291,7 @@ namespace ScrumageWPF.Test {
         [Test]
         [Category("General DoAction")]
         public void ResourceNode_DoAction_DoesNotReturnPawnsToIncorrectPlayer() {
-            ResourceNode sampleNode = reqNode;
+            ResourceNode sampleNode = CreateResourceNode(typeof(Requirements));
             Int32 originalPawnCount2 = testPlayer2.Pawns.Count;
 
             sampleNode.AddPawn(testPlayer1.TakePawn("Back End"));
@@ -328,7 +315,7 @@ namespace ScrumageWPF.Test {
         [Test]
         [Category("General DoAction")]
         public void ResourceNode_DoAction_ReturnsCorrectPawnsToCorrectPlayer() {
-            ResourceNode sampleNode = reqNode;
+            ResourceNode sampleNode = CreateResourceNode(typeof(Requirements));
             Int32 originalPawnCount = testPlayer1.Pawns.Count;
 
             sampleNode.AddPawn(testPlayer1.TakePawn("Back End"));
@@ -342,6 +329,7 @@ namespace ScrumageWPF.Test {
             Assert.That(newPawnCount, Is.EqualTo(originalPawnCount));
         }
         #endregion
+
         #endregion
 
         #region Category: ResourceNode.DoAction
@@ -359,7 +347,7 @@ namespace ScrumageWPF.Test {
         [TestCase(typeof(Testing))]
         #endregion
         public void ResourceNode_DoAction_ReturnsCorrectStringOnNoPawnError(Type resourceType) {
-            ResourceNode sampleNode = GetTestNode(resourceType);
+            ResourceNode sampleNode = CreateResourceNode(resourceType);
 
             sampleNode.AddPawn(testPlayer1.TakePawn("Back End"));
 
@@ -383,7 +371,7 @@ namespace ScrumageWPF.Test {
         #endregion
 
         public void ResourceNode_DoAction_ReturnsCorrectStringOnSuccessRollOrFailRoll(Type resourceType) {
-            ResourceNode sampleNode = GetTestNode(resourceType);
+            ResourceNode sampleNode = CreateResourceNode(resourceType);
 
             sampleNode.AddPawn(testPlayer1.TakePawn("Back End"));
 
@@ -399,7 +387,11 @@ namespace ScrumageWPF.Test {
 
         #endregion
 
-        #region ResourceNode_DoAction_AddsCorrectResourceToPlayer
+        #region ResourceNode_DoAction_AddsCorrectResourceToPlayer        
+        /// <summary>
+        /// Asserts that <see cref="ResourceNode.DoAction(Player)"/> adds the correct resource to the player.
+        /// </summary>
+        /// <param name="resourceType">Type of the resource.</param>
         [Test]
         [Category("ResourceNode.DoAction")]
         #region Test-Cases
@@ -409,11 +401,22 @@ namespace ScrumageWPF.Test {
         [TestCase(typeof(Testing))]
         #endregion
         public void ResourceNode_DoAction_AddsCorrectResourceToPlayer(Type resourceType) {
-            ResourceNode sampleNode = GetTestNode(resourceType);
+            ResourceNode sampleNode = CreateResourceNode(resourceType);
             Resource expectedResource = CreateResource(resourceType);
 
-            
+            // Guarantee successful roll
+            for(Int32 i = 0; i < 6; i++) {
+                sampleNode.AddPawn(testPlayer1.TakePawn("Full Stack"));
+            }
 
+            sampleNode.DoAction(testPlayer1);
+
+            Int32 totalResourcesCount = testPlayer1.playerResources.ResourceDictionary.Values.ToList<Int32>().Sum();
+
+            // Assert that the expected resource has been obtained.
+            Assert.That(testPlayer1.playerResources.ResourceDictionary[expectedResource], Is.EqualTo(1));
+            // Assert that no other resource has been altered.
+            Assert.That(totalResourcesCount, Is.EqualTo(1));
         }
         #endregion
 
@@ -432,8 +435,10 @@ namespace ScrumageWPF.Test {
         [TestCase(typeof(Testing))]
         #endregion
         public void ResourceNode_DoAction_ReturnsDeepCopyOfNodeResource(Type resourceType) {
-            ResourceNode sampleNode = GetTestNode(resourceType);
+            ResourceNode sampleNode = CreateResourceNode(resourceType);
             Resource indexResource = CreateResource(resourceType);
+
+            // Guarantee successful roll
             for(Int32 i = 0; i < 6; i++) {
                 sampleNode.AddPawn(testPlayer1.TakePawn("Full Stack"));
             }
@@ -442,6 +447,30 @@ namespace ScrumageWPF.Test {
             Assert.That(testPlayer1.playerResources.ResourceDictionary[indexResource], Is.Not.SameAs(sampleNode.nodeResource));
         }
         #endregion
+
+        #endregion
+
+        #region Category: Other
+
+        #region ResourceNode_GetMaxPawnLimitReturnsCorrectNumber        
+        /// <summary>
+        /// Asserts that <see cref="ResourceNode.MaxPawnLimit"/> returns the current number.
+        /// </summary>
+        [Test]
+        [Category("Other")]
+        #region Test-Cases
+        [TestCase(typeof(Requirements))]
+        [TestCase(typeof(Design))]
+        [TestCase(typeof(Implementation))]
+        [TestCase(typeof(Testing))]
+        #endregion
+        public void ResourceNode_GetMaxPawnLimitReturnsCorrectNumber(Type resourceType) {
+            ResourceNode sampleNode = CreateResourceNode(resourceType);
+            Assert.That(sampleNode.MaxPawnLimit, Is.EqualTo(RESOURCE_NODE_PAWN_LIMIT));
+        }
+        #endregion
+
+        #endregion 
 
         #endregion
 
