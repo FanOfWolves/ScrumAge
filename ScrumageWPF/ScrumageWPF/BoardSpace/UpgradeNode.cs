@@ -12,7 +12,7 @@ namespace ScrumageEngine.BoardSpace
     /// </summary>
     /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
     
-    class UpgradeNode : Node
+    public class UpgradeNode : Node
     {
         #region Fields
 
