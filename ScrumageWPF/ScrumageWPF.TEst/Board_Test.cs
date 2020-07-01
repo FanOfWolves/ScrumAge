@@ -32,6 +32,31 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
+        #region Helper Methods
+
+        private List<Node> GetNeedNodes() {
+            List<Node> neededNodes = new List<Node>(16);
+            neededNodes.Add(new ResourceNode(1, "Requirements", new Requirements()));
+            neededNodes.Add(new ResourceNode(2, "Design", new Design()));
+            neededNodes.Add(new ResourceNode(3, "Implementation", new Implementation()));
+            neededNodes.Add(new ResourceNode(4, "Testing", new Testing()));
+            neededNodes.Add(new UpgradeNode(5, "Technical Hut"));
+            neededNodes.Add(new BudgetNode(6, "Budget Increase"));
+            neededNodes.Add(new HiringNode(7, "Interview"));
+            neededNodes.Add(new ReassignmentNode(8, "Reassignment"));
+            neededNodes.Add(new CardNode(9, "Agility 1", new Deck("Agility", 10)));
+            neededNodes.Add(new CardNode(10, "Agility 2", new Deck("Agility", 10)));
+            neededNodes.Add(new CardNode(11, "Agility 3", new Deck("Agility", 10)));
+            neededNodes.Add(new CardNode(12, "Agility 4", new Deck("Agility", 10)));
+            neededNodes.Add(new CardNode(13, "Artifact 1", new Deck("Artifact", 10)));
+            neededNodes.Add(new CardNode(14, "Artifact 2", new Deck("Artifact", 10)));
+            neededNodes.Add(new CardNode(15, "Artifact 3", new Deck("Artifact", 10)));
+            neededNodes.Add(new CardNode(16, "Artifact 4", new Deck("Artifact", 10)));
+            return neededNodes;
+        }
+        #endregion
+
+
         #endregion
 
         #region Board Tests
@@ -42,9 +67,7 @@ namespace ScrumageWPF.Test {
         public void Board_ConstructorInstantiatesCorrectly() {
 
         }
-
-
-		#endregion
+        #endregion
 
 		#region Node Getters
         [Test]

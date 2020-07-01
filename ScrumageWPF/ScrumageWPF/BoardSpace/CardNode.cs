@@ -10,7 +10,7 @@ namespace ScrumageEngine.BoardSpace {
     /// Node that contains and gives <see cref="Card"/>s
     /// </summary>
     /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
-    class CardNode : Node {
+    public class CardNode : Node {
 
         #region Fields        
         /// <summary>
