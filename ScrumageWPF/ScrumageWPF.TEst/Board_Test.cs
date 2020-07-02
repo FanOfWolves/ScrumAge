@@ -198,6 +198,28 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
+        #region Board_ShowDiceWorks
+        /// <summary>
+        /// Asserts that <see cref="Board.ShowDice"/> returns correct strings.
+        /// </summary>
+        /// <param name="dieValues">the die values.</param>
+        [Test]
+        [TestCase(1,2,3,4,5)]
+        [TestCase(2,3,4,5,1,2,4,5,6)]
+        [TestCase(1)]
+        public void Board_ShowDiceWorks(params Int32[] dieValues) {
+            List<String> expectedValues = new List<String>(dieValues.Length);
+            foreach(Int32 val in dieValues) {
+                Die _die = new Die(val);
+                expectedValues.Add(_die.DrawDie());
+                testBoard.Dice.Add(_die);
+            }
+            List<String> actualValues = testBoard.ShowDice();
+
+            Assert.That(actualValues, Is.EquivalentTo(expectedValues));
+        }
+        #endregion
+
 
         #region Proxy Methods
 
