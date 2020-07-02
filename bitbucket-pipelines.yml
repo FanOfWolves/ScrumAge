@@ -15,8 +15,6 @@ pipelines:
     dev/testing:
     - step:
         name: .NET Core test
-        caches:
-          - dotnet core
         script:
           - export PROJECT_NAME=ScrumageWPF/ScrumageWPF.TEst/ScrumageWPF.TEst
           - export TEST_NAME=ScrumageWPF/ScrumageWPF.TEst/ScrumageWPF.TEst
