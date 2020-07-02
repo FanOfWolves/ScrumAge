@@ -86,12 +86,15 @@ namespace ScrumageWPF.Test {
         public void Board_ConstructorInstantiatesCorrectly() {
             Board _board = new Board();
             Assert.That(testBoard.Nodes, Is.EquivalentTo(GetNeedNodes()).Using(new NodeEqualityComparer()));
-        } 
+        }
         #endregion
 
         #endregion
 
-
+        #region Board_RollDiceWorks
+        /// <summary>
+        /// Asserts that <see cref="Board.RollDice(Int32, Random)"/> rolls only values between 1 and 6.
+        /// </summary>
         [Test]
         public void Board_RollDiceWorks() {
             List<Die> testDice = new List<Die>(100);
@@ -100,14 +103,15 @@ namespace ScrumageWPF.Test {
             }
             this.testBoard.Dice = testDice;
 
-            testBoard.RollDice(6, new Random());
-            testBoard.Dice.ForEach(die => { 
+            testBoard.RollDice(100, new Random());
+            testBoard.Dice.ForEach(die => {
                 if(die.Value > 6 || die.Value < 1) {
                     Assert.Fail();
-				}
+                }
             });
             Assert.Pass();
-        }
+        } 
+        #endregion
 
         [Test]
         public void Board_ShowDiceWorks() {
