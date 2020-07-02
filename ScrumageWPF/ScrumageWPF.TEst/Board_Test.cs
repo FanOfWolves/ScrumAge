@@ -109,6 +109,11 @@ namespace ScrumageWPF.Test {
             Assert.Pass();
         }
 
+        [Test]
+        public void Board_ShowDiceWorks() {
+            
+        }
+
 
         #region Node Getters
         [Test]
