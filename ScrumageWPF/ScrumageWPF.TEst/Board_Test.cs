@@ -123,6 +123,24 @@ namespace ScrumageWPF.Test {
             // Need to draw a dice to compare it to.
         }
 
+        #region Proxy Methods
+        /// <summary>
+        /// Asserts that <see cref="Board.GetMaxPawnsInNode(String)"/> returns correct value.
+        /// </summary>
+        [Test] 
+        public void Board_GetMaxPawnsInNode_ReturnsCorrectValue() {
+            List<Node> neededNodes = GetNeedNodes();
+            Int32[] expectedValues = new Int32[neededNodes.Count];
+            Int32[] actualValues = new Int32[neededNodes.Count];
+
+            for(Int32 i = 0; i < neededNodes.Count; i++) {
+                expectedValues[i] = neededNodes[i].MaxPawnLimit;
+                actualValues[i] = testBoard.GetMaxPawnsInNode(neededNodes[i].NodeName);
+            }
+
+            Assert.That(actualValues, Is.EquivalentTo(expectedValues));
+        }
+        #endregion
 
         #region Node Getters
         [Test]
