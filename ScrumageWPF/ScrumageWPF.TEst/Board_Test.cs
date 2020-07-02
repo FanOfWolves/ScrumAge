@@ -110,7 +110,21 @@ namespace ScrumageWPF.Test {
                 }
             });
             Assert.Pass();
-        } 
+        }
+        #endregion
+
+        #region Board_ClearDiceWorks        
+        /// <summary>
+        /// Asserts that <see cref="Board.ClearDice"/> removes all die from this board.
+        /// </summary>
+        [Test]
+        public void Board_ClearDiceWorks() {
+            for(Int32 i = 0; i < 5; i++) {
+                testBoard.Dice.Add(new Die(1));
+            }
+            testBoard.ClearDice();
+            Assert.That(testBoard.Dice, Has.Count.EqualTo(0));
+        }
         #endregion
 
         [Test]
