@@ -198,19 +198,6 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
-        /// <summary>
-        /// Asserts that <see cref="Board.ShowDice"/> returns correct string.
-        /// </summary>
-        /// <param name="diceValues">The dice values.</param>
-        [Test]
-        [TestCase(new Int32[] { 2, 2, 4, 6, 1, 5, 5})]
-        public void Board_ShowDiceWorks(Int32[] diceValues) {
-            foreach(Int32 val in diceValues) {
-                this.testBoard.Dice.Add(new Die(val));
-            }
-            Assert.Fail();
-            // Need to draw a dice to compare it to.
-        }
 
         #region Proxy Methods
 
