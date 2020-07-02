@@ -17,8 +17,7 @@ pipelines:
         caches:
           - dotnetcore
         script:
-          - export PROJECT_NAME=ScrumageWPF.sln
-          - export TEST_NAME=ScrumageWPF.sln
-          - dotnet restore ScrumagwWPF/ScrumageWPF.csproj
+          - export PROJECT_NAME=ScrumageWPF/ScrumageWPF
+          - export TEST_NAME=ScrumageWPF/ScrumageWPF
+          - dotnet restore $PROJECT_NAME
           - dotnet build $PROJECT_NAME --no-restore
-          - dotnet test $TEST_NAME --no-build --no-restore
