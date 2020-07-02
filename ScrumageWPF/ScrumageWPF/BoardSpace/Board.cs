@@ -173,7 +173,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// Represents current dice values in a single string for the log.
 		/// </summary>
 		/// <returns>String of current dice values.</returns>
-		internal String DiceValues() {
+		public String DiceValues() {
 			String retString = "";
 			foreach(Die d in Dice) {
 				retString += d.Value + " ";

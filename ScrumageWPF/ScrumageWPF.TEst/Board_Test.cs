@@ -6,6 +6,7 @@ using ScrumageEngine.Objects.Items.Cards;
 using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Player;
 using System.Diagnostics.CodeAnalysis;
+using System.Text;
 
 namespace ScrumageWPF.Test {
 
@@ -30,6 +31,14 @@ namespace ScrumageWPF.Test {
         [OneTimeTearDown]
         public void Board_Test_TearDown() {
             testBoard = null;
+        }
+
+        [SetUp]
+        public void Method_SetUp() {
+            this.testBoard.Dice.Clear();
+            this.testBoard.Nodes.ForEach(_node => {
+                _node.Pawns.Clear();
+            });
         }
         #endregion
 
@@ -124,6 +133,24 @@ namespace ScrumageWPF.Test {
             }
             testBoard.ClearDice();
             Assert.That(testBoard.Dice, Has.Count.EqualTo(0));
+        }
+        #endregion
+
+        #region Board_DiceValuesWorks
+        [Test]
+        [TestCase(new Int32[] { 1, 4, 6, 2, 3, 5, 6, 3})]
+        [TestCase(new Int32[] { 1, 1, 1, 1 })]
+        [TestCase(new Int32[] { 4 })]
+        public void Board_DiceValuesWorks(Int32[] dieValues) {
+            StringBuilder expectedValue = new StringBuilder("");
+            expectedValue.EnsureCapacity(dieValues.Length*2);
+            foreach(Int32 val in dieValues) {
+                expectedValue.Append($"{val} ");
+                testBoard.Dice.Add(new Die(val));
+            }
+
+            String actualValue = testBoard.DiceValues();
+            Assert.That(actualValue, Is.EqualTo(expectedValue.ToString()));
         }
         #endregion
 
