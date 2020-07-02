@@ -5,7 +5,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
     /// A card depicting Software Development Process stage artifacts.
     /// </summary>
     /// <seealso cref="Card" />
-    class ArtifactCard : Card {
+    public class ArtifactCard : Card {
 
         #region Constructors
         /// <summary>

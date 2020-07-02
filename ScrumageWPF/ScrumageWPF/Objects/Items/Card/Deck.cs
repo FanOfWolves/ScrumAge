@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ScrumageEngine.Objects.Items.Cards {
 	public class Deck {
-		private Stack<Card> Cards;
+		public Stack<Card> Cards;
 		public Int32 Count { get { return Cards.Count; } }
 		public Deck(String type, Int32 count) {
 			Cards = CreateStack(type, count);

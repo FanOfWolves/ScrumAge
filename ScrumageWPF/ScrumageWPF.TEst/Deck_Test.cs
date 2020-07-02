@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using NUnit.Framework;
+using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Items.Cards;
 namespace ScrumageWPF.Test {
 
@@ -60,7 +62,25 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
+        #region Test Helper Methods        
+        /// <summary>
+        /// Creates a test card to be used for verifying returns.
+        /// </summary>
+        /// <param name="cardType">Type of the card.</param>
+        /// <param name="cardName">Name of the card.</param>
+        /// <param name="costs">The costs.</param>
+        /// <returns></returns>
+        private Card CreateTestCard(String cardType, String cardName, Int32[] costs) {
+            if(cardType == "Agility")
+                return new AgilityCard(cardName, costs);
+            else
+                return new ArtifactCard(cardName, costs);
+        }
+        #endregion
+
+
         #region Category: Constructor
+
         [Test]
         [Category("Constructor")]
         public void Deck_Construct() {
@@ -71,18 +91,30 @@ namespace ScrumageWPF.Test {
         #region Category: Collection Creation
         [Test]
         [Category("Collection Creation")]
-        [TestCase(new Int32[] {1,0,2,4}, "1,0,2,4")]
-        [TestCase(new Int32[] {0,1,0,2}, "0,1,0,2")]
+        [TestCase(new Int32[] { 1, 0, 2, 4 }, "1,0,2,4")]
+        [TestCase(new Int32[] { 0, 1, 0, 2 }, "0,1,0,2")]
         public void Deck_ParseReqs(Int32[] expectedCosts, String strInputCosts) {
             Int32[] actualOutput = testDeck.ParseReqs(strInputCosts);
             Assert.That(actualOutput, Is.EquivalentTo(expectedCosts));
         }
 
+       
+
+       
+
+
         [Test]
         [Category("Collection Creation")]
-        public void Deck_MakeCard(String cardInfo) {
-            Card testCard = testDeck.MakeCard(cardInfo);
-            Assert.Fail();
+        [TestCase("Artifact:Class Diagram:2,3,4,5", "Artifact", "Class Diagram", new Int32[] { 2, 3, 4, 5 })]
+        [TestCase("Agility:New Code Standards:1,1,1,1", "Agility", "New Code Standards", new Int32[] { 1, 1, 1, 1 } )]
+        [TestCase("Agility:New Law Passed:1,1,1,1", "Agility", "New Law Passed", new Int32[] { 1, 1, 1, 1 })]
+        public void Deck_MakeCard(String makeCardInput, String cardType, String cardName, Int32[] costs) {
+            Card expectedCard = CreateTestCard(cardType, cardName, costs);
+            Card actualCard = testDeck.MakeCard(makeCardInput);
+
+            Assert.That(actualCard.CardName, Is.EqualTo(expectedCard.CardName));
+            Assert.That(actualCard.CardRequirements == expectedCard.CardRequirements);
+            Assert.That(actualCard.GetType() == expectedCard.GetType());
         }
 
         [Test]
