@@ -23,7 +23,7 @@ namespace ScrumageWPF.Test.Utilities {
                 return false;
             if(card1.GetType() != card2.GetType())
                 return false;
-            if(new EqualityCompareTestResourceContainers().Equals(card1.CardRequirements, card2.CardRequirements) == false)
+            if(new TestResourceContainerEqualityCompare().Equals(card1.CardRequirements, card2.CardRequirements) == false)
                 return false;
             return true;
         }

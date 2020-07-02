@@ -5,6 +5,8 @@ using System.Text;
 using NUnit.Framework;
 using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Items.Cards;
+using ScrumageWPF.Test.Utilities;
+
 namespace ScrumageWPF.Test {
 
     /// <summary>
@@ -69,7 +71,7 @@ namespace ScrumageWPF.Test {
         /// <param name="cardType">Type of the card.</param>
         /// <param name="cardName">Name of the card.</param>
         /// <param name="costs">The costs.</param>
-        /// <returns></returns>
+        /// <returns>a Card used for testing.</returns>
         private Card CreateTestCard(String cardType, String cardName, Int32[] costs) {
             if(cardType == "Agility")
                 return new AgilityCard(cardName, costs);
@@ -100,9 +102,6 @@ namespace ScrumageWPF.Test {
 
        
 
-       
-
-
         [Test]
         [Category("Collection Creation")]
         [TestCase("Artifact:Class Diagram:2,3,4,5", "Artifact", "Class Diagram", new Int32[] { 2, 3, 4, 5 })]
@@ -112,9 +111,7 @@ namespace ScrumageWPF.Test {
             Card expectedCard = CreateTestCard(cardType, cardName, costs);
             Card actualCard = testDeck.MakeCard(makeCardInput);
 
-            Assert.That(actualCard.CardName, Is.EqualTo(expectedCard.CardName));
-            Assert.That(actualCard.CardRequirements == expectedCard.CardRequirements);
-            Assert.That(actualCard.GetType() == expectedCard.GetType());
+            Assert.That(actualCard, Is.EqualTo(expectedCard).Using(new TestCardEqualityCompare()));
         }
 
         [Test]
