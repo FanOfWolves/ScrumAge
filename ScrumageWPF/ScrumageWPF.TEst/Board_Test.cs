@@ -22,17 +22,26 @@ namespace ScrumageWPF.Test {
 
         #region Test Class Helper Methods
 
-        #region SetUp and TearDown
+        #region SetUp and TearDown        
+        /// <summary>
+        /// Class setup.
+        /// </summary>
         [OneTimeSetUp]
         public void Board_Test_SetUp() {
             testBoard = new Board();
         }
 
+        /// <summary>
+        /// Class cleanup.
+        /// </summary>
         [OneTimeTearDown]
         public void Board_Test_TearDown() {
             testBoard = null;
         }
 
+        /// <summary>
+        /// Setup done before each test method.
+        /// </summary>
         [SetUp]
         public void Method_SetUp() {
             this.testBoard.Dice.Clear();
@@ -42,9 +51,13 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
-        #region Helper Methods
-
-        private List<Node> GetNeedNodes() {
+        #region Helper Methods        
+        
+        /// <summary>
+        /// Get expected nodes, for testing.
+        /// </summary>
+        /// <returns>returns a list of nodes.</returns>
+        private List<Node> GetNeededNodes() {
             List<Node> neededNodes = new List<Node>(16);
             neededNodes.Add(new ResourceNode(1, "Requirements", new Requirements()));
             neededNodes.Add(new ResourceNode(2, "Design", new Design()));
@@ -65,18 +78,45 @@ namespace ScrumageWPF.Test {
             return neededNodes;
         }
 
-
+        /// <summary>
+        /// An Equality Comparer for comparing Nodes.
+        /// </summary>
+        /// <seealso cref="System.Collections.Generic.IEqualityComparer{ScrumageEngine.BoardSpace.Node}" />
         private class NodeEqualityComparer : IEqualityComparer<Node> {
+            /// <summary>
+            /// For determining if nodes are equal.
+            /// </summary>
+            /// <param name="thisNode">This node.</param>
+            /// <param name="thatNode">That node.</param>
+            /// <returns>
+            ///     <c>true</c> if nodes are equal; Otherwise, <c>false</c>.
+            /// </returns>
             public Boolean Equals( Node thisNode, Node thatNode) {
                 return (thisNode.NodeID == thatNode.NodeID && thisNode.NodeName == thatNode.NodeName);
             }
 
+            /// <summary>
+            /// Returns a hash code for the specified object.
+            /// </summary>
+            /// <param name="obj">The <see cref="T:System.Object" /> for which a hash code is to be returned.</param>
+            /// <returns>
+            /// A hash code for the specified object.
+            /// </returns>
             public Int32 GetHashCode( Node obj) {
                 return obj.GetHashCode();
             }
         }
 
-
+        /// <summary>
+        /// Adds the pawns to node.
+        /// </summary>
+        /// <param name="amountOfPawns">The amount of pawns.</param>
+        /// <param name="node">The node to add to.</param>
+        private void AddPawnsToNode(Int32 amountOfPawns, Node node) {
+            for(Int32 i = 0; i < amountOfPawns; i++) {
+                node.AddPawn(new Pawn(0, "Back End"));
+            }
+        }
         #endregion
 
 
@@ -85,7 +125,7 @@ namespace ScrumageWPF.Test {
         #region Board Tests
 
         #region Category: Instantiation        
-        
+
         #region Board_ConstructorInstantiatesCorrectly
         /// <summary>
         /// Boards the constructor instantiates correctly.
@@ -94,7 +134,7 @@ namespace ScrumageWPF.Test {
         [Category("Instantiation")]
         public void Board_ConstructorInstantiatesCorrectly() {
             Board _board = new Board();
-            Assert.That(testBoard.Nodes, Is.EquivalentTo(GetNeedNodes()).Using(new NodeEqualityComparer()));
+            Assert.That(testBoard.Nodes, Is.EquivalentTo(GetNeededNodes()).Using(new NodeEqualityComparer()));
         }
         #endregion
 
@@ -136,7 +176,11 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
-        #region Board_DiceValuesWorks
+        #region Board_DiceValuesWorks        
+        /// <summary>
+        /// Asserts that <see cref="Board.DiceValues"/> returns correct value.
+        /// </summary>
+        /// <param name="dieValues">The die values.</param>
         [Test]
         [TestCase(new Int32[] { 1, 4, 6, 2, 3, 5, 6, 3})]
         [TestCase(new Int32[] { 1, 1, 1, 1 })]
@@ -154,6 +198,10 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
+        /// <summary>
+        /// Asserts that <see cref="Board.ShowDice"/> returns correct string.
+        /// </summary>
+        /// <param name="diceValues">The dice values.</param>
         [Test]
         [TestCase(new Int32[] { 2, 2, 4, 6, 1, 5, 5})]
         public void Board_ShowDiceWorks(Int32[] diceValues) {
@@ -172,7 +220,7 @@ namespace ScrumageWPF.Test {
         /// </summary>
         [Test]
         public void Board_GetMaxPawnsInNode_ReturnsCorrectValue() {
-            List<Node> neededNodes = GetNeedNodes();
+            List<Node> neededNodes = GetNeededNodes();
             Int32[] expectedValues = new Int32[neededNodes.Count];
             Int32[] actualValues = new Int32[neededNodes.Count];
 
@@ -182,12 +230,6 @@ namespace ScrumageWPF.Test {
             }
 
             Assert.That(actualValues, Is.EquivalentTo(expectedValues));
-        }
-
-        private void AddPawnsToNode(Int32 amountOfPawns, Node node) {
-            for(Int32 i = 0; i < amountOfPawns; i++) {
-                node.AddPawn(new Pawn(0, "Back End"));
-            }
         }
         #endregion
 
