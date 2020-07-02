@@ -95,19 +95,17 @@ namespace ScrumageWPF.Test {
         [Category("Collection Creation")]
         [TestCase(new Int32[] { 1, 0, 2, 4 }, "1,0,2,4")]
         [TestCase(new Int32[] { 0, 1, 0, 2 }, "0,1,0,2")]
-        public void Deck_ParseReqs(Int32[] expectedCosts, String strInputCosts) {
+        public void Deck_ParseReqs_Works(Int32[] expectedCosts, String strInputCosts) {
             Int32[] actualOutput = testDeck.ParseReqs(strInputCosts);
             Assert.That(actualOutput, Is.EquivalentTo(expectedCosts));
         }
-
-       
 
         [Test]
         [Category("Collection Creation")]
         [TestCase("Artifact:Class Diagram:2,3,4,5", "Artifact", "Class Diagram", new Int32[] { 2, 3, 4, 5 })]
         [TestCase("Agility:New Code Standards:1,1,1,1", "Agility", "New Code Standards", new Int32[] { 1, 1, 1, 1 } )]
         [TestCase("Agility:New Law Passed:1,1,1,1", "Agility", "New Law Passed", new Int32[] { 1, 1, 1, 1 })]
-        public void Deck_MakeCard(String makeCardInput, String cardType, String cardName, Int32[] costs) {
+        public void Deck_MakeCard_Works(String makeCardInput, String cardType, String cardName, Int32[] costs) {
             Card expectedCard = CreateTestCard(cardType, cardName, costs);
             Card actualCard = testDeck.MakeCard(makeCardInput);
 
@@ -116,9 +114,46 @@ namespace ScrumageWPF.Test {
 
         [Test]
         [Category("Collection Creation")]
-        public void Deck_CreateStack() {
+        public void Deck_CreateStack_Works() {
             Assert.Fail();
         }
         #endregion
+
+        #region Category: Proxy Methods
+
+        #region Board_Draw_WorksIfCardInStack()        
+        /// <summary>
+        /// Asserts that <see cref="Deck.Draw"/> returns card on top of deck.
+        /// </summary>
+        [Test]
+        [Category("Proxy Methods")]
+        public void Board_Draw_WorksIfCardInStack() {
+            testDeck = new Deck("Agility", 0);
+            Card expectedCard = new AgilityCard("aCard", new Int32[] { 3, 2, 4, 1 });
+            Card unexpectedCard = new AgilityCard("Wrong Card!", new Int32[] { 3, 2, 4, 1 });
+
+            testDeck.Cards.Push(unexpectedCard);
+            testDeck.Cards.Push(expectedCard);
+
+            Card aCard = testDeck.Draw();
+            Assert.That(aCard, Is.EqualTo(expectedCard).Using(new TestCardEqualityCompare()));
+        }
+        #endregion
+
+        #region Board_Draw_ThrowsExceptionIfNoCards        
+        /// <summary>
+        /// Asserts that <see cref="Deck.Draw"/> returns <see cref="System.Exception"/> if no cards on stack.
+        /// </summary>
+        [Test]
+        [Category("Proxy Methods")]
+        public void Board_Draw_ThrowsExceptionIfNoCards() {
+            testDeck = new Deck("Agility", 0);
+
+            Assert.Throws(typeof(System.Exception), new TestDelegate(() => testDeck.Draw()));
+        }
+        #endregion
+
+        #endregion
+
     }
 }

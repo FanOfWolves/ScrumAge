@@ -32,7 +32,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
 			Int32[] cardReqs = ParseReqs(cardArray[2]);
 			if(cardArray[0] == "Artifact") return new ArtifactCard(cardArray[1], cardReqs);
 			else if(cardArray[0] == "Agility") return new AgilityCard(cardArray[1], cardReqs);
-			else return new AgilityCard("Error card", new Int32[] { 0, 0, 0, 0 });					// Maybe throw exception?
+			else return new AgilityCard("Error card", new Int32[] { 0, 0, 0, 0 });	
 		}
 
 		public Int32[] ParseReqs(String reqs) {
