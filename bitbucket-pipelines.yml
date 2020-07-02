@@ -19,6 +19,6 @@ pipelines:
         script:
           - export PROJECT_NAME=ScrumageWPF.sln
           - export TEST_NAME=ScrumageWPF.sln
-          - dotnet restore
+          - dotnet restore ~/ScrumagwWPF/ScrumageWPF.csproj
           - dotnet build $PROJECT_NAME --no-restore
           - dotnet test $TEST_NAME --no-build --no-restore
