@@ -202,6 +202,7 @@ namespace ScrumageWPF.Test {
         [TestCase(1, "null", typeof(Testing))]
         #endregion
         public void ResourceNode_ConstructorInstantiatesCorrectly(Int32 id, String name, Type resourceType) {
+            #nullable enable
             Resource? theResource = CreateResource(resourceType);
 
             ResourceNode testNode = new ResourceNode(id, name, theResource);
@@ -225,7 +226,9 @@ namespace ScrumageWPF.Test {
         [TestCase(0, "Albert", null)]
         [TestCase(0, null, typeof(Design))]
         #endregion
+
         public void ResourceNode_ConstructorCorrectlyHandlesNull(Int32 id, String name, Type resourceType) {
+            #nullable enable
             Resource? theResource = CreateResource(resourceType);
 
             Assert.That(new ResourceNode(id, name, theResource), Throws.InstanceOf(typeof(ArgumentNullException)));
