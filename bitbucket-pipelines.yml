@@ -8,24 +8,17 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: microsoft/dotnet:sdk
+image: mcr.microsoft.com/dotnet/core/sdk:3.1
 
 pipelines:
-  bookmarks:                      
-    test/*:               
-    - step:
-        name: .NET Core test
-        script:
-          - export PROJECT_NAME=ScrumageWPF/ScrumageWPF.TEst
-          - export TEST_NAME=ScrumageWPF/ScrumageWPF.TEst
-          - dotnet restore ScrumageWPF/ScrumageWPF.TEst/ScrumageWPF.Test.csproj
-          - dotnet test $TESTNAME
   branches:
     dev/testing:
     - step:
         name: .NET Core test
+        caches:
+          - dotnet core
         script:
           - export PROJECT_NAME=ScrumageWPF/ScrumageWPF.TEst
           - export TEST_NAME=ScrumageWPF/ScrumageWPF.TEst
-          - dotnet restore ScrumageWPF/ScrumageWPF.TEst/ScrumageWPF.Test.csproj
-          - dotnet test $TESTNAME
+          - dotnet restore $PROJECT_NAME.csproj
+          - dotnet test --no-build $TESTNAME.csproj
