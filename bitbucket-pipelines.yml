@@ -10,10 +10,13 @@
 # You can specify a custom docker image from Docker Hub as your build environment.
 image: microsoft/dotnet:sdk
 
-pipelines: 
-  default: 
-    -step:
-    caches:
-      - dotnetcore
-    script:
-      - dotnet build ScrumageWPF/ScrumageWPF.csproj
+pipelines:
+  default:
+    - step:
+        name: .NET Core build & test
+        caches:
+          - dotnetcore
+        script:
+          - dotnet restore
+          - dotnet build --no-restore
+          - dotnet test --no-build --no-restore
