@@ -94,15 +94,19 @@ namespace ScrumageWPF.Test {
 
         [Test]
         public void Board_RollDiceWorks() {
-            List<Die> fuck = new List<Die>(100);
+            List<Die> testDice = new List<Die>(100);
             for(Int32 i = 0; i < 100; i++) {
-                fuck.Add(new Die(1));
+                testDice.Add(new Die(1));
             }
-            this.testBoard.Dice = fuck;
+            this.testBoard.Dice = testDice;
 
             testBoard.RollDice(6, new Random());
-
-            Assert.That(testBoard.Dice.ForEach => die.value >= 1 && <= 6);
+            testBoard.Dice.ForEach(die => { 
+                if(die.Value > 6 || die.Value < 1) {
+                    Assert.Fail();
+				}
+            });
+            Assert.Pass();
         }
 
 
