@@ -124,6 +124,7 @@ namespace ScrumageWPF.Test {
         }
 
         #region Proxy Methods
+        
         /// <summary>
         /// Asserts that <see cref="Board.GetMaxPawnsInNode(String)"/> returns correct value.
         /// </summary>
@@ -140,6 +141,36 @@ namespace ScrumageWPF.Test {
 
             Assert.That(actualValues, Is.EquivalentTo(expectedValues));
         }
+
+        private void AddPawnsToNode(Int32 amountOfPawns, Node node) {
+            for(Int32 i = 0; i < amountOfPawns; i++) {
+                node.AddPawn(new Pawn(0, "Back End"));
+            }
+        }
+
+        /// <summary>
+        /// Asserts that <see cref="Board.GetPawnCountInNode(String)"/> returns correct value.
+        /// </summary>
+        [Test]
+        public void Board_GetPawnCountInNode_ReturnsCorrectValue() {
+            Random rand = new Random();
+            Int32 numberOfPawns = testBoard.Nodes.Count;
+            Int32[] expectedPawnCount = new Int32[numberOfPawns];
+            Int32[] actualReturnedValues = new Int32[numberOfPawns];
+
+            for(Int32 nodeIndex = 0; nodeIndex < numberOfPawns; nodeIndex++) {
+                Int32 pawnsToAdd = rand.Next(0, 5);
+                expectedPawnCount[nodeIndex] = pawnsToAdd;
+                
+                AddPawnsToNode(pawnsToAdd, testBoard.Nodes[nodeIndex]);
+                
+                String nameOfNode = testBoard.Nodes[nodeIndex].NodeName;
+                actualReturnedValues[nodeIndex] = testBoard.GetPawnCountInNode(nameOfNode);
+            }
+
+            Assert.That(actualReturnedValues, Is.EquivalentTo(expectedPawnCount));
+        }
+
         #endregion
 
         #region Node Getters
