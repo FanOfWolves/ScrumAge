@@ -10,12 +10,23 @@
 # You can specify a custom docker image from Docker Hub as your build environment.
 image: mcr.microsoft.com/dotnet/core/sdk:3.1
 
+
 pipelines:
-  default:
+  bookmarks:                      
+    test/*:               
     - step:
-        name: .NET Core build & test
+        name: .NET Core test
         script:
-          - export PROJECT_NAME=ScrumageWPF/ScrumageWPF
-          - export TEST_NAME=ScrumageWPF/ScrumageWPF
-          - dotnet restore ScrumageWPF/ScrumageWPF/ScrumageWPF.csproj
-          - dotnet build ScrumageWPF/ScrumageWPF.sln --no-restore
+          - export PROJECT_NAME=ScrumageWPF/ScrumageWPF.TEst
+          - export TEST_NAME=ScrumageWPF/ScrumageWPF.TEst
+          - dotnet restore ScrumageWPF/ScrumageWPF.TEst/ScrumageWPF.Test.csproj
+          - dotnet test $TESTNAME
+  branches:
+    dev/testing:
+    - step:
+        name: .NET Core test
+        script:
+          - export PROJECT_NAME=ScrumageWPF/ScrumageWPF.TEst
+          - export TEST_NAME=ScrumageWPF/ScrumageWPF.TEst
+          - dotnet restore ScrumageWPF/ScrumageWPF.TEst/ScrumageWPF.Test.csproj
+          - dotnet test $TESTNAME
