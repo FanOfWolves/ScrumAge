@@ -7,7 +7,7 @@ using ScrumageEngine.Objects.Items.Cards;
 namespace ScrumageWPF.Test {
 
     /// <summary>
-    /// Testing suite for DeckCreator.cs
+    /// Testing suite for <see cref="DeckCreator"/>
     /// </summary>
     [TestFixture]
     class DeckCreator_Test {
@@ -27,7 +27,10 @@ namespace ScrumageWPF.Test {
         private String cardInfoAgility4 = "Agility:Update To A New Framework:1,1,1,1";
         #endregion
 
-        #region Setup and Teardown
+        #region Setup and Teardown        
+        /// <summary>
+        /// One time setup of testing class.
+        /// </summary>
         [OneTimeSetUp]
         public void Class_SetUp() {
 
@@ -54,12 +57,29 @@ namespace ScrumageWPF.Test {
             testArtifactInfoList.Add(cardInfoArtifact3);
             #endregion
         }
+        
+        /// <summary>
+        /// One time cleanup of testing class.
+        /// </summary>
+        [OneTimeTearDown]
+        public void Class_TearDown() {
+            this.testCardInfoList.ForEach(_string => _string = null);
+            this.testCardInfoList.Clear();
+            this.testAgilityInfoList.Clear();
+            this.testArtifactInfoList.Clear();
+            this.testAgilityInfoList = null;
+            this.testArtifactInfoList = null;
+            this.testCardInfoList = null;
+        }
         #endregion
 
+        /// <summary>
+        /// Asserts that <see cref="DeckCreator.ReadCards"/> returns expected list of strings.
+        /// </summary>
         [Test]
         public void DeckCreator_ReadCards_ReturnsExpectedOutput() {
-            //List<String> outputList = DeckCreator.ReadCards();
-            //Assert.That(testCardInfoList, Is.EquivalentTo(outputList));
+            List<String> outputList = DeckCreator.ReadCards();
+            Assert.That(testCardInfoList, Is.EquivalentTo(outputList));
         }
 
         #region Category: Public Deck Creation
