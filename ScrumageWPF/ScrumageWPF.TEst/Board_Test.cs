@@ -124,11 +124,12 @@ namespace ScrumageWPF.Test {
         }
 
         #region Proxy Methods
-        
+
+        #region Board_GetMaxPawnsInNode_ReturnsCorrectValue
         /// <summary>
         /// Asserts that <see cref="Board.GetMaxPawnsInNode(String)"/> returns correct value.
         /// </summary>
-        [Test] 
+        [Test]
         public void Board_GetMaxPawnsInNode_ReturnsCorrectValue() {
             List<Node> neededNodes = GetNeedNodes();
             Int32[] expectedValues = new Int32[neededNodes.Count];
@@ -147,7 +148,9 @@ namespace ScrumageWPF.Test {
                 node.AddPawn(new Pawn(0, "Back End"));
             }
         }
+        #endregion
 
+        #region Board_GetPawnCountInNode_ReturnsCorrectValue
         /// <summary>
         /// Asserts that <see cref="Board.GetPawnCountInNode(String)"/> returns correct value.
         /// </summary>
@@ -161,22 +164,51 @@ namespace ScrumageWPF.Test {
             for(Int32 nodeIndex = 0; nodeIndex < numberOfPawns; nodeIndex++) {
                 Int32 pawnsToAdd = rand.Next(0, 5);
                 expectedPawnCount[nodeIndex] = pawnsToAdd;
-                
+
                 AddPawnsToNode(pawnsToAdd, testBoard.Nodes[nodeIndex]);
-                
+
                 String nameOfNode = testBoard.Nodes[nodeIndex].NodeName;
                 actualReturnedValues[nodeIndex] = testBoard.GetPawnCountInNode(nameOfNode);
             }
 
             Assert.That(actualReturnedValues, Is.EquivalentTo(expectedPawnCount));
         }
+        #endregion
+
+        #region Board_ListNodePawns_ReturnsCorrectValues
+        /// <summary>
+        /// Asserts that <see cref="Board.ListNodePawns(String)"/> returns correct list of strings.
+        /// </summary>
+        [Test]
+        public void Board_ListNodePawns_ReturnsCorrectValues() {
+            Pawn pawn1 = new Pawn(0, "Back End");
+            Pawn pawn2 = new Pawn(2, "Front End");
+            Pawn pawn3 = new Pawn(3, "Full Stack");
+
+            this.testBoard.Nodes[0].AddPawn(pawn1);
+            this.testBoard.Nodes[0].AddPawn(pawn2);
+            this.testBoard.Nodes[0].AddPawn(pawn3);
+
+            List<String> expectedOutput = new List<String>(3) { pawn1.ToString(), pawn2.ToString(), pawn3.ToString() };
+
+            List<String> actualOutput = this.testBoard.ListNodePawns("Requirements");
+
+            Assert.That(actualOutput, Is.EquivalentTo(expectedOutput));
+        } 
+        #endregion
 
         #endregion
 
         #region Node Getters
+
+        #region Nodes_By_Name
+        /// <summary>
+        /// Asserts that <see cref="Board.GetNodeByName(String)"/> returns correct value.
+        /// </summary>
+        /// <param name="nodeName">The expected name.</param>
         [Test]
-		#region Name Test Cases
-		[Category("Getters")]
+        #region Name Test Cases
+        [Category("Getters")]
         [TestCase("Requirements")]
         [TestCase("Design")]
         [TestCase("Implementation")]
@@ -196,8 +228,14 @@ namespace ScrumageWPF.Test {
         #endregion
         public void Nodes_By_Name(String nodeName) {
             Assert.That(nodeName == testBoard.GetNodeByName(nodeName).NodeName);
-		}
+        }
+        #endregion
 
+        #region Nodes_By_ID
+        /// <summary>
+        /// Asserts that <see cref="Board.GetNodeByID(Int32)"/> returns correct value.
+        /// </summary>
+        /// <param name="nodeID">the expected id value.</param>
         [Test]
         [Category("Getters")]
         #region ID Test Cases
@@ -217,13 +255,14 @@ namespace ScrumageWPF.Test {
         [TestCase(14)]
         [TestCase(15)]
         [TestCase(16)]
-		#endregion
-		public void Nodes_By_ID(Int32 nodeID) {
+        #endregion
+        public void Nodes_By_ID(Int32 nodeID) {
             Assert.That(nodeID == testBoard.GetNodeByID(nodeID).NodeID);
-        }
-		#endregion
+        } 
+        #endregion
 
-		#endregion
+        #endregion
 
-	}
+        #endregion
+    }
 }
