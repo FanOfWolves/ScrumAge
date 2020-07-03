@@ -38,7 +38,7 @@ namespace ScrumageWPF.Test {
         [TestCase(0, "Node1", typeof(Implementation))]
         [TestCase(6, "Albert", typeof(Implementation))]
         [TestCase(888, "Node943", typeof(Implementation))]
-        [TestCase(1, "null", ]
+
         #endregion
         public void ResourceNode_ConstructorInstantiatesCorrectly(Int32 id, String name, Resource theResource) {
             Node testNode = new ResourceNode(id, name, theResource);

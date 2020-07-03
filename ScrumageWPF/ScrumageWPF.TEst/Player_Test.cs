@@ -74,14 +74,24 @@ namespace ScrumageWPF.Test
             Assert.IsTrue(player.playerResources[des] == 2);
         }
 
+        [Test]
         public void Test_TakeResources()
         {
-            Assert.Fail();
+            Assert.Warn("Not implemented.");
         }
 
+        [Test]
         public void Test_AddToCards()
         {
-            Assert.Fail();
+            Card card2 = new AgilityCard("Agility_Test", new[] { 1, 2, 3, 4 });
+            Card card1 = new ArtifactCard("Artifact_Test", new[] { 1, 2, 3, 4 });
+
+           player.AddToCards(card1);
+           player.AddToCards(card2);
+
+           Assert.AreEqual(card1, player.Artifacts[0]);
+           Assert.AreEqual(card2, player.Agility[0]);
+
         }
 
         [TestCase(50, 50, 100)]
@@ -202,13 +212,17 @@ namespace ScrumageWPF.Test
 
         }
 
+        [Test]
         public void Test_RemoveFromAgility()
         {
-            
+            Assert.Warn("Not implemented.");
         }
 
+        [Test]
         public void Test_RemoveFromArtifacts()
         {
+            Assert.Warn("Not implemented.");
+
 
         }
 
