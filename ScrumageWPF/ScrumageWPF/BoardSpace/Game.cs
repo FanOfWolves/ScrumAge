@@ -136,6 +136,7 @@ namespace ScrumageEngine.BoardSpace {
 		}
 		#endregion
 
+
 		/// <summary>
 		/// Get the specified <seealso cref="Pawn.PawnType"/>.
 		/// See also <seealso cref="Game.PawnTypes"/>.
@@ -189,6 +190,7 @@ namespace ScrumageEngine.BoardSpace {
 			}
 		}
 
+
 		/// <summary>
 		/// Cycles through players, forcing them to pay for the sprint costs.
 		/// Note: All players have one round in this phase.
@@ -208,6 +210,7 @@ namespace ScrumageEngine.BoardSpace {
             return false;
         }
 
+
 		/// <summary>
 		/// Pays the pawns for the current player.
 		/// </summary>
@@ -223,6 +226,7 @@ namespace ScrumageEngine.BoardSpace {
             return CheckPhase(this.phase);
         }
 
+
 		/// <summary>
 		/// Checks if all players have paid their sprint costs.
 		/// </summary>
@@ -232,6 +236,7 @@ namespace ScrumageEngine.BoardSpace {
 		private Boolean AllPlayersPaid() {
 			return this.Players.TrueForAll(player => player.FinishedPhase == true);
 		}
+
 
 		/// <summary>
 		/// Checks current game phase and returns phase method
