@@ -289,18 +289,6 @@ namespace ScrumageEngine.BoardSpace {
 				if(!PlayerDoneWithActions(p) || !p.FinishedPhase) return false;
 			return true;
 		}
-
-
-		/// <summary>
-		/// Checks if all players have finished actions, external call.
-		/// </summary>
-		/// <returns>True if all players have finished actions</returns>
-		internal Boolean CheckPlayerActions() {
-			return AllPlayersDone();
-		}
-
-
-
 		#endregion
 
 		#region Dice Methods
@@ -403,26 +391,6 @@ namespace ScrumageEngine.BoardSpace {
 		/// <returns>List of pawns currently used by the player</returns>
 		public List<String> GetPlayerPawns(Int32 playerIDP) {
 			return GetPlayerByID(playerIDP).ListPawns();
-		}
-
-
-		/// <summary>
-		/// Gets the player agility cards.
-		/// </summary>
-		/// <param name="playerId">The player identifier.</param>
-		/// <returns>a list of the player's cards</returns>
-		public List<Card> GetPlayerAgilityCards(Int32 playerId) {
-			return this.Players.Find(_player => _player.PlayerID == playerId).Agility;
-		}
-
-
-		/// <summary>
-		/// Gets the player artifact cards.
-		/// </summary>
-		/// <param name="playerId">The player identifier.</param>
-		/// <returns>a list of the player's cards</returns>
-		public List<Card> GetPlayerArtifactCards(Int32 playerId) {
-			return this.Players.Find(_player => _player.PlayerID == playerId).Artifacts;
 		}
 
 
