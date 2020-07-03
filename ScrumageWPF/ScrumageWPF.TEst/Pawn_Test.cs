@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using ScrumageEngine.Objects.Items;
 using System.Text;
+using ScrumageWPF.Test.Utilities;
 
 namespace ScrumageWPF.Test {
 	[TestFixture]
@@ -70,8 +71,8 @@ namespace ScrumageWPF.Test {
 		public void Test_Constructors() {
 			Pawn constructorTestPawn = new Pawn(1, "Full Stack");
 			Pawn constructorTestPawnDefault = new Pawn();
-			Assert.That(constructorTestPawn, Is.EqualTo(new Pawn(1, "Full Stack")));
-			Assert.That(constructorTestPawnDefault, Is.EqualTo(new Pawn()));
+			Assert.That(constructorTestPawn, Is.EqualTo(new Pawn(1, "Full Stack")).Using(new TestPawnEqualityCompare()));
+			Assert.That(constructorTestPawnDefault, Is.EqualTo(new Pawn()).Using(new TestPawnEqualityCompare()));
 		}
 
 
@@ -107,6 +108,8 @@ namespace ScrumageWPF.Test {
 			Assert.That(testPawn.PawnCost == expected);
 		}
 
+
+
 		/// <summary>
 		/// Test equals
 		/// </summary>
@@ -114,8 +117,8 @@ namespace ScrumageWPF.Test {
 		[Category("Equals")]
 		public void Test_Equals() {
 			Pawn equalsTestPawn = new Pawn(1, "Full Stack");
-			Assert.That(equalsTestPawn, Is.EqualTo(new Pawn(1, "Full Stack")));
-			Assert.That(equalsTestPawn, Is.Not.EqualTo(new Pawn(1, "Back End")));
+			Assert.That(equalsTestPawn, Is.EqualTo(new Pawn(1, "Full Stack")).Using(new TestPawnEqualityCompare()));
+			Assert.That(equalsTestPawn, Is.Not.EqualTo(new Pawn(1, "Back End")).Using(new TestPawnEqualityCompare()));
 		}
 
 	}
