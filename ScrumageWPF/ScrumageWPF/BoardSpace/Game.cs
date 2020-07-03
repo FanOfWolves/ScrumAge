@@ -108,8 +108,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// <returns>List of node names</returns>
 		public List<String> GetNodeNames() {
 			List<String> nodeNames = new List<String>();
-			board.Nodes.ForEach(node =>
-			{
+			board.Nodes.ForEach(node => {
 				nodeNames.Add(node.NodeName);
 			});
 			return nodeNames;
@@ -162,13 +161,11 @@ namespace ScrumageEngine.BoardSpace {
 				ResetPlayers();
 				return true;
 			} else {
-				if(Players[currentPlayerIndex].CurrentPawns == 0) {
+				if(Players[currentPlayerIndex].CurrentPawns == 0)
 					Players[currentPlayerIndex].FinishedPhase = true;
-				}
 				if(++currentPlayerIndex >= Players.Count) currentPlayerIndex = 0;
-				while(Players[currentPlayerIndex].FinishedPhase || Players[currentPlayerIndex].CurrentPawns == 0) {
+				while(Players[currentPlayerIndex].FinishedPhase || Players[currentPlayerIndex].CurrentPawns == 0)
 					if(++currentPlayerIndex >= Players.Count) currentPlayerIndex = 0;
-				}
 			}
 			return false;
 		}
@@ -186,9 +183,8 @@ namespace ScrumageEngine.BoardSpace {
 				return true;
 			} else {
 				if(++currentPlayerIndex >= Players.Count) currentPlayerIndex = 0;
-				while(PlayerDoneWithActions(Players[currentPlayerIndex]) || Players[currentPlayerIndex].FinishedPhase) {
+				while(PlayerDoneWithActions(Players[currentPlayerIndex]) || Players[currentPlayerIndex].FinishedPhase)
 					if(++currentPlayerIndex >= Players.Count) currentPlayerIndex = 0;
-				}
 				return false;
 			}
 		}
@@ -221,10 +217,9 @@ namespace ScrumageEngine.BoardSpace {
 		/// </returns>
 		public Boolean PayPawns(out String paymentLog) {
             Boolean paidCost = Players[this.currentPlayerIndex].PayPawns();
-            if (paidCost) {
+            if (paidCost)
                 paymentLog = $"{Players[this.currentPlayerIndex].PlayerName} paid off their costs.";
-			}
-            else paymentLog = $"{Players[this.currentPlayerIndex].PlayerName} could not pay off their cost! -10 points";
+            else paymentLog = $"{Players[this.currentPlayerIndex].PlayerName} could not pay off their cost! -10 points.";
             return CheckPhase(this.phase);
         }
 
@@ -254,9 +249,8 @@ namespace ScrumageEngine.BoardSpace {
 		/// Resets all of the players' FinishedPhase 
 		/// </summary>
 		private void ResetPlayers() {
-			foreach(Player p in Players) {
+			foreach(Player p in Players)
 				p.FinishedPhase = false;
-			}
 		}
 
 
@@ -267,13 +261,10 @@ namespace ScrumageEngine.BoardSpace {
 		///		<c>true</c> if all players have moved all their pawns; otherwise, <c>false</c>
 		/// </returns>
 		private Boolean AllPawnsMoved() {
-			Boolean allPlayersFinished = true;
-			foreach(Player p in Players) {
-				if(p.Pawns.Count > 0) {
-					allPlayersFinished = false;
-				}
-			}
-			return allPlayersFinished;
+			foreach(Player p in Players)
+				if(p.Pawns.Count > 0)
+					return false;
+			return true;
 		}
 
 		/// <summary>
@@ -282,9 +273,8 @@ namespace ScrumageEngine.BoardSpace {
 		/// <param name="playerP">The current player.</param>
 		/// <returns>True if player is finished, false if not.</returns>
 		private Boolean PlayerDoneWithActions(Player playerP) {
-			foreach(Node node in board.Nodes) {
+			foreach(Node node in board.Nodes)
 				if(node.HasPawn(playerP.PlayerID)) return false;
-			}
 			playerP.FinishedPhase = true;
 			return true;
 		}
@@ -295,9 +285,8 @@ namespace ScrumageEngine.BoardSpace {
 		/// </summary>
 		/// <returns>True if all players have finished.</returns>
 		private Boolean AllPlayersDone() {
-			foreach(Player p in Players) {
+			foreach(Player p in Players)
 				if(!PlayerDoneWithActions(p) || !p.FinishedPhase) return false;
-			}
 			return true;
 		}
 
