@@ -5,7 +5,7 @@ namespace ScrumageEngine.Objects.Items.Cards {
     /// A card depicting the handling of change in requirements.
     /// </summary>
     /// <seealso cref="Card" />
-    class AgilityCard : Card {
+    public class AgilityCard : Card {
 
         #region Fields        
 
