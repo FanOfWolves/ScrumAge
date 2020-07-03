@@ -135,8 +135,9 @@ namespace ScrumageWPF.Test {
             testDeck.Cards.Push(unexpectedCard);
             testDeck.Cards.Push(expectedCard);
 
-            Card aCard = testDeck.Draw();
-            Assert.That(aCard, Is.EqualTo(expectedCard).Using(new TestCardEqualityCompare()));
+            Card actualCard = testDeck.Draw();
+            Assert.That(actualCard, Is.EqualTo(expectedCard).Using(new TestCardEqualityCompare()));
+            Assert.That(testDeck.Count, Is.EqualTo(1));
         }
         #endregion
 
@@ -147,6 +148,36 @@ namespace ScrumageWPF.Test {
         [Test]
         [Category("Proxy Methods")]
         public void Board_Draw_ThrowsExceptionIfNoCards() {
+            testDeck = new Deck("Agility", 0);
+
+            Assert.Throws(typeof(System.Exception), new TestDelegate(() => testDeck.Draw()));
+        }
+        #endregion
+
+        #region Board_Peek_WorksIfCardInStack        
+        /// <summary>
+        /// Asserts that <see cref="Deck.Peek"/> works as expected.
+        /// </summary>
+        [Test]
+        public void Board_Peek_WorksIfCardInStack() {
+            testDeck = new Deck("Agility", 0);
+            Card expectedCard = new AgilityCard("aCard", new Int32[] { 3, 2, 4, 1 });
+            Card unexpectedCard = new AgilityCard("Wrong Card!", new Int32[] { 3, 2, 4, 1 });
+
+            testDeck.Cards.Push(unexpectedCard);
+            testDeck.Cards.Push(expectedCard);
+
+            Card actualCard = testDeck.Peek();
+            Assert.That(actualCard, Is.EqualTo(expectedCard).Using(new TestCardEqualityCompare()));
+        }
+        #endregion
+
+        #region Board_Peek_ThrowExceptionIfNoCards        
+        /// <summary>
+        /// Asserts that <see cref="Deck.Peek"/> throws <see cref="System.Exception"/> if no cards in stack.
+        /// </summary>
+        [Test]
+        public void Board_Peek_ThrowsExceptionIfNoCards() {
             testDeck = new Deck("Agility", 0);
 
             Assert.Throws(typeof(System.Exception), new TestDelegate(() => testDeck.Draw()));
