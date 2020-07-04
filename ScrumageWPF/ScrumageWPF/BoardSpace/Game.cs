@@ -143,7 +143,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// </summary>
 		/// <param name="indexP">indexer index.</param>
 		/// <returns>string - a pawn type</returns>
-		public String GetPawnType(Int32 indexP) {
+		private String GetPawnType(Int32 indexP) {
 			return PawnTypes[indexP];
 		}
 		#endregion
