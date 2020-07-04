@@ -9,13 +9,13 @@ namespace ScrumageWPF.Test
 {
     class ReassignmentNode_Test
     {
-        private const Int32 REASSIGNMENT_NODE_PAWN_LIMIT = 1;
+        private const Int32 REASSIGNMENT_NODE_PAWN_LIMIT = 500;
         private Node testNode;
         private Player testPlayer1;
         private Player testPlayer2;
 
-        private String failedActionStr = " Failed to increase their funds. Reason: No Pawns";
-        private String passedActionStr = " has 1 more fund!";
+        private String failedActionStr = " Failed to increase their funds. Reason: No Pawns.";
+        private String passedActionStr = " has received 2 additional funds from reassignment!";
 
         /// <summary>
         /// One-time setup for this testing class.
