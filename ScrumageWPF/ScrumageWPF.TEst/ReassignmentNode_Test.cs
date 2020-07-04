@@ -100,14 +100,14 @@ namespace ScrumageWPF.Test
         public void ReassignmentNode_DoAction_PlayerGivenFundsIfTheyHavePawnsInNode() 
         {
             this.testNode.AddPawn(testPlayer1.TakePawn("Back End"));
-            Int32 originalBudget = testPlayer1.Budget;
+            Int32 originalFunds = testPlayer1.Funds;
 
             this.testNode.DoAction(testPlayer1);
 
             // Assert that Pawn has been removed.
             Assert.That(this.testNode.Pawns.Count, Is.EqualTo(0));
             // Assert that player1 did increase their budget.
-            Assert.That(testPlayer1.Budget, Is.GreaterThan(originalBudget));
+            Assert.That(testPlayer1.Funds, Is.GreaterThan(originalFunds));
 
         }
         #endregion
