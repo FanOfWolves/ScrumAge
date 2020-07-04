@@ -67,7 +67,7 @@ namespace ScrumageEngine.BoardSpace {
         /// </summary>
         /// <param name="playerIdP">The player identifier.</param>
         /// <returns>the player's pawns from this node.</returns>
-		protected List<Pawn> GatherPlayerPawns(Int32 playerIdP) {
+		public List<Pawn> GatherPlayerPawns(Int32 playerIdP) {
             List<Pawn> _playerPawns = Pawns.FindAll(_playerPawn => _playerPawn.PawnID == playerIdP);
             Pawns.RemoveAll(_playerPawn => _playerPawn.PawnID == playerIdP);
             return _playerPawns;
@@ -78,7 +78,7 @@ namespace ScrumageEngine.BoardSpace {
         /// </summary>
         /// <param name="pawnsToReturnP">The pawns to return.</param>
         /// <param name="playerP">The player.</param>
-        protected void ReturnPawnsToPlayer(List<Pawn> pawnsToReturnP, Player playerP) {
+        public void ReturnPawnsToPlayer(List<Pawn> pawnsToReturnP, Player playerP) {
             foreach(Pawn _pawn in pawnsToReturnP) {
                 playerP.GivePawn(_pawn);
             }
