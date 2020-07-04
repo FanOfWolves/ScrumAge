@@ -76,16 +76,24 @@ namespace ScrumageWPF.Test {
 			Assert.That(game.GetPlayerByID(3), Is.EqualTo(new Player(3, "Bob")).Using(new PlayerEqualityComparer()));
 			Assert.That(game.GetPlayerByID(4), Is.EqualTo(new Player(4, "Amy")).Using(new PlayerEqualityComparer()));
 		}
+		#endregion
 
+		#region Action Tests
 		[Test]
 		public void Test_Pay_Pawns() {
 			Int32 expectedFunds = game.Players[0].Funds;
-			game.Players[0].Pawns.ForEach(pawn => { expectedFunds -= pawn.PawnCost; });
+			Player p = game.Players[0];
+			p.Pawns.ForEach(pawn => { expectedFunds -= pawn.PawnCost; });
+			expectedFunds += p.Budget;
 			String testLog = "";
 			game.currentPlayerIndex = 0; // Ensure we are on the right player
 			game.PayPawns(out testLog);
-			Assert.That(game.Players[0].Funds == expectedFunds);
+			Assert.That(p.Funds == expectedFunds);
 		}
+		#endregion
+
+		#region Dice tests
+
 		#endregion
 
 		#region Helpers
