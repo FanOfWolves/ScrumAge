@@ -6,6 +6,7 @@ using ScrumageEngine.Objects.Items.Cards;
 using ScrumageEngine.Objects.Items;
 using ScrumageEngine.Objects.Player;
 using System.Diagnostics.CodeAnalysis;
+using ScrumageWPF.Test.Utilities;
 using System.Text;
 
 namespace ScrumageWPF.Test {
@@ -76,35 +77,6 @@ namespace ScrumageWPF.Test {
             neededNodes.Add(new CardNode(15, "Artifact 3", new Deck("Artifact", 10)));
             neededNodes.Add(new CardNode(16, "Artifact 4", new Deck("Artifact", 10)));
             return neededNodes;
-        }
-
-        /// <summary>
-        /// An Equality Comparer for comparing Nodes.
-        /// </summary>
-        /// <seealso cref="System.Collections.Generic.IEqualityComparer{ScrumageEngine.BoardSpace.Node}" />
-        private class NodeEqualityComparer : IEqualityComparer<Node> {
-            /// <summary>
-            /// For determining if nodes are equal.
-            /// </summary>
-            /// <param name="thisNode">This node.</param>
-            /// <param name="thatNode">That node.</param>
-            /// <returns>
-            ///     <c>true</c> if nodes are equal; Otherwise, <c>false</c>.
-            /// </returns>
-            public Boolean Equals( Node thisNode, Node thatNode) {
-                return (thisNode.NodeID == thatNode.NodeID && thisNode.NodeName == thatNode.NodeName);
-            }
-
-            /// <summary>
-            /// Returns a hash code for the specified object.
-            /// </summary>
-            /// <param name="obj">The <see cref="T:System.Object" /> for which a hash code is to be returned.</param>
-            /// <returns>
-            /// A hash code for the specified object.
-            /// </returns>
-            public Int32 GetHashCode( Node obj) {
-                return obj.GetHashCode();
-            }
         }
 
         /// <summary>
