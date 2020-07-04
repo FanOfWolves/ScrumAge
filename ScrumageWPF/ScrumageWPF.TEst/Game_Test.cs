@@ -14,6 +14,10 @@ namespace ScrumageWPF.Test {
 		public List<String> names = new List<String>();
 		public List<Node> expectedNodes;
 		public Game game;
+		/// <summary>
+		/// The types of acceptable <see cref="Pawn"/>s
+		/// </summary>
+		private String[] PawnTypes = { "Front End", "Back End", "Full Stack" };
 
 		#region Setup and Teardown
 		[OneTimeSetUp]
@@ -73,7 +77,15 @@ namespace ScrumageWPF.Test {
 			Assert.That(game.GetPlayerByID(4), Is.EqualTo(new Player(4, "Amy")).Using(new PlayerEqualityComparer()));
 		}
 
-
+		[Test]
+		public void Test_Pay_Pawns() {
+			Int32 expectedFunds = game.Players[0].Funds;
+			game.Players[0].Pawns.ForEach(pawn => { expectedFunds -= pawn.PawnCost; });
+			String testLog = "";
+			game.currentPlayerIndex = 0; // Ensure we are on the right player
+			game.PayPawns(out testLog);
+			Assert.That(game.Players[0].Funds == expectedFunds);
+		}
 		#endregion
 
 		#region Helpers
