@@ -631,24 +631,24 @@
 				</DockPanel>
 				<!-- Dice Button -->
 				<DockPanel Grid.Column="2" Grid.Row="5">
-					<Button x:Name="TestDiceBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Top" Click="TestDiceBtn_Click" Content="Roll Dice"/>
+					<Button x:Name="TestDiceBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Left" Click="TestDiceBtn_Click" Content="Roll Dice"/>
+					<ComboBox x:Name="DiceCountCombo" Width="42" Margin="10, 5, 5, 0" SelectedIndex="0" RenderTransformOrigin="0.667,0.546">
+						<System:String>1</System:String>
+						<System:String>2</System:String>
+						<System:String>3</System:String>
+						<System:String>4</System:String>
+						<System:String>5</System:String>
+						<System:String>6</System:String>
+						<System:String>7</System:String>
+					</ComboBox>
 				</DockPanel>
 				<!-- Test Button -->
 				<DockPanel Grid.Column="1" Grid.Row="5">
 					<Button x:Name="TestBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Top" Click="TestBtn_Click" Content="Test Button"/>
 				</DockPanel>
                 <!-- Help Button -->
-                <DockPanel Grid.Column="0" Grid.Row="5">
-                    <ComboBox x:Name="DiceCountCombo" Width="42" Margin="10, 5, 5, 0" SelectedIndex="0" RenderTransformOrigin="0.667,0.546">
-                        <System:String>1</System:String>
-                        <System:String>2</System:String>
-                        <System:String>3</System:String>
-                        <System:String>4</System:String>
-                        <System:String>5</System:String>
-                        <System:String>6</System:String>
-                        <System:String>7</System:String>
-                    </ComboBox>
-                    <Button x:Name="HelpBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Left" Click="HelpBtn_Click" Content="Help"/>
+				<DockPanel Grid.Column="0" Grid.Row="5">
+					<Button x:Name="HelpBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Left" Click="HelpBtn_Click" Content="Help"/>
                 </DockPanel>
 
 			</Grid>
