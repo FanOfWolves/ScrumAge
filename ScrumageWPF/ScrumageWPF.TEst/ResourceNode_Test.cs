@@ -212,29 +212,6 @@ namespace ScrumageWPF.Test {
         }
         #endregion
 
-        #region ResourceNode_ConstructorCorrectlyHandlesNull        
-        /// <summary>
-        /// Asserts that <see cref="ResourceNode.ResourceNode(Int32, String, Resource)"/> correctly handles null input.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="resourceType">Type of the resource.</param>
-        [Test]
-        [Category("Instantiation")]
-        #region Test-Cases
-        [TestCase(0, null, null)]
-        [TestCase(0, "Albert", null)]
-        [TestCase(0, null, typeof(Design))]
-        #endregion
-
-        public void ResourceNode_ConstructorCorrectlyHandlesNull(Int32 id, String name, Type resourceType) {
-            #nullable enable
-            Resource? theResource = CreateResource(resourceType);
-
-            Assert.That(new ResourceNode(id, name, theResource), Throws.InstanceOf(typeof(ArgumentNullException)));
-        }
-        #endregion
-
         #endregion
 
         #region Category: ResourceNode Unique Methods       
