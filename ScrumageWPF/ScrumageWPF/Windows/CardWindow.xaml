@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ScrumageEngine.Views"
         mc:Ignorable="d"
         WindowStyle="ToolWindow"
+        WindowStartupLocation="CenterScreen"
         Topmost="True"
         Title="" Height="350" Width="280">
     <Grid>
