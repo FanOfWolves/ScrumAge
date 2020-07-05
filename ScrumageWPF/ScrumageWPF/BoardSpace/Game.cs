@@ -22,7 +22,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// <summary>
 		/// The game board
 		/// </summary>
-		private Board board = new Board();
+		public Board board = new Board();
 
 
 		/// <summary>
@@ -304,7 +304,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// </summary>
 		/// <param name="diceCount">The number of dice wish to be rolled.</param>
 		/// <param name="rand">A global random.</param>
-		internal void RollDice(Int32 diceCount) {
+		public void RollDice(Int32 diceCount) {
 			board.ClearDice();
 			board.RollDice(diceCount, Rand);
 		}
@@ -322,7 +322,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// Represents current dice values in a single string for the log.
 		/// </summary>
 		/// <returns>String of current dice values.</returns>
-		internal String DiceValues() {
+		public String DiceValues() {
 			return board.DiceValues();
 		}
 		#endregion
