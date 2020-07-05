@@ -10,7 +10,7 @@ namespace ScrumageEngine.Objects.Items {
 	/// <summary>
 	/// A pawn class that represents a player's piece on the board
 	/// </summary>
-	public class Pawn : IEquatable<Pawn> {
+	public class Pawn {
 
 		#region Properties
 		/// <summary>
@@ -88,34 +88,6 @@ namespace ScrumageEngine.Objects.Items {
 		/// <returns>The representative String : String</returns>
 		public override String ToString() {
 			return $"{PawnType}, {PawnID}";
-		}
-
-		/// <summary>
-		/// Compares the current instance of a Pawn with a generic object.
-		/// </summary>
-		/// <param name="obj">The object to compare.</param>
-		/// <returns>True if same/false if different.</returns>
-		public override Boolean Equals(object obj) {
-			return base.Equals(obj);
-		}
-
-		/// <summary>
-		/// Returns the HashCode for the current instance of the Pawn.
-		/// </summary>
-		/// <returns>Hash Code for the Pawn.</returns>
-		public override int GetHashCode() {
-			return base.GetHashCode();
-		}
-
-		/// <summary>
-		/// Compare current instance of Pawn with another Pawn
-		/// </summary>
-		/// <param name="other">Another Pawn to be compared to</param>
-		/// <returns>true if same/false if different.</returns>
-		public Boolean Equals([AllowNull] Pawn other) {
-			if(this.PawnID == other.PawnID && this.PawnType == other.PawnType)
-				return true;
-			else return false;
 		}
 	}
 }

@@ -9,7 +9,7 @@ namespace ScrumageEngine.BoardSpace {
     /// Provides temporary funds to Players
     /// </summary>
     /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
-    class ReassignmentNode : Node {
+    public class ReassignmentNode : Node {
 
         public override Int32 MaxPawnLimit { get { return 500; } }
 

@@ -41,12 +41,12 @@ namespace ScrumageEngine.BoardSpace {
 		private Node Reassignment = new ReassignmentNode(8, "Reassignment");
 		private Node AgilityNode1 = new CardNode(9, "Agility 1", new Deck("Agility", 10));
 		private Node AgilityNode2 = new CardNode(10, "Agility 2", new Deck("Agility", 10));
-		private Node AgilityNode3 = new CardNode(10, "Agility 3", new Deck("Agility", 10));
-		private Node AgilityNode4 = new CardNode(10, "Agility 4", new Deck("Agility", 10));
-		private Node ArtifactNode1 = new CardNode(11, "Artifact 1", new Deck("Artifact", 10));
-		private Node ArtifactNode2 = new CardNode(12, "Artifact 2", new Deck("Artifact", 10));
-		private Node ArtifactNode3 = new CardNode(12, "Artifact 3", new Deck("Artifact", 10));
-		private Node ArtifactNode4 = new CardNode(12, "Artifact 4", new Deck("Artifact", 10));
+		private Node AgilityNode3 = new CardNode(11, "Agility 3", new Deck("Agility", 10));
+		private Node AgilityNode4 = new CardNode(12, "Agility 4", new Deck("Agility", 10));
+		private Node ArtifactNode1 = new CardNode(13, "Artifact 1", new Deck("Artifact", 10));
+		private Node ArtifactNode2 = new CardNode(14, "Artifact 2", new Deck("Artifact", 10));
+		private Node ArtifactNode3 = new CardNode(15, "Artifact 3", new Deck("Artifact", 10));
+		private Node ArtifactNode4 = new CardNode(16, "Artifact 4", new Deck("Artifact", 10));
 
 
 		/// <summary>
@@ -173,7 +173,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// Represents current dice values in a single string for the log.
 		/// </summary>
 		/// <returns>String of current dice values.</returns>
-		internal String DiceValues() {
+		public String DiceValues() {
 			String retString = "";
 			foreach(Die d in Dice) {
 				retString += d.Value + " ";

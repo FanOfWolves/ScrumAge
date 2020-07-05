@@ -22,7 +22,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// <summary>
 		/// The game board
 		/// </summary>
-		private Board board = new Board();
+		public Board board = new Board();
 
 
 		/// <summary>
@@ -108,8 +108,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// <returns>List of node names</returns>
 		public List<String> GetNodeNames() {
 			List<String> nodeNames = new List<String>();
-			board.Nodes.ForEach(node =>
-			{
+			board.Nodes.ForEach(node => {
 				nodeNames.Add(node.NodeName);
 			});
 			return nodeNames;
@@ -137,13 +136,14 @@ namespace ScrumageEngine.BoardSpace {
 		}
 		#endregion
 
+
 		/// <summary>
 		/// Get the specified <seealso cref="Pawn.PawnType"/>.
 		/// See also <seealso cref="Game.PawnTypes"/>.
 		/// </summary>
 		/// <param name="indexP">indexer index.</param>
 		/// <returns>string - a pawn type</returns>
-		public String GetPawnType(Int32 indexP) {
+		private String GetPawnType(Int32 indexP) {
 			return PawnTypes[indexP];
 		}
 		#endregion
@@ -162,13 +162,11 @@ namespace ScrumageEngine.BoardSpace {
 				ResetPlayers();
 				return true;
 			} else {
-				if(Players[currentPlayerIndex].CurrentPawns == 0) {
+				if(Players[currentPlayerIndex].CurrentPawns == 0)
 					Players[currentPlayerIndex].FinishedPhase = true;
-				}
 				if(++currentPlayerIndex >= Players.Count) currentPlayerIndex = 0;
-				while(Players[currentPlayerIndex].FinishedPhase || Players[currentPlayerIndex].CurrentPawns == 0) {
+				while(Players[currentPlayerIndex].FinishedPhase || Players[currentPlayerIndex].CurrentPawns == 0)
 					if(++currentPlayerIndex >= Players.Count) currentPlayerIndex = 0;
-				}
 			}
 			return false;
 		}
@@ -186,12 +184,12 @@ namespace ScrumageEngine.BoardSpace {
 				return true;
 			} else {
 				if(++currentPlayerIndex >= Players.Count) currentPlayerIndex = 0;
-				while(PlayerDoneWithActions(Players[currentPlayerIndex]) || Players[currentPlayerIndex].FinishedPhase) {
+				while(PlayerDoneWithActions(Players[currentPlayerIndex]) || Players[currentPlayerIndex].FinishedPhase)
 					if(++currentPlayerIndex >= Players.Count) currentPlayerIndex = 0;
-				}
 				return false;
 			}
 		}
+
 
 		/// <summary>
 		/// Cycles through players, forcing them to pay for the sprint costs.
@@ -212,6 +210,7 @@ namespace ScrumageEngine.BoardSpace {
             return false;
         }
 
+
 		/// <summary>
 		/// Pays the pawns for the current player.
 		/// </summary>
@@ -221,12 +220,12 @@ namespace ScrumageEngine.BoardSpace {
 		/// </returns>
 		public Boolean PayPawns(out String paymentLog) {
             Boolean paidCost = Players[this.currentPlayerIndex].PayPawns();
-            if (paidCost) {
+            if (paidCost)
                 paymentLog = $"{Players[this.currentPlayerIndex].PlayerName} paid off their costs.";
-			}
-            else paymentLog = $"{Players[this.currentPlayerIndex].PlayerName} could not pay off their cost! -10 points";
+            else paymentLog = $"{Players[this.currentPlayerIndex].PlayerName} could not pay off their cost! -10 points.";
             return CheckPhase(this.phase);
         }
+
 
 		/// <summary>
 		/// Checks if all players have paid their sprint costs.
@@ -237,6 +236,7 @@ namespace ScrumageEngine.BoardSpace {
 		private Boolean AllPlayersPaid() {
 			return this.Players.TrueForAll(player => player.FinishedPhase == true);
 		}
+
 
 		/// <summary>
 		/// Checks current game phase and returns phase method
@@ -254,9 +254,8 @@ namespace ScrumageEngine.BoardSpace {
 		/// Resets all of the players' FinishedPhase 
 		/// </summary>
 		private void ResetPlayers() {
-			foreach(Player p in Players) {
+			foreach(Player p in Players)
 				p.FinishedPhase = false;
-			}
 		}
 
 
@@ -267,13 +266,10 @@ namespace ScrumageEngine.BoardSpace {
 		///		<c>true</c> if all players have moved all their pawns; otherwise, <c>false</c>
 		/// </returns>
 		private Boolean AllPawnsMoved() {
-			Boolean allPlayersFinished = true;
-			foreach(Player p in Players) {
-				if(p.Pawns.Count > 0) {
-					allPlayersFinished = false;
-				}
-			}
-			return allPlayersFinished;
+			foreach(Player p in Players)
+				if(p.Pawns.Count > 0)
+					return false;
+			return true;
 		}
 
 		/// <summary>
@@ -282,9 +278,8 @@ namespace ScrumageEngine.BoardSpace {
 		/// <param name="playerP">The current player.</param>
 		/// <returns>True if player is finished, false if not.</returns>
 		private Boolean PlayerDoneWithActions(Player playerP) {
-			foreach(Node node in board.Nodes) {
+			foreach(Node node in board.Nodes)
 				if(node.HasPawn(playerP.PlayerID)) return false;
-			}
 			playerP.FinishedPhase = true;
 			return true;
 		}
@@ -295,23 +290,10 @@ namespace ScrumageEngine.BoardSpace {
 		/// </summary>
 		/// <returns>True if all players have finished.</returns>
 		private Boolean AllPlayersDone() {
-			foreach(Player p in Players) {
+			foreach(Player p in Players)
 				if(!PlayerDoneWithActions(p) || !p.FinishedPhase) return false;
-			}
 			return true;
 		}
-
-
-		/// <summary>
-		/// Checks if all players have finished actions, external call.
-		/// </summary>
-		/// <returns>True if all players have finished actions</returns>
-		internal Boolean CheckPlayerActions() {
-			return AllPlayersDone();
-		}
-
-
-
 		#endregion
 
 		#region Dice Methods
@@ -322,7 +304,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// </summary>
 		/// <param name="diceCount">The number of dice wish to be rolled.</param>
 		/// <param name="rand">A global random.</param>
-		internal void RollDice(Int32 diceCount) {
+		public void RollDice(Int32 diceCount) {
 			board.ClearDice();
 			board.RollDice(diceCount, Rand);
 		}
@@ -340,7 +322,7 @@ namespace ScrumageEngine.BoardSpace {
 		/// Represents current dice values in a single string for the log.
 		/// </summary>
 		/// <returns>String of current dice values.</returns>
-		internal String DiceValues() {
+		public String DiceValues() {
 			return board.DiceValues();
 		}
 		#endregion
@@ -414,26 +396,6 @@ namespace ScrumageEngine.BoardSpace {
 		/// <returns>List of pawns currently used by the player</returns>
 		public List<String> GetPlayerPawns(Int32 playerIDP) {
 			return GetPlayerByID(playerIDP).ListPawns();
-		}
-
-
-		/// <summary>
-		/// Gets the player agility cards.
-		/// </summary>
-		/// <param name="playerId">The player identifier.</param>
-		/// <returns>a list of the player's cards</returns>
-		public List<Card> GetPlayerAgilityCards(Int32 playerId) {
-			return this.Players.Find(_player => _player.PlayerID == playerId).Agility;
-		}
-
-
-		/// <summary>
-		/// Gets the player artifact cards.
-		/// </summary>
-		/// <param name="playerId">The player identifier.</param>
-		/// <returns>a list of the player's cards</returns>
-		public List<Card> GetPlayerArtifactCards(Int32 playerId) {
-			return this.Players.Find(_player => _player.PlayerID == playerId).Artifacts;
 		}
 
 
