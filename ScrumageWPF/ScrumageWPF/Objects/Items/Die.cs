@@ -18,7 +18,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// <summary>
 		/// Die's face representation.
 		/// </summary>
-		private char[][] DieFace = new char[5][];
+		private char[][] dieFace = new char[5][];
 		#endregion
 
 
@@ -28,7 +28,7 @@ namespace ScrumageEngine.Objects.Items {
 		/// <param name="value">The value of the die.</param>
 		public Die(Int32 value) {
 			Value = value;
-			DieFace = CalcDieFace(value);
+			dieFace = CalcDieFace(value);
 		}
 
 
@@ -94,9 +94,9 @@ namespace ScrumageEngine.Objects.Items {
 		public String DrawDie() {
 			String dieString = "";
 			Int32 i = 0, j = 0;
-			while(i < DieFace.Length) {
-				while(j < DieFace[i].Length) {
-					dieString += DieFace[i][j];
+			while(i < dieFace.Length) {
+				while(j < dieFace[i].Length) {
+					dieString += dieFace[i][j];
 					j++;
 				}
 				j = 0;

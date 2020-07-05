@@ -1,0 +1,30 @@
+﻿Artifact:Customer Meeting Design:2,1,0,0
+Artifact:System Test Plan:0,1,1,1
+Artifact:Class Diagram:2,3,4,5
+Artifact:Component Diagram:1,1,1,0
+Artifact:Specifications Document:2,1,0,0
+Artifact:UI-Prototype:1,1,1,0
+Artifact:End-User Manual:1,1,0,1
+Artifact:Scrum Report:1,0,0,0
+Artifact:Architecture Diagram:1,1,0,0
+Artifact:Package Diagram:0,1,1,0
+Artifact:Research Targets:1,1,0,0
+Artifact:Scrum Master Report:0,1,1,0
+Artifact:Some other random document:1,1,0,0
+Artifact:My humps:0,1,1,0
+Artifact:Product Owner Report:1,1,0,0
+Agility:Budget Reduction:0,1,1,1
+Agility:Change in Market Trends:1,1,0,0
+Agility:New Code Standards:1,1,1,1
+Agility:New Law Passed:1,1,1,1
+Agility:Temporary Budget Reduction:1,1,1,1
+Agility:Update To A New Framework:1,1,1,1
+Agility:Cost Benefit Analysis:0,0,1,1
+Agility:Robot Uprising:0,1,1,0
+Agility:Customer Dispute:0,1,1,0
+Agility:Lead developer quits:0,0,2,0
+Agility:New Project Manager:0,2,0,0
+Agility:Deadline Shift:0,0,1,1
+Agility:Global Pandemic:0,0,1,1
+Agility:Out of coffee:0,0,2,0
+Agility:Change in requirements:2,1,0,0

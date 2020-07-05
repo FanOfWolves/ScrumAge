@@ -47,7 +47,9 @@ namespace ScrumageEngine.Views {
 		/// <summary>
 		/// Determines if enough players have been created.
 		/// </summary>
-		/// <returns>True if enough/False if not.</returns>
+		/// <returns>
+		///		<c>true</c> if enough; Otherwise <c>false</c>.
+		/// </returns>
 		private bool CanStartGame() {
 			// not enough players
 			if(list.Count < 2)
@@ -59,8 +61,8 @@ namespace ScrumageEngine.Views {
 		/// <summary>
 		/// Starts the Game (and validates)
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
 		private void btnStart_Click(object sender, RoutedEventArgs e) {
 			if(CanStartGame()) {
 				GameWindow mw = new GameWindow(list);

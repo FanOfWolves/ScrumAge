@@ -15,20 +15,30 @@ namespace ScrumageEngine.Objects.Items {
 		/// <summary>
 		/// The pawn's ID will be the same as the owning player's ID, used to determine if a pawn is a players upon a move.
 		/// </summary>
-		public Int32 PawnID { get; set; }
+		public Int32 PawnID { get; }
 
 
-		/// <summary>
-		/// The level of the pawn used to determine if a pawn can do a specific task
-		/// </summary>
-		public String PawnType { get; set; }
+        /// <summary>
+        /// The level of the pawn used to determine if a pawn can do a specific task
+        /// </summary>
+        private String pawnType;
+		public String PawnType {
+            get {
+                return pawnType;
+            }
+            set {
+                this.pawnType = value;
+                PawnCost = CalcCost(value);
+            }
+        }
 
 
-		/// <summary>
-		/// The cost this pawn requires per turn
-		/// </summary>
-		public Int32 PawnCost { get; set; }
-		#endregion
+        /// <summary>
+        /// The cost this pawn requires per turn
+        /// </summary>
+        public Int32 PawnCost { get; private set; }
+
+        #endregion
 
 
 		/// <summary>
@@ -58,7 +68,16 @@ namespace ScrumageEngine.Objects.Items {
 		/// <param name="PawnType">The type of pawn</param>
 		/// <returns>How much this pawn costs per turn : Int32</returns>
 		private Int32 CalcCost(String pawnType) {
-			return 0;
+            switch (pawnType) {
+				case "Full Stack":
+                    return 2;
+                case "Back End":
+                    return 1;
+				case "Front End":
+                    return 1;
+				default:
+                    return 0;
+            }
 		}
 
 

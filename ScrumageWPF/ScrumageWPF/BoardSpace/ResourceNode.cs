@@ -11,9 +11,20 @@ namespace ScrumageEngine.BoardSpace {
     /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
     public class ResourceNode : Node
     {
-        #region Fields
+        #region Fields        
+        /// <summary>
+        /// The resource of this <see cref="ResourceNode"/>.
+        /// </summary>
         private readonly Resource nodeResource = null;
+
+        /// <summary>
+        /// The base success rate of acquiring a resource from this node.
+        /// </summary>
         private const Int32 RESOURCE_BASE_CHANCE = 20;
+
+        /// <summary>
+        /// The resource chance calculator. Created by the constructor
+        /// </summary>
         private readonly Random resourceChanceCalculator;
         #endregion
 
@@ -32,17 +43,6 @@ namespace ScrumageEngine.BoardSpace {
 
 
         /// <summary>
-        /// Gathers the player pawns from this node.
-        /// </summary>
-        /// <param name="playerId">The player identifier.</param>
-        /// <returns>the player's pawns from this node</returns>
-        private List<Pawn> GatherPlayerPawns(Int32 playerId) {
-            List<Pawn> _playerPawns = Pawns.FindAll(_playerPawn => _playerPawn.PawnID == playerId);
-            Pawns.RemoveAll(_playerPawn => _playerPawn.PawnID == playerId);
-            return _playerPawns;
-        }
-
-        /// <summary>
         /// Rolls for resource.
         /// </summary>
         /// <param name="successChance">The success chance.</param>
@@ -50,32 +50,47 @@ namespace ScrumageEngine.BoardSpace {
         ///     <c>true</c> if player is to gain resource; otherwise, <c>false</c>.
         /// </returns>
         private Boolean RollForResource(Int32 successChance) {
-            Int32 _result = this.resourceChanceCalculator.Next(0,101);
+            Int32 _result = this.resourceChanceCalculator.Next(1,101);
             return successChance >= _result;
         }
 
         /// <summary>
+        /// Accumulates the resource chances.
+        /// </summary>
+        /// <param name="playerPawnsP">The player pawns.</param>
+        /// <returns>the resource roll chance.</returns>
+        private Int32 AccumulateResourceChances(IEnumerable<Pawn> playerPawnsP) {
+            Int32 _resourceAcquireChance = RESOURCE_BASE_CHANCE;
+            foreach(Pawn _pawn in playerPawnsP) {
+                _resourceAcquireChance += this.nodeResource.GetChance(_pawn);
+            }
+            return _resourceAcquireChance;
+        }
+        
+        /// <summary>
         /// Attempt to gain a resource from this node
         /// </summary>
-        /// <param name="player">the player attempting to obtain the resource</param>
+        /// <param name="playerP">the player attempting to obtain the resource.</param>
         /// <returns>a log indicating if the player acquired the resource or not</returns>
-        public override String DoAction(Player player) {
-            List<Pawn> _playerPawns = GatherPlayerPawns(player.PlayerID);
+        public override String DoAction(Player playerP) {
+            
+            List<Pawn> _playerPawns = base.GatherPlayerPawns(playerP.PlayerID);
 
-            Int32 _resourceAcquireChance = RESOURCE_BASE_CHANCE;
-            foreach (Pawn _pawn in _playerPawns) {
-                _resourceAcquireChance += this.nodeResource.GetChance(_pawn);
-                player.GivePawn(_pawn);
+            if (_playerPawns.Count < 1) {
+                return $"{playerP.PlayerName} has failed to obtain a {this.nodeResource.Name}. Reason: No Pawns.";
             }
 
+            Int32 _resourceAcquireChance = AccumulateResourceChances(_playerPawns);
             Boolean _getResource = RollForResource(_resourceAcquireChance);
-            if (_getResource == true) {
-                player.AddResource(this.nodeResource.DeepCopy());
-                return $"{player.PlayerName} has acquired a {this.nodeResource.Name}!";
+
+            ReturnPawnsToPlayer(_playerPawns, playerP);
+
+            if (_getResource) {
+                playerP.AddResource(this.nodeResource.DeepCopy());
+                return $"{playerP.PlayerName} has acquired a {this.nodeResource.Name}!";
             }
-            else {
-                return $"{player.PlayerName} has failed to obtain a {this.nodeResource.Name}";
-            }
-		}
+            
+            return $"{playerP.PlayerName} has failed to obtain a {this.nodeResource.Name}";
+        }
 	}
 }

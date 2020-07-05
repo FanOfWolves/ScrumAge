@@ -62,6 +62,28 @@ namespace ScrumageEngine.BoardSpace {
 			Pawns = new List<Pawn>();
 		}
 
+        /// <summary>
+        /// Gathers the player pawns from this node.
+        /// </summary>
+        /// <param name="playerIdP">The player identifier.</param>
+        /// <returns>the player's pawns from this node.</returns>
+		protected List<Pawn> GatherPlayerPawns(Int32 playerIdP) {
+            List<Pawn> _playerPawns = Pawns.FindAll(_playerPawn => _playerPawn.PawnID == playerIdP);
+            Pawns.RemoveAll(_playerPawn => _playerPawn.PawnID == playerIdP);
+            return _playerPawns;
+		}
+
+        /// <summary>
+        /// Returns the pawns (if any) to player.
+        /// </summary>
+        /// <param name="pawnsToReturnP">The pawns to return.</param>
+        /// <param name="playerP">The player.</param>
+        protected void ReturnPawnsToPlayer(List<Pawn> pawnsToReturnP, Player playerP) {
+            foreach(Pawn _pawn in pawnsToReturnP) {
+                playerP.GivePawn(_pawn);
+            }
+        }
+
 		/// <summary>
 		/// Takes a pawn from a node, requires both the pawn level and the owning player's ID
 		/// </summary>
@@ -105,6 +127,29 @@ namespace ScrumageEngine.BoardSpace {
 					hasPawn = true;
 					break;
 				} else if (pawn.PawnType.ToLower().Replace(" ", "").Contains(PawnType) && pawn.PawnID == pawnID) {
+					hasPawn = true;
+					break;
+				} else {
+					continue;
+				}
+			}
+			return hasPawn;
+		}
+
+
+		/// <summary>
+		/// Determines of a pawn exists within the node.
+		/// </summary>
+		/// <param name="PawnType">The level of the pawn to be found</param>
+		/// <param name="pawnID">The player's ID to be paired with the pawn.</param>
+		/// <returns>True/false depending on if the Node has the pawn</returns>
+		public Boolean HasPawn(Int32 pawnID) {
+			Boolean hasPawn = false;
+			foreach(Pawn pawn in Pawns) {
+				if(pawn.PawnID == pawnID) {
+					hasPawn = true;
+					break;
+				} else if(pawn.PawnID == pawnID) {
 					hasPawn = true;
 					break;
 				} else {

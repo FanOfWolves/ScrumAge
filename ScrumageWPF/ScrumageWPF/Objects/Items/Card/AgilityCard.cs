@@ -8,15 +8,11 @@ namespace ScrumageEngine.Objects.Items.Cards {
     class AgilityCard : Card {
 
         #region Fields        
-        /// <summary>
-        /// The card level. Determines resource costs and benefits.
-        /// </summary>
-        private Int32 cardLevel = 0;
 
         /// <summary>
         /// The immediate bonus for obtaining this card
         /// </summary>
-        private Int32 ImmediateBonus = 0;//TODO: Replace with ImmediateBonus class?
+        public Int32 ImmediateBonus { get; set; } = 0;//TODO: Replace with ImmediateBonus class?
         #endregion
 
         #region Constructors
@@ -26,10 +22,9 @@ namespace ScrumageEngine.Objects.Items.Cards {
         /// <param name="nameP">The card name.</param>
         /// <param name="descP">The card description.</param>
         /// <param name="costs">The resource costs of this card.</param>
-        public AgilityCard(String nameP, String descP, Int32[] costs) : base(nameP, descP, costs) {
-            this.cardLevel = 1;
+        public AgilityCard(String nameP, Int32[] costs) : base(nameP, costs) {
             this.ImmediateBonus = 0;
         }
         #endregion
-    }
+	}
 }

@@ -2,11 +2,16 @@
 using ScrumageEngine.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ScrumageEngine.InputLogic;
 using ScrumageEngine.Objects.Items;
+using ScrumageEngine.Objects.Items.Cards;
 using ScrumageEngine.Objects.Player;
+using ScrumageEngine.Views;
 using static ScrumageEngine.InputLogic.InputHandler;
 
 namespace ScrumageEngine.Windows {
@@ -20,18 +25,15 @@ namespace ScrumageEngine.Windows {
 		/// </summary>
 		Game game;
 
-
 		/// <summary>
 		/// The ID of the current player controlling the board.
 		/// </summary>
 		private Int32 currentPlayerID;
 
-
 		/// <summary>
 		/// A list of the pawns that are currently selected in the player's pawn box.
 		/// </summary>
 		private List<String> SelectedPawns = new List<String>();
-
 
 		/// <summary>
 		/// returns the combobox choice in the Placement Phase panel
@@ -40,13 +42,20 @@ namespace ScrumageEngine.Windows {
 			get { return NodeComboBox.SelectedItem.ToString(); }
 		}
 
-
 		/// <summary>
 		/// returns the combobox choice in the Action Phase panel
 		/// </summary>
 		private String PawnboxForActionNode {
 			get { return this.NodeComboBox2.SelectionBoxItem.ToString(); }
 		}
+
+		/// <summary>
+		/// Tracks the current phase from the Game class and updates GUI when needed
+		/// </summary>
+		private Int32 currentPhaseIndex;
+
+
+		private Int32 playerCount;
 		#endregion
 
 		#region Constructor
@@ -60,7 +69,9 @@ namespace ScrumageEngine.Windows {
 			InitPlayerTab(playerNames);
 			InitComboBox(NodeComboBox, game.GetNodeNames());
 			InitComboBox(NodeComboBox2, game.GetNodeNames());
+			UpdateResourceLabels();
 			currentPlayerID = game.currentPlayerIndex+1;
+			currentPhaseIndex = game.phase - 1;
 		}
 		#endregion
 
@@ -82,12 +93,14 @@ namespace ScrumageEngine.Windows {
 		/// <param name="playerNames">The names of the players collected in the first GUI.</param>
 		void InitPlayerTab(List<String> playerNames) {
 			TabItem temp = null;
+			playerCount = playerNames.Count;
 			for(Int32 i = 0; i < playerNames.Count; i++) {
 				temp = PlayerTabControl.Items[i] as TabItem;
 				temp.IsEnabled = true;
 				temp.Header = playerNames[i];
 				(temp.FindName($"P{i + 1}NameValue") as Label).Content = playerNames[i];
 				UpdatePawnBox(FindPlayerPawnBox(i + 1), game.GetPlayerPawns(i + 1));
+				UpdatePlayerInformation(i + 1);
 				// Whatever else needs to be initialized at the start of the game for players goes here.
 			}
 		}
@@ -128,13 +141,18 @@ namespace ScrumageEngine.Windows {
 
 				UpdatePawnBox(FindNodePawnBoxPhase1(), game.GetNodePawns(PawnboxForPlacementNode));
 				UpdatePawnBox(FindPlayerPawnBox(currentPlayerID), game.GetPlayerPawns(currentPlayerID));
+				UpdateResourceLabels();
 				IncrementPlayer();
 			} catch(MovePawnException _exception) {
 				MessageBox.Show(_exception.Message);
 			}
-
-			if(phaseEnd) MessageBox.Show("Phase 1 has completed!");
 			LogInput();
+			if(phaseEnd) { 
+				MessageBox.Show("Phase 1 has completed!");
+				IncrementPhase();
+				ClearInputs();
+				ClearLog();
+			}
 		}
 
 
@@ -157,12 +175,37 @@ namespace ScrumageEngine.Windows {
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
 		private void NodeActionBtn_Click(Object sender, RoutedEventArgs e) {
-			ActivateNode(game, currentPlayerID, PawnboxForActionNode);
+			Boolean phaseDone = ActivateNode(game, currentPlayerID, PawnboxForActionNode);
 			UpdatePawnBox(FindNodePawnBoxPhase2(), game.GetNodePawns(PawnboxForActionNode));
 			UpdatePlayerInformation(this.currentPlayerID);
+			UpdateResourceLabels();
+			IncrementPlayer();
 			LogInput();
+			if(phaseDone) { 
+				MessageBox.Show("Phase 2 Done");
+				IncrementPhase();
+				ClearInputs();
+				ClearLog();
+			}
 		}
 
+        /// <summary>
+		/// Handles the Click event of the PlayerPaymentBtn control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+		private void PlayerPaymentBtn_Click(Object sender, RoutedEventArgs e) {
+            Boolean phaseDone = InputHandler.PaySprintCost(this.game);
+            UpdatePlayerInformation(this.currentPlayerID);
+			IncrementPlayer();
+			LogInput();
+			if(phaseDone) {
+				MessageBox.Show("Phase 3 Done");
+				IncrementPhase();
+				ClearInputs();
+				ClearLog();
+			}
+        }
 
 		/// <summary>
 		/// Displays information on the card in the relative location.
@@ -170,7 +213,8 @@ namespace ScrumageEngine.Windows {
 		/// <param name="sender">The label prompt.</param>
 		/// <param name="e">Prompt being clicked.</param>
 		private void Label_MouseDoubleClick(Object sender, MouseButtonEventArgs e) {
-			MessageBox.Show("Make GUI to display card requirements");
+			var pickedNode = (CardNode)game.GetNodeByName((String)(sender as Label).Tag);
+			MessageBox.Show(pickedNode.TopCard().ToString());
 		}
 
 
@@ -220,39 +264,105 @@ namespace ScrumageEngine.Windows {
 		}
 
 
+		/// <summary>
+		/// Gets the Player Score Label for a player given the player ID.
+		/// </summary>
+		/// <param name="playerIdP">The player ID</param>
+		/// <returns>The Score Label belonging to that player</returns>
 		private Label FindPlayerScoreLabel(Int32 playerIdP) {
 			return FindName($"P{playerIdP}ScoreValue") as Label;
 		}
 
+
+		/// <summary>
+		/// Gets the Player Budget Label for a player given the player ID.
+		/// </summary>
+		/// <param name="playerIdP">The player ID</param>
+		/// <returns>The Budget Label belonging to that player</returns>
 		private Label FindPlayerBudgetLabel(Int32 playerIdP) {
 			return FindName($"P{playerIdP}BudgetValue") as Label;
 		}
 
 
+		/// <summary>
+		/// Gets the Player Funds Label for a player given the player ID.
+		/// </summary>
+		/// <param name="playerIdP">The player ID</param>
+		/// <returns>The Funds Label belonging to that player</returns>
 		private Label FindPlayerFundsLabel(Int32 playerIdp) {
 			return FindName($"P{playerIdp}FundsValue") as Label;
 		}
 		#endregion
 
 		#region Update Player Display
+
+		private void UpdateAllPlayers() {
+			for(Int32 i = 1; i <= playerCount; i++) {
+				UpdatePlayerInformation(i);
+			}
+		}
+
 		/// <summary>
 		/// Updates the player's information display.
 		/// </summary>
-		/// <param name="playerIdP">The player identifier</param>
+		/// <param name="playerIdP">The player identifier.</param>
 		private void UpdatePlayerInformation(Int32 playerIdP) {
 
 			// Update inventory display
 			UpdatePlayerResourceDisplay(FindResourceBox(playerIdP), this.game.GetPlayerResources(playerIdP));
 			UpdatePawnBox(FindPlayerPawnBox(playerIdP), this.game.GetPlayerPawns(playerIdP));
-			//TODO: Update Cards
 
-			// Update Stats
+			var currentPlayer = this.game.GetPlayerByID(playerIdP);
+
+			// Update Cards
+			UpdatePlayerCardsDisplay(playerIdP, currentPlayer.Agility, currentPlayer.Artifacts);
 			//	update budget
-			UpdatePlayerBudgetDisplay(FindPlayerBudgetLabel(playerIdP), this.game.GetPlayerByID(playerIdP).Budget);
+			UpdatePlayerBudgetDisplay(FindPlayerBudgetLabel(playerIdP), currentPlayer.Budget);
 			//	update score
-			UpdatePlayerScoreDisplay(FindPlayerScoreLabel(playerIdP), this.game.GetPlayerByID(playerIdP).FeaturePoints);
+			UpdatePlayerScoreDisplay(FindPlayerScoreLabel(playerIdP), currentPlayer.FeaturePoints);
 			//	update funds
-			UpdatePlayerFundsDisplay(FindPlayerFundsLabel(playerIdP), this.game.GetPlayerByID(playerIdP).Funds);
+			UpdatePlayerFundsDisplay(FindPlayerFundsLabel(playerIdP), currentPlayer.Funds);
+		}
+
+		/// <summary>
+		/// Updates all the card boxes, as well as the labels for the player.
+		/// </summary>
+		private void UpdatePlayerCardsDisplay(Int32 playerId, List<Card> agilityCards, List<Card> artifactCards)
+		{
+			var artifactLabel = FindName($"P{playerId}ArtifactsCountLabel") as Label;
+
+			if (artifactLabel != null)
+			{
+				artifactLabel.Content = artifactCards.Count;
+			}
+
+			var agilityLabel = FindName($"P{playerId}AgilityCountLabel") as Label;
+			if (agilityLabel != null)
+			{
+				agilityLabel.Content = agilityCards.Count;
+			}
+
+			var artifactBox = FindName($"P{playerId}ArtifactBox") as ListBox;
+
+			if (artifactBox != null)
+			{
+				artifactBox.Items.Clear();
+				foreach (var card in artifactCards)
+                {
+                    artifactBox.Items.Add(card.CardName);
+				}
+			}
+
+			var agilityBox = FindName($"P{playerId}AgilityBox") as ListBox;
+			if (agilityBox != null)
+			{
+				agilityBox.Items.Clear();
+				foreach(var card in agilityCards)
+				{
+					agilityBox.Items.Add(card.CardName);
+				}
+			}
+
 		}
 
 
@@ -351,6 +461,121 @@ namespace ScrumageEngine.Windows {
 			currentPlayerID = game.currentPlayerIndex + 1;
 			PlayerTabControl.SelectedIndex = game.currentPlayerIndex;
 		}
+
+
+		/// <summary>
+		/// Updates the current phase tab to the correct phase
+		/// </summary>
+		private void IncrementPhase() {
+			currentPhaseIndex = game.phase - 1;
+			PhaseTabControl.SelectedIndex = currentPhaseIndex;
+		}
 		#endregion
-	}
+
+		/// <summary>
+		/// Creates the HelpWindow
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void HelpBtn_Click(object sender, RoutedEventArgs e)
+		{
+			new HelpView().Show();
+		}
+
+
+		/// <summary>
+		/// Updates the 4 resource node remaining spots labels as nodes enter or leave
+		/// </summary>
+		private void UpdateResourceLabels() {
+			Int32[] spots = game.GetResourceNodeSpots();
+			R1SpotValueLabel.Content = spots[0];
+			R2SpotValueLabel.Content = spots[1];
+			R3SpotValueLabel.Content = spots[2];
+			R4SpotValueLabel.Content = spots[3];
+		}
+
+		private void TestBtn_Click(Object sender, RoutedEventArgs e)
+		{
+            foreach(Player p in game.Players) {
+				p.playerResources += new ResourceContainer(new Int32[] { 1000, 1000, 1000, 1000 });
+				p.AddToCards(new ArtifactCard("Test Artifact 1", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new ArtifactCard("Test Artifact 2", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new ArtifactCard("Test Artifact 3", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new ArtifactCard("Test Artifact 4", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new ArtifactCard("Test Artifact 5", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new ArtifactCard("Test Artifact 6", new Int32[] { 0, 0, 0, 0 }));
+
+				p.AddToCards(new AgilityCard("Test Agility 1", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 2", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 3", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 4", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 5", new Int32[] { 0, 0, 0, 0 }));
+				p.AddToCards(new AgilityCard("Test Agility 6", new Int32[] { 0, 0, 0, 0 }));
+				UpdatePlayerInformation(p.PlayerID);
+				Debug.WriteLine($"Finished giving test cards to {p.PlayerID}");
+
+			}
+		}
+
+        /// <summary>
+        /// Creates a new CardWindow Artifacts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+		private void OpenCardWindow_Artifacts_Click(Object sender, RoutedEventArgs e)
+		{
+			if (sender == null)
+				return;
+
+            var listBox = sender as ListBox;
+
+            if (listBox == null || listBox.Items.Count == 0)
+                return;
+
+            // get selected index
+            var item = listBox.SelectedIndex;
+
+            var currentPlayer = game.GetPlayerByID(currentPlayerID);
+
+            if (currentPlayer.Artifacts[item] != null)
+            {
+                // get player's card by index of SelectedItem -> Item
+                var cardWindow = new CardWindow(currentPlayer.Artifacts[item]);
+                cardWindow.Show();
+            }
+
+        }
+
+        /// <summary>
+        /// Opens a new CardWindow Agility
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void OpenCardWindow_Agility_Click(Object sender, RoutedEventArgs e)
+        {
+            if (sender == null)
+                return;
+
+            var listBox = sender as ListBox;
+
+            if (listBox == null || listBox.Items.Count == 0)
+                return;
+
+            // get selected index
+            var item = listBox.SelectedIndex;
+
+
+            var currentPlayer = game.GetPlayerByID(currentPlayerID);
+
+            if (currentPlayer.Agility[item] != null)
+            {
+                // get player's card by index of SelectedItem -> Item
+                var cardWindow = new CardWindow(currentPlayer.Agility[item]);
+                cardWindow.Show();
+            }
+        }
+
+    }
+
 }

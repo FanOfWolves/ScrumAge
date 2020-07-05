@@ -23,18 +23,6 @@ namespace ScrumageEngine.Objects.Items {
         }
 
         /// <summary>
-        /// Copy Constructor. Initializes a new instance of the <see cref="Resource"/> class.
-        /// </summary>
-        /// <param name="other">The original Resource to copy.</param>
-        public Resource(Resource other) {
-            Name = other.Name;
-            FrontEndChance = other.FrontEndChance;
-            BackEndChance = other.BackEndChance;
-            FullStackChance = other.FullStackChance;
-        }
-
-
-        /// <summary>
         /// Returns the change for any type of pawn the chance to successfully gather a resource.
         /// </summary>
         /// <param name="pawnP">The pawn to get the chance for.</param>
@@ -71,8 +59,7 @@ namespace ScrumageEngine.Objects.Items {
         /// <returns>True of object is equal</returns>
         public override Boolean Equals(Object obj) {
             if (obj is null) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == this.GetType() && Equals((Resource) obj);
+            return Equals(obj as Resource);
         }
 
 
@@ -81,7 +68,7 @@ namespace ScrumageEngine.Objects.Items {
         /// </summary>
         /// <returns>The hash code for the object</returns>
         public override Int32 GetHashCode() {
-            return (Name != null ? Name.GetHashCode() : 0);
+            return Name.GetHashCode();
         }
 
 

@@ -12,7 +12,13 @@ namespace ScrumageEngine.BoardSpace {
     /// <seealso cref="ScrumageEngine.BoardSpace.Node" />
     class BudgetNode : Node {
 
-        public override Int32 MaxPawnLimit { get { return 4; } }
+        /// <summary>
+        /// Gets the maximum pawn limit for this Node.
+        /// </summary>
+        /// <value>
+        /// The maximum pawn limit.
+        /// </value>
+        public override Int32 MaxPawnLimit { get { return 1; } }
 
         #region Constructors        
         /// <summary>
@@ -31,27 +37,17 @@ namespace ScrumageEngine.BoardSpace {
         /// <param name="playerP">The player who wants to increase their budget</param>
         /// <returns>a message log denoting amount of budget increase and the player given it.</returns>
         public override String DoAction(Player playerP) {
-            if(base.Pawns.Count == 0)
-                return null; //!!TODO: EmptyNodeException()
-
             Int32 _playerID = playerP.PlayerID;
             Boolean _playerHasPawnsHere = base.Pawns.Exists(_playerPawn => _playerPawn.PawnID == _playerID);
-            if(!_playerHasPawnsHere)
-                return null; //!!TODO: NoPlayerPawnsException()
-
-            Int32 _budgetIncrease = 0;
-            // Increase budget per pawn belong to playerP
-            for(Int32 _pawnIndex = base.Pawns.Count - 1; _pawnIndex >= 0; _pawnIndex--) {
-                if(base.Pawns[_pawnIndex].PawnID == _playerID)
-                    continue;
-                _budgetIncrease++;
-
-                playerP.GivePawn(base.Pawns[_pawnIndex]);
-                base.Pawns.RemoveAt(_pawnIndex);
+            if(!_playerHasPawnsHere || Pawns.Count == 0) {
+                return $"{playerP.PlayerName} Failed to increase their budget. Reason: No Pawns";
             }
-
-            playerP.IncreaseBudget(_budgetIncrease);
-            return $"{playerP.PlayerName} has {_budgetIncrease} more budget!";
+            if(Pawns[0].PawnID == playerP.PlayerID) {
+                playerP.IncreaseBudget(1);
+                playerP.GivePawn(Pawns[0]);
+                Pawns.Remove(Pawns[0]);
+            }
+            return $"{playerP.PlayerName} has 1 more budget!";
         }
 
     }

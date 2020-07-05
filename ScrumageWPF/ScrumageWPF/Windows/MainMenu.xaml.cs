@@ -1,14 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using ScrumageEngine.Views;
 
 namespace ScrumageEngine.Windows {
@@ -51,10 +43,10 @@ namespace ScrumageEngine.Windows {
 
 
 		/// <summary>
-		/// Call <Global>Help Menu</Global>
+		/// Calls and displays the global help-menu item
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
 		private void btnHelp_Click(object sender, RoutedEventArgs e) {
 			new HelpView().Show();
 		}
