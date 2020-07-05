@@ -13,8 +13,18 @@ namespace ScrumageWPF.Test {
     /// </summary>
     [TestFixture]
     class InputHandler_Test {
+        private Game testGame;
+
+        [SetUp]
+        public void SetUp() {
+            List<String> list = new List<String>(2);
+            list.Add("p1");
+            list.Add("p2");
+
+            this.testGame = new Game(list);
 
 
+        }
 
         /// <summary>
         /// Asserts that <see cref="InputHandler.ClearInputs"/> clears RecentInputs
@@ -25,9 +35,34 @@ namespace ScrumageWPF.Test {
                 InputHandler.RecentInputs.Add("Sample Text");
             }
             InputHandler.ClearInputs();
-            Assert.That(InputHandler.RecentInputs.Count, Is.EqualTo(0));
+        }
+
+        /// <summary>
+        /// Asserts that <see cref="InputHandler.RecordInputs(String)"/> does not go over limit.
+        /// </summary>
+        [Test] 
+        public void InputHandler_RecordInputs_DoesNotGoOverMaxEntries() {
+            List<String> inputs = new List<String>();
+
+            for(Int32 i = 30; i > 0; i--) {
+                inputs.Add($"newInput{i}");
+            }
+
+            foreach(String input in inputs) {
+                InputHandler.RecordInputs(input);
+            }
+
+            Assert.That(InputHandler.RecentInputs.Count, Is.EqualTo(30));
+            
+            InputHandler.RecordInputs($"newInput0");
+
+            Assert.That(InputHandler.RecentInputs.Count, Is.EqualTo(30));
         }
 
 
+        [Test]
+        public void InputHandler_MovePawn_ChecksIfNodeIsFull() {
+
+        }
     }
 }
