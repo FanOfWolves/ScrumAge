@@ -254,7 +254,7 @@ namespace ScrumageEngine.Objects.Player {
         /// <summary>
         /// Adds the budget to funds.
         /// </summary>
-        private void AddBudgetToFunds() {
+        public void AddBudgetToFunds() {
             this.Funds += this.Budget;
         }
 
@@ -269,6 +269,7 @@ namespace ScrumageEngine.Objects.Player {
             for (Int32 i = this.Pawns.Count-1; i >= 0; i--) {
                 if (this.Funds <= 0) {
                     this.Pawns.RemoveAt(i);
+                    continue;
                 }
                 else if (this.Pawns.Count <= 2) {
                     this.FeaturePoints -= 10;
