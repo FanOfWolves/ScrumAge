@@ -16,7 +16,17 @@ namespace ScrumageWPF.Test {
 
 
 
-
+        /// <summary>
+        /// Asserts that <see cref="InputHandler.ClearInputs"/> clears RecentInputs
+        /// </summary>
+        [Test]
+        public void InputHandler_ClearInputs_Works() {
+            for(Int32 i = 0; i < 5; i++) {
+                InputHandler.RecentInputs.Add("Sample Text");
+            }
+            InputHandler.ClearInputs();
+            Assert.That(InputHandler.RecentInputs.Count, Is.EqualTo(0));
+        }
 
 
     }
