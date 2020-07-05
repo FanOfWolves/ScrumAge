@@ -410,6 +410,10 @@ namespace ScrumageEngine.BoardSpace {
 		#endregion
 
 		#region Node Tracking
+		/// <summary>
+		/// Update the current available spaces for resource nodes
+		/// </summary>
+		/// <returns>An array containing all resource node spots in order.</returns>
 		public Int32[] GetResourceNodeSpots() {
 			Int32[] retArr = new Int32[4];
 			retArr[0] = GetNodeByID(1).MaxPawnLimit - GetNodeByID(1).NumberOfPawns;
