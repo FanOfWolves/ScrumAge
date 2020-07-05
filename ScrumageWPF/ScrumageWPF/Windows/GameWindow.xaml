@@ -639,24 +639,18 @@
 				</DockPanel>
                 <!-- Help Button -->
                 <DockPanel Grid.Column="0" Grid.Row="5">
-                    <Button x:Name="HelpBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Top" Click="HelpBtn_Click" Content="Help"/>
+                    <ComboBox x:Name="DiceCountCombo" Width="42" Margin="10, 5, 5, 0" SelectedIndex="0" RenderTransformOrigin="0.667,0.546">
+                        <System:String>1</System:String>
+                        <System:String>2</System:String>
+                        <System:String>3</System:String>
+                        <System:String>4</System:String>
+                        <System:String>5</System:String>
+                        <System:String>6</System:String>
+                        <System:String>7</System:String>
+                    </ComboBox>
+                    <Button x:Name="HelpBtn" FontSize="20" Margin="10, 5, 5, 0" DockPanel.Dock="Left" Click="HelpBtn_Click" Content="Help"/>
                 </DockPanel>
-                <DockPanel Grid.Column="0" Grid.Row="4">
-					<ComboBox x:Name="DiceCountCombo" HorizontalAlignment="Left" Margin="0,0,0,65" Grid.Row="5" VerticalAlignment="Center" Width="42" SelectedIndex="0" RenderTransformOrigin="0.667,0.546">
-						<System:String>1</System:String>
-						<System:String>2</System:String>
-						<System:String>3</System:String>
-						<System:String>4</System:String>
-						<System:String>5</System:String>
-						<System:String>6</System:String>
-						<System:String>7</System:String>
-					</ComboBox>
-				</DockPanel>
-				<DockPanel Grid.Column="0" Grid.Row="4">
-					<Label DockPanel.Dock="Left" Width="50">
-						<Label x:Name="CurrentPlayerIDLabel" Content="Label"/>
-					</Label>
-				</DockPanel>
+
 			</Grid>
 		</ScrollViewer>
 	</Grid>
